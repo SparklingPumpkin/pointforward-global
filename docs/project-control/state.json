@@ -30,6 +30,23 @@
       ],
       "candidate_ids": [],
       "created_at": "2026-09-25T15:51:53+00:00"
+    },
+    "delivery-validation": {
+      "scope_id": "delivery-validation",
+      "kind": "workstream",
+      "prefix": "DEL",
+      "label": "交付验证",
+      "purpose": "独立交付包的可执行性与27dB复现证据",
+      "parent_scope_id": "project",
+      "current_version_id": "DEL-v1",
+      "next_version_number": 2,
+      "version_ids": [
+        "DEL-v1"
+      ],
+      "candidate_ids": [
+        "DEL-v1-a"
+      ],
+      "created_at": "2026-09-25T16:30:57+00:00"
     }
   },
   "versions": {
@@ -46,10 +63,93 @@
       "evidence": [],
       "legacy_id": null,
       "created_at": "2026-09-25T15:51:53+00:00"
+    },
+    "DEL-v1": {
+      "version_id": "DEL-v1",
+      "scope_id": "delivery-validation",
+      "number": 1,
+      "slug": "validation-baseline",
+      "status": "current",
+      "parent_version_id": null,
+      "promoted_from_candidate_id": null,
+      "change_types": [],
+      "summary": "PFG-v1交付包轻量验证与scene017 27dB复现",
+      "evidence": [
+        {
+          "reference": "docs/VALIDATION.md",
+          "claim": "交付包通过48项测试并复现27.000626453986534 dB",
+          "recorded_at": "2026-09-25T16:30:57+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "8ed602c103de923ce2bab428d94ed5ee2546dfa2fd9cd3edfe847c8f5f7ee8c4",
+          "size_when_recorded": 1713,
+          "mtime_ns_when_recorded": 1790353471044197009
+        }
+      ],
+      "legacy_id": "pfg-delivery-validation",
+      "created_at": "2026-09-25T16:30:57+00:00"
     }
   },
-  "candidates": {},
-  "runs": {},
+  "candidates": {
+    "DEL-v1-a": {
+      "candidate_id": "DEL-v1-a",
+      "scope_id": "delivery-validation",
+      "base_version_id": "DEL-v1",
+      "slug": "27db-delivery-validation",
+      "status": "passed",
+      "hypothesis": "交付仓库内源码、权重和配置可以在不复制场景payload的前提下复现scene017的27.000626 dB指标并导出PLY。",
+      "change_types": [
+        "delivery_contract"
+      ],
+      "directory_id": "dir-0011",
+      "run_ids": [
+        "run-20260925T162548Z-scene017-27db-delivery-validation"
+      ],
+      "conclusion": "交付代码、权重和配置通过48项测试，并用外部scene017最终payload复现27.000626453986534 dB全局PSNR及PLY导出。",
+      "evidence": [
+        {
+          "reference": "docs/VALIDATION.md",
+          "claim": "记录完整轻量检查、156帧27dB复现和PLY合同证据",
+          "recorded_at": "2026-09-25T16:32:16+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "8ed602c103de923ce2bab428d94ed5ee2546dfa2fd9cd3edfe847c8f5f7ee8c4",
+          "size_when_recorded": 1713,
+          "mtime_ns_when_recorded": 1790353471044197009
+        }
+      ],
+      "promoted_to_version_id": null,
+      "created_at": "2026-09-25T16:31:47+00:00",
+      "updated_at": "2026-09-25T16:32:16+00:00"
+    }
+  },
+  "runs": {
+    "run-20260925T162548Z-scene017-27db-delivery-validation": {
+      "run_id": "run-20260925T162548Z-scene017-27db-delivery-validation",
+      "candidate_id": "DEL-v1-a",
+      "variant": "scene017-27db-delivery-validation",
+      "status": "completed",
+      "directory_id": "dir-0012",
+      "config_identity": "docs/validation/summary.json::resolved portable config plus original final payload hashes",
+      "code_identity": "PFG-v1 delivery snapshot scripts/render_final_global_runtime.py + scripts/export_runtime_payload_ply.py",
+      "data_identity": "scene017 final payload external validation input; not delivered",
+      "summary": "交付包轻量检查、156帧指标复现和PLY导出均完成。",
+      "evidence": [
+        {
+          "reference": "docs/validation/summary.json",
+          "claim": "48 tests、27.000626 dB和PLY合同",
+          "recorded_at": "2026-09-25T16:32:16+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "4030da4c7b109de2db0c56baec35366c3845fa2708270fa1392fc736aaa08d7b",
+          "size_when_recorded": 974,
+          "mtime_ns_when_recorded": 1790353471044197009
+        }
+      ],
+      "created_at": "2026-09-25T16:32:00+00:00",
+      "updated_at": "2026-09-25T16:32:16+00:00"
+    }
+  },
   "directories": {
     "dir-0001": {
       "directory_id": "dir-0001",
@@ -162,6 +262,62 @@
       "decision_id": "layout-0007",
       "created_at": "2026-09-25T16:13:58+00:00",
       "updated_at": "2026-09-25T16:13:58+00:00"
+    },
+    "dir-0009": {
+      "directory_id": "dir-0009",
+      "path": "validation-delivery",
+      "level": "workstream",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "delivery-validation",
+      "purpose": "交付包独立可执行性验证工作流",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0008",
+      "created_at": "2026-09-25T16:31:16+00:00",
+      "updated_at": "2026-09-25T16:31:16+00:00"
+    },
+    "dir-0010": {
+      "directory_id": "dir-0010",
+      "path": "validation-delivery/scene017-27db",
+      "level": "experiment_family",
+      "parent_directory_id": "dir-0009",
+      "scope_id": "delivery-validation",
+      "purpose": "scene017 27dB交付复现验证实验族",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0009",
+      "created_at": "2026-09-25T16:31:29+00:00",
+      "updated_at": "2026-09-25T16:31:29+00:00"
+    },
+    "dir-0011": {
+      "directory_id": "dir-0011",
+      "path": "validation-delivery/scene017-27db/DEL-v1-a",
+      "level": "candidate",
+      "parent_directory_id": "dir-0010",
+      "scope_id": "delivery-validation",
+      "purpose": "交付包27dB复现候选",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0010",
+      "created_at": "2026-09-25T16:31:47+00:00",
+      "updated_at": "2026-09-25T16:31:47+00:00"
+    },
+    "dir-0012": {
+      "directory_id": "dir-0012",
+      "path": "validation-delivery/scene017-27db/DEL-v1-a/run-20260925T162548Z-scene017-27db-delivery-validation",
+      "level": "run",
+      "parent_directory_id": "dir-0011",
+      "scope_id": "delivery-validation",
+      "purpose": "scene017交付复现执行记录",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0011",
+      "created_at": "2026-09-25T16:32:00+00:00",
+      "updated_at": "2026-09-25T16:32:00+00:00"
     }
   },
   "layout_decisions": {
@@ -297,11 +453,87 @@
       "status": "applied",
       "applied_directory_id": "dir-0008",
       "created_at": "2026-09-25T16:13:57+00:00"
+    },
+    "layout-0008": {
+      "decision_id": "layout-0008",
+      "scope_id": "delivery-validation",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "validation-delivery",
+      "target_level": "workstream",
+      "parent_directory_id": "dir-0001",
+      "purpose": "交付包独立可执行性验证工作流",
+      "reason": "交付验证使用独立workstream承载后续实验记录",
+      "alternatives_considered": [
+        "不把交付验证混入PFG主线目录"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0009",
+      "created_at": "2026-09-25T16:31:16+00:00"
+    },
+    "layout-0009": {
+      "decision_id": "layout-0009",
+      "scope_id": "delivery-validation",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "validation-delivery/scene017-27db",
+      "target_level": "experiment_family",
+      "parent_directory_id": "dir-0009",
+      "purpose": "scene017 27dB交付复现验证实验族",
+      "reason": "按场景和合同隔离交付验证证据",
+      "alternatives_considered": [
+        "直接在workstream下登记candidate会丢失实验族语义"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0010",
+      "created_at": "2026-09-25T16:31:29+00:00"
+    },
+    "layout-0010": {
+      "decision_id": "layout-0010",
+      "scope_id": "delivery-validation",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "validation-delivery/scene017-27db/DEL-v1-a",
+      "target_level": "candidate",
+      "parent_directory_id": "dir-0010",
+      "purpose": "交付包27dB复现候选",
+      "reason": "候选验证交付包与固定scene017合同",
+      "alternatives_considered": [
+        "不把验证作为PFG方法候选，避免误升主线版本"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0011",
+      "created_at": "2026-09-25T16:31:47+00:00"
+    },
+    "layout-0011": {
+      "decision_id": "layout-0011",
+      "scope_id": "delivery-validation",
+      "candidate_id": "DEL-v1-a",
+      "action": "new_child",
+      "target_path": "validation-delivery/scene017-27db/DEL-v1-a/run-20260925T162548Z-scene017-27db-delivery-validation",
+      "target_level": "run",
+      "parent_directory_id": "dir-0011",
+      "purpose": "scene017交付复现执行记录",
+      "reason": "记录独立交付代码的实际验证命令与证据",
+      "alternatives_considered": [
+        "不把run事实混入candidate摘要"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0012",
+      "created_at": "2026-09-25T16:32:00+00:00"
     }
   },
-  "updated_at": "2026-09-25T16:13:58+00:00",
+  "updated_at": "2026-09-25T16:32:16+00:00",
   "ledger": {
-    "event_count": 15,
-    "head_hash": "f17948b759b3a423bc815cee14da1f943718f2060d58f462a89493214b8d0cd6"
+    "event_count": 28,
+    "head_hash": "166130a92ba6f863bc47ad5f86abf321102672ff09d472a13c72d1178dc62e24"
   }
 }

@@ -13,8 +13,12 @@
 | dir-0003 | scripts | area | dir-0001 | project | active | 否 | 训练、推理、优化、PLY导出和视频渲染入口 |
 | dir-0002 | src | area | dir-0001 | project | active | 否 | 核心模型、外部预处理与深度估计源码快照 |
 | dir-0006 | tests | area | dir-0001 | project | active | 否 | 轻量语法、导入与交付合同测试 |
+| dir-0009 | validation-delivery | workstream | dir-0001 | delivery-validation | active | 否 | 交付包独立可执行性验证工作流 |
 | dir-0005 | weights | area | dir-0001 | project | active | 否 | 交付所需模型权重及校验清单 |
 | dir-0008 | docs/validation | workstream | dir-0007 | project | active | 否 | PFG-v1独立交付的轻量与27dB复现证据 |
+| dir-0010 | validation-delivery/scene017-27db | experiment_family | dir-0009 | delivery-validation | active | 否 | scene017 27dB交付复现验证实验族 |
+| dir-0011 | validation-delivery/scene017-27db/DEL-v1-a | candidate | dir-0010 | delivery-validation | active | 否 | 交付包27dB复现候选 |
+| dir-0012 | validation-delivery/scene017-27db/DEL-v1-a/run-20260925T162548Z-scene017-27db-delivery-validation | run | dir-0011 | delivery-validation | active | 否 | scene017交付复现执行记录 |
 
 ## 布局决策历史
 
@@ -27,3 +31,7 @@
 | layout-0005 | applied | new_child | tests | 验证代码和交付资产，不执行大型预训练 | 只在原研究仓库验证无法证明交付包独立性 | — |
 | layout-0006 | applied | new_child | docs | 登记初始化时已创建的文档目录并保留控制面 | 另建说明目录会分裂文档事实源 | — |
 | layout-0007 | applied | new_child | docs/validation | 验证记录属于文档证据，不包含场景payload或逐帧图像 | 放入outputs会被忽略且无法随主线审计 | — |
+| layout-0008 | applied | new_child | validation-delivery | 交付验证使用独立workstream承载后续实验记录 | 不把交付验证混入PFG主线目录 | — |
+| layout-0009 | applied | new_child | validation-delivery/scene017-27db | 按场景和合同隔离交付验证证据 | 直接在workstream下登记candidate会丢失实验族语义 | — |
+| layout-0010 | applied | new_child | validation-delivery/scene017-27db/DEL-v1-a | 候选验证交付包与固定scene017合同 | 不把验证作为PFG方法候选，避免误升主线版本 | — |
+| layout-0011 | applied | new_child | validation-delivery/scene017-27db/DEL-v1-a/run-20260925T162548Z-scene017-27db-delivery-validation | 记录独立交付代码的实际验证命令与证据 | 不把run事实混入candidate摘要 | — |
