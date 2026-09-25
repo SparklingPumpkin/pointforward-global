@@ -11,12 +11,12 @@
 
 ## 27 dB 推理复现
 
-验证使用交付仓库内的：
+验证使用交付工作树内的：
 
 - `scripts/render_final_global_runtime.py`
 - `src/pointforward/`
 - `weights/pointforward_waymo_ds_paper_ckpt_020000.pt`
-- `weights/refiner_scene017_27db.pt`
+- 本地可选的 `weights/refiner_scene017_27db.pt`（该文件不进入 Git 上传）
 - 由 `configs/argoverse_global.template.yaml` 在交付仓库解析的配置
 
 输入是未打包的既有最终 scene017 payload；其三个文件 SHA256 已写入完整 [manifest](validation/scene017-27db-metrics/manifest.json)。在全部 156 帧、三前向相机上得到：
