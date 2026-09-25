@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+.idea/
+.vscode/
+
+# User data and generated state are never part of the delivery repository.
+data/
+datasets/
+outputs/
+runs/
+cache/
+tmp/
+*.mp4
+*.avi
+*.ply
+*.pt.tmp
+
+# Keep the four audited weights tracked through Git LFS.
+!weights/*.pt
+!weights/*.ckpt
+!weights/*.pth

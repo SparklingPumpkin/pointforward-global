@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "skill": "fjn-project-workflow",
+  "project": {
+    "project_id": "pointforward-global",
+    "name": "PointForward Global",
+    "root_hint": "pointforward-global",
+    "control_dir": "docs/project-control",
+    "created_at": "2026-09-25T15:51:53+00:00"
+  },
+  "config": {
+    "max_active_siblings": 6,
+    "max_managed_depth": 8,
+    "scope_prefix_required": true,
+    "legacy_ids_are_aliases_only": true,
+    "directory_policy": "hard_block_with_audited_override"
+  },
+  "scopes": {
+    "project": {
+      "scope_id": "project",
+      "kind": "project",
+      "prefix": "PFG",
+      "label": "项目主线",
+      "purpose": "可在新机器独立完成数据预处理、模型预训练、全局Gaussian推理、PLY导出与128D渲染的交付主线",
+      "parent_scope_id": null,
+      "current_version_id": "PFG-v1",
+      "next_version_number": 2,
+      "version_ids": [
+        "PFG-v1"
+      ],
+      "candidate_ids": [],
+      "created_at": "2026-09-25T15:51:53+00:00"
+    }
+  },
+  "versions": {
+    "PFG-v1": {
+      "version_id": "PFG-v1",
+      "scope_id": "project",
+      "number": 1,
+      "slug": "27db-global-mainline",
+      "status": "current",
+      "parent_version_id": null,
+      "promoted_from_candidate_id": null,
+      "change_types": [],
+      "summary": "scene017最终全局Gaussian 27.000626dB方法的可移植交付主线",
+      "evidence": [],
+      "legacy_id": null,
+      "created_at": "2026-09-25T15:51:53+00:00"
+    }
+  },
+  "candidates": {},
+  "runs": {},
+  "directories": {
+    "dir-0001": {
+      "directory_id": "dir-0001",
+      "path": ".",
+      "level": "project",
+      "parent_directory_id": null,
+      "scope_id": "project",
+      "purpose": "项目边界；其子目录必须按业务职责继续登记。",
+      "status": "active",
+      "status_reason": "project initialized",
+      "manage_children": false,
+      "decision_id": null,
+      "created_at": "2026-09-25T15:51:53+00:00",
+      "updated_at": "2026-09-25T15:51:53+00:00"
+    },
+    "dir-0002": {
+      "directory_id": "dir-0002",
+      "path": "src",
+      "level": "area",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "project",
+      "purpose": "核心模型、外部预处理与深度估计源码快照",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0001",
+      "created_at": "2026-09-25T16:00:27+00:00",
+      "updated_at": "2026-09-25T16:00:27+00:00"
+    },
+    "dir-0003": {
+      "directory_id": "dir-0003",
+      "path": "scripts",
+      "level": "area",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "project",
+      "purpose": "训练、推理、优化、PLY导出和视频渲染入口",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0002",
+      "created_at": "2026-09-25T16:00:27+00:00",
+      "updated_at": "2026-09-25T16:00:27+00:00"
+    },
+    "dir-0004": {
+      "directory_id": "dir-0004",
+      "path": "configs",
+      "level": "area",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "project",
+      "purpose": "可移植训练和推理配置模板",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0003",
+      "created_at": "2026-09-25T16:00:27+00:00",
+      "updated_at": "2026-09-25T16:00:27+00:00"
+    },
+    "dir-0005": {
+      "directory_id": "dir-0005",
+      "path": "weights",
+      "level": "area",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "project",
+      "purpose": "交付所需模型权重及校验清单",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0004",
+      "created_at": "2026-09-25T16:00:40+00:00",
+      "updated_at": "2026-09-25T16:00:40+00:00"
+    },
+    "dir-0006": {
+      "directory_id": "dir-0006",
+      "path": "tests",
+      "level": "area",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "project",
+      "purpose": "轻量语法、导入与交付合同测试",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0005",
+      "created_at": "2026-09-25T16:00:40+00:00",
+      "updated_at": "2026-09-25T16:00:40+00:00"
+    },
+    "dir-0007": {
+      "directory_id": "dir-0007",
+      "path": "docs",
+      "level": "area",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "project",
+      "purpose": "使用说明、方法说明、验证证据与项目控制面",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0006",
+      "created_at": "2026-09-25T16:00:50+00:00",
+      "updated_at": "2026-09-25T16:00:50+00:00"
+    },
+    "dir-0008": {
+      "directory_id": "dir-0008",
+      "path": "docs/validation",
+      "level": "workstream",
+      "parent_directory_id": "dir-0007",
+      "scope_id": "project",
+      "purpose": "PFG-v1独立交付的轻量与27dB复现证据",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0007",
+      "created_at": "2026-09-25T16:13:58+00:00",
+      "updated_at": "2026-09-25T16:13:58+00:00"
+    }
+  },
+  "layout_decisions": {
+    "layout-0001": {
+      "decision_id": "layout-0001",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "src",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "核心模型、外部预处理与深度估计源码快照",
+      "reason": "用src统一容纳本项目代码和固定版本外部源码，保持根目录职责数量可控",
+      "alternatives_considered": [
+        "将三个源码树散列在根目录会增加交付结构复杂度"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0002",
+      "created_at": "2026-09-25T16:00:12+00:00"
+    },
+    "layout-0002": {
+      "decision_id": "layout-0002",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "scripts",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "训练、推理、优化、PLY导出和视频渲染入口",
+      "reason": "入口脚本与可导入源码分离，便于新机器按阶段执行",
+      "alternatives_considered": [
+        "把编排逻辑嵌入模型包会混淆职责"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0003",
+      "created_at": "2026-09-25T16:00:27+00:00"
+    },
+    "layout-0003": {
+      "decision_id": "layout-0003",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "configs",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "可移植训练和推理配置模板",
+      "reason": "集中管理数据根、权重和输出参数，消除机器路径硬编码",
+      "alternatives_considered": [
+        "直接复用研究配置会携带本机绝对路径"
+      ],
+      "active_sibling_count_at_decision": 2,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0004",
+      "created_at": "2026-09-25T16:00:27+00:00"
+    },
+    "layout-0004": {
+      "decision_id": "layout-0004",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "weights",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "交付所需模型权重及校验清单",
+      "reason": "必要权重随包交付并通过SHA256审计",
+      "alternatives_considered": [
+        "依赖隐式缓存不满足离线新机器使用目标"
+      ],
+      "active_sibling_count_at_decision": 3,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0005",
+      "created_at": "2026-09-25T16:00:40+00:00"
+    },
+    "layout-0005": {
+      "decision_id": "layout-0005",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "tests",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "轻量语法、导入与交付合同测试",
+      "reason": "验证代码和交付资产，不执行大型预训练",
+      "alternatives_considered": [
+        "只在原研究仓库验证无法证明交付包独立性"
+      ],
+      "active_sibling_count_at_decision": 4,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0006",
+      "created_at": "2026-09-25T16:00:40+00:00"
+    },
+    "layout-0006": {
+      "decision_id": "layout-0006",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "使用说明、方法说明、验证证据与项目控制面",
+      "reason": "登记初始化时已创建的文档目录并保留控制面",
+      "alternatives_considered": [
+        "另建说明目录会分裂文档事实源"
+      ],
+      "active_sibling_count_at_decision": 5,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0007",
+      "created_at": "2026-09-25T16:00:50+00:00"
+    },
+    "layout-0007": {
+      "decision_id": "layout-0007",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/validation",
+      "target_level": "workstream",
+      "parent_directory_id": "dir-0007",
+      "purpose": "PFG-v1独立交付的轻量与27dB复现证据",
+      "reason": "验证记录属于文档证据，不包含场景payload或逐帧图像",
+      "alternatives_considered": [
+        "放入outputs会被忽略且无法随主线审计"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0008",
+      "created_at": "2026-09-25T16:13:57+00:00"
+    }
+  },
+  "updated_at": "2026-09-25T16:13:58+00:00",
+  "ledger": {
+    "event_count": 15,
+    "head_hash": "f17948b759b3a423bc815cee14da1f943718f2060d58f462a89493214b8d0cd6"
+  }
+}

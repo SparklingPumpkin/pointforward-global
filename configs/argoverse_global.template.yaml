@@ -1,0 +1,65 @@
+seed: 0
+output: __OUTPUT_ROOT__/pretrain
+
+data:
+  layout: argoverse_drivestudio
+  root: __DATA_ROOT__
+  train_scenes: ["017"]
+  val_scenes: ["017"]
+  cameras: [0, 1, 2]
+  clip_length: 20
+  num_context: 4
+  frame_stride: 5
+  num_target: 4
+  resolution: [576, 768]
+  resolutions: [[352, 512], [576, 768]]
+  max_instances: 24
+  rigid_classes:
+    - REGULAR_VEHICLE
+    - LARGE_VEHICLE
+    - TRUCK
+    - BUS
+    - VEHICULAR_TRAILER
+    - MOTORCYCLE
+    - BICYCLE
+    - BICYCLIST
+    - MOTORCYCLIST
+  load_lidar: true
+  require_lidar: false
+  require_instances: false
+
+depth:
+  kind: infinidepth
+  repo_root: __PROJECT_ROOT__/src/InfiniDepth
+  checkpoint: __PROJECT_ROOT__/weights/infinidepth_depthsensor.ckpt
+  variant: InfiniDepth_DepthSensor
+  encoder: vitl16
+
+model:
+  backbone: tf_efficientnetv2_s
+  pretrained_backbone: true
+  feat_dim: 128
+  color_dim: 128
+  hidden: 128
+  num_static: 100000
+  num_dynamic: 10000
+  use_weighted_fusion: true
+  use_depth_cue: true
+  fusion_chunk: 65536
+  decoder_chunk: 262144
+  grad_checkpoint: true
+
+train:
+  steps: 45000
+  batch_size: 8
+  lr: 0.0005
+  weight_decay: 0.05
+  warmup_steps: 2000
+  lpips_weight: 0.2
+  grad_clip: 1.0
+  bf16: true
+  num_workers: 8
+  log_every: 50
+  eval_every: 2000
+  eval_batches: 20
+  save_every: 2000

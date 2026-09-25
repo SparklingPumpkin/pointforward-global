@@ -1,0 +1,10 @@
+# Raw Argoverse/Waymo conversion dependencies. Dataset SDK versions are kept
+# separate from the renderer environment because Waymo and SegFormer have
+# incompatible legacy constraints.
+av2 @ git+https://github.com/ziyc/av2-api
+tensorflow-cpu>=2.12,<2.16
+waymo-open-dataset-tf-2-12-0
+imageio
+opencv-python
+pandas
+tqdm
