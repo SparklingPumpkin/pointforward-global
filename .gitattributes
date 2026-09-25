@@ -1,4 +1,1 @@
 weights/*.pt filter=lfs diff=lfs merge=lfs -text
-weights/*.ckpt filter=lfs diff=lfs merge=lfs -text
-weights/*.pth filter=lfs diff=lfs merge=lfs -text
-weights/huggingface/**/blobs/* filter=lfs diff=lfs merge=lfs -text

@@ -1,6 +1,6 @@
 # PointForward Global（PFG-v1 当前主线）
 
-这是当前 27 dB 全局 Gaussian 版本的独立交付仓库。它包含原始数据预处理、PointForward 预训练、全局静态/动态 Gaussian 推理、场景级 RGB 后优化、PLY 导出和 128D+UNet 视频渲染所需源码与权重；不包含任何数据集、历史实验、payload、逐帧图片或成品视频。
+这是当前 27 dB 全局 Gaussian 版本的独立交付仓库。它包含原始数据预处理、PointForward 预训练、全局静态/动态 Gaussian 推理、场景级 RGB 后优化、PLY 导出和 128D+UNet 视频渲染所需源码，以及 Git 中唯一保留的 PointForward checkpoint；不包含任何数据集、历史实验、payload、逐帧图片或成品视频。
 
 当前版本由 [项目控制面](docs/project-control/CURRENT.md) 标记为 `PFG-v1 / 27db-global-mainline`。方法和 27 dB 合同见 [METHOD.md](docs/METHOD.md)。
 
@@ -18,9 +18,20 @@ export HF_HOME="$PWD/weights/huggingface"
 python scripts/validate_install.py
 ```
 
-如果已有 CUDA 版 PyTorch，亦可执行 `pip install -r requirements.txt && pip install -e .`。`weights/manifest.json` 给出每个权重的大小、SHA256 和用途。
+如果已有 CUDA 版 PyTorch，亦可执行 `pip install -r requirements.txt && pip install -e .`。`weights/manifest.json` 给出 Git 保留 checkpoint 以及外部可选权重的大小、SHA256 和用途。为控制 Git 体积，InfiniDepth、SegFormer、EfficientNetV2-S 初始化权重和 scene017 refiner 不再上传到 Git。
 
 ## 2. 原始数据预处理
+
+### 外部可选模型权重
+
+Git 只提供 `weights/pointforward_waymo_ds_paper_ckpt_020000.pt`。运行完整推理前，还需将以下可选权重放到对应路径（或修改生成配置指向其他路径）：
+
+- `weights/infinidepth_depthsensor.ckpt`：从 InfiniDepth 发布渠道获取；
+- `weights/segformer.b5.1024x1024.city.160k.pth`：按下方 Argoverse 文档的 NVlabs SegFormer 下载说明获取；
+- `weights/huggingface/.../model.safetensors`：运行大规模预训练时由 timm/Hugging Face 下载，或从内部缓存复制；
+- `weights/refiner_scene017_27db.pt`：仅用于复现已验收 scene017 的 27 dB overlay；新场景应重新训练 refiner。
+
+下载后可用 `weights/manifest.json` 中 `optional_local_files` 的 SHA256 校验。`scripts/validate_install.py` 默认只检查 Git 中的 PointForward checkpoint。
 
 ### Argoverse 2
 

@@ -7,7 +7,9 @@
       "bytes": 271714184,
       "sha256": "318205d7475b4687dc59412f5a4432b5ae2a58da0ae143b5a69d1f18071d52ea",
       "purpose": "PointForward base checkpoint used by the accepted global pipeline"
-    },
+    }
+  ],
+  "optional_local_files": [
     {
       "path": "weights/infinidepth_depthsensor.ckpt",
       "bytes": 1433096532,
@@ -18,7 +20,7 @@
       "path": "weights/refiner_scene017_27db.pt",
       "bytes": 7853317,
       "sha256": "e1a21b89adc3e341e22f527349a3b95353541499715e6710c7fd3c8a2d1c1757",
-      "purpose": "Final scene017-specific 27 dB feature-refiner overlay"
+      "purpose": "Optional scene017-specific 27 dB feature-refiner overlay"
     },
     {
       "path": "weights/segformer.b5.1024x1024.city.160k.pth",
@@ -30,7 +32,7 @@
       "path": "weights/huggingface/hub/models--timm--tf_efficientnetv2_s.in21k_ft_in1k/blobs/6f1933fb6c0d760eae03863ad0110570393e16c0610f8fe94dc9f978e52ec59c",
       "bytes": 86523256,
       "sha256": "6f1933fb6c0d760eae03863ad0110570393e16c0610f8fe94dc9f978e52ec59c",
-      "purpose": "Offline timm EfficientNetV2-S initialization for pretraining"
+      "purpose": "Optional offline timm EfficientNetV2-S initialization for pretraining"
     }
   ]
 }

@@ -18,7 +18,10 @@ tmp/
 *.ply
 *.pt.tmp
 
-# Keep the four audited weights tracked through Git LFS.
-!weights/*.pt
-!weights/*.ckpt
-!weights/*.pth
+# Keep Git small: only the PointForward checkpoint is versioned.  Depth,
+# segmentation, ImageNet initialization and scene-specific refiner weights
+# remain usable in an existing working tree but are supplied out of band.
+weights/*
+!weights/README.md
+!weights/manifest.json
+!weights/pointforward_waymo_ds_paper_ckpt_020000.pt
