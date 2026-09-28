@@ -1,12 +1,12 @@
-# PointForward Global（PFG-v1 当前主线）
+# PointForward Global（PFG-v2 当前主线）
 
 这是当前 27 dB 全局 Gaussian 版本的独立交付仓库。它包含原始数据预处理、PointForward 预训练、全局静态/动态 Gaussian 推理、场景级 RGB 后优化、PLY 导出和 128D+UNet 视频渲染所需源码，以及 Git 中唯一保留的 PointForward checkpoint；不包含任何数据集、历史实验、payload、逐帧图片或成品视频。
 
-当前版本由 [项目控制面](docs/project-control/CURRENT.md) 标记为 `PFG-v1 / 27db-global-mainline`。方法和 27 dB 合同见 [METHOD.md](docs/METHOD.md)。
+当前版本由 [项目控制面](docs/project-control/CURRENT.md) 标记。PFG-v2 将最终优化默认切换为 `fast-g8`，在 scene017 上达到 27.085059 dB，并把固定输入 payload 到最终 PLY 的阶段压缩到 7.08 分钟；旧版四阶段尾部仍可选。方法见 [METHOD.md](docs/METHOD.md)，从 DG-v1-f 开始的完整技术演进见 [UPGRADES_DG_V1_F_TO_PFG_V2.md](docs/UPGRADES_DG_V1_F_TO_PFG_V2.md)。
 
 ## 1. 硬件与环境
 
-完整 scene017 流程建议使用 Linux、CUDA 12.x、FFmpeg 6 和至少 48 GiB 显存；已验证机器为 A100 80 GiB，峰值 CUDA allocation 约 46.1 GiB。预训练按论文配置使用 8 GPU、全局 batch 8；单 GPU 可以运行但会显著变慢。
+完整 scene017 流程建议使用 Linux、CUDA 12.x、FFmpeg 6 和 A100 80 GiB 级别显存；`fast-g8` 验证峰值 CUDA allocation 约 76.41 GiB。预训练按论文配置使用 8 GPU、全局 batch 8；单 GPU 可以运行但会显著变慢。
 
 ```bash
 cd /path/to/pointforward-global
@@ -29,7 +29,8 @@ Git 只提供 `weights/pointforward_waymo_ds_paper_ckpt_020000.pt`。运行完�
 - `weights/infinidepth_depthsensor.ckpt`：从 InfiniDepth 发布渠道获取；
 - `weights/segformer.b5.1024x1024.city.160k.pth`：按下方 Argoverse 文档的 NVlabs SegFormer 下载说明获取；
 - `weights/huggingface/.../model.safetensors`：运行大规模预训练时由 timm/Hugging Face 下载，或从内部缓存复制；
-- `weights/refiner_scene017_27db.pt`：仅用于复现已验收 scene017 的 27 dB overlay；新场景应重新训练 refiner。
+- `weights/refiner_scene017_fast_g8.pt`：用于复现 PFG-v2 scene017 的 refiner overlay；
+- `weights/refiner_scene017_27db.pt`：旧 PFG-v1 / `legacy-alternating` overlay。
 
 下载后可用 `weights/manifest.json` 中 `optional_local_files` 的 SHA256 校验。`scripts/validate_install.py` 默认只检查 Git 中的 PointForward checkpoint。
 
@@ -118,11 +119,14 @@ python scripts/run_current_pipeline.py \
   --scene 017
 ```
 
+默认等价于 `--final-recipe fast-g8`。如需严格复现旧 PFG-v1 四阶段尾部，增加 `--final-recipe legacy-alternating`。
+
 每个阶段以 manifest 或目标文件为完成证据，重复执行会自动跳过已完成阶段。可用 `--from-stage NAME`、`--through-stage NAME` 选择区间，用 `--force` 重做，用 `--skip-video` 只做到指标和 PLY。列出阶段名可运行 `python scripts/run_current_pipeline.py --help`，或查看脚本中的 `Stage` 定义。
 
 主要输出：
 
-- `17_static_xyz_1cm/runtime-payload-refined/`：最终 128D 全局 payload；
+- `14_static_g8_fast_final/runtime-payload-refined/`：PFG-v2 默认最终 128D 全局 payload；
+- `17_static_xyz_1cm/runtime-payload-refined/`：仅旧 `legacy-alternating` 最终 payload；
 - `18_metrics/manifest.json`：全局/非天空/动态 bbox PSNR；
 - `final_global_gaussians_frame000_preview.ply`：frame 0 动态姿态下的标准 PLY；
 - `19_video/final_global_runtime_predicted_front3_60fps.mp4`：相机与车辆均插值的 60 fps 视频。
@@ -132,9 +136,9 @@ PLY 只有缓存 preview RGB / degree-0 SH，适合几何查看，不等价于 2
 ## 6. 对已有 payload 渲染、评估和导出
 
 ```bash
-PAYLOAD=/work/pfg/scene017/current/17_static_xyz_1cm/runtime-payload-refined
+PAYLOAD=/work/pfg/scene017/current/14_static_g8_fast_final/runtime-payload-refined
 CONFIG=/work/pfg/scene017/config.yaml
-REFINER=/work/pfg/scene017/current/16_refiner_postxyz_e1/refiner_state.pt
+REFINER="$PWD/weights/refiner_scene017_fast_g8.pt"
 CKPT="$PWD/weights/pointforward_waymo_ds_paper_ckpt_020000.pt"
 
 # 156 个源帧指标
@@ -153,7 +157,7 @@ python scripts/export_runtime_payload_ply.py --payload-dir "$PAYLOAD" \
   --out /work/pfg/final_frame000_preview.ply --frame 0
 ```
 
-`weights/refiner_scene017_27db.pt` 是已验收 scene017 的最终 overlay，只能和对应最终 payload 配套用于复现；它不应直接套到新场景。
+两个 scene017 refiner 都只能和对应配方的 payload 配套使用，不能直接套到新场景。
 
 ## 7. 新视角
 
@@ -180,4 +184,4 @@ python scripts/render_final_global_runtime.py --config "$CONFIG" --ckpt "$CKPT" 
 
 ## 8. 验收边界
 
-交付仓库的轻量检查包括语法、导入、权重 SHA256、目标仓库代码对既有最终 payload 的 156 帧复算，以及 PLY 导出。不会把最终 payload 打包进 Git，因为它是约 20.7M Gaussian 的场景数据产物。复现记录见 `docs/VALIDATION.md`。
+交付仓库的轻量检查包括语法、导入、权重 SHA256、编排合同检查，以及目标仓库代码对既有最终 payload 的 156 帧复算。不会把最终 payload 打包进 Git，因为它是约 20.7M Gaussian 的场景数据产物。7.08 分钟仅统计固定 26.668159 dB 输入 payload 的最后 RGB 优化到 PLY，不包含原始数据预处理、深度预测、全局建图及此前优化阶段。复现记录见 `docs/VALIDATION.md`。

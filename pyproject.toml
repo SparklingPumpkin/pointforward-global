@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pointforward-global"
-version = "1.0.0"
-description = "PFG-v1 portable global-Gaussian training and inference delivery"
+version = "2.0.0"
+description = "PFG-v2 fast global-Gaussian training and inference delivery"
 requires-python = ">=3.9,<3.11"
 
 [tool.setuptools]

@@ -6,4 +6,4 @@ Git 只跟踪 `pointforward_waymo_ds_paper_ckpt_020000.pt`，通过 Git LFS 下�
 
 可选权重的 SHA256 仍保留在清单中，便于下载后校验。
 
-`refiner_scene017_27db.pt` 是 scene017 场景级 RGB 后优化得到的 overlay，不是通用预训练权重，也不进入 Git。对新场景应由 `run_current_pipeline.py` 的 refiner 阶段重新生成。最终 27 dB 渲染还需要相同版本生成的 scene017 runtime payload；payload 属于场景数据，按交付要求不进入本仓库。
+`refiner_scene017_fast_g8.pt` 是 PFG-v2 默认配方使用的 scene017 overlay；`refiner_scene017_27db.pt` 是 PFG-v1 旧配方 overlay。两者都不是通用预训练权重，也不进入 Git。对新场景应由 `run_current_pipeline.py` 的 refiner 阶段重新生成。最终 27 dB 渲染还需要相同配方生成的 scene017 runtime payload；payload 属于场景数据，按交付要求不进入本仓库。

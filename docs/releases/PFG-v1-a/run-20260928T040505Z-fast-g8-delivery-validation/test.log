@@ -1,0 +1,17 @@
+PFG-v2 delivery validation, 2026-09-28 Asia/Shanghai
+
+Command: /root/miniconda3/envs/drivestudio/bin/python -m py_compile scripts/*.py src/pointforward/**/*.py
+Result: PASS
+
+Command: PYTHONPATH=$PWD/src:$PWD /root/miniconda3/envs/drivestudio/bin/python -m pytest -q tests
+Result: 50 passed in 16.89s
+
+Command: PYTHONPATH=$PWD/src:$PWD /root/miniconda3/envs/drivestudio/bin/python scripts/validate_install.py
+Result: PASS; torch 2.8.0+cu128; gsplat 1.5.3; one Git-delivered checkpoint verified
+
+Command: python scripts/run_current_pipeline.py --help
+Result: PASS; --final-recipe {fast-g8,legacy-alternating} exposed
+
+Independent render: delivery render_final_global_runtime.py, 156 frames, cameras 0/1/2
+Result: 27.085058566851494 dB global; 26.529556188827907 dB non-sky; 21.998108961643318 dB dynamic bbox
+Manifest: independent-metrics/manifest.json

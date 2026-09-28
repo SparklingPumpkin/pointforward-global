@@ -1,31 +1,33 @@
 {
   "status": "passed",
-  "project_version": "PFG-v1",
-  "validation_date": "2026-09-26",
+  "project_version": "PFG-v2",
+  "validation_date": "2026-09-28",
   "large_pretraining_run": false,
   "tests": {
-    "pytest_passed": 48,
-    "weight_hashes_passed": 5,
+    "pytest_passed": 50,
+    "weight_hashes_passed": 1,
     "py_compile": "passed"
   },
   "scene017": {
     "frame_count": 156,
     "camera_count": 3,
     "gaussian_count": 20677973,
-    "mean_psnr": 27.000626453986534,
-    "mean_psnr_non_sky": 26.47900737860264,
-    "mean_psnr_dynamic_bbox": 21.75951957091307,
-    "metrics_wall_seconds": 242.289842676837,
+    "mean_psnr": 27.085058566851494,
+    "mean_psnr_non_sky": 26.529556188827907,
+    "mean_psnr_dynamic_bbox": 21.998108961643318,
+    "metrics_wall_seconds": 137.2627907488495,
+    "rgb_refinement_input_to_ply_seconds": 424.77296328544617,
+    "rgb_refinement_input_to_ply_minutes": 7.079549388090769,
+    "timing_boundary": "fixed 26.668159 dB post-refinement payload through final PLY; excludes preprocessing and all earlier pipeline stages",
     "payload_sha256": {
-      "final_static_128d.pt": "e3a58bb96c0f62bf097504b95207fd9d87eff7ed93606e5e4d3cddc3debbd0fe",
+      "final_static_128d.pt": "afcbef52f124678b5f5989da09cc7e9bdd5e51a1ef949bebde397d8488954693",
       "final_dynamic_128d.pt": "e975437af16f43abb31b3f74c495136dd0163e1431d7e3afa5f6a5d829e678d5",
       "global_dynamic_meta.pt": "15287f560041925e3e10bca7fbc756b61e828d5b721d8fbf74a7bd743c31e03e"
     }
   },
-  "ply_export": {
-    "status": "passed",
-    "bytes": 1406102582,
-    "wall_seconds": 8.05431660078466,
-    "included_in_repository": false
-  }
+  "legacy_pfg_v1": {
+    "mean_psnr": 27.000626453986534,
+    "tail_to_ply_seconds": 1391.46
+  },
+  "artifacts_in_repository": "metrics manifest, timing, and contact sheet only; payload and PLY excluded"
 }

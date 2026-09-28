@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "candidate_id": "PFG-v1-a",
+  "target_project_version": "PFG-v2",
+  "recipe": "fast-g8",
+  "validation_date": "2026-09-28",
+  "environment": {
+    "python": "3.9.25",
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA A100-SXM4-80GB"
+  },
+  "checks": {
+    "py_compile": "passed",
+    "pytest": "50 passed in 16.89s",
+    "validate_install": "passed; one Git-delivered checkpoint verified",
+    "pipeline_help": "passed; fast-g8 and legacy-alternating exposed"
+  },
+  "independent_render": {
+    "status": "completed",
+    "implementation": "delivery repository scripts/render_final_global_runtime.py and src/pointforward",
+    "frame_count": 156,
+    "cameras": [0, 1, 2],
+    "gaussian_count": 20677973,
+    "mean_psnr": 27.085058566851494,
+    "mean_psnr_non_sky": 26.529556188827907,
+    "mean_psnr_dynamic_bbox": 21.998108961643318,
+    "wall_seconds": 138.73790197074413,
+    "manifest": "independent-metrics/manifest.json"
+  },
+  "accepted_tail_timing": {
+    "seconds": 424.77296328544617,
+    "minutes": 7.079549388090769,
+    "boundary": "fixed GR-v1-i 26.668159 dB payload through fast-g8 refinement and PLY export"
+  },
+  "large_artifacts_in_git": false
+}

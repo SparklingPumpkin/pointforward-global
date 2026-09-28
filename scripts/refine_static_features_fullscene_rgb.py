@@ -27,6 +27,11 @@ from scripts.render_final_global_runtime import combine, load_boxes, load_payloa
 from scripts.train import build_dataset
 
 
+def load_refiner_state(model: torch.nn.Module, path: Path) -> None:
+    payload = torch.load(path, map_location="cpu", weights_only=True)
+    model.refiner.load_state_dict(payload.get("refiner", payload), strict=True)
+
+
 def sampled_quantile(values: torch.Tensor, q: float, max_samples: int = 1_000_000) -> torch.Tensor:
     flat = values.reshape(-1)
     stride = max(1, (flat.numel() + max_samples - 1) // max_samples)
@@ -47,6 +52,17 @@ def main() -> None:
     parser.add_argument("--anchor-weight", type=float, default=0.0001)
     parser.add_argument("--groups", type=int, default=4)
     parser.add_argument("--max-frames", type=int, default=None)
+    parser.add_argument(
+        "--frame-list", default=None,
+        help="Comma-separated source frame IDs to supervise, overriding stride/max-frames.",
+    )
+    parser.add_argument("--frame-stride", type=int, default=1)
+    parser.add_argument("--camera-batch-size", type=int, default=1)
+    parser.add_argument("--refiner-state", default=None)
+    parser.add_argument(
+        "--empty-cache-every", type=int, default=1,
+        help="Call CUDA empty_cache every N frames; 0 disables it.",
+    )
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
     if 128 % args.groups:
@@ -68,7 +84,20 @@ def main() -> None:
     dataset = build_dataset(config, args.split)
     metadata = next(item for item in dataset.scenes if item["name"] == args.scene)
     all_frames = list(metadata["frames"])
-    frames = all_frames if args.max_frames is None else all_frames[:args.max_frames]
+    if args.frame_stride < 1:
+        raise ValueError("--frame-stride must be >= 1")
+    if args.camera_batch_size < 1:
+        raise ValueError("--camera-batch-size must be >= 1")
+    if args.frame_list:
+        requested = [int(value) for value in args.frame_list.split(",") if value.strip()]
+        missing = sorted(set(requested) - set(all_frames))
+        if missing:
+            raise ValueError(f"--frame-list contains frames absent from scene: {missing}")
+        frames = requested
+    else:
+        frames = all_frames[::args.frame_stride]
+        if args.max_frames is not None:
+            frames = frames[:args.max_frames]
     slots = {int(frame): slot for slot, frame in enumerate(all_frames)}
     normalized_times = dataset._normalised_times(all_frames)
     world_from = np.linalg.inv(dataset._ego_pose(metadata, all_frames[0]))
@@ -85,6 +114,8 @@ def main() -> None:
     boxes = load_boxes(meta["boxes"], device)
     assert boxes is not None
     model = build_model(config, device, args.ckpt).eval().requires_grad_(False)
+    if args.refiner_state:
+        load_refiner_state(model, Path(args.refiner_state).resolve())
     generator = torch.Generator().manual_seed(args.seed)
     records: list[dict] = []
     started = time.perf_counter()
@@ -101,24 +132,28 @@ def main() -> None:
             )
             optimizer.zero_grad(set_to_none=True)
             losses = []
-            for camera_index in range(len(dataset.cameras)):
+            camera_count = len(dataset.cameras)
+            camera_batch_size = min(args.camera_batch_size, camera_count)
+            for camera_start in range(0, camera_count, camera_batch_size):
+                camera_end = min(camera_start + camera_batch_size, camera_count)
+                view_count = camera_end - camera_start
                 delta = raw_delta[:, group_index]
                 current_static = replace(static, colors=base_colors + delta)
                 scene = combine(current_static, dynamic)
                 targets = TargetViews(
-                    intrinsics=batch["intrinsics"][camera_index:camera_index + 1].to(device),
-                    cam_to_world=batch["cam_to_world"][camera_index:camera_index + 1].to(device),
-                    times=normalized_times[slot:slot + 1].to(device),
-                    frame_index=torch.full((1,), slot, dtype=torch.long, device=device),
+                    intrinsics=batch["intrinsics"][camera_start:camera_end].to(device),
+                    cam_to_world=batch["cam_to_world"][camera_start:camera_end].to(device),
+                    times=normalized_times[slot:slot + 1].to(device).expand(view_count),
+                    frame_index=torch.full((view_count,), slot, dtype=torch.long, device=device),
                 )
                 rendered = model.render(
                     scene, boxes, targets, height=height, width=width,
                     render_depth=False,
                 )["rgb"]
-                truth = batch["images"][camera_index:camera_index + 1].to(device)
-                mse = (rendered - truth).square().mean()
-                (mse / len(dataset.cameras)).backward()
-                losses.append(float(mse.detach()))
+                truth = batch["images"][camera_start:camera_end].to(device)
+                per_view_mse = (rendered - truth).square().flatten(1).mean(1)
+                (per_view_mse.sum() / camera_count).backward()
+                losses.extend(float(value) for value in per_view_mse.detach())
                 del targets, rendered, scene, current_static, delta
             anchor = raw_delta.square().mean()
             (args.anchor_weight * anchor).backward()
@@ -140,7 +175,8 @@ def main() -> None:
                     })
                     print(json.dumps(records[-1]), flush=True)
             del batch
-            torch.cuda.empty_cache()
+            if args.empty_cache_every > 0 and step % args.empty_cache_every == 0:
+                torch.cuda.empty_cache()
 
     with torch.no_grad():
         delta = raw_delta[:, group_index]
@@ -155,11 +191,19 @@ def main() -> None:
         "status": "completed", "scene": args.scene,
         "source_payload": str(source_dir), "refined_payload": str(refined_dir),
         "checkpoint": str(Path(args.ckpt).resolve()),
+        "refiner_state": (
+            str(Path(args.refiner_state).resolve()) if args.refiner_state else None
+        ),
         "optimized": "static Gaussian 128-D colors via per-point grouped deltas",
         "groups": args.groups, "epochs": args.epochs,
         "frozen": "dynamic map, Gaussian geometry/opacity/sigma/time, boxes, cameras, network and UNet",
         "supervision": "full final scene RGB MSE over all pixels and cameras",
         "learning_rate": args.learning_rate, "anchor_weight": args.anchor_weight,
+        "training_frame_stride": args.frame_stride,
+        "training_frame_count": len(frames),
+        "training_frames": [int(frame) for frame in frames],
+        "camera_batch_size": args.camera_batch_size,
+        "empty_cache_every": args.empty_cache_every,
         "delta_rms": float(delta.square().mean().sqrt()),
         "delta_abs_p95_sampled": float(sampled_quantile(delta.abs(), 0.95)),
         "delta_abs_max": float(delta.abs().max()),

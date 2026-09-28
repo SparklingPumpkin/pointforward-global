@@ -3,13 +3,17 @@
 > 由机器状态生成，只展示当前版本与仍活跃的候选；完整历史见 `VERSION_LEDGER.md`。
 
 项目：PointForward Global（`pointforward-global`）  
-更新时间：2026-09-25T16:32:16+00:00
+更新时间：2026-09-28T04:27:48+00:00
 
 ## 项目主线
 
-当前版本：`PFG-v1`（27db-global-mainline）
+当前版本：`PFG-v2`（fast-g8-27db-mainline）
 
-scene017最终全局Gaussian 27.000626dB方法的可移植交付主线
+PFG-v2 makes the validated full-frame groups=8 batched feature tail the default, retains the PFG-v1 legacy recipe, and documents the DG-v1-f to current upgrade path.
+
+当前证据：
+- `docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/validation-summary.json`：Validates the new default recipe and its fallback contract.
+- `docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/validation-summary.json`：Supports promotion to the PFG-v2 mainline.
 
 活跃候选：
 - 无。

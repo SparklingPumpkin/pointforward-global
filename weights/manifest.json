@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "project_version": "PFG-v1",
+  "project_version": "PFG-v2",
   "files": [
     {
       "path": "weights/pointforward_waymo_ds_paper_ckpt_020000.pt",
@@ -17,10 +17,16 @@
       "purpose": "Frozen InfiniDepth sparse-depth-conditioned prior"
     },
     {
+      "path": "weights/refiner_scene017_fast_g8.pt",
+      "bytes": 7853317,
+      "sha256": "8447c20ba0f9e08d280eeeb4e02deac3f7b7e6d65bf08d6ae36cafd773d74a85",
+      "purpose": "Optional scene017-specific PFG-v2 fast-g8 refiner overlay"
+    },
+    {
       "path": "weights/refiner_scene017_27db.pt",
       "bytes": 7853317,
       "sha256": "e1a21b89adc3e341e22f527349a3b95353541499715e6710c7fd3c8a2d1c1757",
-      "purpose": "Optional scene017-specific 27 dB feature-refiner overlay"
+      "purpose": "Legacy PFG-v1 scene017-specific 27 dB feature-refiner overlay"
     },
     {
       "path": "weights/segformer.b5.1024x1024.city.160k.pth",

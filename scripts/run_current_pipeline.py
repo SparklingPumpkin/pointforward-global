@@ -1,9 +1,8 @@
-"""Run the PFG-v1 global-Gaussian recipe as resumable named stages.
+"""Run the PFG-v2 global-Gaussian recipe as resumable named stages.
 
-The scene017 contract deliberately preserves every accepted stage that led to
-27.000626 dB.  It is also usable for another processed Argoverse scene, but
-the target-domain refinements then learn a new scene-specific payload/refiner
-and no numeric 27 dB guarantee is implied.
+The default fast-g8 recipe replaces the four-stage GR-v1-j tail with one
+full-frame groups=8 static-feature refinement.  The original alternating
+refiner/XYZ tail remains available for exact PFG-v1 reproduction.
 """
 
 from __future__ import annotations
@@ -54,6 +53,11 @@ def main() -> None:
     parser.add_argument("--through-stage", default=None)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--skip-video", action="store_true")
+    parser.add_argument(
+        "--final-recipe", choices=("fast-g8", "legacy-alternating"),
+        default="fast-g8",
+        help="Final scene-specific RGB refinement recipe.",
+    )
     args = parser.parse_args()
 
     project = Path(__file__).resolve().parents[1]
@@ -188,59 +192,75 @@ def main() -> None:
     ))
     payload = out / "runtime-payload-refined"
 
-    out = output / "14_refiner_postxyz_e2"
-    stages.append(Stage(
-        "refiner-postxyz-e2",
-        py(
-            "refine_refiner_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
-            "--payload-dir", payload, "--out", out, "--scene", args.scene,
-            "--epochs", 2, "--learning-rate", 5e-5, "--anchor-weight", 0.0001,
-            "--scope", "full", "--loss-mode", "frame-log-mse",
-            "--refiner-state-in", refiner, "--device", args.device,
-        ),
-        out / "manifest.json",
-    ))
-    refiner = out / "refiner_state.pt"
+    if args.final_recipe == "fast-g8":
+        out = output / "14_static_g8_fast_final"
+        stages.append(Stage(
+            "static-g8-fast-final",
+            py(
+                "refine_static_features_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
+                "--payload-dir", payload, "--refiner-state", refiner, "--out", out,
+                "--scene", args.scene, "--epochs", 1, "--learning-rate", 0.005,
+                "--anchor-weight", 0.0001, "--groups", 8, "--frame-stride", 1,
+                "--camera-batch-size", 3, "--empty-cache-every", 0,
+                "--device", args.device,
+            ),
+            out / "manifest.json",
+        ))
+        payload = out / "runtime-payload-refined"
+    else:
+        out = output / "14_refiner_postxyz_e2"
+        stages.append(Stage(
+            "refiner-postxyz-e2",
+            py(
+                "refine_refiner_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
+                "--payload-dir", payload, "--out", out, "--scene", args.scene,
+                "--epochs", 2, "--learning-rate", 5e-5, "--anchor-weight", 0.0001,
+                "--scope", "full", "--loss-mode", "frame-log-mse",
+                "--refiner-state-in", refiner, "--device", args.device,
+            ),
+            out / "manifest.json",
+        ))
+        refiner = out / "refiner_state.pt"
 
-    out = output / "15_static_xyz_2cm"
-    stages.append(Stage(
-        "static-xyz-2cm",
-        py(
-            "refine_static_xyz_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
-            "--payload-dir", payload, "--refiner-state", refiner, "--out", out,
-            "--scene", args.scene, "--epochs", 1, "--learning-rate", 0.01,
-            "--max-displacement-m", 0.02, "--anchor-weight", 0.001, "--device", args.device,
-        ),
-        out / "manifest.json",
-    ))
-    payload = out / "runtime-payload-refined"
+        out = output / "15_static_xyz_2cm"
+        stages.append(Stage(
+            "static-xyz-2cm",
+            py(
+                "refine_static_xyz_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
+                "--payload-dir", payload, "--refiner-state", refiner, "--out", out,
+                "--scene", args.scene, "--epochs", 1, "--learning-rate", 0.01,
+                "--max-displacement-m", 0.02, "--anchor-weight", 0.001, "--device", args.device,
+            ),
+            out / "manifest.json",
+        ))
+        payload = out / "runtime-payload-refined"
 
-    out = output / "16_refiner_postxyz_e1"
-    stages.append(Stage(
-        "refiner-postxyz-e1",
-        py(
-            "refine_refiner_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
-            "--payload-dir", payload, "--out", out, "--scene", args.scene,
-            "--epochs", 1, "--learning-rate", 2.5e-5, "--anchor-weight", 0.0001,
-            "--scope", "full", "--loss-mode", "frame-log-mse",
-            "--refiner-state-in", refiner, "--device", args.device,
-        ),
-        out / "manifest.json",
-    ))
-    refiner = out / "refiner_state.pt"
+        out = output / "16_refiner_postxyz_e1"
+        stages.append(Stage(
+            "refiner-postxyz-e1",
+            py(
+                "refine_refiner_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
+                "--payload-dir", payload, "--out", out, "--scene", args.scene,
+                "--epochs", 1, "--learning-rate", 2.5e-5, "--anchor-weight", 0.0001,
+                "--scope", "full", "--loss-mode", "frame-log-mse",
+                "--refiner-state-in", refiner, "--device", args.device,
+            ),
+            out / "manifest.json",
+        ))
+        refiner = out / "refiner_state.pt"
 
-    out = output / "17_static_xyz_1cm"
-    stages.append(Stage(
-        "static-xyz-1cm",
-        py(
-            "refine_static_xyz_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
-            "--payload-dir", payload, "--refiner-state", refiner, "--out", out,
-            "--scene", args.scene, "--epochs", 1, "--learning-rate", 0.005,
-            "--max-displacement-m", 0.01, "--anchor-weight", 0.001, "--device", args.device,
-        ),
-        out / "manifest.json",
-    ))
-    payload = out / "runtime-payload-refined"
+        out = output / "17_static_xyz_1cm"
+        stages.append(Stage(
+            "static-xyz-1cm",
+            py(
+                "refine_static_xyz_fullscene_rgb.py", "--config", config, "--ckpt", ckpt,
+                "--payload-dir", payload, "--refiner-state", refiner, "--out", out,
+                "--scene", args.scene, "--epochs", 1, "--learning-rate", 0.005,
+                "--max-displacement-m", 0.01, "--anchor-weight", 0.001, "--device", args.device,
+            ),
+            out / "manifest.json",
+        ))
+        payload = out / "runtime-payload-refined"
 
     metric_out = output / "18_metrics"
     stages.append(Stage(
@@ -284,13 +304,15 @@ def main() -> None:
     for stage in selected:
         records.append(run(stage, env, args.force))
         (output / "pipeline_manifest.json").write_text(json.dumps({
-            "status": "running", "project_version": "PFG-v1", "scene": args.scene,
+            "status": "running", "project_version": "PFG-v2", "scene": args.scene,
             "config": str(config), "checkpoint": str(ckpt), "records": records,
+            "final_recipe": args.final_recipe,
             "final_payload": str(payload), "final_refiner": str(refiner),
         }, indent=2) + "\n")
     manifest = {
-        "status": "completed", "project_version": "PFG-v1", "scene": args.scene,
+        "status": "completed", "project_version": "PFG-v2", "scene": args.scene,
         "config": str(config), "checkpoint": str(ckpt), "records": records,
+        "final_recipe": args.final_recipe,
         "final_payload": str(payload), "final_refiner": str(refiner),
         "ply": str(ply),
     }

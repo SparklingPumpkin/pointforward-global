@@ -23,12 +23,15 @@
       "label": "项目主线",
       "purpose": "可在新机器独立完成数据预处理、模型预训练、全局Gaussian推理、PLY导出与128D渲染的交付主线",
       "parent_scope_id": null,
-      "current_version_id": "PFG-v1",
-      "next_version_number": 2,
+      "current_version_id": "PFG-v2",
+      "next_version_number": 3,
       "version_ids": [
-        "PFG-v1"
+        "PFG-v1",
+        "PFG-v2"
       ],
-      "candidate_ids": [],
+      "candidate_ids": [
+        "PFG-v1-a"
+      ],
       "created_at": "2026-09-25T15:51:53+00:00"
     },
     "delivery-validation": {
@@ -55,14 +58,15 @@
       "scope_id": "project",
       "number": 1,
       "slug": "27db-global-mainline",
-      "status": "current",
+      "status": "superseded",
       "parent_version_id": null,
       "promoted_from_candidate_id": null,
       "change_types": [],
       "summary": "scene017最终全局Gaussian 27.000626dB方法的可移植交付主线",
       "evidence": [],
       "legacy_id": null,
-      "created_at": "2026-09-25T15:51:53+00:00"
+      "created_at": "2026-09-25T15:51:53+00:00",
+      "superseded_at": "2026-09-28T04:27:48+00:00"
     },
     "DEL-v1": {
       "version_id": "DEL-v1",
@@ -88,6 +92,43 @@
       ],
       "legacy_id": "pfg-delivery-validation",
       "created_at": "2026-09-25T16:30:57+00:00"
+    },
+    "PFG-v2": {
+      "version_id": "PFG-v2",
+      "scope_id": "project",
+      "number": 2,
+      "slug": "fast-g8-27db-mainline",
+      "status": "current",
+      "parent_version_id": "PFG-v1",
+      "promoted_from_candidate_id": "PFG-v1-a",
+      "change_types": [
+        "validated_default_change"
+      ],
+      "summary": "PFG-v2 makes the validated full-frame groups=8 batched feature tail the default, retains the PFG-v1 legacy recipe, and documents the DG-v1-f to current upgrade path.",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/validation-summary.json",
+          "claim": "Validates the new default recipe and its fallback contract.",
+          "recorded_at": "2026-09-28T04:27:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "9291f4762031c6a3bfcf9e618be9d7bdfd729e1a30b6f1e14e6ce6822e0f35b5",
+          "size_when_recorded": 1190,
+          "mtime_ns_when_recorded": 1790569541982802590
+        },
+        {
+          "reference": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/validation-summary.json",
+          "claim": "Supports promotion to the PFG-v2 mainline.",
+          "recorded_at": "2026-09-28T04:27:48+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "9291f4762031c6a3bfcf9e618be9d7bdfd729e1a30b6f1e14e6ce6822e0f35b5",
+          "size_when_recorded": 1190,
+          "mtime_ns_when_recorded": 1790569541982802590
+        }
+      ],
+      "legacy_id": null,
+      "created_at": "2026-09-28T04:27:48+00:00"
     }
   },
   "candidates": {
@@ -121,6 +162,37 @@
       "promoted_to_version_id": null,
       "created_at": "2026-09-25T16:31:47+00:00",
       "updated_at": "2026-09-25T16:32:16+00:00"
+    },
+    "PFG-v1-a": {
+      "candidate_id": "PFG-v1-a",
+      "scope_id": "project",
+      "base_version_id": "PFG-v1",
+      "slug": "fast-g8-27db-mainline",
+      "status": "promoted",
+      "hypothesis": "以DG-v1-f到GR-v1-i的既有链路为基础，用全156帧groups8静态feature优化和三相机批处理替换GR-v1-j末端四阶段，可在10分钟RGB后优化合同内达到至少27dB并保留旧配方回退",
+      "change_types": [
+        "validated_default_change"
+      ],
+      "directory_id": "dir-0014",
+      "run_ids": [
+        "run-20260928T040505Z-fast-g8-delivery-validation"
+      ],
+      "conclusion": "Adopt fast-g8 as the PFG-v2 default: 27.085059 dB, 7.08-minute accepted tail, with legacy-alternating preserved.",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/validation-summary.json",
+          "claim": "Validates the new default recipe and its fallback contract.",
+          "recorded_at": "2026-09-28T04:27:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "9291f4762031c6a3bfcf9e618be9d7bdfd729e1a30b6f1e14e6ce6822e0f35b5",
+          "size_when_recorded": 1190,
+          "mtime_ns_when_recorded": 1790569541982802590
+        }
+      ],
+      "promoted_to_version_id": "PFG-v2",
+      "created_at": "2026-09-28T04:05:20+00:00",
+      "updated_at": "2026-09-28T04:27:48+00:00"
     }
   },
   "runs": {
@@ -148,6 +220,31 @@
       ],
       "created_at": "2026-09-25T16:32:00+00:00",
       "updated_at": "2026-09-25T16:32:16+00:00"
+    },
+    "run-20260928T040505Z-fast-g8-delivery-validation": {
+      "run_id": "run-20260928T040505Z-fast-g8-delivery-validation",
+      "candidate_id": "PFG-v1-a",
+      "variant": "fast-g8-delivery-validation",
+      "status": "completed",
+      "directory_id": "dir-0015",
+      "config_identity": "configs/argoverse_global.template.yaml::scene017 156帧三前视合同",
+      "code_identity": "PFG-v1-a working tree::fast-g8 default plus legacy-alternating fallback",
+      "data_identity": "GR-v1-s external scene017 payload and manifests::20,677,973 Gaussians",
+      "summary": "PFG-v2 package passed syntax, 50 tests, install validation, pipeline contract checks, and independent 156-frame rendering at 27.085059 dB.",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/validation-summary.json",
+          "claim": "Proves package tests, install checks, independent 156-frame 27.085059 dB rendering, and accepted timing boundary.",
+          "recorded_at": "2026-09-28T04:27:26+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "9291f4762031c6a3bfcf9e618be9d7bdfd729e1a30b6f1e14e6ce6822e0f35b5",
+          "size_when_recorded": 1190,
+          "mtime_ns_when_recorded": 1790569541982802590
+        }
+      ],
+      "created_at": "2026-09-28T04:05:53+00:00",
+      "updated_at": "2026-09-28T04:27:26+00:00"
     }
   },
   "directories": {
@@ -318,6 +415,76 @@
       "decision_id": "layout-0011",
       "created_at": "2026-09-25T16:32:00+00:00",
       "updated_at": "2026-09-25T16:32:00+00:00"
+    },
+    "dir-0013": {
+      "directory_id": "dir-0013",
+      "path": "docs/releases",
+      "level": "experiment_family",
+      "parent_directory_id": "dir-0007",
+      "scope_id": "project",
+      "purpose": "主线交付升级候选与验证记录",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0012",
+      "created_at": "2026-09-28T04:04:54+00:00",
+      "updated_at": "2026-09-28T04:04:54+00:00"
+    },
+    "dir-0014": {
+      "directory_id": "dir-0014",
+      "path": "docs/releases/PFG-v1-a",
+      "level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "scope_id": "project",
+      "purpose": "DG-v1-f到GR-v1-s快速27dB主线升级",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0013",
+      "created_at": "2026-09-28T04:05:05+00:00",
+      "updated_at": "2026-09-28T04:05:05+00:00"
+    },
+    "dir-0015": {
+      "directory_id": "dir-0015",
+      "path": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation",
+      "level": "run",
+      "parent_directory_id": "dir-0014",
+      "scope_id": "project",
+      "purpose": "PFG-v1-a源码、配方、指标与文档交付验证",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0014",
+      "created_at": "2026-09-28T04:05:53+00:00",
+      "updated_at": "2026-09-28T04:05:53+00:00"
+    },
+    "dir-0016": {
+      "directory_id": "dir-0016",
+      "path": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/independent-metrics",
+      "level": "artifact",
+      "parent_directory_id": "dir-0015",
+      "scope_id": "project",
+      "purpose": "交付包独立156帧复算manifest",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0015",
+      "created_at": "2026-09-28T04:26:35+00:00",
+      "updated_at": "2026-09-28T04:26:35+00:00"
+    },
+    "dir-0017": {
+      "directory_id": "dir-0017",
+      "path": "docs/validation/scene017-fast-g8",
+      "level": "experiment_family",
+      "parent_directory_id": "dir-0008",
+      "scope_id": "project",
+      "purpose": "scene017 fast-g8指标计时与关键帧证据",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0016",
+      "created_at": "2026-09-28T04:27:07+00:00",
+      "updated_at": "2026-09-28T04:27:07+00:00"
     }
   },
   "layout_decisions": {
@@ -529,11 +696,102 @@
       "status": "applied",
       "applied_directory_id": "dir-0012",
       "created_at": "2026-09-25T16:32:00+00:00"
+    },
+    "layout-0012": {
+      "decision_id": "layout-0012",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_group",
+      "target_path": "docs/releases",
+      "target_level": "experiment_family",
+      "parent_directory_id": "dir-0007",
+      "purpose": "主线交付升级候选与验证记录",
+      "reason": "将方法升级候选和运行证据集中于文档区域，不混入源码或交付验证工作流",
+      "alternatives_considered": [
+        "直接修改主线而不保留候选和run审计"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0013",
+      "created_at": "2026-09-28T04:04:34+00:00"
+    },
+    "layout-0013": {
+      "decision_id": "layout-0013",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v1-a",
+      "target_level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "purpose": "DG-v1-f到GR-v1-s快速27dB主线升级",
+      "reason": "当前方法、性能合同和默认流水线均发生实质变化，应作为PFG-v1独立候选验证后晋级",
+      "alternatives_considered": [
+        "覆盖PFG-v1会丢失旧27dB四阶段配方身份"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0014",
+      "created_at": "2026-09-28T04:04:54+00:00"
+    },
+    "layout-0014": {
+      "decision_id": "layout-0014",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation",
+      "target_level": "run",
+      "parent_directory_id": "dir-0014",
+      "purpose": "PFG-v1-a源码、配方、指标与文档交付验证",
+      "reason": "候选晋级前需保存独立运行与持久证据",
+      "alternatives_considered": [
+        "仅依赖源研究仓库结果不能证明交付包已经更新"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0015",
+      "created_at": "2026-09-28T04:05:53+00:00"
+    },
+    "layout-0015": {
+      "decision_id": "layout-0015",
+      "scope_id": "project",
+      "candidate_id": "PFG-v1-a",
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/independent-metrics",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0015",
+      "purpose": "交付包独立156帧复算manifest",
+      "reason": "将独立渲染产生的可审计指标证据登记在对应验证run下",
+      "alternatives_considered": [],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0016",
+      "created_at": "2026-09-28T04:26:27+00:00"
+    },
+    "layout-0016": {
+      "decision_id": "layout-0016",
+      "scope_id": "project",
+      "candidate_id": "PFG-v1-a",
+      "action": "new_group",
+      "target_path": "docs/validation/scene017-fast-g8",
+      "target_level": "experiment_family",
+      "parent_directory_id": "dir-0008",
+      "purpose": "scene017 fast-g8指标计时与关键帧证据",
+      "reason": "保存PFG-v2验收所需的小型可审计证据，不纳入大payload和PLY",
+      "alternatives_considered": [],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0017",
+      "created_at": "2026-09-28T04:27:00+00:00"
     }
   },
-  "updated_at": "2026-09-25T16:32:16+00:00",
+  "updated_at": "2026-09-28T04:27:48+00:00",
   "ledger": {
-    "event_count": 28,
-    "head_hash": "166130a92ba6f863bc47ad5f86abf321102672ff09d472a13c72d1178dc62e24"
+    "event_count": 44,
+    "head_hash": "1040bc800d1ba5cb92506d2ba9bed223757e05c6fc2cf0fcb08f6b18eae4e9d1"
   }
 }
