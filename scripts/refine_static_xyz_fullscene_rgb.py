@@ -41,6 +41,14 @@ def main() -> None:
     parser.add_argument("--max-displacement-m", type=float, default=0.05)
     parser.add_argument("--anchor-weight", type=float, default=0.001)
     parser.add_argument("--max-frames", type=int, default=None)
+    parser.add_argument(
+        "--camera-batch-size", type=int, default=1,
+        help="Render this many same-frame cameras together; 1 preserves legacy execution.",
+    )
+    parser.add_argument(
+        "--frame-stride", type=int, default=1,
+        help="Uniformly subsample RGB-supervision frames; 1 keeps every frame.",
+    )
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
 
@@ -61,7 +69,13 @@ def main() -> None:
     dataset = build_dataset(config, "val")
     metadata = next(item for item in dataset.scenes if item["name"] == args.scene)
     all_frames = list(metadata["frames"])
-    frames = all_frames if args.max_frames is None else all_frames[:args.max_frames]
+    if args.frame_stride < 1:
+        raise ValueError("--frame-stride must be >= 1")
+    if args.camera_batch_size < 1:
+        raise ValueError("--camera-batch-size must be >= 1")
+    frames = all_frames[::args.frame_stride]
+    if args.max_frames is not None:
+        frames = frames[:args.max_frames]
     slots = {int(frame): slot for slot, frame in enumerate(all_frames)}
     normalized_times = dataset._normalised_times(all_frames)
     world_from = np.linalg.inv(dataset._ego_pose(metadata, all_frames[0]))
@@ -99,17 +113,21 @@ def main() -> None:
             )
             optimizer.zero_grad(set_to_none=True)
             losses = []
-            for camera_index in range(len(dataset.cameras)):
+            camera_count = len(dataset.cameras)
+            camera_batch_size = min(args.camera_batch_size, camera_count)
+            for camera_start in range(0, camera_count, camera_batch_size):
+                camera_end = min(camera_start + camera_batch_size, camera_count)
+                view_count = camera_end - camera_start
                 delta = bounded_delta(raw_delta, args.max_displacement_m)
                 current_static = replace(static, means=base_means + delta)
                 gaussians = combine(current_static, dynamic)
-                intrinsics = batch["intrinsics"][camera_index:camera_index + 1].to(device)
-                cam_to_world = batch["cam_to_world"][camera_index:camera_index + 1].to(device)
+                intrinsics = batch["intrinsics"][camera_start:camera_end].to(device)
+                cam_to_world = batch["cam_to_world"][camera_start:camera_end].to(device)
                 targets = TargetViews(
                     intrinsics=intrinsics,
                     cam_to_world=cam_to_world,
-                    times=normalized_times[slot:slot + 1].to(device),
-                    frame_index=torch.full((1,), slot, dtype=torch.long, device=device),
+                    times=normalized_times[slot:slot + 1].to(device).expand(view_count),
+                    frame_index=torch.full((view_count,), slot, dtype=torch.long, device=device),
                 )
                 rendered = model.render(
                     gaussians, boxes, targets,
@@ -117,15 +135,17 @@ def main() -> None:
                 )["rgb"]
                 dynamic_mask = box_dynamic_masks(
                     evaluation_boxes,
-                    torch.tensor([slot], dtype=torch.long, device=device),
+                    torch.full((view_count,), slot, dtype=torch.long, device=device),
                     intrinsics, torch.linalg.inv(cam_to_world), height, width,
                 ).unsqueeze(1)
-                valid = (batch["sky_mask"][camera_index:camera_index + 1].to(device) < 0.5)
+                valid = (batch["sky_mask"][camera_start:camera_end].to(device) < 0.5)
                 valid &= ~dynamic_mask
-                squared = (rendered - batch["images"][camera_index:camera_index + 1].to(device)).square()
-                mse = (squared * valid).sum() / (valid.sum() * 3.0).clamp_min(1.0)
-                (torch.log(mse.clamp_min(1e-8)) / len(dataset.cameras)).backward()
-                losses.append(float(mse.detach()))
+                squared = (rendered - batch["images"][camera_start:camera_end].to(device)).square()
+                numerator = (squared * valid).flatten(1).sum(1)
+                denominator = valid.flatten(1).sum(1).mul(3.0).clamp_min(1.0)
+                per_view_mse = numerator / denominator
+                (torch.log(per_view_mse.clamp_min(1e-8)).sum() / camera_count).backward()
+                losses.extend(float(value) for value in per_view_mse.detach())
                 del delta, current_static, gaussians, rendered, targets
 
             delta = bounded_delta(raw_delta, args.max_displacement_m)
@@ -176,6 +196,10 @@ def main() -> None:
         "epochs": args.epochs, "learning_rate": args.learning_rate,
         "max_displacement_m": args.max_displacement_m,
         "anchor_weight": args.anchor_weight,
+        "training_frame_stride": args.frame_stride,
+        "training_frame_count": len(frames),
+        "training_frames": [int(frame) for frame in frames],
+        "camera_batch_size": args.camera_batch_size,
         "mean_displacement_m": float(norms.mean()),
         "p95_displacement_m_sampled": float(torch.quantile(sample, 0.95)),
         "peak_cuda_gib": torch.cuda.max_memory_allocated() / 2**30,

@@ -1,8 +1,20 @@
-# PointForward Global（PFG-v2 当前主线）
+# PointForward Global（FFR-v1-l ver2 当前交付）
 
-这是当前 27 dB 全局 Gaussian 版本的独立交付仓库。它包含原始数据预处理、PointForward 预训练、全局静态/动态 Gaussian 推理、场景级 RGB 后优化、PLY 导出和 128D+UNet 视频渲染所需源码，以及 Git 中唯一保留的 PointForward checkpoint；不包含任何数据集、历史实验、payload、逐帧图片或成品视频。
+这是 `FFR-v1-l` ver2 的独立交付仓库。它包含原始数据预处理、PointForward 预训练、全局静态/动态 Gaussian 推理、场景级 RGB 后优化、PLY 导出和 128D+UNet 视频渲染所需源码，以及本次固定 scene017 的完整运行 payload 和所需权重；不包含原始数据集和成品视频。固定结果为 RGB/raw 冷启动到 PLY+完整 156 帧视频 **1153.131 s / 28.088604 dB**。详细边界和文件清单见 [FFR-v1-l ver2 release](docs/releases/FFR-v1-l-ver2/README.md)。
 
-当前版本由 [项目控制面](docs/project-control/CURRENT.md) 标记。PFG-v2 将最终优化默认切换为 `fast-g8`，在 scene017 上达到 27.085059 dB，并把固定输入 payload 到最终 PLY 的阶段压缩到 7.08 分钟；旧版四阶段尾部仍可选。方法见 [METHOD.md](docs/METHOD.md)，从 DG-v1-f 开始的完整技术演进见 [UPGRADES_DG_V1_F_TO_PFG_V2.md](docs/UPGRADES_DG_V1_F_TO_PFG_V2.md)。
+历史 PFG-v2 说明仍保留在 [项目控制面](docs/project-control/CURRENT.md) 和历史文档中；本 ver2 交付的固定实验记录不应与旧 PFG-v2 的 27.085059 dB 结果混用。
+
+## FFR-v1-l ver2 快速入口
+
+```bash
+export PYTHONPATH="$PWD/src:$PWD"
+python scripts/run_current_pipeline.py \
+  --config /work/scene017/config.yaml \
+  --output-root /work/scene017/ffr-v1-l \
+  --scene 017
+```
+
+固定场景 payload 位于 `artifacts/scene017_ffr_v1_l/`，对应 refiner 为 `weights/refiner_scene017_ffr_v1_l.pt`。不要把该 scene017 资产当作新场景的通用 checkpoint。
 
 ## 1. 硬件与环境
 
@@ -18,13 +30,13 @@ export HF_HOME="$PWD/weights/huggingface"
 python scripts/validate_install.py
 ```
 
-如果已有 CUDA 版 PyTorch，亦可执行 `pip install -r requirements.txt && pip install -e .`。`weights/manifest.json` 给出 Git 保留 checkpoint 以及外部可选权重的大小、SHA256 和用途。为控制 Git 体积，InfiniDepth、SegFormer、EfficientNetV2-S 初始化权重和 scene017 refiner 不再上传到 Git。
+如果已有 CUDA 版 PyTorch，亦可执行 `pip install -r requirements.txt && pip install -e .`。`weights/manifest.json` 给出 ver2 交付包内全部模型权重的大小、SHA256 和用途。大文件仍按仓库原有策略不纳入 Git 历史，但在本交付目录中已随包提供；复制或归档交付包时必须保留 `weights/` 下的这些文件。
 
 ## 2. 原始数据预处理
 
 ### 外部可选模型权重
 
-Git 只提供 `weights/pointforward_waymo_ds_paper_ckpt_020000.pt`。运行完整推理前，还需将以下可选权重放到对应路径（或修改生成配置指向其他路径）：
+Git 历史只保留 `weights/pointforward_waymo_ds_paper_ckpt_020000.pt`；当前 ver2 工作目录已经提供完整流程所需的其他权重。若从 Git 的干净 clone 开始，运行完整推理前需恢复 `weights/manifest.json` 列出的全部大文件：
 
 - `weights/infinidepth_depthsensor.ckpt`：从 InfiniDepth 发布渠道获取；
 - `weights/segformer.b5.1024x1024.city.160k.pth`：按下方 Argoverse 文档的 NVlabs SegFormer 下载说明获取；
@@ -32,7 +44,7 @@ Git 只提供 `weights/pointforward_waymo_ds_paper_ckpt_020000.pt`。运行完�
 - `weights/refiner_scene017_fast_g8.pt`：用于复现 PFG-v2 scene017 的 refiner overlay；
 - `weights/refiner_scene017_27db.pt`：旧 PFG-v1 / `legacy-alternating` overlay。
 
-下载后可用 `weights/manifest.json` 中 `optional_local_files` 的 SHA256 校验。`scripts/validate_install.py` 默认只检查 Git 中的 PointForward checkpoint。
+恢复后可用 `weights/manifest.json` 的 SHA256 校验。`scripts/validate_install.py` 默认只检查 Git 中的 PointForward checkpoint。
 
 ### Argoverse 2
 

@@ -253,14 +253,38 @@ class SpatialTemporalFusion(nn.Module):
         query_times: Tensor,
         image_size: tuple[int, int],
         dynamic_masks: Tensor | None = None,
+        dynamic_foreground_masks: Tensor | None = None,
         is_static: Tensor | None = None,
         point_valid: Tensor | None = None,
+        query_view_id: Tensor | None = None,
+        source_anchor_dynamic_fq: bool = False,
+        neutralize_dynamic_depth_cue: bool = False,
+        dynamic_soft_occlusion_order: bool = False,
+        static_depth_tolerance: float | None = None,
     ) -> tuple[Tensor, Tensor]:
         """Fuse in chunks over the query dimension; see :meth:`forward_chunk`."""
         n = queries.shape[0]
         # phi_v is built lazily, so materialise it before any checkpointed call:
         # creating parameters inside a checkpointed region would lose their grads.
         self._sigma_head(points_per_view.shape[0], queries.device, queries.dtype)
+
+        # Compute the dynamic-vs-dynamic z-order once over the complete query
+        # set.  Doing this before chunking is important: a front query in a
+        # different chunk must still occlude a back query.  The default path
+        # remains byte-for-byte equivalent and does not allocate this buffer.
+        occlusion_factor = None
+        if dynamic_soft_occlusion_order:
+            if is_static is None:
+                raise ValueError("dynamic_soft_occlusion_order requires is_static")
+            occlusion_factor = _dynamic_occlusion_factor(
+                points_per_view,
+                intrinsics,
+                world_to_cam,
+                image_size,
+                is_static,
+                point_valid,
+                tau=0.5,
+            )
 
         chunk = self.chunk_size if self.chunk_size > 0 else n
         if n <= chunk:
@@ -283,8 +307,14 @@ class SpatialTemporalFusion(nn.Module):
                 query_times[lo:hi],
                 image_size,
                 dynamic_masks,
+                dynamic_foreground_masks,
                 None if is_static is None else is_static[lo:hi],
                 None if point_valid is None else point_valid[:, lo:hi],
+                None if query_view_id is None else query_view_id[lo:hi],
+                source_anchor_dynamic_fq,
+                neutralize_dynamic_depth_cue,
+                occlusion_factor,
+                static_depth_tolerance,
             )
             if self.grad_checkpoint and self.training and torch.is_grad_enabled():
                 from torch.utils.checkpoint import checkpoint
@@ -311,8 +341,14 @@ class SpatialTemporalFusion(nn.Module):
         query_times: Tensor,
         image_size: tuple[int, int],
         dynamic_masks: Tensor | None = None,
+        dynamic_foreground_masks: Tensor | None = None,
         is_static: Tensor | None = None,
         point_valid: Tensor | None = None,
+        query_view_id: Tensor | None = None,
+        source_anchor_dynamic_fq: bool = False,
+        neutralize_dynamic_depth_cue: bool = False,
+        occlusion_factor: Tensor | None = None,
+        static_depth_tolerance: float | None = None,
     ) -> tuple[Tensor, Tensor]:
         """Run fusion on one chunk of queries.
 
@@ -328,6 +364,9 @@ class SpatialTemporalFusion(nn.Module):
             query_times:     (N,) normalised timestamp t of each query.
             image_size:      (H, W) of the input images.
             dynamic_masks:   (V, H, W) bool; where each view is dynamic.
+            dynamic_foreground_masks: (V, H, W) bool RGB-predicted foreground;
+                             when provided, dynamic queries must project inside
+                             both this mask and the projected box-union mask.
             is_static:       (N,) bool; True for background queries.
             point_valid:     (V, N) bool; False where the query has no meaningful
                              world position in that view -- e.g. a dynamic query
@@ -354,18 +393,78 @@ class SpatialTemporalFusion(nn.Module):
 
         # A static query landing in a dynamic region carries motion-contaminated
         # evidence, so its sampled feature is zeroed (paper Sec. 3.3).
+        box_mask_at_query = None
         if dynamic_masks is not None and is_static is not None:
-            mask_at_query = _sample_mask(dynamic_masks, uv, height, width)  # (V, N)
-            contaminated = mask_at_query & is_static.view(1, n)
+            box_mask_at_query = _sample_mask(dynamic_masks, uv, height, width)  # (V, N)
+            contaminated = box_mask_at_query & is_static.view(1, n)
             visible = visible & ~contaminated
 
+        if dynamic_foreground_masks is not None:
+            if is_static is None:
+                raise ValueError(
+                    "is_static is required with dynamic_foreground_masks"
+                )
+            foreground = _sample_mask(
+                dynamic_foreground_masks, uv, height, width
+            )
+            if box_mask_at_query is not None:
+                foreground = foreground & box_mask_at_query
+            dynamic = ~is_static.view(1, n)
+            visible = visible & (~dynamic | foreground)
+
+        ref_depth = _sample_depth(depth_maps, uv, height, width)
+        depth_diff = (proj_depth - ref_depth).abs()
+        if static_depth_tolerance is not None:
+            if static_depth_tolerance <= 0 or is_static is None:
+                raise ValueError("static depth gating requires positive tolerance and is_static")
+            consistent = ref_depth.isfinite() & (ref_depth > 0) & (depth_diff <= static_depth_tolerance)
+            visible = visible & (~is_static.view(1, n) | consistent)
         feats = feats * visible.unsqueeze(-1).to(feats.dtype)
 
-        # --- depth consistency cue -------------------------------------------------
-        ref_depth = _sample_depth(depth_maps, uv, height, width)  # (V, N)
-        depth_diff = (proj_depth - ref_depth).abs()
-        depth_diff = torch.where(visible, depth_diff, torch.zeros_like(depth_diff))
+        # Softly attenuate evidence from dynamic queries that are behind the
+        # nearest dynamic query at the same projected pixel.  This is not a
+        # hard visibility mask: queries remain in the Gaussian set and only
+        # their per-view evidence is down-weighted.
+        if occlusion_factor is not None:
+            feats = feats * occlusion_factor.to(feats.dtype).unsqueeze(-1)
 
+        # --- depth consistency cue -------------------------------------------------
+        depth_diff = torch.where(visible, depth_diff, torch.zeros_like(depth_diff))
+        if occlusion_factor is not None:
+            depth_diff = depth_diff * occlusion_factor
+        if neutralize_dynamic_depth_cue:
+            if is_static is None:
+                raise ValueError("neutralize_dynamic_depth_cue requires is_static")
+            depth_diff = torch.where(
+                (~is_static).view(1, n), torch.zeros_like(depth_diff), depth_diff
+            )
+
+        return self.fuse_evidence(
+            queries, feats, visible, depth_diff, view_times, query_times,
+            query_view_id=query_view_id, is_static=is_static,
+            source_anchor_dynamic_fq=source_anchor_dynamic_fq,
+        )
+
+    def fuse_evidence(
+        self,
+        queries: Tensor,
+        feats: Tensor,
+        visible: Tensor,
+        depth_diff: Tensor,
+        view_times: Tensor,
+        query_times: Tensor,
+        *,
+        query_view_id: Tensor | None = None,
+        is_static: Tensor | None = None,
+        source_anchor_dynamic_fq: bool = False,
+    ) -> tuple[Tensor, Tensor]:
+        """Apply the trained fusion to already sampled per-query evidence.
+
+        Caller supplies masked features and depth residuals. View times may be
+        shared (V,) or per-query (V,N), enabling a fixed-width view bank without
+        duplicating the learned fusion equations or changing phi_v's width.
+        """
+        v, n = feats.shape[:2]
         # Eq. (3)
         spatial_in = [self.phi_feat(feats)]
         if self.use_depth_cue:
@@ -373,10 +472,20 @@ class SpatialTemporalFusion(nn.Module):
         f_s = self.phi_spatial(torch.cat(spatial_in, dim=-1))  # (V, N, C)
 
         # Eq. (4): f_q is the query's own-view feature, broadcast over views.
-        f_q = _own_view_feature(feats, visible)  # (N, C)
+        if source_anchor_dynamic_fq:
+            if query_view_id is None or is_static is None:
+                raise ValueError(
+                    "source_anchor_dynamic_fq requires query_view_id and is_static"
+                )
+            anchored = _source_view_feature(feats, visible, query_view_id)
+            legacy = _own_view_feature(feats, visible)
+            f_q = torch.where(is_static.unsqueeze(-1), legacy, anchored)
+        else:
+            f_q = _own_view_feature(feats, visible)  # (N, C)
         prod = f_q.view(1, n, -1) * f_s
 
-        t_view = view_times.view(v, 1, 1).expand(v, n, 1)
+        t_view = (view_times.unsqueeze(-1) if view_times.ndim == 2
+                  else view_times.view(v, 1, 1).expand(v, n, 1))
         t_query = query_times.view(1, n, 1).expand(v, n, 1)
         same_time = (t_view == t_query).to(prod.dtype)
         f_t = torch.cat((prod, same_time, t_query), dim=-1)  # (V, N, C + 2)
@@ -432,6 +541,55 @@ def _sample_depth(depth_maps: Tensor, uv: Tensor, height: int, width: int) -> Te
     return sampled.squeeze(-1)
 
 
+def _dynamic_occlusion_factor(
+    points_per_view: Tensor,
+    intrinsics: Tensor,
+    world_to_cam: Tensor,
+    image_size: tuple[int, int],
+    is_static: Tensor,
+    point_valid: Tensor | None,
+    tau: float,
+) -> Tensor:
+    """Return a soft same-track projected z-order factor.
+
+    ``build_track_once_dynamic`` decodes one vehicle track per call, so this
+    z-buffer intentionally orders surfaces *within that track*.  It is not a
+    cross-track visibility oracle.  The nearest projected dynamic query at a
+    rounded pixel receives factor 1; farther queries retain a positive factor
+    ``exp(-depth_excess / tau)``.  Invalid/background/static queries retain 1.
+    """
+    height, width = image_size
+    uv, proj_depth, in_front = project_points(
+        points_per_view, intrinsics, world_to_cam
+    )
+    in_bounds = (
+        (uv[..., 0] >= 0)
+        & (uv[..., 0] <= width - 1)
+        & (uv[..., 1] >= 0)
+        & (uv[..., 1] <= height - 1)
+    )
+    dynamic = (~is_static).view(1, -1).expand_as(in_front)
+    valid = dynamic & in_front & in_bounds
+    if point_valid is not None:
+        valid = valid & point_valid
+    u = uv[..., 0].round().long().clamp(0, width - 1)
+    v = uv[..., 1].round().long().clamp(0, height - 1)
+    pixel = v * width + u
+    inf = torch.full_like(proj_depth, float("inf"))
+    candidate = torch.where(valid, proj_depth, inf)
+    nearest = torch.full(
+        (points_per_view.shape[0], height * width),
+        float("inf"),
+        dtype=proj_depth.dtype,
+        device=proj_depth.device,
+    )
+    nearest.scatter_reduce_(1, pixel, candidate, reduce="amin", include_self=True)
+    nearest_at = nearest.gather(1, pixel)
+    excess = (proj_depth - nearest_at).clamp_min(0.0)
+    factor = torch.exp(-excess / max(float(tau), 1e-6))
+    return torch.where(valid, factor, torch.ones_like(factor))
+
+
 def _own_view_feature(feats: Tensor, visible: Tensor) -> Tensor:
     """The query's initial associated feature f_q.
 
@@ -444,3 +602,16 @@ def _own_view_feature(feats: Tensor, visible: Tensor) -> Tensor:
     w = visible.unsqueeze(-1).to(feats.dtype)
     total = w.sum(dim=0).clamp_min(1.0)
     return (feats * w).sum(dim=0) / total
+
+
+def _source_view_feature(
+    feats: Tensor, visible: Tensor, source_view_id: Tensor
+) -> Tensor:
+    """Use the originating view feature, falling back to legacy visible mean."""
+    n = visible.shape[1]
+    source = source_view_id.long().clamp(0, feats.shape[0] - 1)
+    query = torch.arange(n, device=feats.device)
+    anchored = feats[source, query]
+    source_visible = visible[source, query]
+    fallback = _own_view_feature(feats, visible)
+    return torch.where(source_visible.unsqueeze(-1), anchored, fallback)

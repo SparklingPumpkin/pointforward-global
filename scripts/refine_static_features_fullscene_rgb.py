@@ -58,6 +58,13 @@ def main() -> None:
     )
     parser.add_argument("--frame-stride", type=int, default=1)
     parser.add_argument("--camera-batch-size", type=int, default=1)
+    parser.add_argument(
+        "--loss-mode", choices=("mse", "frame-log-mse"), default="mse",
+        help=(
+            "Training objective. frame-log-mse directly targets the reported "
+            "mean per-frame PSNR; mse preserves legacy behavior."
+        ),
+    )
     parser.add_argument("--refiner-state", default=None)
     parser.add_argument(
         "--empty-cache-every", type=int, default=1,
@@ -134,6 +141,35 @@ def main() -> None:
             losses = []
             camera_count = len(dataset.cameras)
             camera_batch_size = min(args.camera_batch_size, camera_count)
+            all_cameras_in_one_graph = camera_batch_size == camera_count
+            frame_mse_sum = None
+            if args.loss_mode == "frame-log-mse" and not all_cameras_in_one_graph:
+                measured = []
+                with torch.no_grad():
+                    delta = raw_delta[:, group_index]
+                    measured_static = replace(static, colors=base_colors + delta)
+                    measured_scene = combine(measured_static, dynamic)
+                    for camera_start in range(0, camera_count, camera_batch_size):
+                        camera_end = min(camera_start + camera_batch_size, camera_count)
+                        view_count = camera_end - camera_start
+                        targets = TargetViews(
+                            intrinsics=batch["intrinsics"][camera_start:camera_end].to(device),
+                            cam_to_world=batch["cam_to_world"][camera_start:camera_end].to(device),
+                            times=normalized_times[slot:slot + 1].to(device).expand(view_count),
+                            frame_index=torch.full(
+                                (view_count,), slot, dtype=torch.long, device=device
+                            ),
+                        )
+                        rendered = model.render(
+                            measured_scene, boxes, targets, height=height, width=width,
+                            render_depth=False,
+                        )["rgb"]
+                        truth = batch["images"][camera_start:camera_end].to(device)
+                        measured.extend(
+                            (rendered - truth).square().flatten(1).mean(1)
+                        )
+                    del delta, measured_static, measured_scene
+                frame_mse_sum = torch.stack(measured).sum().clamp_min(1e-8)
             for camera_start in range(0, camera_count, camera_batch_size):
                 camera_end = min(camera_start + camera_batch_size, camera_count)
                 view_count = camera_end - camera_start
@@ -152,7 +188,15 @@ def main() -> None:
                 )["rgb"]
                 truth = batch["images"][camera_start:camera_end].to(device)
                 per_view_mse = (rendered - truth).square().flatten(1).mean(1)
-                (per_view_mse.sum() / camera_count).backward()
+                if args.loss_mode == "frame-log-mse":
+                    objective = (
+                        torch.log(per_view_mse.sum().clamp_min(1e-8))
+                        if all_cameras_in_one_graph
+                        else per_view_mse.sum() / frame_mse_sum
+                    )
+                else:
+                    objective = per_view_mse.sum() / camera_count
+                objective.backward()
                 losses.extend(float(value) for value in per_view_mse.detach())
                 del targets, rendered, scene, current_static, delta
             anchor = raw_delta.square().mean()
@@ -199,6 +243,7 @@ def main() -> None:
         "frozen": "dynamic map, Gaussian geometry/opacity/sigma/time, boxes, cameras, network and UNet",
         "supervision": "full final scene RGB MSE over all pixels and cameras",
         "learning_rate": args.learning_rate, "anchor_weight": args.anchor_weight,
+        "loss_mode": args.loss_mode,
         "training_frame_stride": args.frame_stride,
         "training_frame_count": len(frames),
         "training_frames": [int(frame) for frame in frames],

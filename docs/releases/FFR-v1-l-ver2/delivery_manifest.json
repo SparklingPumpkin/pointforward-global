@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "release": "FFR-v1-l-ver2",
+  "source_run": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/joint-speed29/FFR-v1-l/run-20261016T052523Z-fresh-parallel-350-gpu1",
+  "cold_start": {
+    "boundary": "first RGB/raw scene read through PLY and complete 156-frame three-camera video written",
+    "elapsed_seconds": 1153.131,
+    "global_psnr_db": 28.088604,
+    "non_sky_psnr_db": 27.598707,
+    "dynamic_bbox_psnr_db": 23.446180,
+    "time_limit_seconds": 1200,
+    "quality_target_db": 29.0,
+    "time_passed": true,
+    "quality_passed": false
+  },
+  "source": {
+    "model_source": "src/pointforward",
+    "pipeline_scripts": "scripts",
+    "source_snapshot": "FFR-v1-l cold-start source-snapshot overlay",
+    "pointforward_file_count": 49,
+    "script_file_count": 193
+  },
+  "weights": [
+    {"path": "weights/pointforward_waymo_ds_paper_ckpt_020000.pt", "bytes": 271714184, "sha256": "318205d7475b4687dc59412f5a4432b5ae2a58da0ae143b5a69d1f18071d52ea", "role": "base PointForward checkpoint"},
+    {"path": "weights/infinidepth_depthsensor.ckpt", "bytes": 1433096532, "sha256": "53230af7c46e987acc993f250e76f99914e7321ee8a13966136fdb0619f98267", "role": "InfiniDepth depth prior"},
+    {"path": "weights/segformer.b5.1024x1024.city.160k.pth", "bytes": 1016455151, "sha256": "daa9f3500a32ce17d4ce1a89ee91b01a87c2179d0203d9394dc4e5ce526f15b4", "role": "sky and dynamic mask model"},
+    {"path": "weights/refiner_scene017_ffr_v1_l.pt", "bytes": 7852997, "sha256": "6fe7d801d12e886c9ff2d5a65b6b9aebbefdad94d4b4409359073d5b4b97c305", "role": "FFR-v1-l scene017 joint refiner"}
+  ],
+  "artifacts": [
+    {"path": "artifacts/scene017_ffr_v1_l/runtime-payload-refined/final_static_128d.pt", "bytes": 5158134798, "sha256": "afab1e5281d1d2c4cf9c8b379b124a537be205e516b16032605d8c1cdc056daa", "role": "joint-refined static 128D payload"},
+    {"path": "artifacts/scene017_ffr_v1_l/runtime-payload-refined/final_dynamic_128d.pt", "bytes": 266404477, "sha256": "062363fcc3f8d1ff965357897e1d9ea983619494cbd23d12822c192e529fbd7e", "role": "joint-refined dynamic 128D payload"},
+    {"path": "artifacts/scene017_ffr_v1_l/runtime-payload-refined/global_dynamic_meta.pt", "bytes": 1293262, "sha256": "a26947f782ce621fe389c28277a04406bd7751ef9e33d64c31809c2b7c555202", "role": "dynamic track metadata"},
+    {"path": "artifacts/scene017_ffr_v1_l/runtime-payload-refined/track_once_manifest.json", "bytes": 212416, "sha256": "e4c6cab88ee56914dc66a5b04bf9df0ba1741109ab98ae374747c6952f8fdade", "role": "track-once construction manifest"}
+  ]
+}

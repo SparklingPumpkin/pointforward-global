@@ -23,6 +23,7 @@ from PIL import Image
 
 from pointforward.models import SceneInput
 from pointforward.models.query import query_rgb
+from pointforward.models.scene_graph import InstanceBoxes
 from scripts.deliver_continuous_scene import (
     boxes_payload,
     build_global_track_boxes,
@@ -59,7 +60,7 @@ def uniform_timestamps(frames: list[int], count: int) -> list[int]:
 
 
 def calibrated_intrinsics(dataset, metadata: dict, frame: int) -> dict[int, np.ndarray]:
-    """Return intrinsics after the Argoverse center crop and resize."""
+    """Return intrinsics after the dataset's crop and resize."""
     height, width = dataset.resolution
     output = {}
     for camera in dataset.cameras:
@@ -67,6 +68,34 @@ def calibrated_intrinsics(dataset, metadata: dict, frame: int) -> dict[int, np.n
         with Image.open(path) as image:
             original_width, original_height = image.size
         intrinsic = metadata["intrinsics"][camera].copy()
+        crop_x, crop_y = 0, 0
+        crop_width, crop_height = original_width, original_height
+        if hasattr(dataset, "_crop_parameters"):
+            crop_x, crop_y, crop_width, crop_height = dataset._crop_parameters(
+                original_width,
+                original_height,
+                width,
+                height,
+                intrinsic[0, 2],
+                intrinsic[1, 2],
+            )
+        intrinsic[0, 2] -= crop_x
+        intrinsic[1, 2] -= crop_y
+        intrinsic[0, :] *= width / crop_width
+        intrinsic[1, :] *= height / crop_height
+        output[int(camera)] = intrinsic
+    return output
+
+
+def load_calibrated_foreground_mask(
+    dataset, metadata: dict, path: Path, camera: int
+) -> torch.Tensor:
+    """Load an external RGB-predicted mask with the dataset crop contract."""
+    height, width = dataset.resolution
+    intrinsic = metadata["intrinsics"][camera]
+    with Image.open(path) as image:
+        image = image.convert("L")
+        original_width, original_height = image.size
         crop_x, crop_y, crop_width, crop_height = dataset._crop_parameters(
             original_width,
             original_height,
@@ -75,12 +104,28 @@ def calibrated_intrinsics(dataset, metadata: dict, frame: int) -> dict[int, np.n
             intrinsic[0, 2],
             intrinsic[1, 2],
         )
-        intrinsic[0, 2] -= crop_x
-        intrinsic[1, 2] -= crop_y
-        intrinsic[0, :] *= width / crop_width
-        intrinsic[1, :] *= height / crop_height
-        output[int(camera)] = intrinsic
-    return output
+        image = image.crop(
+            (crop_x, crop_y, crop_x + crop_width, crop_y + crop_height)
+        )
+        image = image.resize((width, height), Image.NEAREST)
+        mask = np.asarray(image, dtype=np.uint8) > 0
+    return torch.from_numpy(mask.copy())
+
+
+def foreground_mask_path(
+    root: Path,
+    layout: str,
+    track_id: int,
+    frame: int,
+    camera: int,
+) -> Path:
+    """Resolve shared semantic or per-track instance foreground masks."""
+    filename = f"{frame:03d}_{camera}.png"
+    if layout == "shared":
+        return root / filename
+    if layout == "per-track":
+        return root / f"track-{track_id}" / filename
+    raise ValueError(f"Unsupported foreground mask layout: {layout}")
 
 
 def track_front_camera_frames(
@@ -298,28 +343,90 @@ def select_diverse_visible_views(
     return selected
 
 
+def select_camera_balanced_views(
+    candidates: list[dict], count: int, angle_weight: float
+) -> list[dict]:
+    """Select an equal camera quota while reusing the area/diversity score."""
+    cameras = sorted({int(item["camera"]) for item in candidates})
+    if not cameras:
+        return []
+    quota = count // len(cameras)
+    selected: list[dict] = []
+    used: set[tuple[int, int]] = set()
+    for camera in cameras:
+        pool = [item for item in candidates if int(item["camera"]) == camera]
+        chosen = select_diverse_large_views(pool, min(quota, len(pool)), angle_weight)
+        selected.extend(chosen)
+        used.update((int(item["frame"]), int(item["camera"])) for item in chosen)
+    if len(selected) < count:
+        remaining = [
+            item for item in candidates
+            if (int(item["frame"]), int(item["camera"])) not in used
+        ]
+        remaining.sort(
+            key=lambda item: (-float(item.get("bbox_area_fraction", 0.0)), int(item["frame"]), int(item["camera"]))
+        )
+        selected.extend(remaining[: count - len(selected)])
+    return selected[:count]
+
+
 @torch.inference_mode()
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True)
     parser.add_argument("--ckpt", required=True)
     parser.add_argument("--static-payload", required=True)
+    parser.add_argument(
+        "--allow-pending-static-payload", action="store_true",
+        help="For a joined parallel pipeline only: static input is merely linked, not read; caller must verify its completed producer before rendering.",
+    )
     parser.add_argument("--out", required=True)
     parser.add_argument("--scene", default="017")
     parser.add_argument("--split", default="val")
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument(
+        "--query-origin", choices=("scene", "first-ego", "canonical-centre"),
+        default="scene",
+        help="Optional translation of learned query XYZ/Plucker moment per independent track clip. Geometry used for projection and stored global canonical means remain unchanged in coordinate convention.",
+    )
     parser.add_argument("--timestamps-per-track", type=int, default=4)
     parser.add_argument(
         "--view-selection",
-        choices=("uniform-timestamps", "diverse-large", "diverse-visible"),
+        choices=("uniform-timestamps", "diverse-large", "diverse-visible", "camera-balanced"),
         default="uniform-timestamps",
     )
     parser.add_argument("--views-per-track", type=int, default=12)
+    parser.add_argument(
+        "--track-ids",
+        default=None,
+        help=(
+            "Optional comma-separated scene track IDs to decode. Global box "
+            "slots and metadata still use the complete scene ordering, so the "
+            "result can replace those tracks in an existing global payload."
+        ),
+    )
+    parser.add_argument(
+        "--temporal-segments-per-track",
+        type=int,
+        default=1,
+        help=(
+            "Split each requested track into this many temporal canonical "
+            "segments. Each segment is decoded independently and is valid only "
+            "on its assigned frames; default 1 preserves the original path."
+        ),
+    )
     parser.add_argument(
         "--dynamic-queries-per-track",
         type=int,
         default=None,
         help="Override the checkpoint's per-instance query budget at inference.",
+    )
+    parser.add_argument(
+        "--decode-box-scale", type=float, default=1.0,
+        help=(
+            "Scale only local box dimensions used for query assignment; "
+            "canonical Gaussians are rebased to the unscaled global box."
+        ),
     )
     parser.add_argument("--view-angle-weight", type=float, default=0.65)
     parser.add_argument(
@@ -334,6 +441,48 @@ def main() -> None:
         default="isotropic-trace",
     )
     parser.add_argument("--isotropic-max-scale", type=float, default=0.05)
+    parser.add_argument(
+        "--foreground-mask-dir",
+        default=None,
+        help=(
+            "Directory containing RGB-predicted {frame:03d}_{camera}.png masks. "
+            "Ignored unless a foreground gate is enabled."
+        ),
+    )
+    parser.add_argument(
+        "--foreground-mask-layout",
+        choices=("shared", "per-track"),
+        default="shared",
+        help=(
+            "Mask path layout. 'shared' preserves {frame}_{camera}.png; "
+            "'per-track' reads track-{track_id}/{frame}_{camera}.png."
+        ),
+    )
+    parser.add_argument(
+        "--foreground-query-gate",
+        action="store_true",
+        help="Require box-assigned source pixels to lie in RGB foreground.",
+    )
+    parser.add_argument(
+        "--foreground-fusion-gate",
+        action="store_true",
+        help="Require dynamic projections to lie in RGB foreground and box masks.",
+    )
+    parser.add_argument(
+        "--source-anchor-dynamic-fq",
+        action="store_true",
+        help="Use each dynamic query's originating source-view feature as f_q.",
+    )
+    parser.add_argument(
+        "--neutralize-dynamic-depth-cue",
+        action="store_true",
+        help="Set depth-consistency residual to zero only for dynamic queries.",
+    )
+    parser.add_argument(
+        "--dynamic-soft-occlusion-order",
+        action="store_true",
+        help="Softly attenuate behind-front dynamic evidence using a per-track projected z-order.",
+    )
     parser.add_argument("--stationary-track-max-span", type=float, default=None)
     parser.add_argument("--stationary-track-max-median-step", type=float, default=0.1)
     args = parser.parse_args()
@@ -342,9 +491,18 @@ def main() -> None:
     checkpoint_path = Path(args.ckpt).resolve()
     static_path = Path(args.static_payload).resolve()
     output_dir = Path(args.out).resolve()
+    foreground_mask_dir = (
+        None if args.foreground_mask_dir is None
+        else Path(args.foreground_mask_dir).resolve()
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
-    if not static_path.exists():
+    if not static_path.exists() and not args.allow_pending_static_payload:
         raise FileNotFoundError(static_path)
+    if args.foreground_query_gate or args.foreground_fusion_gate:
+        if foreground_mask_dir is None or not foreground_mask_dir.is_dir():
+            parser.error(
+                "foreground gates require an existing --foreground-mask-dir"
+            )
 
     config = yaml.safe_load(config_path.read_text())
     if config.get("data", {}).get("layout") == "argoverse_drivestudio":
@@ -361,12 +519,20 @@ def main() -> None:
     metadata = matches[0]
     evaluation_metadata = metadata
     selected_frames = [int(frame) for frame in metadata["frames"]]
-    if args.views_per_track != 12:
-        parser.error("The pretrained fusion network requires exactly 12 views")
+    if args.views_per_track not in (8, 10, 12):
+        parser.error("Supported source view budgets are 8, 10, or 12")
     if not 0.0 <= args.view_angle_weight <= 1.0:
         parser.error("--view-angle-weight must be in [0, 1]")
     if args.view_pass_index < 0:
         parser.error("--view-pass-index must be non-negative")
+    if args.temporal_segments_per_track <= 0:
+        parser.error("--temporal-segments-per-track must be positive")
+    if args.decode_box_scale < 1.0:
+        parser.error("--decode-box-scale must be >= 1")
+    if args.temporal_segments_per_track > 1 and not args.track_ids:
+        parser.error(
+            "--temporal-segments-per-track > 1 requires explicit --track-ids"
+        )
     if (
         args.view_selection == "uniform-timestamps"
         and args.timestamps_per_track * len(dataset.cameras) != args.views_per_track
@@ -419,12 +585,113 @@ def main() -> None:
     global_track_ids = sorted(
         track_id for track_id in track_visible_frames if track_candidates[track_id]
     )
+    requested_track_ids = None
+    if args.track_ids:
+        requested_track_ids = sorted({
+            int(value) for value in args.track_ids.split(",") if value.strip()
+        })
+        missing_track_ids = sorted(set(requested_track_ids) - set(global_track_ids))
+        if missing_track_ids:
+            parser.error(
+                "--track-ids contains tracks without valid visible candidates: "
+                + ",".join(str(value) for value in missing_track_ids)
+            )
+        decode_track_ids = [
+            track_id for track_id in global_track_ids
+            if track_id in set(requested_track_ids)
+        ]
+    else:
+        decode_track_ids = global_track_ids
     global_track_slot = {
         track_id: slot for slot, track_id in enumerate(global_track_ids)
     }
     global_boxes_cpu = build_global_track_boxes(
         dataset, metadata, selected_frames, world_from, global_track_ids
     )
+    render_track_ids = list(global_track_ids)
+    decode_jobs = []
+    if args.temporal_segments_per_track == 1:
+        decode_jobs = [
+            {
+                "track_id": track_id,
+                "segment_index": 0,
+                "global_slot": global_track_slot[track_id],
+                "allowed_frames": None,
+            }
+            for track_id in decode_track_ids
+        ]
+    else:
+        box_parts = {
+            name: [getattr(global_boxes_cpu, name).clone()]
+            for name in ("centers", "dims", "rots", "times", "valid")
+        }
+        base_valid = global_boxes_cpu.valid.clone()
+        for track_id in decode_track_ids:
+            original_slot = global_track_slot[track_id]
+            valid_slots = torch.nonzero(
+                base_valid[original_slot], as_tuple=False
+            ).flatten()
+            visible_frame_groups = np.array_split(
+                np.asarray(sorted({
+                    int(item["frame"]) for item in track_candidates[track_id]
+                }), dtype=np.int64),
+                args.temporal_segments_per_track,
+            )
+            if any(group.size == 0 for group in visible_frame_groups):
+                parser.error(
+                    f"track {track_id} has too few visible frames for "
+                    f"{args.temporal_segments_per_track} temporal segments"
+                )
+            cutoffs = [
+                0.5 * (float(left[-1]) + float(right[0]))
+                for left, right in zip(
+                    visible_frame_groups[:-1], visible_frame_groups[1:]
+                )
+            ]
+            slot_groups = []
+            for segment_index in range(args.temporal_segments_per_track):
+                chosen = []
+                for slot in valid_slots.tolist():
+                    frame_value = int(selected_frames[int(slot)])
+                    assigned = int(np.searchsorted(cutoffs, frame_value, side="right"))
+                    if assigned == segment_index:
+                        chosen.append(int(slot))
+                slot_groups.append(torch.tensor(chosen, dtype=torch.long))
+            global_boxes_cpu.valid[original_slot].zero_()
+            global_boxes_cpu.valid[original_slot, slot_groups[0]] = True
+            for segment_index, slots in enumerate(slot_groups):
+                if segment_index == 0:
+                    segment_slot = original_slot
+                else:
+                    segment_slot = len(render_track_ids)
+                    render_track_ids.append(
+                        -(int(track_id) * args.temporal_segments_per_track + segment_index + 1)
+                    )
+                    for name in ("centers", "dims", "rots", "times"):
+                        source = getattr(global_boxes_cpu, name)[original_slot:original_slot + 1]
+                        box_parts[name].append(source.clone())
+                    segment_valid = torch.zeros_like(
+                        global_boxes_cpu.valid[original_slot:original_slot + 1]
+                    )
+                    segment_valid[0, slots] = True
+                    box_parts["valid"].append(segment_valid)
+                allowed_frames = {
+                    int(value) for value in visible_frame_groups[segment_index].tolist()
+                }
+                decode_jobs.append({
+                    "track_id": track_id,
+                    "segment_index": segment_index,
+                    "global_slot": segment_slot,
+                    "allowed_frames": allowed_frames,
+                })
+        box_parts["centers"][0] = global_boxes_cpu.centers
+        box_parts["dims"][0] = global_boxes_cpu.dims
+        box_parts["rots"][0] = global_boxes_cpu.rots
+        box_parts["times"][0] = global_boxes_cpu.times
+        box_parts["valid"][0] = global_boxes_cpu.valid
+        global_boxes_cpu = InstanceBoxes(**{
+            name: torch.cat(parts, dim=0) for name, parts in box_parts.items()
+        })
     evaluation_track_ids = sorted(
         int(value) for value in evaluation_metadata["instances"]
     )
@@ -450,25 +717,44 @@ def main() -> None:
     started = time.perf_counter()
     torch.cuda.reset_peak_memory_stats()
 
-    for track_index, track_id in enumerate(global_track_ids):
+    for track_index, job in enumerate(decode_jobs):
+        track_id = job["track_id"]
+        candidate_pool = track_candidates[track_id]
+        visible_frames = track_visible_frames[track_id]
+        if job["allowed_frames"] is not None:
+            candidate_pool = [
+                item for item in candidate_pool
+                if item["frame"] in job["allowed_frames"]
+            ]
+            visible_frames = [
+                frame for frame in visible_frames
+                if frame in job["allowed_frames"]
+            ]
         if args.view_selection == "diverse-visible":
             selected_views = select_diverse_visible_views(
-                track_candidates[track_id],
+                candidate_pool,
                 args.views_per_track,
                 args.view_angle_weight,
             )
             context_frames = sorted({item["frame"] for item in selected_views})
         elif args.view_selection == "diverse-large":
             selected_views = select_diverse_large_view_pass(
-                track_candidates[track_id],
+                candidate_pool,
                 args.views_per_track,
                 args.view_angle_weight,
                 args.view_pass_index,
             )
             context_frames = sorted({item["frame"] for item in selected_views})
+        elif args.view_selection == "camera-balanced":
+            selected_views = select_camera_balanced_views(
+                candidate_pool,
+                args.views_per_track,
+                args.view_angle_weight,
+            )
+            context_frames = sorted({item["frame"] for item in selected_views})
         else:
             context_frames = uniform_timestamps(
-                track_visible_frames[track_id], args.timestamps_per_track
+                visible_frames, args.timestamps_per_track
             )
             selected_views = [
                 {"frame": int(frame), "camera": int(camera)}
@@ -488,6 +774,14 @@ def main() -> None:
         local_boxes_cpu = build_global_track_boxes(
             dataset, metadata, context_frames, world_from, [track_id]
         )
+        if args.decode_box_scale != 1.0:
+            local_boxes_cpu = InstanceBoxes(
+                centers=local_boxes_cpu.centers,
+                dims=local_boxes_cpu.dims * args.decode_box_scale,
+                rots=local_boxes_cpu.rots,
+                times=local_boxes_cpu.times,
+                valid=local_boxes_cpu.valid,
+            )
         local_boxes = boxes_to(local_boxes_cpu, device)
         scene = SceneInput(
             images=context["images"].to(device),
@@ -510,9 +804,19 @@ def main() -> None:
             (int(frame), int(camera))
             for frame in context_frames for camera in dataset.cameras
         ]
-        selected_keys = [
+        source_selected_keys = [
             (item["frame"], item["camera"]) for item in selected_views
         ]
+        # The pretrained sigma head remains a 12-slot contract. Reduced-view
+        # probes lower expensive source RGB/depth/backbone work, then pad the
+        # selected source slots by repetition so the generic checkpoint is
+        # never rebuilt or silently given a different view count.
+        selected_keys = list(source_selected_keys)
+        if len(selected_keys) < 12:
+            selected_keys.extend(
+                source_selected_keys[index % len(source_selected_keys)]
+                for index in range(12 - len(selected_keys))
+            )
         selected_indices = torch.tensor(
             [all_view_keys.index(key) for key in selected_keys],
             dtype=torch.long,
@@ -536,6 +840,28 @@ def main() -> None:
         )
 
         view_keys = selected_keys
+        foreground_masks = None
+        if args.foreground_query_gate or args.foreground_fusion_gate:
+            mask_parts = []
+            for frame, camera in view_keys:
+                mask_path = foreground_mask_path(
+                    foreground_mask_dir,
+                    args.foreground_mask_layout,
+                    track_id,
+                    frame,
+                    camera,
+                )
+                if not mask_path.exists():
+                    raise FileNotFoundError(
+                        f"Missing RGB foreground mask for selected view: {mask_path}"
+                    )
+                mask_parts.append(
+                    load_calibrated_foreground_mask(
+                        dataset, metadata, mask_path, camera
+                    )
+                )
+            foreground_masks = torch.stack(mask_parts).to(device=device)
+
         missing = [index for index, key in enumerate(view_keys) if key not in depth_cache]
         if missing:
             index = torch.tensor(missing, dtype=torch.long, device=device)
@@ -574,20 +900,44 @@ def main() -> None:
         depth = torch.stack([depth_cache[key] for key in view_keys])
         features = torch.stack([feature_cache[key] for key in view_keys])
         generator = torch.Generator(device=device).manual_seed(args.seed + track_id)
+        scene.dynamic_foreground_masks = (
+            foreground_masks if args.foreground_query_gate else None
+        )
         sampled = model.build_queries(scene, depth, generator=generator)
         dynamic_mask = sampled["instance_id"] == 0
         sampled = select_sampled(sampled, dynamic_mask)
         if sampled["queries"].shape[0] == 0:
             track_records.append({
                 "track_id": track_id,
-                "global_slot": global_track_slot[track_id],
-                "visible_frame_count": len(track_visible_frames[track_id]),
+                "segment_index": job["segment_index"],
+                "global_slot": job["global_slot"],
+                "visible_frame_count": len(visible_frames),
                 "selected_views": selected_views,
                 "dynamic_count": 0,
             })
             continue
 
-        decoded = model.decode(scene, depth, sampled, image_features=features)
+        scene.dynamic_foreground_masks = (
+            foreground_masks if args.foreground_fusion_gate else None
+        )
+        query_origin = None
+        if args.query_origin == "first-ego":
+            first_ego = world_from @ dataset._ego_pose(metadata, context_frames[0])
+            query_origin = torch.as_tensor(
+                first_ego[:3, 3], device=device, dtype=sampled["base_xyz"].dtype,
+            )
+        elif args.query_origin == "canonical-centre":
+            query_origin = local_boxes.canonical()[0][0]
+        decoded = model.decode(
+            scene,
+            depth,
+            sampled,
+            image_features=features,
+            query_origin=query_origin,
+            source_anchor_dynamic_fq=args.source_anchor_dynamic_fq,
+            neutralize_dynamic_depth_cue=args.neutralize_dynamic_depth_cue,
+            dynamic_soft_occlusion_order=args.dynamic_soft_occlusion_order,
+        )
         decoded.extras["preview_rgb"] = query_rgb(sampled["queries"])
         decoded.extras["observations"] = torch.ones(
             decoded.count, dtype=torch.int32, device=device
@@ -606,20 +956,37 @@ def main() -> None:
             local_boxes,
             [track_id],
             global_boxes,
-            global_track_slot,
+            {track_id: job["global_slot"]},
         )
         dynamic_parts.append(dynamic)
         track_records.append({
             "track_id": track_id,
-            "global_slot": global_track_slot[track_id],
-            "visible_frame_count": len(track_visible_frames[track_id]),
+            "segment_index": job["segment_index"],
+            "global_slot": job["global_slot"],
+            "visible_frame_count": len(visible_frames),
             "selected_views": selected_views,
-            "sampled_view_count": len(selected_views),
+            "sampled_view_count": len(selected_keys),
+            "source_view_count": len(source_selected_keys),
+            "model_view_slot_count": len(selected_keys),
+            "padded_source_slots": max(0, len(selected_keys) - len(source_selected_keys)),
+            "learned_query_origin_policy": args.query_origin,
+            "learned_query_origin_translation": (
+                None if query_origin is None else query_origin.detach().cpu().tolist()
+            ),
+            "foreground_query_gate": args.foreground_query_gate,
+            "foreground_fusion_gate": args.foreground_fusion_gate,
+            "source_anchor_dynamic_fq": args.source_anchor_dynamic_fq,
+            "neutralize_dynamic_depth_cue": args.neutralize_dynamic_depth_cue,
+            "dynamic_soft_occlusion_order": args.dynamic_soft_occlusion_order,
+            "foreground_pixels_per_view": (
+                None if foreground_masks is None
+                else [int(mask.sum()) for mask in foreground_masks]
+            ),
             "dynamic_count": dynamic.count,
         })
         print(json.dumps({
             "track": track_index + 1,
-            "track_count": len(global_track_ids),
+            "track_count": len(decode_jobs),
             **track_records[-1],
         }), flush=True)
         del context, scene, local_boxes, sampled, decoded, dynamic
@@ -635,7 +1002,7 @@ def main() -> None:
         {
             "frames": selected_frames,
             "normalized_times": global_times.cpu(),
-            "track_ids": global_track_ids,
+            "track_ids": render_track_ids,
             "boxes": boxes_payload(global_boxes_cpu),
             "evaluation_track_ids": evaluation_track_ids,
             "evaluation_boxes": boxes_payload(evaluation_boxes_cpu),
@@ -661,13 +1028,17 @@ def main() -> None:
         "config": str(config_path),
         "checkpoint": str(checkpoint_path),
         "static_payload": str(static_path),
+        "allow_pending_static_payload": args.allow_pending_static_payload,
         "static_policy": "byte-identical reuse of GD-v1-f final static payload",
-        "dynamic_policy": "one independent 12-view clip per global track; decode once; no later refresh or append",
+        "dynamic_policy": "one independent source-view clip per global track; source views are padded to the pretrained 12-slot fusion contract; decode once; no later refresh or append",
+        "learned_query_origin_policy": args.query_origin,
         "view_contract": {
             "selection": args.view_selection,
             "timestamps_per_track": args.timestamps_per_track,
             "cameras": list(dataset.cameras),
             "views_per_track": args.views_per_track,
+            "model_view_slots": 12,
+            "padding_policy": "repeat source slots to 12 for reduced-view probes",
             "angle_weight": args.view_angle_weight,
             "pass_index": args.view_pass_index,
             "selection_objective": (
@@ -675,10 +1046,15 @@ def main() -> None:
                 if args.view_selection == "diverse-visible"
                 else "greedy weighted local-azimuth diversity and clipped bbox projected area"
                 if args.view_selection == "diverse-large"
+                else "fixed equal camera quota with diverse-large score"
+                if args.view_selection == "camera-balanced"
                 else "uniform timestamps over every visible frame, all cameras"
             ),
         },
-        "track_count": len(global_track_ids),
+        "track_count": len(decode_jobs),
+        "scene_global_track_count": len(render_track_ids),
+        "requested_track_ids": requested_track_ids,
+        "temporal_segments_per_track": args.temporal_segments_per_track,
         "stationary_track_reclassification": {
             "enabled": args.stationary_track_max_span is not None,
             "max_center_span_m": args.stationary_track_max_span,
@@ -688,6 +1064,22 @@ def main() -> None:
         },
         "dynamic_count": final_dynamic.count,
         "dynamic_queries_per_track": model.num_dynamic,
+        "source_anchor_dynamic_fq": args.source_anchor_dynamic_fq,
+        "dynamic_soft_occlusion_order": args.dynamic_soft_occlusion_order,
+        "foreground_gate": {
+            "mask_dir": (
+                None if foreground_mask_dir is None else str(foreground_mask_dir)
+            ),
+            "query": args.foreground_query_gate,
+            "fusion": args.foreground_fusion_gate,
+            "layout": args.foreground_mask_layout,
+            "contract": (
+                "RGB-predicted semantic vehicle mask intersected with the "
+                "projected local track box; no dataset fine/dynamic mask"
+                if args.foreground_query_gate or args.foreground_fusion_gate
+                else None
+            ),
+        },
         "tracks": track_records,
         "gaussian_scale_postprocess": {
             "mode": args.gaussian_scale_postprocess,

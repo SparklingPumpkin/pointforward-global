@@ -9,10 +9,12 @@ held fixed while dynamic Gaussians are posed at each requested frame.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import math
 import time
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -25,6 +27,8 @@ from pointforward.models import (
     InstanceBoxes,
     TargetViews,
     box_dynamic_masks,
+    project_points,
+    render_features,
 )
 from pointforward.models.rotation import matrix_to_quaternion, quaternion_to_matrix
 from scripts.deliver_continuous_scene import (
@@ -64,6 +68,31 @@ def combine(static: Gaussians, dynamic: Gaussians) -> Gaussians:
             for name in extra_names
         },
     )
+
+
+def composite_rgb_surface_proxy(
+    base_rgb: torch.Tensor,
+    standalone_proxy_rgb: torch.Tensor,
+    standalone_proxy_alpha: torch.Tensor,
+    visible_proxy_alpha: torch.Tensor,
+    *,
+    minimum_alpha: float = 0.25,
+    minimum_visibility_ratio: float = 0.95,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """Apply the pre-registered conservative Round-64 proxy composition.
+
+    ``visible_proxy_alpha`` is the fourth channel of a joint, depth-sorted
+    baseline+proxy gsplat.  It is used only as an occlusion rejection signal;
+    accepted RGB is the standalone proxy alpha-over the nonlinear base image.
+    """
+    ratio = visible_proxy_alpha / standalone_proxy_alpha.clamp_min(1e-8)
+    accepted = ((standalone_proxy_alpha >= minimum_alpha)
+                & (ratio >= minimum_visibility_ratio))
+    proxy_over = (
+        standalone_proxy_rgb
+        + (1.0 - standalone_proxy_alpha) * base_rgb
+    ).clamp(0.0, 1.0)
+    return torch.where(accepted, proxy_over, base_rgb), accepted, ratio
 
 
 def load_boxes(payload: dict | None, device: torch.device) -> InstanceBoxes | None:
@@ -174,6 +203,50 @@ def psnr(
     return float((-10.0 * torch.log10(mse)).cpu())
 
 
+def projected_box_bounds(
+    boxes: InstanceBoxes,
+    box_index: torch.Tensor,
+    intrinsics: torch.Tensor,
+    world_to_cam: torch.Tensor,
+    height: int,
+    width: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Return integer inclusive bounds and visibility for every view/instance."""
+    view_count = intrinsics.shape[0]
+    instance_count = boxes.num_instances
+    slots = box_index.clamp(0, boxes.centers.shape[1] - 1)
+    centers = boxes.centers[:, slots].permute(1, 0, 2)
+    dims = boxes.dims[:, slots].permute(1, 0, 2)
+    rots = boxes.rots[:, slots].permute(1, 0, 2, 3)
+    box_valid = boxes.valid[:, slots].permute(1, 0)
+    signs = intrinsics.new_tensor([
+        [-1, -1, -1], [-1, -1, 1], [-1, 1, -1], [-1, 1, 1],
+        [1, -1, -1], [1, -1, 1], [1, 1, -1], [1, 1, 1],
+    ])
+    local = signs.view(1, 1, 8, 3) * (dims * 0.5).unsqueeze(2)
+    corners = torch.einsum("voji,vokj->voki", rots, local) + centers.unsqueeze(2)
+    uv, _, in_front = project_points(
+        corners.reshape(view_count, instance_count * 8, 3),
+        intrinsics,
+        world_to_cam,
+    )
+    uv = uv.reshape(view_count, instance_count, 8, 2)
+    visible_corners = in_front.reshape(view_count, instance_count, 8) & box_valid.unsqueeze(-1)
+    big = torch.finfo(uv.dtype).max
+    lo = torch.where(
+        visible_corners.unsqueeze(-1), uv, torch.full_like(uv, big)
+    ).amin(dim=2)
+    hi = torch.where(
+        visible_corners.unsqueeze(-1), uv, torch.full_like(uv, -big)
+    ).amax(dim=2)
+    x0 = torch.ceil(lo[..., 0]).clamp(0, width - 1).long()
+    y0 = torch.ceil(lo[..., 1]).clamp(0, height - 1).long()
+    x1 = torch.floor(hi[..., 0]).clamp(0, width - 1).long()
+    y1 = torch.floor(hi[..., 1]).clamp(0, height - 1).long()
+    visible = visible_corners.any(dim=-1) & (x0 <= x1) & (y0 <= y1)
+    return torch.stack((x0, y0, x1, y1), dim=-1), visible
+
+
 def apply_camera_offset(
     cam_to_world: torch.Tensor,
     ego_to_world: torch.Tensor,
@@ -226,7 +299,29 @@ def main() -> None:
         default=None,
         help="Optional target-domain refiner state overlay; the base checkpoint is unchanged.",
     )
+    parser.add_argument(
+        "--camera-refiner-states",
+        nargs="+",
+        default=None,
+        help=(
+            "Optional refiner-state path per configured camera, in dataset camera "
+            "order. Requires --camera-batch-size 1. By default one shared refiner "
+            "is used, preserving legacy behavior."
+        ),
+    )
+    parser.add_argument(
+        "--dynamic-refiner-state",
+        default=None,
+        help=(
+            "Optional second 128-D UNet state used only inside projected "
+            "dynamic evaluation boxes; outside pixels keep --refiner-state."
+        ),
+    )
     parser.add_argument("--payload-dir", required=True)
+    parser.add_argument(
+        "--rgb-residual-state", default=None,
+        help="Optional additive per-Gaussian RGB residual overlay.",
+    )
     parser.add_argument("--out", required=True)
     parser.add_argument("--scene", default="017")
     parser.add_argument("--split", default="val", choices=("train", "val"))
@@ -277,6 +372,8 @@ def main() -> None:
         ),
     )
     parser.add_argument("--device", default="cuda")
+    parser.add_argument("--static-source-rgb-blend", type=float, default=0.0,
+        help="Optional fixed 3D source-RGB mixture for static points; retains generic128D decoding and full-scene occlusion; no target-image lookup.")
     parser.add_argument(
         "--camera-batch-size",
         type=int,
@@ -297,10 +394,22 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--per-track-bbox-metrics",
+        action="store_true",
+        help=(
+            "Also record pixel-weighted and per-visible-frame PSNR for every "
+            "individual projected track rectangle. This is diagnostic-only."
+        ),
+    )
+    parser.add_argument(
         "--dynamic-opacity-scale",
         type=float,
         default=1.0,
         help="Inference-only multiplier for dynamic Gaussian opacity.",
+    )
+    parser.add_argument(
+        "--dynamic-frame-opacity-state", default=None,
+        help="Optional per-frame/per-track opacity multiplier state.",
     )
     parser.add_argument(
         "--dynamic-scale-multiplier",
@@ -314,6 +423,15 @@ def main() -> None:
         default=1.0,
         help="Inference-only multiplier for static Gaussian radii.",
     )
+    parser.add_argument(
+        "--rgb-surface-proxy-dir",
+        default=None,
+        help=(
+            "Optional Round-64 RGB proxy payload. Reliable baseline dynamic "
+            "tracks are suppressed and the fixed conservative proxy compositor "
+            "is enabled. Omit to preserve the legacy path exactly."
+        ),
+    )
     args = parser.parse_args()
 
     if args.camera_interpolation_factor <= 0:
@@ -324,6 +442,8 @@ def main() -> None:
         parser.error("Orbit mode does not use --camera-interpolation-factor")
     if args.camera_batch_size <= 0:
         parser.error("--camera-batch-size must be positive")
+    if args.camera_refiner_states and args.camera_batch_size != 1:
+        parser.error("--camera-refiner-states requires --camera-batch-size 1")
     if args.dynamic_opacity_scale <= 0:
         parser.error("--dynamic-opacity-scale must be positive")
     if args.dynamic_scale_multiplier <= 0:
@@ -357,6 +477,14 @@ def main() -> None:
             "MOTORCYCLIST",
         ]
     dataset = build_dataset(config, args.split)
+    if (
+        args.camera_refiner_states
+        and len(args.camera_refiner_states) != len(dataset.cameras)
+    ):
+        parser.error(
+            "--camera-refiner-states must provide exactly one path per configured "
+            f"camera ({len(dataset.cameras)} paths for {dataset.cameras})"
+        )
     matches = [metadata for metadata in dataset.scenes if metadata["name"] == args.scene]
     if len(matches) != 1:
         raise ValueError(f"Expected one scene {args.scene!r}, found {len(matches)}")
@@ -374,10 +502,49 @@ def main() -> None:
     has_global_dynamic = (
         final_dynamic_path.exists() and global_dynamic_meta_path.exists()
     )
+    proxy = None
+    proxy_manifest = None
+    proxy_dir = None
+    reliable_proxy_slots = None
+    if args.rgb_surface_proxy_dir:
+        proxy_dir = Path(args.rgb_surface_proxy_dir).resolve()
+        proxy_manifest_path = proxy_dir / "manifest.json"
+        proxy_manifest = json.loads(proxy_manifest_path.read_text(encoding="utf-8"))
+        proxy_static = load_payload(proxy_dir / "static_proxy.pt", device)
+        proxy_dynamic = load_payload(proxy_dir / "dynamic_proxy.pt", device)
+        proxy = combine(proxy_static, proxy_dynamic)
+        reliable_proxy_slots = torch.tensor(
+            proxy_manifest["reliable_global_slots"], dtype=torch.long, device=device
+        )
+        if not has_global_dynamic:
+            raise ValueError("RGB surface proxy requires one scene-global dynamic payload")
     if not static_path.exists() or (not meta_paths and not has_global_dynamic):
         raise FileNotFoundError(f"Incomplete runtime payload in {payload_dir}")
 
     static = load_payload(static_path, device)
+    rgb_residual_payload = None
+    if args.rgb_residual_state:
+        rgb_residual_payload = torch.load(
+            Path(args.rgb_residual_state).resolve(),
+            map_location="cpu", weights_only=True,
+        )
+        if rgb_residual_payload["static_rgb_residual"].shape != (static.count, 3):
+            raise ValueError("Static RGB residual shape does not match payload")
+        dynamic_residual = rgb_residual_payload["dynamic_rgb_residual"]
+        residual_mode = rgb_residual_payload.get("residual_mode")
+        if residual_mode is None:
+            residual_mode = "camera-specific" if dynamic_residual.ndim == 3 else "shared"
+        if residual_mode not in ("shared", "camera-specific", "per-frame"):
+            raise ValueError(f"Unsupported RGB residual mode: {residual_mode!r}")
+        rgb_residual_payload["residual_mode"] = residual_mode
+    dynamic_frame_opacity = None
+    if args.dynamic_frame_opacity_state:
+        dynamic_frame_opacity = torch.load(
+            Path(args.dynamic_frame_opacity_state).resolve(),
+            map_location="cpu", weights_only=True,
+        )
+        if dynamic_frame_opacity["frame_track_opacity_scale"].ndim != 2:
+            raise ValueError("frame_track_opacity_scale must have shape (F,K)")
     static.scales = static.scales * args.static_scale_multiplier
     windows = []
     frame_to_window = {}
@@ -389,6 +556,10 @@ def main() -> None:
         dynamic = load_payload(final_dynamic_path, device)
         dynamic.opacities = (dynamic.opacities * args.dynamic_opacity_scale).clamp_max(1.0)
         dynamic.scales = dynamic.scales * args.dynamic_scale_multiplier
+        if reliable_proxy_slots is not None:
+            suppressed = torch.isin(dynamic.instance_id.long(), reliable_proxy_slots)
+            dynamic.opacities = dynamic.opacities.clone()
+            dynamic.opacities[suppressed] = 0.0
         window = {
             "frames": window_frames,
             "rendered_frames": window_frames,
@@ -399,6 +570,11 @@ def main() -> None:
             ),
             "dynamic": dynamic,
             "dynamic_path": final_dynamic_path,
+            "track_ids": [
+                int(value) for value in meta.get(
+                    "track_ids", range(dynamic.instance_id.max().long().item() + 1)
+                )
+            ],
         }
         windows.append(window)
         for frame in window["rendered_frames"]:
@@ -423,6 +599,11 @@ def main() -> None:
                 ),
                 "dynamic": dynamic,
                 "dynamic_path": dynamic_path,
+                "track_ids": [
+                    int(value) for value in meta.get(
+                        "track_ids", range(dynamic.instance_id.max().long().item() + 1)
+                    )
+                ],
             }
             windows.append(window)
             for frame in window["rendered_frames"]:
@@ -447,8 +628,39 @@ def main() -> None:
         model.refiner.load_state_dict(
             refiner_payload.get("refiner", refiner_payload), strict=True
         )
+    camera_refiners = None
+    if args.camera_refiner_states:
+        camera_refiners = {}
+        for camera_id, state_path in zip(
+            dataset.cameras, args.camera_refiner_states
+        ):
+            camera_refiner = copy.deepcopy(model.refiner).to(device).eval()
+            camera_payload = torch.load(
+                Path(state_path).resolve(), map_location="cpu", weights_only=True
+            )
+            camera_refiner.load_state_dict(
+                camera_payload.get("refiner", camera_payload), strict=True
+            )
+            camera_refiners[camera_id] = camera_refiner
+    dynamic_refiner = None
+    if args.dynamic_refiner_state:
+        dynamic_refiner = copy.deepcopy(model.refiner).to(device).eval()
+        dynamic_refiner_payload = torch.load(
+            Path(args.dynamic_refiner_state).resolve(),
+            map_location="cpu",
+            weights_only=True,
+        )
+        dynamic_refiner.load_state_dict(
+            dynamic_refiner_payload.get("refiner", dynamic_refiner_payload),
+            strict=True,
+        )
     started = time.perf_counter()
     frame_records = []
+    per_track_accumulators: dict[int, dict] = {}
+    proxy_accepted_dynamic_bbox_pixels = 0
+    proxy_dynamic_bbox_pixels = 0
+    proxy_accepted_pixels = 0
+    proxy_total_pixels = 0
     current_key = None
     current_gaussians = None
 
@@ -508,6 +720,33 @@ def main() -> None:
             current_gaussians = combine(static, window["dynamic"])
             current_key = key
         gaussians = current_gaussians
+        render_gaussians = gaussians
+        if dynamic_frame_opacity is not None:
+            frame_scales = dynamic_frame_opacity["frame_track_opacity_scale"][
+                int(frame)
+            ].to(device)
+            dynamic_mask = gaussians.instance_id >= 0
+            if frame_scales.shape[0] <= int(gaussians.instance_id[dynamic_mask].max().item()):
+                raise ValueError("frame opacity state track count does not match payload")
+            opacities = gaussians.opacities.clone()
+            opacities[dynamic_mask] = opacities[dynamic_mask] * frame_scales[
+                gaussians.instance_id[dynamic_mask]
+            ]
+            render_gaussians = replace(gaussians, opacities=opacities)
+        residual_gaussians = None
+        if rgb_residual_payload is not None:
+            dynamic_residual = rgb_residual_payload["dynamic_rgb_residual"]
+            residual_mode = rgb_residual_payload["residual_mode"]
+            if residual_mode == "shared":
+                expected = (window["dynamic"].count, 3)
+                if dynamic_residual.shape != expected:
+                    raise ValueError(f"Shared dynamic RGB residual must have shape {expected}")
+            elif dynamic_residual.ndim != 3 or dynamic_residual.shape[1:] != (
+                window["dynamic"].count, 3
+            ):
+                raise ValueError(
+                    "Camera/per-frame dynamic RGB residual must have shape (K,N,3)"
+                )
         local_slot = window["frames"].index(frame)
         if source_index != cached_target_index:
             if (
@@ -597,6 +836,7 @@ def main() -> None:
         # global Gaussian set; this only avoids gsplat materialising the
         # N-by-128 colour buffer for all three cameras simultaneously.
         rendered_views = []
+        proxy_accept_views = []
         for camera_start in range(0, len(active_camera_ids), args.camera_batch_size):
             camera_end = min(
                 camera_start + args.camera_batch_size, len(active_camera_ids)
@@ -614,11 +854,119 @@ def main() -> None:
                     device=device,
                 ),
             )
-            rendered_views.append(model.render(
-                gaussians, render_boxes, target_views,
+            if camera_refiners is not None:
+                model.refiner = camera_refiners[active_camera_ids[camera_start]]
+            render_result = model.render(
+                render_gaussians, render_boxes, target_views,
                 height=height, width=width, render_depth=False,
-            )["rgb"])
+                static_source_rgb_blend=args.static_source_rgb_blend,
+            )
+            base_view = render_result["rgb"]
+            if dynamic_refiner is not None and evaluation_boxes is not None:
+                dynamic_view = dynamic_refiner(
+                    render_result["features"], render_result["alpha"]
+                )
+                route_mask = box_dynamic_masks(
+                    evaluation_boxes,
+                    torch.full(
+                        (camera_end - camera_start,),
+                        render_slot,
+                        dtype=torch.long,
+                        device=device,
+                    ),
+                    target_views.intrinsics,
+                    torch.linalg.inv(target_views.cam_to_world),
+                    height,
+                    width,
+                ).unsqueeze(1)
+                base_view = torch.where(route_mask, dynamic_view, base_view)
+            if rgb_residual_payload is not None:
+                dynamic_residual = rgb_residual_payload["dynamic_rgb_residual"]
+                residual_mode = rgb_residual_payload["residual_mode"]
+                if residual_mode == "camera-specific":
+                    if args.camera_batch_size != 1:
+                        raise ValueError(
+                            "camera-specific RGB residuals require --camera-batch-size 1"
+                        )
+                    dynamic_residual = dynamic_residual[
+                        dataset.cameras.index(active_camera_ids[camera_start])
+                    ]
+                elif residual_mode == "per-frame":
+                    source_frames = rgb_residual_payload.get("source_frames", frames)
+                    frame_residual_slots = {
+                        int(source_frame): residual_slot
+                        for residual_slot, source_frame in enumerate(source_frames)
+                    }
+                    residual_slot = frame_residual_slots[int(frame)]
+                    dynamic_residual = dynamic_residual[residual_slot]
+                    if alpha > 0.0 and source_index + 1 < len(frames):
+                        next_slot = frame_residual_slots[int(frames[source_index + 1])]
+                        dynamic_residual = torch.lerp(
+                            dynamic_residual,
+                            rgb_residual_payload["dynamic_rgb_residual"][next_slot],
+                            alpha,
+                        )
+                residual_colors = torch.cat((
+                    rgb_residual_payload["static_rgb_residual"], dynamic_residual
+                ), dim=0).to(device)
+                residual_gaussians = replace(render_gaussians, colors=residual_colors)
+                posed_residual = model.pose_gaussians(
+                    residual_gaussians, render_boxes, render_slot,
+                    target_views.times[0],
+                )
+                residual_view, _, _ = render_features(
+                    means=posed_residual["means"], quats=posed_residual["quats"],
+                    scales=posed_residual["scales"], opacities=posed_residual["opacities"],
+                    colors=posed_residual["colors"], intrinsics=target_views.intrinsics,
+                    world_to_cam=torch.linalg.inv(target_views.cam_to_world),
+                    height=height, width=width, render_depth=False,
+                )
+                base_view = (base_view + residual_view).clamp(0.0, 1.0)
+            if proxy is not None:
+                posed_proxy = model.pose_gaussians(
+                    proxy, render_boxes, render_slot, target_views.times[0]
+                )
+                standalone_proxy_rgb, standalone_proxy_alpha, _ = render_features(
+                    means=posed_proxy["means"], quats=posed_proxy["quats"],
+                    scales=posed_proxy["scales"], opacities=posed_proxy["opacities"],
+                    colors=posed_proxy["colors"], intrinsics=target_views.intrinsics,
+                    world_to_cam=torch.linalg.inv(target_views.cam_to_world),
+                    height=height, width=width, render_depth=False,
+                )
+                posed_base = model.pose_gaussians(
+                    render_gaussians, render_boxes, render_slot, target_views.times[0]
+                )
+                base_joint_colors = torch.zeros(
+                    (posed_base["means"].shape[0], 4), device=device,
+                    dtype=posed_base["means"].dtype,
+                )
+                proxy_joint_colors = torch.cat((
+                    posed_proxy["colors"],
+                    torch.ones(
+                        (posed_proxy["means"].shape[0], 1), device=device,
+                        dtype=posed_proxy["colors"].dtype,
+                    ),
+                ), dim=1)
+                joint_features, _, _ = render_features(
+                    means=torch.cat((posed_base["means"], posed_proxy["means"]), dim=0),
+                    quats=torch.cat((posed_base["quats"], posed_proxy["quats"]), dim=0),
+                    scales=torch.cat((posed_base["scales"], posed_proxy["scales"]), dim=0),
+                    opacities=torch.cat((posed_base["opacities"], posed_proxy["opacities"]), dim=0),
+                    colors=torch.cat((base_joint_colors, proxy_joint_colors), dim=0),
+                    intrinsics=target_views.intrinsics,
+                    world_to_cam=torch.linalg.inv(target_views.cam_to_world),
+                    height=height, width=width, render_depth=False,
+                )
+                base_view, proxy_accept, _ = composite_rgb_surface_proxy(
+                    base_view, standalone_proxy_rgb, standalone_proxy_alpha,
+                    joint_features[:, 3:4],
+                )
+                proxy_accept_views.append(proxy_accept)
+            rendered_views.append(base_view)
         rendered = torch.cat(rendered_views, dim=0)
+        proxy_accept_mask = (
+            torch.cat(proxy_accept_views, dim=0) if proxy_accept_views else None
+        )
         sample_label = (
             f"orbit {360.0 * orbit_fraction:.1f} deg | frozen frame {frame:03d}"
             if args.camera_trajectory == "orbit"
@@ -643,6 +991,7 @@ def main() -> None:
                 Image.fromarray(comparison).save(comparison_dir / f"frame_{output_index:04d}.jpg", quality=92)
         non_sky_mask = None
         dynamic_bbox_mask = None
+        per_track_frame_records = []
         if alpha == 0.0 and not novel_view:
             if "sky_mask" not in target:
                 raise KeyError("Dataset target does not provide sky_mask")
@@ -663,6 +1012,89 @@ def main() -> None:
                 ).unsqueeze(1)
                 if not bool(dynamic_bbox_mask.any()):
                     dynamic_bbox_mask = None
+            if proxy_accept_mask is not None:
+                proxy_accepted_pixels += int(proxy_accept_mask.sum().item())
+                proxy_total_pixels += int(proxy_accept_mask.numel())
+                if dynamic_bbox_mask is not None:
+                    proxy_accepted_dynamic_bbox_pixels += int(
+                        (proxy_accept_mask & dynamic_bbox_mask).sum().item()
+                    )
+                    proxy_dynamic_bbox_pixels += int(dynamic_bbox_mask.sum().item())
+            if args.per_track_bbox_metrics and evaluation_boxes is not None:
+                bounds, track_visible = projected_box_bounds(
+                    evaluation_boxes,
+                    torch.full(
+                        (len(dataset.cameras),), render_slot,
+                        dtype=torch.long, device=device,
+                    ),
+                    target["intrinsics"].to(device),
+                    torch.linalg.inv(target_cam_to_world.to(device)),
+                    height,
+                    width,
+                )
+                bounds_cpu = bounds.cpu()
+                visible_cpu = track_visible.cpu()
+                pixel_error = (
+                    rendered.float() - target["images"].to(device).float()
+                ).square().mean(dim=1)
+                point_counts = torch.bincount(
+                    window["dynamic"].instance_id.long().clamp_min(0),
+                    minlength=evaluation_boxes.num_instances,
+                ).cpu()
+                for track_slot in range(evaluation_boxes.num_instances):
+                    squared_error_sum = 0.0
+                    pixel_count = 0
+                    visible_camera_count = 0
+                    for camera_index in range(len(dataset.cameras)):
+                        if not bool(visible_cpu[camera_index, track_slot]):
+                            continue
+                        x0, y0, x1, y1 = [
+                            int(value) for value in bounds_cpu[camera_index, track_slot]
+                        ]
+                        patch = pixel_error[camera_index, y0:y1 + 1, x0:x1 + 1]
+                        squared_error_sum += float(patch.sum())
+                        pixel_count += int(patch.numel())
+                        visible_camera_count += 1
+                    if pixel_count == 0:
+                        continue
+                    frame_mse = max(squared_error_sum / pixel_count, 1e-10)
+                    frame_psnr = -10.0 * math.log10(frame_mse)
+                    track_id = (
+                        window["track_ids"][track_slot]
+                        if track_slot < len(window["track_ids"]) else track_slot
+                    )
+                    valid_centers = evaluation_boxes.centers[
+                        track_slot, evaluation_boxes.valid[track_slot]
+                    ]
+                    motion_span = (
+                        float(torch.linalg.vector_norm(
+                            valid_centers.amax(dim=0) - valid_centers.amin(dim=0)
+                        ))
+                        if valid_centers.shape[0] else 0.0
+                    )
+                    accumulator = per_track_accumulators.setdefault(track_id, {
+                        "track_id": int(track_id),
+                        "track_slot": track_slot,
+                        "dynamic_point_count": int(point_counts[track_slot]),
+                        "motion_span_m": motion_span,
+                        "squared_error_sum": 0.0,
+                        "pixel_count": 0,
+                        "visible_source_frame_count": 0,
+                        "visible_camera_count": 0,
+                        "frame_psnr_values": [],
+                    })
+                    accumulator["squared_error_sum"] += squared_error_sum
+                    accumulator["pixel_count"] += pixel_count
+                    accumulator["visible_source_frame_count"] += 1
+                    accumulator["visible_camera_count"] += visible_camera_count
+                    accumulator["frame_psnr_values"].append(frame_psnr)
+                    per_track_frame_records.append({
+                        "track_id": int(track_id),
+                        "track_slot": track_slot,
+                        "pixel_count": pixel_count,
+                        "visible_camera_count": visible_camera_count,
+                        "psnr": frame_psnr,
+                    })
         frame_records.append({
             "output_index": output_index,
             "frame": int(frame),
@@ -684,6 +1116,7 @@ def main() -> None:
                 psnr(rendered, target["images"].to(device), dynamic_bbox_mask)
                 if dynamic_bbox_mask is not None else None
             ),
+            "per_track_dynamic_bbox": per_track_frame_records,
         })
         if output_index % 25 == 0 or output_index == len(output_samples) - 1:
             print(json.dumps({
@@ -714,6 +1147,27 @@ def main() -> None:
         record["psnr_non_sky_all_cameras"] for record in frame_records
         if record["psnr_non_sky_all_cameras"] is not None
     ]
+    per_track_summary = []
+    total_track_squared_error = sum(
+        record["squared_error_sum"] for record in per_track_accumulators.values()
+    )
+    for record in per_track_accumulators.values():
+        mse = max(record["squared_error_sum"] / record["pixel_count"], 1e-10)
+        per_track_summary.append({
+            key: value for key, value in record.items()
+            if key not in ("frame_psnr_values", "squared_error_sum")
+        } | {
+            "pixel_weighted_psnr": -10.0 * math.log10(mse),
+            "mean_visible_frame_psnr": float(np.mean(record["frame_psnr_values"])),
+            "squared_error_sum": record["squared_error_sum"],
+            "error_contribution_fraction_over_tracks": (
+                record["squared_error_sum"] / total_track_squared_error
+                if total_track_squared_error > 0 else 0.0
+            ),
+        })
+    per_track_summary.sort(
+        key=lambda item: item["squared_error_sum"], reverse=True
+    )
     manifest = {
         "status": "completed",
         "scene": args.scene,
@@ -756,7 +1210,19 @@ def main() -> None:
         "refiner_state": (
             str(Path(args.refiner_state).resolve()) if args.refiner_state else None
         ),
+        "camera_refiner_states": (
+            [str(Path(path).resolve()) for path in args.camera_refiner_states]
+            if args.camera_refiner_states else None
+        ),
+        "dynamic_refiner_state": (
+            str(Path(args.dynamic_refiner_state).resolve())
+            if args.dynamic_refiner_state else None
+        ),
         "payload_dir": str(payload_dir),
+        "rgb_residual_state": (
+            str(Path(args.rgb_residual_state).resolve())
+            if args.rgb_residual_state else None
+        ),
         "payload_sha256": {
             str(path.name): hashlib.sha256(path.read_bytes()).hexdigest()
             for path in (
@@ -767,10 +1233,15 @@ def main() -> None:
         },
         "static_gaussian_count": static.count,
         "feature_dim": int(static.colors.shape[-1]),
+        "static_source_rgb_blend": args.static_source_rgb_blend,
+        "static_source_rgb_contract": "Per-point construction-time source RGB, same-depth static ownership; generic128D+UNet retained; no target RGB lookup or GT-mask routing.",
         "rendering": (
             "final static global Gaussian + final scene-global dynamic Gaussian; model.pose_gaussians + 128-D render_features + refiner UNet"
             if has_global_dynamic
             else "final static global Gaussian + per-window dynamic payload; model.pose_gaussians + 128-D render_features + refiner UNet"
+        ) + (
+            "; same-depth construction-time static source-RGB mixture"
+            if args.static_source_rgb_blend > 0 else ""
         ),
         "dynamic_semantics": (
             "one persistent dynamic Gaussian map uses stable scene track IDs and the full-scene box graph for every frame"
@@ -788,9 +1259,38 @@ def main() -> None:
             float(np.mean(non_sky_psnr_values)) if non_sky_psnr_values else None
         ),
         "dynamic_bbox_metrics_enabled": args.dynamic_bbox_metrics,
+        "per_track_bbox_metrics_enabled": args.per_track_bbox_metrics,
+        "per_track_dynamic_bbox_summary_by_error": per_track_summary,
         "dynamic_opacity_scale": args.dynamic_opacity_scale,
         "dynamic_scale_multiplier": args.dynamic_scale_multiplier,
         "static_scale_multiplier": args.static_scale_multiplier,
+        "rgb_surface_proxy": (
+            None if proxy_dir is None else {
+                "directory": str(proxy_dir),
+                "manifest_sha256": hashlib.sha256(
+                    (proxy_dir / "manifest.json").read_bytes()
+                ).hexdigest(),
+                "dynamic_proxy_count": int((proxy.instance_id >= 0).sum().item()),
+                "static_proxy_count": int((proxy.instance_id < 0).sum().item()),
+                "suppressed_baseline_track_slots": proxy_manifest["reliable_global_slots"],
+                "composition": {
+                    "minimum_standalone_alpha": 0.25,
+                    "minimum_visible_over_standalone_alpha": 0.95,
+                    "accepted_source_pixels": proxy_accepted_pixels,
+                    "source_pixels": proxy_total_pixels,
+                    "accepted_source_fraction": (
+                        proxy_accepted_pixels / proxy_total_pixels
+                        if proxy_total_pixels else None
+                    ),
+                    "accepted_dynamic_bbox_pixels": proxy_accepted_dynamic_bbox_pixels,
+                    "dynamic_bbox_pixels": proxy_dynamic_bbox_pixels,
+                    "accepted_dynamic_bbox_fraction": (
+                        proxy_accepted_dynamic_bbox_pixels / proxy_dynamic_bbox_pixels
+                        if proxy_dynamic_bbox_pixels else None
+                    ),
+                },
+            }
+        ),
         "mean_psnr_dynamic_bbox_source_frames_all_cameras": (
             float(np.mean([
                 record["psnr_dynamic_bbox_all_cameras"]

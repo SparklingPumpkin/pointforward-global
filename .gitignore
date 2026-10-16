@@ -13,6 +13,7 @@ outputs/
 runs/
 cache/
 tmp/
+artifacts/
 *.mp4
 *.avi
 *.ply

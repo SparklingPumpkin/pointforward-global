@@ -23,7 +23,7 @@ from pointforward.models import (
     decanonicalise,
 )
 from pointforward.models.backbone import sample_features
-from pointforward.models.fusion import project_points
+from pointforward.models.fusion import project_points, box_dynamic_masks
 from pointforward.models.query import query_rgb
 from pointforward.models.rotation import (
     matrix_to_quaternion,
@@ -205,6 +205,7 @@ def blend_static_gaussians(
     update: Gaussians,
     alpha: float | torch.Tensor,
     update_position: bool = True,
+    refresh_fields: str = "all",
 ) -> Gaussians:
     """Blend a decoder refresh into persistent static Gaussians."""
     quat_update = update.quats
@@ -241,14 +242,17 @@ def blend_static_gaussians(
             )
         else:
             extras[name] = old.extras[name]
+    if refresh_fields not in ("all", "colors"):
+        raise ValueError(f"Unsupported static refresh fields: {refresh_fields}")
     return Gaussians(
         means=(
             pointwise_lerp(old.means, update.means, alpha)
             if update_position else old.means
         ),
-        quats=quats,
-        scales=scales,
-        opacities=torch.sigmoid(pointwise_lerp(old_opacity, new_opacity, alpha)),
+        quats=quats if refresh_fields == "all" else old.quats,
+        scales=scales if refresh_fields == "all" else old.scales,
+        opacities=(torch.sigmoid(pointwise_lerp(old_opacity, new_opacity, alpha))
+                   if refresh_fields == "all" else old.opacities),
         colors=pointwise_lerp(old.colors, update.colors, alpha),
         sigma=torch.full_like(old.sigma, 1e6),
         times=torch.zeros_like(old.times),
@@ -1006,7 +1010,8 @@ def project_static_gaussians_to_sparse_depth(
 
 
 def voxel_deduplicate_static(
-    parts: list[Gaussians], voxel_size: float, append: Gaussians | None = None
+    parts: list[Gaussians], voxel_size: float, append: Gaussians | None = None,
+    representative_policy: str = "first",
 ) -> tuple[Gaussians, dict[str, int | float]]:
     """Keep the first static Gaussian per voxel and optionally append dynamics."""
     nonempty = [part for part in parts if part.count > 0]
@@ -1026,7 +1031,18 @@ def voxel_deduplicate_static(
     representatives = torch.full(
         (unique_count,), total, dtype=torch.long, device=means.device
     )
-    representatives.scatter_reduce_(0, inverse, positions, reduce="amin", include_self=True)
+    if representative_policy == "first":
+        representatives.scatter_reduce_(0, inverse, positions, reduce="amin", include_self=True)
+    elif representative_policy == "closest":
+        quality = torch.cat([part.extras["best_observation_distance"] for part in nonempty])
+        quality = torch.nan_to_num(quality, nan=float("inf"), posinf=float("inf"))
+        best = torch.full((unique_count,), float("inf"), device=quality.device, dtype=quality.dtype)
+        best.scatter_reduce_(0, inverse, quality, reduce="amin", include_self=True)
+        eligible = torch.where(quality == best[inverse], positions, torch.full_like(positions,total))
+        representatives.scatter_reduce_(0, inverse, eligible, reduce="amin", include_self=True)
+        del quality, best, eligible
+    else:
+        raise ValueError("Unsupported voxel representative policy")
     selected_indices = []
     offset = 0
     for part in nonempty:
@@ -1063,7 +1079,7 @@ def voxel_deduplicate_static(
     )
     static_after = unique_count
     return output, {
-        "policy": "first-per-voxel",
+        "policy": "first-per-voxel" if representative_policy == "first" else "closest-observation-per-voxel",
         "voxel_size_m": voxel_size,
         "before": int(total),
         "after": int(static_after),
@@ -1077,6 +1093,7 @@ def build_queries_from_static_gaussians(
     depth: torch.Tensor,
     depth_threshold: float,
     chunk_size: int = 65_536,
+    source_view_policy: str = "min-depth-error",
 ) -> tuple[dict[str, torch.Tensor], torch.Tensor]:
     """Reproject persistent centres and rebuild their RGB/ray query fields."""
     height, width = scene.image_size
@@ -1099,9 +1116,21 @@ def build_queries_from_static_gaussians(
         sampled_depth = sample_features(depth.unsqueeze(1), uv, height, width).squeeze(-1)
         depth_error = (projected_depth - sampled_depth).abs()
         valid = in_front & in_bounds & sampled_depth.isfinite() & (sampled_depth > 0)
-        score = depth_error.masked_fill(~valid, float("inf"))
-        best_error, best_view = score.min(dim=0)
-        observed = best_error <= depth_threshold
+        if source_view_policy == "min-depth-error":
+            # Preserve the original source-camera choice exactly.
+            score = depth_error.masked_fill(~valid, float("inf"))
+            best_error, best_view = score.min(dim=0)
+            observed = best_error <= depth_threshold
+        elif source_view_policy == "nearest-depth-valid":
+            depth_valid = valid & (depth_error <= depth_threshold)
+            distance = torch.linalg.vector_norm(
+                points - scene.cam_to_world[:, None, :3, 3], dim=-1
+            )
+            score = distance.masked_fill(~depth_valid, float("inf"))
+            best_distance, best_view = score.min(dim=0)
+            observed = best_distance.isfinite()
+        else:
+            raise ValueError(f"Unsupported static source-view policy: {source_view_policy}")
         if not bool(observed.any()):
             continue
 
@@ -1302,6 +1331,8 @@ def postprocess_gaussian_scales(
     sqrt((sx^2 + sy^2 + sz^2) / 3), preserving trace of the 3D covariance
     before an optional radius cap. ``isotropic-volume`` uses the geometric mean
     and therefore preserves the determinant/volume before the optional cap.
+    ``axis-cap`` retains decoded orientation and shorter axes, capping each
+    axis independently; it bounds spatial extent without forcing a sphere.
     """
     before = gaussian_scale_stats(scales)
     if mode == "none":
@@ -1313,6 +1344,11 @@ def postprocess_gaussian_scales(
     elif mode == "isotropic-volume":
         radius_before_cap = scales.float().clamp_min(1e-12).log().mean(dim=-1, keepdim=True).exp()
         transformed = radius_before_cap
+    elif mode == "axis-cap":
+        if isotropic_max_scale is None or isotropic_max_scale <= 0:
+            raise ValueError("axis-cap requires a positive maximum axis scale")
+        radius_before_cap = scales.float().amax(dim=-1, keepdim=True)
+        transformed = scales.float()
     else:
         raise ValueError(f"Unsupported Gaussian scale postprocess mode: {mode}")
 
@@ -1334,6 +1370,7 @@ def postprocess_gaussian_scales(
     return transformed, {
         "mode": mode,
         "isotropic_max_scale_m": isotropic_max_scale,
+        "scale_cap_semantics": "each_decoded_axis" if mode == "axis-cap" else "isotropic_radius",
         "radius_before_cap_m_p50_p90_p99": radius_quantiles,
         "capped_fraction": capped_fraction,
         "before": before,
@@ -1388,6 +1425,11 @@ def main() -> None:
         help="Frames between clip starts; defaults to clip_length. Smaller values create overlap.",
     )
     parser.add_argument(
+        "--pad-final-window",
+        action="store_true",
+        help="Repeat the final frame when a tail window is shorter than window_length.",
+    )
+    parser.add_argument(
         "--window-length",
         type=int,
         default=None,
@@ -1400,8 +1442,13 @@ def main() -> None:
         help="Frame spacing between context timestamps; defaults to the dataset frame_stride.",
     )
     parser.add_argument("--global-voxel-size", type=float, default=0.05)
+    parser.add_argument("--global-static-voxel-representative", choices=("first","closest"), default="first")
     parser.add_argument("--global-depth-threshold", type=float, default=1.0)
     parser.add_argument("--global-update-alpha", type=float, default=0.5)
+    parser.add_argument(
+        "--global-query-origin", choices=("scene", "clip", "clip-rigid"), default="scene",
+        help="scene preserves original queries; clip translates queries; clip-rigid expresses static queries in the clip ego frame. Outputs remain in their original scene/canonical frames.",
+    )
     parser.add_argument(
         "--global-update-distance-policy",
         choices=("uniform", "smoothstep", "closest-smoothstep"),
@@ -1421,12 +1468,34 @@ def main() -> None:
         help="Required range improvement in metres for closest-smoothstep.",
     )
     parser.add_argument(
+        "--global-static-source-view",
+        choices=("min-depth-error", "nearest-depth-valid"),
+        default="min-depth-error",
+        help="Select the source RGB/ray camera for old static queries. The optional "
+        "nearest policy chooses the closest camera among depth-consistent views; "
+        "all clip views still participate in neural feature fusion.",
+    )
+    parser.add_argument(
+        "--global-static-refresh-fields", choices=("all", "colors"), default="all",
+        help="Attributes refreshed for observed old static points; colors keeps geometry and opacity frozen.",
+    )
+    parser.add_argument("--global-static-offset-gain", type=float, default=1.0,
+                        help="Scale the static decoder XYZ residual; 0 retains depth-lifted query centres.")
+    parser.add_argument("--global-static-fusion-depth-tolerance", type=float, default=0.0,
+                        help="Optional static view-depth consistency gate in metres; 0 preserves learned-only fusion.")
+    parser.add_argument("--global-static-view-bank", choices=("disabled", "nearest4"), default="disabled",
+                        help="Optional scene-wide closest reliable four-frame feature-only pass before runtime export.")
+    parser.add_argument("--global-static-view-bank-alpha", type=float, default=1.0)
+    parser.add_argument("--global-static-view-bank-depth-tolerance", type=float, default=1.0)
+    parser.add_argument("--global-static-view-bank-chunk-size", type=int, default=16384)
+    parser.add_argument(
         "--global-growth-policy",
         choices=(
             "baseline",
             "visibility-difference-frozen-position",
             "two-clip-mutable-frozen-position",
             "three-clip-mutable-frozen-position",
+            "unrestricted-frozen-position",
         ),
         default="baseline",
         help=(
@@ -1438,7 +1507,8 @@ def main() -> None:
             "previous clip regions, and protects regions seen two or more clips ago. "
             "three-clip-mutable-frozen-position extends the mutable region to the "
             "two immediately previous clips and protects regions seen three or more "
-            "clips ago."
+            "clips ago. unrestricted-frozen-position admits new points across all "
+            "clip ages before voxel deduplication, while keeping persistent means frozen."
         ),
     )
     parser.add_argument(
@@ -1503,7 +1573,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--gaussian-scale-postprocess",
-        choices=("none", "isotropic-trace", "isotropic-volume"),
+        choices=("none", "isotropic-trace", "isotropic-volume", "axis-cap"),
         default="none",
         help="Inference-only scale ablation applied after Gaussian decoding.",
     )
@@ -1512,6 +1582,14 @@ def main() -> None:
         type=float,
         default=None,
         help="Optional maximum isotropic radius in metres after scale postprocessing.",
+    )
+    parser.add_argument(
+        "--global-static-source-pixel-radius", type=float, default=0.0,
+        help="Optional static sphere scale = source depth * pixel radius / geometric-mean focal length; zero disables.",
+    )
+    parser.add_argument(
+        "--global-static-source-min-scale", type=float, default=0.005,
+        help="Physical lower bound in metres when source-pixel static spheres are enabled.",
     )
     parser.add_argument(
         "--save-runtime-payload",
@@ -1577,10 +1655,33 @@ def main() -> None:
         parser.error("--camera-interpolation-factor must be positive")
     if args.gaussian_scale_postprocess == "none" and args.isotropic_max_scale is not None:
         parser.error("--isotropic-max-scale requires an isotropic scale postprocess mode")
+    if args.gaussian_scale_postprocess == "axis-cap" and args.isotropic_max_scale is None:
+        parser.error("axis-cap requires --isotropic-max-scale as the maximum decoded axis length")
+    if args.global_static_source_pixel_radius < 0:
+        parser.error("--global-static-source-pixel-radius must be non-negative")
+    if args.global_static_source_pixel_radius > 0 and (
+        args.gaussian_scale_postprocess != "isotropic-trace"
+        or args.isotropic_max_scale is None
+        or not 0 < args.global_static_source_min_scale <= args.isotropic_max_scale
+    ):
+        parser.error("Source-pixel spheres require isotropic-trace and 0 < min-scale <= isotropic-max-scale")
     if args.global_voxel_size <= 0:
         parser.error("--global-voxel-size must be positive")
     if args.global_depth_threshold <= 0:
         parser.error("--global-depth-threshold must be positive")
+    if not 0 <= args.global_static_offset_gain <= 1:
+        parser.error("--global-static-offset-gain must be in [0, 1]")
+    if args.global_static_fusion_depth_tolerance < 0:
+        parser.error("--global-static-fusion-depth-tolerance must be non-negative")
+    if not 0 <= args.global_static_view_bank_alpha <= 1:
+        parser.error("--global-static-view-bank-alpha must be in [0, 1]")
+    if args.global_static_view_bank_depth_tolerance <= 0 or args.global_static_view_bank_chunk_size <= 0:
+        parser.error("Static view bank requires positive depth tolerance and chunk size")
+    if args.global_static_view_bank != "disabled" and (
+        args.reconstruction_mode != "global-gaussians" or not args.cache_overlap_image_networks
+        or args.save_runtime_payload is None or not args.skip_frame_render
+    ):
+        parser.error("Static view bank requires global-gaussians, overlap cache, runtime payload export and skipped per-clip rendering")
     if not 0 <= args.global_update_alpha <= 1:
         parser.error("--global-update-alpha must be in [0, 1]")
     if args.global_update_near_distance < 0:
@@ -1794,6 +1895,8 @@ def main() -> None:
 
     for window_index, offset in enumerate(window_offsets):
         window = selected_frames[offset:offset + window_length]
+        if args.pad_final_window and len(window) < window_length and window:
+            window = window + [window[-1]] * (window_length - len(window))
         owned_frames = selected_frames[offset:owned_end_by_offset[offset]]
         slot_of = {frame: slot for slot, frame in enumerate(window)}
         normalized_times = dataset._normalised_times(window)
@@ -1977,7 +2080,8 @@ def main() -> None:
         current_query_count = int(sampled["queries"].shape[0])
         if old_static is not None:
             old_sampled, old_source_index = build_queries_from_static_gaussians(
-                old_static, scene, depth, args.global_depth_threshold
+                old_static, scene, depth, args.global_depth_threshold,
+                source_view_policy=args.global_static_source_view,
             )
             old_static_refresh_candidates = int(old_source_index.shape[0])
             if (
@@ -2081,8 +2185,23 @@ def main() -> None:
             dynamic_refresh_start + observed_old_dynamic_count
         )
 
+        query_origin = None
+        query_frame = None
+        if args.global_query_origin == "clip":
+            clip_pose = world_from @ dataset._ego_pose(metadata, window[0])
+            query_origin = torch.as_tensor(clip_pose[:3, 3], device=device, dtype=sampled["base_xyz"].dtype)
+        elif args.global_query_origin == "clip-rigid":
+            query_frame = torch.as_tensor(
+                world_from @ dataset._ego_pose(metadata, window[0]),
+                device=device, dtype=sampled["base_xyz"].dtype,
+            )
         decoded = model.decode(
-            scene, depth, sampled, image_features=image_features
+            scene, depth, sampled, image_features=image_features,
+            query_origin=query_origin,
+            query_frame=query_frame,
+            static_offset_gain=args.global_static_offset_gain,
+            static_depth_tolerance=(args.global_static_fusion_depth_tolerance
+                                    if args.global_static_fusion_depth_tolerance > 0 else None),
         )
         if image_features is not None:
             del image_features
@@ -2106,6 +2225,28 @@ def main() -> None:
             mode=args.gaussian_scale_postprocess,
             isotropic_max_scale=args.isotropic_max_scale,
         )
+        if args.global_static_source_pixel_radius > 0:
+            # Construction-time camera evidence only.  The sphere remains a
+            # fixed 3-D attribute for all future target cameras.
+            source_view = sampled["view_id"]
+            source_pose = scene.cam_to_world[source_view]
+            source_depth = ((sampled["world_xyz"] - source_pose[:, :3, 3])
+                            * source_pose[:, :3, 2]).sum(-1).clamp_min(0)
+            source_focal = (scene.intrinsics[source_view, 0, 0]
+                            * scene.intrinsics[source_view, 1, 1]).sqrt()
+            radius = (source_depth * args.global_static_source_pixel_radius
+                      / source_focal.clamp_min(1e-6)).clamp(
+                          min=args.global_static_source_min_scale,
+                          max=args.isotropic_max_scale)
+            decoded.scales = torch.where(
+                (sampled["instance_id"] < 0)[:, None],
+                radius[:, None].expand(-1, 3), decoded.scales)
+            scale_postprocess["static_source_pixel_override"] = {
+                "pixel_radius": args.global_static_source_pixel_radius,
+                "minimum_scale_m": args.global_static_source_min_scale,
+                "maximum_scale_m": args.isotropic_max_scale,
+                "definition": "source projected depth times pixel radius divided by sqrt(fx*fy); fixed 3-D spheres, static only",
+            }
 
         if args.global_growth_policy == "visibility-difference-frozen-position":
             visibility_filter_history = visibility_history
@@ -2113,6 +2254,8 @@ def main() -> None:
             visibility_filter_history = visibility_history[:-1]
         elif args.global_growth_policy == "three-clip-mutable-frozen-position":
             visibility_filter_history = visibility_history[:-2]
+        elif args.global_growth_policy == "unrestricted-frozen-position":
+            visibility_filter_history = []
         else:
             visibility_filter_history = []
 
@@ -2207,6 +2350,7 @@ def main() -> None:
                             else static_refresh_alpha
                         ),
                         update_position=(args.global_growth_policy == "baseline"),
+                        refresh_fields=args.global_static_refresh_fields,
                     )
                     old_static = replace_gaussians(
                         old_static, refresh_source_index, blended
@@ -2336,7 +2480,8 @@ def main() -> None:
             growth_stats["new_static_after_visibility_filter"] = current_static.count
             static_parts = [current_static] if old_static is None else [old_static, current_static]
             global_gaussians, voxel_stats = voxel_deduplicate_static(
-                static_parts, args.global_voxel_size, append=current_dynamic
+                static_parts, args.global_voxel_size, append=current_dynamic,
+                representative_policy=args.global_static_voxel_representative,
             )
             del current_static, static_parts, current_dynamic
             if old_dynamic is not None:
@@ -2577,8 +2722,42 @@ def main() -> None:
         torch.cuda.empty_cache()
 
     runtime_payload_manifest = None
+    static_view_bank_stats = None
     if runtime_payload_dir is not None and args.reconstruction_mode == "global-gaussians":
         static_final = persistent_static(global_gaussians)
+        if args.global_static_view_bank != "disabled":
+            from pointforward.models.static_view_bank import refresh_static_features
+            bank_frames = sorted({frame for frame, _ in image_feature_cache})
+            bank_keys = [(frame, int(camera)) for frame in bank_frames for camera in dataset.cameras]
+            if any(key not in image_feature_cache or key not in depth_cache for key in bank_keys):
+                raise RuntimeError("Static view bank has incomplete camera groups")
+            bank_context = dataset._collect(metadata, bank_frames, global_frame_slot,
+                                            global_normalized_times, dataset.resolution,
+                                            world_from, lidar=False)
+            bank_images = bank_context["images"].to(device)
+            bank_intrinsics = bank_context["intrinsics"].to(device)
+            bank_poses = bank_context["cam_to_world"].to(device)
+            bank_masks = None
+            if global_boxes is not None:
+                bank_masks = box_dynamic_masks(global_boxes, bank_context["frame_index"].to(device),
+                                               bank_intrinsics, torch.linalg.inv(bank_poses),
+                                               *bank_images.shape[-2:])
+            ego_poses = torch.stack([torch.as_tensor(world_from @ dataset._ego_pose(metadata, frame),
+                                                    device=device, dtype=bank_poses.dtype)
+                                     for frame in bank_frames])
+            static_view_bank_stats = refresh_static_features(
+                model, static_final, images=bank_images,
+                features=torch.stack([image_feature_cache[key] for key in bank_keys]),
+                depth=torch.stack([depth_cache[key] for key in bank_keys]),
+                intrinsics=bank_intrinsics, cam_to_world=bank_poses,
+                frame_numbers=torch.tensor(bank_frames, device=device), ego_to_world=ego_poses,
+                camera_count=len(dataset.cameras), dynamic_masks=bank_masks,
+                alpha=args.global_static_view_bank_alpha,
+                depth_tolerance=args.global_static_view_bank_depth_tolerance,
+                chunk_size=args.global_static_view_bank_chunk_size,
+            )
+            print(json.dumps({"static_view_bank": static_view_bank_stats}), flush=True)
+            del bank_context, bank_images, bank_intrinsics, bank_poses, bank_masks, ego_poses
         final_static_path = runtime_payload_dir / "final_static_128d.pt"
         save_gaussian_payload(final_static_path, static_final)
         runtime_payload_manifest = {
@@ -2703,6 +2882,13 @@ def main() -> None:
         },
         "global_update_distance": {
             "policy": args.global_update_distance_policy,
+            "static_voxel_representative": args.global_static_voxel_representative,
+            "query_coordinate_frame": args.global_query_origin,
+            "static_decoder_offset_gain": args.global_static_offset_gain,
+            "static_source_pixel_radius": args.global_static_source_pixel_radius,
+            "static_source_min_scale_m": args.global_static_source_min_scale,
+            "static_fusion_depth_tolerance_m": args.global_static_fusion_depth_tolerance,
+            "static_source_view_policy": args.global_static_source_view,
             "new_observation_max_alpha": args.global_update_alpha,
             "near_distance_m": args.global_update_near_distance,
             "far_cutoff_distance_m": args.global_update_far_distance,
@@ -2748,6 +2934,8 @@ def main() -> None:
             if args.global_growth_policy == "two-clip-mutable-frozen-position"
             else "persistent static means are immutable; current and two immediately previous clip regions permit new static Gaussians and attribute refreshes, while regions visible three or more processed clips ago are protected from both"
             if args.global_growth_policy == "three-clip-mutable-frozen-position"
+            else "persistent static means are immutable; all current static points are eligible for admission before voxel deduplication; attribute refresh still follows the selected distance policy"
+            if args.global_growth_policy == "unrestricted-frozen-position"
             else "AV-v1-m baseline: persistent static means are alpha-blended and current static Gaussians are added before voxel deduplication"
         ),
         "global_gaussians": {
@@ -2761,6 +2949,8 @@ def main() -> None:
                 if args.global_growth_policy == "two-clip-mutable-frozen-position"
                 else "persistent positions frozen; attribute refresh and new-point admission allowed only outside the visible-region union of clips three or more processing steps old; then voxel-deduplicated"
                 if args.global_growth_policy == "three-clip-mutable-frozen-position"
+                else "persistent positions frozen; no historical visible-region admission exclusion; attribute refresh follows distance policy; then voxel-deduplicated"
+                if args.global_growth_policy == "unrestricted-frozen-position"
                 else "persistent, reprojected into each new clip, decoder-refreshed, then voxel-deduplicated"
             ),
             "dynamic_policy": (
@@ -2794,6 +2984,7 @@ def main() -> None:
             "application_point": "after Gaussian decoding and before PLY export and rendering",
         },
         "runtime_payload": runtime_payload_manifest,
+        "static_view_bank": static_view_bank_stats,
         "coordinate_frame": "shared world recentered at the first ego pose of the delivered sequence",
         "windows": windows,
         "mean_psnr_all_frames_cameras": (

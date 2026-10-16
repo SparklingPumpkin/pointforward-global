@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import os
 import time
@@ -63,6 +64,9 @@ def main() -> None:
         "--max-frames", type=int, default=None,
         help="Optional deterministic frame cap for smoke testing.",
     )
+    parser.add_argument("--frames", default=None,
+                        help="Explicit comma-separated source frame IDs.")
+    parser.add_argument("--camera-index", type=int, default=-1)
     parser.add_argument("--learning-rate", type=float, default=0.02)
     parser.add_argument("--max-translation-m", type=float, default=0.30)
     parser.add_argument("--anchor-weight", type=float, default=0.001)
@@ -71,6 +75,10 @@ def main() -> None:
     parser.add_argument(
         "--initial-corrections",
         help="Optional frame_translation_corrections.pt from an earlier run.",
+    )
+    parser.add_argument(
+        "--camera-refiner-states", nargs="+",
+        help="Optional one refiner_state.pt per configured camera.",
     )
     args = parser.parse_args()
 
@@ -91,9 +99,13 @@ def main() -> None:
     dataset = build_dataset(config, args.split)
     metadata = next(item for item in dataset.scenes if item["name"] == args.scene)
     all_frames = list(metadata["frames"])
-    frames = (
-        all_frames if args.max_frames is None else all_frames[:args.max_frames]
-    )
+    if args.frames:
+        frames = [int(value) for value in args.frames.split(",") if value.strip()]
+        unknown = sorted(set(frames) - set(all_frames))
+        if unknown:
+            parser.error(f"--frames contains unknown source frames: {unknown}")
+    else:
+        frames = all_frames if args.max_frames is None else all_frames[:args.max_frames]
     if not frames:
         parser.error("--max-frames must be positive")
     normalized_times = dataset._normalised_times(all_frames)
@@ -120,6 +132,20 @@ def main() -> None:
         valid=evaluation_cpu.valid.to(device),
     )
     model = build_model(config, device, args.ckpt).eval().requires_grad_(False)
+    camera_refiners = None
+    if args.camera_refiner_states:
+        if len(args.camera_refiner_states) != len(dataset.cameras):
+            parser.error(
+                "--camera-refiner-states must provide exactly one path per camera"
+            )
+        camera_refiners = {}
+        for camera_id, state_path in zip(dataset.cameras, args.camera_refiner_states):
+            refiner = copy.deepcopy(model.refiner).to(device).eval()
+            state = torch.load(
+                Path(state_path).resolve(), map_location="cpu", weights_only=True
+            )
+            refiner.load_state_dict(state.get("refiner", state), strict=True)
+            camera_refiners[camera_id] = refiner
 
     raw_translation = torch.nn.Parameter(torch.zeros_like(boxes.centers))
     if args.initial_corrections:
@@ -153,7 +179,13 @@ def main() -> None:
             optimizer.zero_grad(set_to_none=True)
             view_losses = []
             valid_views = 0
-            for camera_index in range(len(dataset.cameras)):
+            camera_indices = (
+                list(range(len(dataset.cameras)) if args.camera_index < 0
+                     else [args.camera_index])
+            )
+            for camera_index in camera_indices:
+                if camera_refiners is not None:
+                    model.refiner = camera_refiners[dataset.cameras[camera_index]]
                 translations = (
                     torch.tanh(raw_translation) * args.max_translation_m * valid_float
                 )
@@ -181,7 +213,7 @@ def main() -> None:
                     continue
                 squared = (rendered - batch["images"][camera_index:camera_index + 1].to(device)).square()
                 mse = (squared * mask).sum() / (mask.sum() * 3.0).clamp_min(1.0)
-                (mse / len(dataset.cameras)).backward()
+                (mse / len(camera_indices)).backward()
                 view_losses.append(float(mse.detach()))
                 valid_views += 1
 
@@ -234,7 +266,10 @@ def main() -> None:
             dims=boxes.dims.clone(), rots=boxes.rots.clone(),
             times=boxes.times.clone(), valid=boxes.valid.clone(),
         )
-        refined_dynamic = rebase_payload(dynamic, boxes, refined_boxes)
+        # Gaussian means are already in the canonical frame used by ``boxes``.
+        # Updating the box trajectory is sufficient; rebasing means here would
+        # apply the learned translation a second time during pose_gaussians.
+        refined_dynamic = dynamic
 
     static_target = refined_dir / "final_static_128d.pt"
     if not static_target.exists():
@@ -256,6 +291,10 @@ def main() -> None:
         "checkpoint": str(Path(args.ckpt).resolve()),
         "optimized": "per-track per-frame world translation only",
         "frozen": "all Gaussian attributes, box rotation/dimensions, cameras, network and UNet weights",
+        "camera_refiner_states": (
+            [str(Path(path).resolve()) for path in args.camera_refiner_states]
+            if args.camera_refiner_states else None
+        ),
         "supervision": "full final scene 128D+UNet RGB MSE inside original evaluation bbox union",
         "evaluation_boxes": "original unmodified boxes",
         "epochs": args.epochs, "learning_rate": args.learning_rate,

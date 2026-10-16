@@ -64,6 +64,9 @@ class SceneInput:
     sparse_depth: Tensor | None = None
     sparse_mask: Tensor | None = None
     ego_mask: Tensor | None = None
+    # Optional RGB-only foreground support used by targeted inference probes.
+    # Shape (V, H, W); disabled by default so the pretrained path is unchanged.
+    dynamic_foreground_masks: Tensor | None = None
 
     @property
     def num_views(self) -> int:
@@ -240,6 +243,26 @@ class PointForward(nn.Module):
             instance_id = assign_instances(query_xyz(dense), boxes, box_index)
             num_instances = boxes.num_instances
 
+        if scene.dynamic_foreground_masks is not None:
+            foreground = scene.dynamic_foreground_masks
+            if foreground.shape != (
+                scene.num_views,
+                *scene.image_size,
+            ):
+                raise ValueError(
+                    "dynamic_foreground_masks must have shape (V, H, W); "
+                    f"received {tuple(foreground.shape)} for "
+                    f"{(scene.num_views, *scene.image_size)}"
+                )
+            foreground = foreground.to(device=instance_id.device).reshape(-1).bool()
+            # The 3-D box remains the weak instance hint.  RGB foreground only
+            # removes box-assigned pixels; it never creates a dynamic instance.
+            instance_id = torch.where(
+                (instance_id >= 0) & ~foreground,
+                torch.full_like(instance_id, -1),
+                instance_id,
+            )
+
         stationary_id = None
         if scene.stationary_boxes is not None and scene.stationary_boxes.num_instances > 0:
             stationary_id = assign_instances(
@@ -377,6 +400,13 @@ class PointForward(nn.Module):
         depth: Tensor,
         sampled: dict[str, Tensor],
         image_features: Tensor | None = None,
+        source_anchor_dynamic_fq: bool = False,
+        neutralize_dynamic_depth_cue: bool = False,
+        dynamic_soft_occlusion_order: bool = False,
+        query_origin: Tensor | None = None,
+        query_frame: Tensor | None = None,
+        static_offset_gain: float = 1.0,
+        static_depth_tolerance: float | None = None,
     ) -> Gaussians:
         """Stages 3 + 4: fuse multi-view evidence, then decode Gaussians."""
         h, w = scene.image_size
@@ -402,8 +432,44 @@ class PointForward(nn.Module):
                 scene.boxes, scene.frame_index, scene.intrinsics, world_to_cam, h, w
             )
 
+        # Optional translation of the learned query/decoder inputs. Projection
+        # still uses the original common-world points, so cameras and persistent
+        # scene geometry retain their coordinate contract.
+        decoder_base = sampled["base_xyz"]
+        fusion_queries = sampled["queries"]
+        if query_origin is not None and query_frame is not None:
+            raise ValueError("Choose query_origin or query_frame, not both")
+        static_query = sampled["instance_id"] < 0
+        if query_frame is not None:
+            frame = query_frame.to(device=decoder_base.device, dtype=decoder_base.dtype)
+            if frame.shape != (4, 4):
+                raise ValueError("query_frame must have shape (4, 4)")
+            rotation, origin = frame[:3, :3], frame[:3, 3]
+            # Column-vector R maps local to global; row-vector inputs use R.
+            local_xyz = (decoder_base - origin) @ rotation
+            decoder_base = torch.where(static_query[:, None], local_xyz, decoder_base)
+            fusion_queries = fusion_queries.clone()
+            local_dir = fusion_queries[:, 6:9] @ rotation
+            local_moment = (fusion_queries[:, 9:12] - torch.cross(
+                origin.expand_as(fusion_queries[:, 6:9]), fusion_queries[:, 6:9], dim=-1
+            )) @ rotation
+            fusion_queries[:, :3] = decoder_base
+            fusion_queries[:, 6:9] = torch.where(static_query[:, None], local_dir, fusion_queries[:, 6:9])
+            fusion_queries[:, 9:12] = torch.where(static_query[:, None], local_moment, fusion_queries[:, 9:12])
+        elif query_origin is not None:
+            origin = query_origin.to(device=decoder_base.device, dtype=decoder_base.dtype)
+            if origin.shape != (3,):
+                raise ValueError("query_origin must have shape (3,)")
+            decoder_base = decoder_base - origin
+            fusion_queries = fusion_queries.clone()
+            fusion_queries[:, :3] = decoder_base
+            # Plucker moment: (o-t) x d = m - t x d.
+            fusion_queries[:, 9:12] = fusion_queries[:, 9:12] - torch.cross(
+                origin.expand_as(fusion_queries[:, 6:9]), fusion_queries[:, 6:9], dim=-1
+            )
+
         fused, sigma = self.fusion(
-            queries=sampled["queries"],
+            queries=fusion_queries,
             points_per_view=points_per_view,
             features=features,
             depth_maps=depth,
@@ -413,11 +479,33 @@ class PointForward(nn.Module):
             query_times=sampled["times"],
             image_size=(h, w),
             dynamic_masks=dynamic_masks,
+            dynamic_foreground_masks=scene.dynamic_foreground_masks,
             is_static=sampled["instance_id"] < 0,
             point_valid=point_valid,
+            query_view_id=sampled.get("view_id"),
+            source_anchor_dynamic_fq=source_anchor_dynamic_fq,
+            neutralize_dynamic_depth_cue=neutralize_dynamic_depth_cue,
+            dynamic_soft_occlusion_order=dynamic_soft_occlusion_order,
+            static_depth_tolerance=static_depth_tolerance,
         )
 
-        decoded = self.decoder(fused, sampled["base_xyz"])
+        decoded = self.decoder(fused, decoder_base)
+        if query_frame is not None:
+            world_means = decoded["means"] @ rotation.T + origin
+            world_quats = quaternion_multiply(
+                matrix_to_quaternion(rotation).expand_as(decoded["quats"]), decoded["quats"]
+            )
+            decoded["means"] = torch.where(static_query[:, None], world_means, decoded["means"])
+            decoded["quats"] = torch.where(static_query[:, None], world_quats, decoded["quats"])
+        elif query_origin is not None:
+            decoded["means"] = decoded["means"] + origin
+        if not 0.0 <= static_offset_gain <= 1.0:
+            raise ValueError("static_offset_gain must be in [0, 1]")
+        if static_offset_gain != 1.0:
+            anchored = sampled["base_xyz"] + static_offset_gain * (
+                decoded["means"] - sampled["base_xyz"]
+            )
+            decoded["means"] = torch.where(static_query[:, None], anchored, decoded["means"])
         return Gaussians(
             means=decoded["means"],
             quats=decoded["quats"],
@@ -491,12 +579,28 @@ class PointForward(nn.Module):
         height: int,
         width: int,
         render_depth: bool = False,
+        static_source_rgb_blend: float = 0.0,
     ) -> dict[str, Tensor]:
         """Stage 5: rasterise features per target view, then refine to RGB.
 
         Target views sharing a frame index are rasterised in a single gsplat
         call, since the dynamic Gaussian poses are identical for them.
         """
+        if not 0.0 <= static_source_rgb_blend <= 1.0:
+            raise ValueError("static_source_rgb_blend must be in [0, 1]")
+        source_channels = None
+        feature_dim = gaussians.colors.shape[-1]
+        if static_source_rgb_blend > 0:
+            # Source RGB was attached at query construction, independent of
+            # the requested render camera. The fourth channel measures the
+            # static contribution under the same depth ordering as features.
+            source_rgb = gaussians.extras.get("preview_rgb")
+            if source_rgb is None or source_rgb.shape != (gaussians.count, 3):
+                raise ValueError("Static source RGB blending requires per-point preview_rgb")
+            source_rgb = source_rgb.to(device=gaussians.colors.device,
+                                       dtype=gaussians.colors.dtype)
+            static = (gaussians.instance_id < 0).to(source_rgb.dtype).unsqueeze(-1)
+            source_channels = torch.cat((source_rgb * static, static), dim=-1)
         t = targets.num_views
         world_to_cam = torch.linalg.inv(targets.cam_to_world)
 
@@ -519,7 +623,8 @@ class PointForward(nn.Module):
                 quats=posed["quats"],
                 scales=posed["scales"],
                 opacities=posed["opacities"],
-                colors=posed["colors"],
+                colors=(posed["colors"] if source_channels is None else
+                        torch.cat((posed["colors"], source_channels), dim=-1)),
                 intrinsics=targets.intrinsics[sel],
                 world_to_cam=world_to_cam[sel],
                 height=height,
@@ -532,8 +637,8 @@ class PointForward(nn.Module):
                 depth_out.append(depth)
             order.append(sel)
 
-        features = torch.cat(feats_out, dim=0)
-        alpha = torch.cat(alpha_out, dim=0)
+        features = feats_out[0] if len(feats_out) == 1 else torch.cat(feats_out, dim=0)
+        alpha = alpha_out[0] if len(alpha_out) == 1 else torch.cat(alpha_out, dim=0)
 
         # Restore the caller's target ordering.  Advanced indexing
         # (features[perm]) triggers a "CUDA error: invalid configuration
@@ -542,10 +647,18 @@ class PointForward(nn.Module):
         # elements, with torch 2.8.0+cu128) -- index_select along dim 0 is
         # semantically identical for a 1-D index and does not hit this limit.
         perm = torch.argsort(torch.cat(order, dim=0))
-        features = torch.index_select(features, 0, perm)
-        alpha = torch.index_select(alpha, 0, perm)
+        features = features if len(order) == 1 else torch.index_select(features, 0, perm)
+        alpha = alpha if len(order) == 1 else torch.index_select(alpha, 0, perm)
 
+        attached_rgb = static_ownership = None
+        if source_channels is not None:
+            attached_rgb = features[:, feature_dim:feature_dim+3]
+            static_ownership = features[:, feature_dim+3:feature_dim+4].clamp(0, 1)
+            features = features[:, :feature_dim].contiguous()
         rgb = self.refiner(features, alpha)
+        if attached_rgb is not None:
+            rgb = (rgb * (1 - static_source_rgb_blend * static_ownership)
+                   + static_source_rgb_blend * attached_rgb).clamp(0, 1)
         assert rgb.shape[0] == t
         out = {"rgb": rgb, "features": features, "alpha": alpha}
         if depth_out:
