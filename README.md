@@ -34,6 +34,24 @@ python scripts/run_pipeline.py --mode fresh \
 
 当前新场景fresh默认停止条件：**全局PSNR≥30dB且车辆bbox PSNR≥28dB，或从冷启动输入开始累计达到3600s（60min）**。优化前及每100步检查完整场景、全部三相机，统计口径同正式渲染器；质量检查成本计入冷启动时间。取消原1700步提前停止，达到条件后保存状态并完成视频/PLY；最终保存与交付耗时仍单独如实记录，60min是优化停止触发点。配置在 `configs/runtime-stop/`；此次仅改停止逻辑，未重测。冻结历史入口 `run_vr_v1_s_pipeline.py` 保留原实验配方，replay固定资产保持原状态。
 
+前期车辆校准通过 `--vehicle-calibration` 选择，只影响fresh：
+
+|选项|处理|
+|---|---|
+|`adaptive`（默认）|现有自适应bbox/轨迹对齐与冲突背景LiDAR提示过滤，不额外扩大框|
+|`bbox-expand`|跳过自适应校准，保留原LiDAR；仅将车辆前馈局部候选/解码框前后各加0.5m、左右各加0.3m|
+|`both`|先做现有自适应bbox/LiDAR校准，再扩大车辆前馈局部候选/解码框|
+
+扩大量沿车辆自身长宽轴计算，默认总长增加1.0m、总宽增加0.6m、高度不变。可用 `--bbox-front-back-margin 0.5 --bbox-left-right-margin 0.3` 调整单侧值。扩框不改变原始评估框或静态前馈框，也不改变选视图评分的原框；两者同时使用时，自适应拟合/过滤仍用原框支持，扩框用于之后的车辆重建范围，不重复扩张LiDAR归属范围。配置和实际总扩大量写入每次运行的 `delivery_options.json`。replay使用已固化资产，不重新应用这些选项。
+
+```bash
+# 例：同时启用两者，沿用默认扩大量。
+python scripts/run_pipeline.py --mode fresh \
+  --data-root /data/argoverse/processed/training \
+  --output-root /work/vr-s-both --scene 017 --gpu 0 --vehicle-gpu 1 \
+  --vehicle-calibration both --bbox-front-back-margin 0.5 --bbox-left-right-margin 0.3
+```
+
 输入为已预处理RGB、LiDAR、标定、自车位姿、实例、天空mask与SMPL标注，数据集不随包提供。冷启动起点是这些输入，不包含数据集格式转换或SMPL标注生成。环境见 [requirements.txt](requirements.txt) / [environment.yml](environment.yml) 及release。
 
 ## 时间与交付边界
