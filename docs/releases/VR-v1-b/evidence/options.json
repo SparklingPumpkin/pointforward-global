@@ -1,0 +1,24 @@
+{
+  "candidate": "VR-v1-b",
+  "source_run": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry",
+  "source_payload": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/runtime-payload",
+  "snapshot": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/source-snapshot",
+  "steps": 950,
+  "milestones": [
+    350,
+    550,
+    750,
+    950
+  ],
+  "roi_weight": 0.25,
+  "pose_lr": 0.001,
+  "lr_decay_steps": [
+    240,
+    700
+  ],
+  "lr_decay_factor": 0.4,
+  "initialization": "raw feedforward + generic checkpoint",
+  "selected_step": 950,
+  "scope": "cached_incremental",
+  "scene": "017"
+}

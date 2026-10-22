@@ -1,0 +1,80 @@
+{
+  "static": {
+    "feature": {
+      "delta_rms": 0.19039791822433472,
+      "delta_absmax": 0.49838536977767944,
+      "bound": 0.5
+    },
+    "xyz": {
+      "delta_rms": 0.007247037719935179,
+      "delta_absmax": 0.01994560845196247,
+      "bound": 0.02
+    },
+    "scale": {
+      "delta_rms": 0.0476740337908268,
+      "delta_absmax": 0.2483637034893036,
+      "bound": 0.25
+    },
+    "rotation": {
+      "delta_rms": 0.0015411253552883863,
+      "delta_absmax": 0.08146496117115021,
+      "bound": 0.08726646259971647
+    },
+    "opacity": {
+      "delta_rms": 0.1459244191646576,
+      "delta_absmax": 0.4968594014644623,
+      "bound": 0.5
+    },
+    "time": {
+      "delta_rms": 0.0,
+      "delta_absmax": 0.0,
+      "bound": 0.05
+    },
+    "sigma": {
+      "delta_rms": 0.0,
+      "delta_absmax": 0.0,
+      "bound": 0.25
+    }
+  },
+  "dynamic": {
+    "feature": {
+      "delta_rms": 0.20783187448978424,
+      "delta_absmax": 0.9785728454589844,
+      "bound": 1.0
+    },
+    "xyz": {
+      "delta_rms": 0.036466002464294434,
+      "delta_absmax": 0.28500425815582275,
+      "bound": 0.3
+    },
+    "scale": {
+      "delta_rms": 0.09321803599596024,
+      "delta_absmax": 0.6694465279579163,
+      "bound": 0.7
+    },
+    "rotation": {
+      "delta_rms": 0.02738882787525654,
+      "delta_absmax": 0.31130868196487427,
+      "bound": 0.3490658503988659
+    },
+    "opacity": {
+      "delta_rms": 0.2845178246498108,
+      "delta_absmax": 1.8867762088775635,
+      "bound": 2.0
+    },
+    "time": {
+      "delta_rms": 0.0,
+      "delta_absmax": 0.0,
+      "bound": 0.05
+    },
+    "sigma": {
+      "delta_rms": 0.0,
+      "delta_absmax": 0.0,
+      "bound": 0.25
+    }
+  },
+  "pose_translation_mean_m": 0.029274335131049156,
+  "pose_translation_max_m": 0.18897892534732819,
+  "pose_yaw_absmax_deg": 2.768261194229126,
+  "pose_export_maxabs": 0.0
+}

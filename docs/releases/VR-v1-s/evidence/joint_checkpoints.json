@@ -1,0 +1,19 @@
+[
+  {
+    "step": 1670,
+    "global_psnr": null,
+    "dynamic_psnr": null,
+    "pedestrian_psnr": null,
+    "non_sky_psnr": null,
+    "payload": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/runtime-payload-refined",
+    "render": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/runtime-render-source",
+    "refiner_state": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/refiner_state.pt",
+    "incremental_elapsed_seconds": 1483.9135518353432,
+    "historical_cumulative_seconds": 1483.9135518353432,
+    "optimization_and_setup_seconds": 1000.0845890585333,
+    "checkpoint_audit_seconds": 3.1980988113209605,
+    "cumulative_audit_seconds": 3.1973927784711123,
+    "optimizer_max_step": 1670,
+    "peak_cuda_gib": 27.351122856140137
+  }
+]

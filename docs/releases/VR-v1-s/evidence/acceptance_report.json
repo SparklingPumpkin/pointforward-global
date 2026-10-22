@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "subject_id": "VR-v1-s",
+  "checks": [
+    {
+      "id": "time",
+      "criterion": "Raw-input preprocessing, feedforward and optimization including initialization and checkpoint saves complete within1500seconds in one cold run.",
+      "passed": true,
+      "run_id": "run-20261022T054208Z-cold-compact-union1700",
+      "evidence": [
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/result_summary.json::same-run full156x3 originalbox quality and actualcold time",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/runtime-render-source/manifest.json::complete original-box vehicle metrics and three cameras",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/optimization_timing.json::same-clock rawstart to final optimizer checkpoint completion",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::fresh source chain, generic offline prerequisites and twoGPU parallel join"
+      ],
+      "timing_requirement": {
+        "scope": "end_to_end",
+        "input_boundary": "before_raw_input_preprocessing",
+        "output_boundary": "optimization_checkpoint_write_complete",
+        "max_seconds": 1500
+      },
+      "timing_measurement": {
+        "scope": "end_to_end",
+        "input_boundary": "before_raw_input_preprocessing",
+        "output_boundary": "optimization_checkpoint_write_complete",
+        "run_id": "run-20261022T054208Z-cold-compact-union1700",
+        "seconds": 1485.371231320314,
+        "timer": {
+          "reference": "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/optimization_timing.json",
+          "start_field": "start",
+          "end_field": "end"
+        },
+        "boundary_evidence": [
+          "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/run_cold.py::timer starts before raw preprocessing and ends after optimizer subprocess returns; final checkpoint serialization included",
+          "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/source-snapshot/scripts/refine_unified_scene_rgb.py::budget stop triggers actual checkpoint save before successful exit"
+        ],
+        "inputs": [
+          {
+            "reference": "/mnt/data/dataset/argoverse/processed/training/017",
+            "kind": "raw_input",
+            "generated_in_timed_run": false,
+            "provenance_evidence": [
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::original scene RGB LiDAR calibration annotations and poses"
+            ]
+          },
+          {
+            "reference": "ckpt/ckpt_020000_waymo_ds_paper_original.pt",
+            "kind": "generic_pretrained",
+            "generated_in_timed_run": false,
+            "provenance_evidence": [
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::generic PointForward original weights, not fitted scene state"
+            ]
+          },
+          {
+            "reference": "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/runtime-payload-compressed",
+            "kind": "scene_state",
+            "generated_in_timed_run": true,
+            "provenance_evidence": [
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/pipeline_timing.json::fresh FF and projection stages generated in this raw timer",
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::no historical scene payload or fitted refiner"
+            ]
+          },
+          {
+            "reference": "/mnt/data/why/InfiniDepth/checkpoints/depth/infinidepth_depthsensor.ckpt",
+            "kind": "generic_pretrained",
+            "generated_in_timed_run": false,
+            "provenance_evidence": [
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::offline generic depth segmentation human and SMPL prerequisites; not fitted scene state"
+            ]
+          },
+          {
+            "reference": "/mnt/data/fjn/projects/tools/sam2/checkpoints/sam2.1_hiera_tiny.pt",
+            "kind": "generic_pretrained",
+            "generated_in_timed_run": false,
+            "provenance_evidence": [
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::offline generic depth segmentation human and SMPL prerequisites; not fitted scene state"
+            ]
+          },
+          {
+            "reference": "/mnt/fjn/projects/Pointforward-pedestrian/ckpt/ckpt_002000.pt",
+            "kind": "generic_pretrained",
+            "generated_in_timed_run": false,
+            "provenance_evidence": [
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::offline generic depth segmentation human and SMPL prerequisites; not fitted scene state"
+            ]
+          },
+          {
+            "reference": "/mnt/data/output/pointforward/smpl_models/SMPL_NEUTRAL.npz",
+            "kind": "generic_pretrained",
+            "generated_in_timed_run": false,
+            "provenance_evidence": [
+              "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::offline generic depth segmentation human and SMPL prerequisites; not fitted scene state"
+            ]
+          }
+        ],
+        "outputs": [
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/runtime-payload-refined",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/refiner_state.pt"
+        ]
+      }
+    },
+    {
+      "id": "vehicle_psnr",
+      "criterion": "Original evaluation-box union PSNR over all156 Argoverse017 frames and all3 cameras >=29dB.",
+      "passed": false,
+      "run_id": "run-20261022T054208Z-cold-compact-union1700",
+      "evidence": [
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/result_summary.json::same-run full156x3 originalbox quality and actualcold time",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/runtime-render-source/manifest.json::complete original-box vehicle metrics and three cameras",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/optimization_timing.json::same-clock rawstart to final optimizer checkpoint completion",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::fresh source chain, generic offline prerequisites and twoGPU parallel join"
+      ]
+    },
+    {
+      "id": "visual_review",
+      "criterion": "Each executed experiment has full-source video and personally reviewed representative vehicle comparisons.",
+      "passed": true,
+      "run_id": "run-20261022T054208Z-cold-compact-union1700",
+      "evidence": [
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/result_summary.json::same-run full156x3 originalbox quality and actualcold time",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/runtime-render-source/manifest.json::complete original-box vehicle metrics and three cameras",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/optimization_timing.json::same-clock rawstart to final optimizer checkpoint completion",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/input_provenance.md::fresh source chain, generic offline prerequisites and twoGPU parallel join"
+      ]
+    }
+  ]
+}

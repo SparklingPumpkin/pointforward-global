@@ -1,0 +1,177 @@
+{
+  "groups": [
+    {
+      "name": "static.feature",
+      "lr": 0.03,
+      "elements": 274979712
+    },
+    {
+      "name": "static.xyz",
+      "lr": 0.02,
+      "elements": 25779348
+    },
+    {
+      "name": "static.scale",
+      "lr": 0.02,
+      "elements": 25779348
+    },
+    {
+      "name": "static.rotation",
+      "lr": 0.02,
+      "elements": 25779348
+    },
+    {
+      "name": "static.opacity",
+      "lr": 0.01,
+      "elements": 8593116
+    },
+    {
+      "name": "dynamic.feature",
+      "lr": 0.012,
+      "elements": 15061440
+    },
+    {
+      "name": "dynamic.xyz",
+      "lr": 0.006,
+      "elements": 1412010
+    },
+    {
+      "name": "dynamic.scale",
+      "lr": 0.006,
+      "elements": 1412010
+    },
+    {
+      "name": "dynamic.rotation",
+      "lr": 0.006,
+      "elements": 1412010
+    },
+    {
+      "name": "dynamic.opacity",
+      "lr": 0.006,
+      "elements": 470670
+    },
+    {
+      "name": "refiner",
+      "lr": 0.0003,
+      "elements": 1904643
+    },
+    {
+      "name": "vehicle_pose",
+      "lr": 0.001,
+      "elements": 7840
+    }
+  ],
+  "static_bounds": {
+    "feature": 0.5,
+    "xyz": 0.02,
+    "scale": 0.25,
+    "rotation": 0.08726646259971647,
+    "opacity": 0.5,
+    "time": 0.05,
+    "sigma": 0.25
+  },
+  "dynamic_bounds": {
+    "feature": 1.0,
+    "xyz": 0.3,
+    "scale": 0.7,
+    "rotation": 0.3490658503988659,
+    "opacity": 2.0,
+    "time": 0.05,
+    "sigma": 0.25
+  },
+  "actor_visible_counts": [
+    120,
+    0,
+    0,
+    0,
+    0,
+    102,
+    0,
+    156,
+    0,
+    0,
+    0,
+    0,
+    95,
+    0,
+    0,
+    0,
+    180,
+    49,
+    59,
+    0,
+    159,
+    0,
+    47,
+    0,
+    143,
+    0,
+    151,
+    130,
+    155,
+    130,
+    159,
+    14,
+    18,
+    17,
+    53,
+    123,
+    157,
+    14,
+    0,
+    8,
+    161,
+    89,
+    0,
+    27,
+    0,
+    0,
+    22,
+    0,
+    15,
+    4,
+    3,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    131,
+    0,
+    87,
+    0,
+    125,
+    33,
+    25,
+    18,
+    6,
+    50,
+    11,
+    43,
+    0,
+    33,
+    0,
+    0,
+    38,
+    12,
+    10,
+    7,
+    0
+  ],
+  "active_actors": 46,
+  "strict_roi_count": 3197,
+  "frozen": [
+    "depth and image/fusion networks",
+    "Gaussian identity/count and cached source RGB",
+    "original evaluation boxes and calibration",
+    "canonical reference pose"
+  ],
+  "optimizer_restarts": 0,
+  "global_loss": "mean per-camera log RGB MSE",
+  "roi_loss": "per-actor inverse-observation-count log ROI MSE; averaged over epoch",
+  "roi_weight": 1.0
+}

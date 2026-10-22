@@ -1,0 +1,43 @@
+{
+  "release": "VR-v1-s",
+  "passed": true,
+  "checksum_files": 3922,
+  "source_files": 443,
+  "portability_changes": [
+    "scripts/geometry_rgb_masks.py",
+    "scripts/refine_unified_scene_rgb.py",
+    "sitecustomize.py"
+  ],
+  "numerical_equations_changed": false,
+  "psnr": {
+    "mean_psnr_source_frames_all_cameras": 31.13165373679919,
+    "mean_psnr_dynamic_bbox_source_frames_all_cameras": 28.32924439356877,
+    "mean_psnr_non_sky_source_frames_all_cameras": 30.68500505349575
+  },
+  "absolute_error": {
+    "mean_psnr_source_frames_all_cameras": 0.0,
+    "mean_psnr_dynamic_bbox_source_frames_all_cameras": 0.0,
+    "mean_psnr_non_sky_source_frames_all_cameras": 0.0
+  },
+  "videos": {
+    "final_global_runtime_predicted_front3.mp4": {
+      "width": 2304,
+      "height": 576,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    "final_global_runtime_gt_vs_predicted_front3.mp4": {
+      "width": 2304,
+      "height": 1152,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    }
+  },
+  "ply_sha256_identical": true,
+  "frame_count": 156,
+  "feature_dim": 32,
+  "cold_start_retrained": false,
+  "replay_seconds": 211.9892128231004,
+  "research_vehicle_29db_passed": false,
+  "note": "Independent package replay/export verified. Source cold timing is historical evidence, not this replay."
+}

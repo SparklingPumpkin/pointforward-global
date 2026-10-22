@@ -1,0 +1,80 @@
+{
+  "static": {
+    "feature": {
+      "delta_rms": 0.1026826798915863,
+      "delta_absmax": 0.4926425814628601,
+      "bound": 0.5
+    },
+    "xyz": {
+      "delta_rms": 0.005118880420923233,
+      "delta_absmax": 0.019733041524887085,
+      "bound": 0.02
+    },
+    "scale": {
+      "delta_rms": 0.03035392053425312,
+      "delta_absmax": 0.24164602160453796,
+      "bound": 0.25
+    },
+    "rotation": {
+      "delta_rms": 0.0005249498062767088,
+      "delta_absmax": 0.06204236298799515,
+      "bound": 0.08726646259971647
+    },
+    "opacity": {
+      "delta_rms": 0.09133340418338776,
+      "delta_absmax": 0.4848407208919525,
+      "bound": 0.5
+    },
+    "time": {
+      "delta_rms": 3.5766298234728156e-14,
+      "delta_absmax": 1.0008261580596312e-11,
+      "bound": 0.05
+    },
+    "sigma": {
+      "delta_rms": 6.449392343961524e-13,
+      "delta_absmax": 1.6443976735835975e-10,
+      "bound": 0.25
+    }
+  },
+  "dynamic": {
+    "feature": {
+      "delta_rms": 0.07218426465988159,
+      "delta_absmax": 0.7232195138931274,
+      "bound": 1.0
+    },
+    "xyz": {
+      "delta_rms": 0.019502708688378334,
+      "delta_absmax": 0.1746811866760254,
+      "bound": 0.3
+    },
+    "scale": {
+      "delta_rms": 0.04490656778216362,
+      "delta_absmax": 0.5560908913612366,
+      "bound": 0.7
+    },
+    "rotation": {
+      "delta_rms": 0.0075131990015506744,
+      "delta_absmax": 0.22270514070987701,
+      "bound": 0.3490658503988659
+    },
+    "opacity": {
+      "delta_rms": 0.14673270285129547,
+      "delta_absmax": 1.4264657497406006,
+      "bound": 2.0
+    },
+    "time": {
+      "delta_rms": 4.0570984207810926e-14,
+      "delta_absmax": 8.946707090451422e-12,
+      "bound": 0.05
+    },
+    "sigma": {
+      "delta_rms": 7.506252021859117e-13,
+      "delta_absmax": 1.7180377953618375e-10,
+      "bound": 0.25
+    }
+  },
+  "pose_translation_mean_m": 0.015581641346216202,
+  "pose_translation_max_m": 0.06697767972946167,
+  "pose_yaw_absmax_deg": 1.2740262746810913,
+  "pose_export_maxabs": 0.0
+}

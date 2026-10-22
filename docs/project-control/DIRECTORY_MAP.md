@@ -8,6 +8,7 @@
 | ID | 路径 | 层级 | 父级 | 作用域 | 状态 | 管理直接子目录 | 职责 |
 |---|---|---|---|---|---|---|---|
 | dir-0001 | . | project | — | project | active | 否 | 项目边界；其子目录必须按业务职责继续登记。 |
+| dir-0022 | artifacts | area | dir-0001 | project | active | 否 | 版本化场景载荷、PLY和视频 |
 | dir-0004 | configs | area | dir-0001 | project | active | 否 | 可移植训练和推理配置模板 |
 | dir-0007 | docs | area | dir-0001 | project | active | 否 | 使用说明、方法说明、验证证据与项目控制面 |
 | dir-0003 | scripts | area | dir-0001 | project | active | 否 | 训练、推理、优化、PLY导出和视频渲染入口 |
@@ -15,15 +16,30 @@
 | dir-0006 | tests | area | dir-0001 | project | active | 否 | 轻量语法、导入与交付合同测试 |
 | dir-0009 | validation-delivery | workstream | dir-0001 | delivery-validation | active | 否 | 交付包独立可执行性验证工作流 |
 | dir-0005 | weights | area | dir-0001 | project | active | 否 | 交付所需模型权重及校验清单 |
+| dir-0023 | artifacts/scene017_vr_v1_b | archive | dir-0022 | project | active | 否 | VR-v1-b原始前馈和950步资产 |
+| dir-0033 | artifacts/scene017_vr_v1_s | archive | dir-0022 | project | active | 否 | 当前VR-v1-s运行时及预览资产 |
 | dir-0013 | docs/releases | experiment_family | dir-0007 | project | active | 否 | 主线交付升级候选与验证记录 |
 | dir-0008 | docs/validation | workstream | dir-0007 | project | active | 否 | PFG-v1独立交付的轻量与27dB复现证据 |
 | dir-0010 | validation-delivery/scene017-27db | experiment_family | dir-0009 | delivery-validation | active | 否 | scene017 27dB交付复现验证实验族 |
 | dir-0014 | docs/releases/PFG-v1-a | candidate | dir-0013 | project | active | 否 | DG-v1-f到GR-v1-s快速27dB主线升级 |
+| dir-0018 | docs/releases/PFG-v2-a | candidate | dir-0013 | project | active | 否 | VR-v1-b独立交付包升级验证 |
+| dir-0025 | docs/releases/PFG-v3-a | candidate | dir-0013 | project | active | 否 | VR-v1-s独立交付验收 |
+| dir-0020 | docs/releases/VR-v1-b | archive | dir-0013 | project | active | 否 | VR-v1-b版本说明、源码与固定证据 |
+| dir-0028 | docs/releases/VR-v1-s | archive | dir-0013 | project | active | 否 | VR-v1-s不可变版本源码与证据 |
 | dir-0017 | docs/validation/scene017-fast-g8 | experiment_family | dir-0008 | project | active | 否 | scene017 fast-g8指标计时与关键帧证据 |
 | dir-0011 | validation-delivery/scene017-27db/DEL-v1-a | candidate | dir-0010 | delivery-validation | active | 否 | 交付包27dB复现候选 |
 | dir-0015 | docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation | run | dir-0014 | project | active | 否 | PFG-v1-a源码、配方、指标与文档交付验证 |
+| dir-0019 | docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation | run | dir-0018 | project | active | 否 | 独立交付复制核验与156帧重渲染 |
+| dir-0026 | docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation | run | dir-0025 | project | active | 否 | 完整独立重渲染与交付校验 |
+| dir-0021 | docs/releases/VR-v1-b/source | archive | dir-0020 | project | active | 否 | VR-v1-b精确数值源码快照 |
+| dir-0032 | docs/releases/VR-v1-s/evidence | archive | dir-0028 | project | active | 否 | 原始计时指标与研究失败验收记录 |
+| dir-0029 | docs/releases/VR-v1-s/source | archive | dir-0028 | project | active | 否 | VR-v1-s数值源码及便携依赖 |
 | dir-0012 | validation-delivery/scene017-27db/DEL-v1-a/run-20260925T162548Z-scene017-27db-delivery-validation | run | dir-0011 | delivery-validation | active | 否 | scene017交付复现执行记录 |
 | dir-0016 | docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/independent-metrics | artifact | dir-0015 | project | active | 否 | 交付包独立156帧复算manifest |
+| dir-0024 | docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay | artifact | dir-0019 | project | active | 否 | 包内完整156帧独立重渲染 |
+| dir-0027 | docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay | artifact | dir-0026 | project | active | 否 | 包内重渲染输出 |
+| dir-0031 | docs/releases/VR-v1-s/source/InfiniDepth | archive | dir-0029 | project | active | 否 | 本次原始深度模型源码 |
+| dir-0030 | docs/releases/VR-v1-s/source/SAM2 | archive | dir-0029 | project | active | 否 | SAM2.1 Tiny源码及许可 |
 
 ## 布局决策历史
 
@@ -45,3 +61,20 @@
 | layout-0014 | applied | new_child | docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation | 候选晋级前需保存独立运行与持久证据 | 仅依赖源研究仓库结果不能证明交付包已经更新 | — |
 | layout-0015 | applied | new_child | docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/independent-metrics | 将独立渲染产生的可审计指标证据登记在对应验证run下 | — | — |
 | layout-0016 | applied | new_group | docs/validation/scene017-fast-g8 | 保存PFG-v2验收所需的小型可审计证据，不纳入大payload和PLY | — | — |
+| layout-0017 | applied | new_child | docs/releases/PFG-v2-a | 独立固化VR-v1-b并保留旧交付版本 | 覆盖旧源码和资产会损害旧版本复现 | — |
+| layout-0018 | applied | new_child | docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation | 独立固化VR-v1-b并保留旧交付版本 | 覆盖旧源码和资产会损害旧版本复现 | — |
+| layout-0019 | applied | new_child | docs/releases/VR-v1-b | 独立固化VR-v1-b并保留旧交付版本 | 覆盖旧源码和资产会损害旧版本复现 | — |
+| layout-0020 | applied | new_child | docs/releases/VR-v1-b/source | 独立固化VR-v1-b并保留旧交付版本 | 覆盖旧源码和资产会损害旧版本复现 | — |
+| layout-0021 | planned | new_child | artifacts | 独立固化VR-v1-b并保留旧交付版本 | 覆盖旧源码和资产会损害旧版本复现 | — |
+| layout-0022 | applied | new_child | artifacts | 独立固化VR-v1-b并保留旧交付版本 | 覆盖旧源码和资产会损害旧版本复现 | — |
+| layout-0023 | applied | new_child | artifacts/scene017_vr_v1_b | 独立固化VR-v1-b并保留旧交付版本 | 覆盖旧源码和资产会损害旧版本复现 | — |
+| layout-0024 | applied | new_child | docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay | 验证独立交付的数值一致性 | 仅复制旧视频不足以验证执行能力 | — |
+| layout-0025 | applied | new_child | docs/releases/PFG-v3-a | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0026 | applied | new_child | docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0027 | applied | new_child | docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0028 | applied | new_child | docs/releases/VR-v1-s | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0029 | applied | new_child | docs/releases/VR-v1-s/source | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0030 | applied | new_child | docs/releases/VR-v1-s/source/SAM2 | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0031 | applied | new_child | docs/releases/VR-v1-s/source/InfiniDepth | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0032 | applied | new_child | docs/releases/VR-v1-s/evidence | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0033 | applied | new_child | artifacts/scene017_vr_v1_s | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |

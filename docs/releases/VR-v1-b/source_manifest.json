@@ -1,0 +1,559 @@
+{
+  "source_run": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950",
+  "files": [
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/__init__.py",
+      "delivered_sha256": "fd0b6474380fd3be522fd19fe0cdedeee2007a07857c65b89efa13da0d9e2b35",
+      "original_sha256": "fd0b6474380fd3be522fd19fe0cdedeee2007a07857c65b89efa13da0d9e2b35"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/data/__init__.py",
+      "delivered_sha256": "d7c073f61ba1b588b3895ee589b2869d7152186b2252190e6dab961fb3aec19a",
+      "original_sha256": "d7c073f61ba1b588b3895ee589b2869d7152186b2252190e6dab961fb3aec19a"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/data/argoverse.py",
+      "delivered_sha256": "b0e39461e69f964278aee15e33fe6c99ab3274aec5a50998871f34a3f0703440",
+      "original_sha256": "b0e39461e69f964278aee15e33fe6c99ab3274aec5a50998871f34a3f0703440"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/data/drivestudio.py",
+      "delivered_sha256": "37700064eb49c55bcd17dd06722b4a6c5acf1f83f993d30313cfe10b5a968898",
+      "original_sha256": "37700064eb49c55bcd17dd06722b4a6c5acf1f83f993d30313cfe10b5a968898"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/data/waymo.py",
+      "delivered_sha256": "189f10c275f36f3a117034ac5f4dddef504edacb956857a3d9670d86e4fd14cf",
+      "original_sha256": "189f10c275f36f3a117034ac5f4dddef504edacb956857a3d9670d86e4fd14cf"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/losses.py",
+      "delivered_sha256": "5ca5b573473eb0cbd53b171ede310303d742290f4c77dae3290d3fcbcf4d0c98",
+      "original_sha256": "5ca5b573473eb0cbd53b171ede310303d742290f4c77dae3290d3fcbcf4d0c98"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/__init__.py",
+      "delivered_sha256": "dd99d99d9892eca3760b2b5c6fc287cf32996cfaff5683c1ddcf5ae5a00f2556",
+      "original_sha256": "dd99d99d9892eca3760b2b5c6fc287cf32996cfaff5683c1ddcf5ae5a00f2556"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/backbone.py",
+      "delivered_sha256": "d7f33a124eb17c9a98f157c484b5da4d7f26c9b7cfe51e68e9c94f7b56633fa1",
+      "original_sha256": "d7f33a124eb17c9a98f157c484b5da4d7f26c9b7cfe51e68e9c94f7b56633fa1"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/depth.py",
+      "delivered_sha256": "baa1667d09a29cdd7d5fd71ba584a453c6144bf565de5a11dfe577354db06fe5",
+      "original_sha256": "baa1667d09a29cdd7d5fd71ba584a453c6144bf565de5a11dfe577354db06fe5"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/fusion.py",
+      "delivered_sha256": "bd323fca0688bf886e72d95d52a941e954d42294f036ed22e919a391a32c0cd6",
+      "original_sha256": "bd323fca0688bf886e72d95d52a941e954d42294f036ed22e919a391a32c0cd6"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/gaussian_head.py",
+      "delivered_sha256": "392dfbf69fe1371c8ed1e7a5f775c2cd8ef2ab2d47a8032f367ca1aebaffefda",
+      "original_sha256": "392dfbf69fe1371c8ed1e7a5f775c2cd8ef2ab2d47a8032f367ca1aebaffefda"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/pointforward.py",
+      "delivered_sha256": "e2daa2bfab295b5310b52d3a3b35cdf0a27554634e1a968f2480a3b507a0e9e4",
+      "original_sha256": "e2daa2bfab295b5310b52d3a3b35cdf0a27554634e1a968f2480a3b507a0e9e4"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/query.py",
+      "delivered_sha256": "d904cea8c7099f112753f4eab6691f6e3e6bcbdbf31227d2066af33639535a7c",
+      "original_sha256": "d904cea8c7099f112753f4eab6691f6e3e6bcbdbf31227d2066af33639535a7c"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/renderer.py",
+      "delivered_sha256": "7b562e4d317dd9afd9041173965141067c29fc14fc3e303159e0c6af8377cc6d",
+      "original_sha256": "7b562e4d317dd9afd9041173965141067c29fc14fc3e303159e0c6af8377cc6d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/rotation.py",
+      "delivered_sha256": "1e223b83fc62e9733c4428959d7ea12398c99f0af2a1df08658f6dc519e41f53",
+      "original_sha256": "1e223b83fc62e9733c4428959d7ea12398c99f0af2a1df08658f6dc519e41f53"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/scene_graph.py",
+      "delivered_sha256": "2f5779a59ce59b3dd3ea1b0ac4c65ba97c5fdfd42e830d20fb992c15ebb53d2a",
+      "original_sha256": "2f5779a59ce59b3dd3ea1b0ac4c65ba97c5fdfd42e830d20fb992c15ebb53d2a"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/pointforward/models/static_view_bank.py",
+      "delivered_sha256": "bb48865f3652281bfc7e9adf15dd32807e9fcfc34de117530cbfeee7fd41b4ff",
+      "original_sha256": "bb48865f3652281bfc7e9adf15dd32807e9fcfc34de117530cbfeee7fd41b4ff"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/__init__.py",
+      "delivered_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/ablate_dynamic_payload.py",
+      "delivered_sha256": "92f4f8a6769f13ac0b0cfcd37584d6201d14706c02d5e928c9e3bd6ed3792a9d",
+      "original_sha256": "92f4f8a6769f13ac0b0cfcd37584d6201d14706c02d5e928c9e3bd6ed3792a9d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/analyze_dynamic_payload.py",
+      "delivered_sha256": "fa1c7f4fcce5cf0bd6a771d651a4df71a6f9c4a6a0ed00087ea4db8520e491a7",
+      "original_sha256": "fa1c7f4fcce5cf0bd6a771d651a4df71a6f9c4a6a0ed00087ea4db8520e491a7"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/audit_canonical_gaussian_support.py",
+      "delivered_sha256": "7fad40b0105d8f26c9a7e5a99e98e8b0ee12c34ae8439100d5ae90a77e8e23d5",
+      "original_sha256": "7fad40b0105d8f26c9a7e5a99e98e8b0ee12c34ae8439100d5ae90a77e8e23d5"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/audit_dynamic_bbox_oracle.py",
+      "delivered_sha256": "e26469f86f22e105774bf87c2fa99b16b47c68ac652549679fcb704781f4b636",
+      "original_sha256": "e26469f86f22e105774bf87c2fa99b16b47c68ac652549679fcb704781f4b636"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/audit_dynamic_depth_box_contract.py",
+      "delivered_sha256": "df381772a208bdf102ba20f81e1bd93116552d60d9d5f617649081e9c8288c28",
+      "original_sha256": "df381772a208bdf102ba20f81e1bd93116552d60d9d5f617649081e9c8288c28"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/audit_dynamic_support_visibility.py",
+      "delivered_sha256": "355704442c2ca3fa3f4cc79efdeb202f1cf06ba9f514f13db651de75a448f511",
+      "original_sha256": "355704442c2ca3fa3f4cc79efdeb202f1cf06ba9f514f13db651de75a448f511"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/audit_multi_clip_continuous.py",
+      "delivered_sha256": "b4ecfedb7ca5f36148dea2cfeb04206e20279bba9ad4aea9ffe02a128981cf7c",
+      "original_sha256": "b4ecfedb7ca5f36148dea2cfeb04206e20279bba9ad4aea9ffe02a128981cf7c"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/audit_multi_clip_overlap.py",
+      "delivered_sha256": "15fba0171dd8a2a635933a943d787eb20839e7c429224f51de0193d7d7da5971",
+      "original_sha256": "15fba0171dd8a2a635933a943d787eb20839e7c429224f51de0193d7d7da5971"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/audit_sam2_track_mask_quality.py",
+      "delivered_sha256": "18a1ee18bd357b55a14c6df0a92ecc97d57453b7e3985ad9f762893205ba3b14",
+      "original_sha256": "18a1ee18bd357b55a14c6df0a92ecc97d57453b7e3985ad9f762893205ba3b14"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/benchmark_cached_scene_refinement.py",
+      "delivered_sha256": "0481b50620610bd275d70f7a3b11d1fe99eab580bf2d8aad71ac42df3e9de90d",
+      "original_sha256": "0481b50620610bd275d70f7a3b11d1fe99eab580bf2d8aad71ac42df3e9de90d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/benchmark_feedforward_updates.py",
+      "delivered_sha256": "75986d34264ac227f1f90ad51c0a3efa73575f1e55f2f9aa21b8253a683c13e4",
+      "original_sha256": "75986d34264ac227f1f90ad51c0a3efa73575f1e55f2f9aa21b8253a683c13e4"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/benchmark_joint_speed29.py",
+      "delivered_sha256": "02023c7fa4d8ed546bf4bf5b039d0222d915ac67f85a22b6f643376205e6d64a",
+      "original_sha256": "02023c7fa4d8ed546bf4bf5b039d0222d915ac67f85a22b6f643376205e6d64a"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/build_rgb_surface_proxy.py",
+      "delivered_sha256": "e12e26c00b56250feb3d7fbf172450802f4a0d1d815c24256c1bd67298d2b759",
+      "original_sha256": "e12e26c00b56250feb3d7fbf172450802f4a0d1d815c24256c1bd67298d2b759"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/build_track_once_dynamic.py",
+      "delivered_sha256": "a2372048547aeff135860e28eda82524238dc86496b887bb92244c31688193a4",
+      "original_sha256": "a2372048547aeff135860e28eda82524238dc86496b887bb92244c31688193a4"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/check_depth.py",
+      "delivered_sha256": "afa5ee917d283c4f17ba10c56880df14b4bd0207a578f01bef438cb1317d9bca",
+      "original_sha256": "afa5ee917d283c4f17ba10c56880df14b4bd0207a578f01bef438cb1317d9bca"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/compare_gaussian_depth.py",
+      "delivered_sha256": "6a68ac3ae079ab95178e64c631404ec46696f3f49b984be055ae9a5e8ca9e40d",
+      "original_sha256": "6a68ac3ae079ab95178e64c631404ec46696f3f49b984be055ae9a5e8ca9e40d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/deliver_continuous_scene.py",
+      "delivered_sha256": "54320447afce1b2daee43f001e093a574ea4ced5c3941cd2dc725721ed606bb8",
+      "original_sha256": "54320447afce1b2daee43f001e093a574ea4ced5c3941cd2dc725721ed606bb8"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/delivery_runtime_helpers.py",
+      "delivered_sha256": "5d1dd66bc181a8aa96eb006a8148533c0e5477d559db0006fa703b1b223c68b1",
+      "original_sha256": null
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/eval.py",
+      "delivered_sha256": "61adf08b7c9b4a1f0524cd917d5d28470e39f13c58115a1e6d81a681414d4db7",
+      "original_sha256": "61adf08b7c9b4a1f0524cd917d5d28470e39f13c58115a1e6d81a681414d4db7"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/eval_tagged_samples.py",
+      "delivered_sha256": "74fca082b24664948b53617bc04504acb5ca9d1a796714f653035583c715de2a",
+      "original_sha256": "74fca082b24664948b53617bc04504acb5ca9d1a796714f653035583c715de2a"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/evaluate_dynamic_joint_support.py",
+      "delivered_sha256": "45d4adc65ee35148541c6d9e8aa9000dc0fd5cd73fced6d91c1b61f8a8423d95",
+      "original_sha256": "45d4adc65ee35148541c6d9e8aa9000dc0fd5cd73fced6d91c1b61f8a8423d95"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/export_gaussians_ply.py",
+      "delivered_sha256": "3634c43abee6fb788b1499262f943ff0118049f49d4ba25c9db2e4b1193d452e",
+      "original_sha256": "3634c43abee6fb788b1499262f943ff0118049f49d4ba25c9db2e4b1193d452e"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/export_infinidepth_scene_gaussians.py",
+      "delivered_sha256": "5f824f2957d0deb7fad4c159d8f4257af8fbe75168ae9724ccaf0eb780964ca3",
+      "original_sha256": "5f824f2957d0deb7fad4c159d8f4257af8fbe75168ae9724ccaf0eb780964ca3"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/export_runtime_payload_ply.py",
+      "delivered_sha256": "049f14e189dbddd96f48a63d5c9c03dea889b2c2387125f0117952a38ea3f011",
+      "original_sha256": "049f14e189dbddd96f48a63d5c9c03dea889b2c2387125f0117952a38ea3f011"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/export_unfiltered_depth_lightweight_gs.py",
+      "delivered_sha256": "f7aac695ccc834c302a1d9cd1dd55a164482f4d37b3ea293d18e1f1c7d0f77e2",
+      "original_sha256": "f7aac695ccc834c302a1d9cd1dd55a164482f4d37b3ea293d18e1f1c7d0f77e2"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/filter_dynamic_tracks.py",
+      "delivered_sha256": "8e250d528fb1455229d426c78d3b4a7eb1b6e1b2bc75e2832ff72a20f829573d",
+      "original_sha256": "8e250d528fb1455229d426c78d3b4a7eb1b6e1b2bc75e2832ff72a20f829573d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/filter_static_gaussians_dynamic_sweep.py",
+      "delivered_sha256": "efcaaaeb0c5e95b05bb3773458e1d35458625ed801e2e9fa2574709fb0997d5f",
+      "original_sha256": "efcaaaeb0c5e95b05bb3773458e1d35458625ed801e2e9fa2574709fb0997d5f"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/freeze_stationary_dynamic_tracks.py",
+      "delivered_sha256": "a492ab7e9e3883cdc7d2c6ceea460f47b90cc87d54890437b91af303f559dcb8",
+      "original_sha256": "a492ab7e9e3883cdc7d2c6ceea460f47b90cc87d54890437b91af303f559dcb8"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/make_split.py",
+      "delivered_sha256": "394d01117dad4cf5b8c989bf4aebcea9987c0dcba0c9f393f6ca2164d6b976cd",
+      "original_sha256": "394d01117dad4cf5b8c989bf4aebcea9987c0dcba0c9f393f6ca2164d6b976cd"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/merge_track_once_dynamic_passes.py",
+      "delivered_sha256": "1e951eca933bfe08ac2071e6de81c6fe51a8db61b58b04232d2fa7f17b035b75",
+      "original_sha256": "1e951eca933bfe08ac2071e6de81c6fe51a8db61b58b04232d2fa7f17b035b75"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/migrate_improvement_tree_relations.py",
+      "delivered_sha256": "d6932788494e8998dcae3c5cf54f796793ccd8a7ded3457cae8ff210c843decb",
+      "original_sha256": "d6932788494e8998dcae3c5cf54f796793ccd8a7ded3457cae8ff210c843decb"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/predict_rgb_vehicle_masks.py",
+      "delivered_sha256": "bbe08e116f39195140daf65a46b61a43c30838a7fa7476d93491f9cda71258f8",
+      "original_sha256": "bbe08e116f39195140daf65a46b61a43c30838a7fa7476d93491f9cda71258f8"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/predict_sam2_track_masks.py",
+      "delivered_sha256": "85934c2e0ae8b10656c7c6e295161be5532ab4c3b6fbba20616e8654f94f9a2d",
+      "original_sha256": "85934c2e0ae8b10656c7c6e295161be5532ab4c3b6fbba20616e8654f94f9a2d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/prepare_rgb_proxy_track_manifest.py",
+      "delivered_sha256": "baa815d3d41e9e6af16fee6b068e4b8f432a8e7d20e4c165d44963aaa05f0f72",
+      "original_sha256": "baa815d3d41e9e6af16fee6b068e4b8f432a8e7d20e4c165d44963aaa05f0f72"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/probe_dynamic_multiview.py",
+      "delivered_sha256": "d1351c3e3d6e5d82174811f898f010844f79378d02bdc2afa2e9073ce69da5ab",
+      "original_sha256": "d1351c3e3d6e5d82174811f898f010844f79378d02bdc2afa2e9073ce69da5ab"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/probe_time_view_local_rgbd.py",
+      "delivered_sha256": "343b406ce56fab09ee3e9ed8342e4f638dbe2ee825ef7017be1b3572add49e29",
+      "original_sha256": "343b406ce56fab09ee3e9ed8342e4f638dbe2ee825ef7017be1b3572add49e29"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/recondition_infinidepth_from_gaussian.py",
+      "delivered_sha256": "3832a29b1dd61ef0e5f1236eb9fd511f7c6a2ba3c9224aee450cb3e7c56d410f",
+      "original_sha256": "3832a29b1dd61ef0e5f1236eb9fd511f7c6a2ba3c9224aee450cb3e7c56d410f"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_cached_grouped_rgb.py",
+      "delivered_sha256": "951a4b1db7e6fc041093f7be34c7b3fe54488829d42aa2c262b875b71277b112",
+      "original_sha256": "951a4b1db7e6fc041093f7be34c7b3fe54488829d42aa2c262b875b71277b112"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_all_fullscene_rgb.py",
+      "delivered_sha256": "ceb94b9c6684727be9aba76ae73934807fdc35b7ed8c9715db5f6af5865b4ed1",
+      "original_sha256": "ceb94b9c6684727be9aba76ae73934807fdc35b7ed8c9715db5f6af5865b4ed1"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_boxes_fullscene_rgb.py",
+      "delivered_sha256": "eef58ef5035b40e67a7e04274ab1a0bbd101cd35676ee8448a9edfdbe2e0ac14",
+      "original_sha256": "eef58ef5035b40e67a7e04274ab1a0bbd101cd35676ee8448a9edfdbe2e0ac14"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_boxes_rgb.py",
+      "delivered_sha256": "8724f53f7f7b6e2b3dd9420e65946cb907b67c8fc96c17070878f91fd7dd731d",
+      "original_sha256": "8724f53f7f7b6e2b3dd9420e65946cb907b67c8fc96c17070878f91fd7dd731d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_features_fullscene_rgb.py",
+      "delivered_sha256": "1a6477077972c3249e4eeaaf13c83cb65fd7367bb93e838910d1b3cfaa0dd9f7",
+      "original_sha256": "1a6477077972c3249e4eeaaf13c83cb65fd7367bb93e838910d1b3cfaa0dd9f7"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_frame_opacity.py",
+      "delivered_sha256": "eb20d2451b0e393ef5615c38d17404d1f4fd1ad4ea9ea3f11ee627afe3144674",
+      "original_sha256": "eb20d2451b0e393ef5615c38d17404d1f4fd1ad4ea9ea3f11ee627afe3144674"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_joint_fullscene_rgb.py",
+      "delivered_sha256": "9ab573e5e52b849aa8cd9184911eeaf82c4c7cc372ec6c4976aecd3f87809cd3",
+      "original_sha256": "9ab573e5e52b849aa8cd9184911eeaf82c4c7cc372ec6c4976aecd3f87809cd3"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_layered_fullscene_rgb.py",
+      "delivered_sha256": "a3dad25c6a0b5226fa59ba869cf88edd1093c0ca5884092ef7d666df01a6259c",
+      "original_sha256": "a3dad25c6a0b5226fa59ba869cf88edd1093c0ca5884092ef7d666df01a6259c"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_roi_exact_fullscene_rgb.py",
+      "delivered_sha256": "d7bc4875cdc39dc6a5ac599160f79a7a284e5c54933c8c04c1e02e62fe37c562",
+      "original_sha256": "d7bc4875cdc39dc6a5ac599160f79a7a284e5c54933c8c04c1e02e62fe37c562"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_dynamic_temporal_means_fullscene_rgb.py",
+      "delivered_sha256": "cd22fd50f2a57810e08d8d69277f1f7873639dbbdcb7b99e806a4df83844cbd4",
+      "original_sha256": "cd22fd50f2a57810e08d8d69277f1f7873639dbbdcb7b99e806a4df83844cbd4"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_final_global_xyz.py",
+      "delivered_sha256": "dcd31ecd254a33d717f20a9bbb8f983c5df950c93a7fa1dcf5185e738e2b452d",
+      "original_sha256": "dcd31ecd254a33d717f20a9bbb8f983c5df950c93a7fa1dcf5185e738e2b452d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_joint_fast_rgb.py",
+      "delivered_sha256": "d80513ef5730a28eac910ab9f78ec4a3fae3f25a33e61415378b410d1612c544",
+      "original_sha256": "d80513ef5730a28eac910ab9f78ec4a3fae3f25a33e61415378b410d1612c544"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_joint_fullscene_rgb.py",
+      "delivered_sha256": "1e1305f14278f0e0453ee7f73f1f285e16aef333eee104be33afd4e03c06c509",
+      "original_sha256": "1e1305f14278f0e0453ee7f73f1f285e16aef333eee104be33afd4e03c06c509"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_refiner_fullscene_rgb.py",
+      "delivered_sha256": "0798f97ca8f8a28f18144abf457da014c3026a2092fac292cd7ed14f8a0d416a",
+      "original_sha256": "0798f97ca8f8a28f18144abf457da014c3026a2092fac292cd7ed14f8a0d416a"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_rgb_residual_fullscene.py",
+      "delivered_sha256": "6650f9f3bc94379ba0b09739e37f5d1754b690ffd2141baf7684275b5ef4e313",
+      "original_sha256": "6650f9f3bc94379ba0b09739e37f5d1754b690ffd2141baf7684275b5ef4e313"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_static_features_fullscene_rgb.py",
+      "delivered_sha256": "de5acb10e34e219e29863e1633ea7ab592dbd7576cfca14660afe142a80d664c",
+      "original_sha256": "de5acb10e34e219e29863e1633ea7ab592dbd7576cfca14660afe142a80d664c"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_static_opacity_scale_fullscene_rgb.py",
+      "delivered_sha256": "41734a923e22b660cbe251fde459101a7b32d21a309fb171375d59fa688e0e2a",
+      "original_sha256": "41734a923e22b660cbe251fde459101a7b32d21a309fb171375d59fa688e0e2a"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_static_proxy_features_roi.py",
+      "delivered_sha256": "39152ac00746d45e71851b5565e4fe7c60f2cef31a3a8c84dd05c71f4771ab9d",
+      "original_sha256": "39152ac00746d45e71851b5565e4fe7c60f2cef31a3a8c84dd05c71f4771ab9d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_static_xyz_fullscene_rgb.py",
+      "delivered_sha256": "054d56c91adce30ed03eb8d4037da083899374174dfe5ab28b7c9c5a3f6f67f3",
+      "original_sha256": "054d56c91adce30ed03eb8d4037da083899374174dfe5ab28b7c9c5a3f6f67f3"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py",
+      "delivered_sha256": "e7cfe8749f7719c9d2dd0a95355328da63e32dc22964e87c96070e258cad9453",
+      "original_sha256": "bd119729529136c3224ea3d35c75f168e67665e09be42886f77ffec60284bba5"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_vehicle_roi_rgb.py",
+      "delivered_sha256": "5a13183f7a9073ebb8cea0af02af039874f13b10b59dde39aaabcf292e543b5b",
+      "original_sha256": "5a13183f7a9073ebb8cea0af02af039874f13b10b59dde39aaabcf292e543b5b"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/refine_vehicle_trajectory_rgb.py",
+      "delivered_sha256": "2dfaeebda0701ab7c552c26b97f01abe3ef3e71bf11112c7ac2f6a4416ce0013",
+      "original_sha256": "2dfaeebda0701ab7c552c26b97f01abe3ef3e71bf11112c7ac2f6a4416ce0013"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_context4_stride3_60fps.py",
+      "delivered_sha256": "3ceb0f7f4f66d21fdd60664579dc634e2cd15a16b5563d2c3b976abb42d57c02",
+      "original_sha256": "3ceb0f7f4f66d21fdd60664579dc634e2cd15a16b5563d2c3b976abb42d57c02"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_context4_stride3_gt_comparison.py",
+      "delivered_sha256": "f038f36a943a472b5c74987ac94e49e672fdcf2e45463aa631ab5e39433cdfb2",
+      "original_sha256": "f038f36a943a472b5c74987ac94e49e672fdcf2e45463aa631ab5e39433cdfb2"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_continuous.py",
+      "delivered_sha256": "633191a5306f1c47d5fc03216f129b64f602f306528d01e6982ba2d76c369400",
+      "original_sha256": "633191a5306f1c47d5fc03216f129b64f602f306528d01e6982ba2d76c369400"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_dense_context_60fps.py",
+      "delivered_sha256": "cf531aae0e067f88407e9e014437910f0de98d7e5c7acc755848347cdfe577df",
+      "original_sha256": "cf531aae0e067f88407e9e014437910f0de98d7e5c7acc755848347cdfe577df"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_drivestudio_layer_hybrid.py",
+      "delivered_sha256": "bcbb03b8a49fab944aac12ddd7d4ce6191dc1aa170d6f87b7c40b35eeeb5786d",
+      "original_sha256": "bcbb03b8a49fab944aac12ddd7d4ce6191dc1aa170d6f87b7c40b35eeeb5786d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_final_global_ply.py",
+      "delivered_sha256": "0d28a2f6424e7166b8a06b57a662cac2510d1c909daa95e257b17518e08485d7",
+      "original_sha256": "0d28a2f6424e7166b8a06b57a662cac2510d1c909daa95e257b17518e08485d7"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_final_global_runtime.py",
+      "delivered_sha256": "42c228aa75c3432d1abd651d9661ed08d91ed273e787b320c77beaed0288439d",
+      "original_sha256": "42c228aa75c3432d1abd651d9661ed08d91ed273e787b320c77beaed0288439d"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_grid.py",
+      "delivered_sha256": "6fdfde2ab878dd8a4b72035aaf456af566583fb08b499f9c2a01f91dba3a6cf9",
+      "original_sha256": "6fdfde2ab878dd8a4b72035aaf456af566583fb08b499f9c2a01f91dba3a6cf9"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_multiscene.py",
+      "delivered_sha256": "8257e0192e0c0f939e465f0b483e1ecf9e2f57725e7480c561ff63f3f5a0dd7f",
+      "original_sha256": "8257e0192e0c0f939e465f0b483e1ecf9e2f57725e7480c561ff63f3f5a0dd7f"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_novel_view.py",
+      "delivered_sha256": "22f36e569b5ae29eb21c16ef8955d9ef63a330642e1c603b240931d765a5cdb6",
+      "original_sha256": "22f36e569b5ae29eb21c16ef8955d9ef63a330642e1c603b240931d765a5cdb6"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/render_shifted_trajectories.py",
+      "delivered_sha256": "d0b11db03171f6ac80f7d1c866165afbc94c088f7baf3b0776ffd64b83429111",
+      "original_sha256": "d0b11db03171f6ac80f7d1c866165afbc94c088f7baf3b0776ffd64b83429111"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/replace_dynamic_tracks.py",
+      "delivered_sha256": "6f805c307e7579ec23a759090e84ae431c107d2a55db6dd2f976cb0accab6cbe",
+      "original_sha256": "6f805c307e7579ec23a759090e84ae431c107d2a55db6dd2f976cb0accab6cbe"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/run_two_stage_vehicle_cold.py",
+      "delivered_sha256": "65f1c95fe7dd859a88a3018541e0fefb4c7b304c79fbfecc7362df9b21b9749f",
+      "original_sha256": "65f1c95fe7dd859a88a3018541e0fefb4c7b304c79fbfecc7362df9b21b9749f"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/run_unified_scene_experiment.py",
+      "delivered_sha256": "2716656fca706a807fca62260b3ae346f9ffd6c336cba2325137e16e69a0c8bc",
+      "original_sha256": "2716656fca706a807fca62260b3ae346f9ffd6c336cba2325137e16e69a0c8bc"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/run_vehicle_trajectory_experiments.py",
+      "delivered_sha256": "c777682553b2a3974f9449444b857e3b89be4dc1b80dcc550d1da0d252e22c35",
+      "original_sha256": "c777682553b2a3974f9449444b857e3b89be4dc1b80dcc550d1da0d252e22c35"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/sample_images.py",
+      "delivered_sha256": "8f5f0834a649883ae06a68619b5df3a78f13ffc78a4434a49d4a2cf9a6b2ccf5",
+      "original_sha256": "8f5f0834a649883ae06a68619b5df3a78f13ffc78a4434a49d4a2cf9a6b2ccf5"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/scale_dynamic_box_corrections.py",
+      "delivered_sha256": "1fc3c41e921d757a4225c2bd9d6a03e7e97ddee255536d7459dafdb84e2375fc",
+      "original_sha256": "1fc3c41e921d757a4225c2bd9d6a03e7e97ddee255536d7459dafdb84e2375fc"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/stabilize_stationary_dynamic_medoid.py",
+      "delivered_sha256": "bd51599176325cf26cc880f2eb3774707ce484778e44251a463c4db5ccf3555b",
+      "original_sha256": "bd51599176325cf26cc880f2eb3774707ce484778e44251a463c4db5ccf3555b"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/summarize_cold_probe.py",
+      "delivered_sha256": "ab01e9767317588d1caa7d3c7c4e2495f6fcb996da1af46939dd865c8c43dfb2",
+      "original_sha256": "ab01e9767317588d1caa7d3c7c4e2495f6fcb996da1af46939dd865c8c43dfb2"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/summarize_feedforward_updates.py",
+      "delivered_sha256": "ed144fe6c25beb8cfd2360b1defc7f6a5a1d968ff4c67b7ff95db7fc87405eb2",
+      "original_sha256": "ed144fe6c25beb8cfd2360b1defc7f6a5a1d968ff4c67b7ff95db7fc87405eb2"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/summarize_joint_refinement.py",
+      "delivered_sha256": "8d7a054d2b77efdf5838725cfb1f0099286d295310601d33d2dfab2db37cea08",
+      "original_sha256": "8d7a054d2b77efdf5838725cfb1f0099286d295310601d33d2dfab2db37cea08"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/test_rgb_surface_proxy_composition.py",
+      "delivered_sha256": "32d20d47e12439f0e05bbbe1a8de56bc80a821c6bbf86549bf4ac15b7f0f7af4",
+      "original_sha256": "32d20d47e12439f0e05bbbe1a8de56bc80a821c6bbf86549bf4ac15b7f0f7af4"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/train.py",
+      "delivered_sha256": "ac9137ea41f293bf3962b39ce1fcf9ba51beebd53fc94853eb05bb4a67e7ea88",
+      "original_sha256": "ac9137ea41f293bf3962b39ce1fcf9ba51beebd53fc94853eb05bb4a67e7ea88"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/vehicle_all_frame_groups.py",
+      "delivered_sha256": "1a8198bb5e8ae95191d57ff390ca0664dcd56a46bf9d6b8fec6c80f23e43b0b3",
+      "original_sha256": "1a8198bb5e8ae95191d57ff390ca0664dcd56a46bf9d6b8fec6c80f23e43b0b3"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/verify_drivestudio.py",
+      "delivered_sha256": "3088ef45fc1101f494b0dc1e120d3c8d2bc689d0b1425fd05895b431d69c47ad",
+      "original_sha256": "3088ef45fc1101f494b0dc1e120d3c8d2bc689d0b1425fd05895b431d69c47ad"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/verify_multi_clip_artifacts.py",
+      "delivered_sha256": "ca0f6fc3a4617d26c122ce2265a54833425d86daf095921cff743ee4a4822f5f",
+      "original_sha256": "ca0f6fc3a4617d26c122ce2265a54833425d86daf095921cff743ee4a4822f5f"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/verify_waymo.py",
+      "delivered_sha256": "31256fbc7822cf7e44e967fb8ac78ad56d24372db88aba09c085d33169902196",
+      "original_sha256": "31256fbc7822cf7e44e967fb8ac78ad56d24372db88aba09c085d33169902196"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/visualize_depth_lidar.py",
+      "delivered_sha256": "e442f4f002d655e59684be60b83e3e8ebc58a2522e5a963d88ec6e4bba99bc88",
+      "original_sha256": "e442f4f002d655e59684be60b83e3e8ebc58a2522e5a963d88ec6e4bba99bc88"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/visualize_per_track_errors.py",
+      "delivered_sha256": "9157148e42ea4ab24c484144ce8a3f721c3aae04844267ff7c0d6f95f559c400",
+      "original_sha256": "9157148e42ea4ab24c484144ce8a3f721c3aae04844267ff7c0d6f95f559c400"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/visualize_pipeline.py",
+      "delivered_sha256": "f2a53a225e23e68dc1f02d33e55d11cb4cc909bc4076bad40d3d6a774a8d3322",
+      "original_sha256": "f2a53a225e23e68dc1f02d33e55d11cb4cc909bc4076bad40d3d6a774a8d3322"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/visualize_temporal.py",
+      "delivered_sha256": "577bb39d106ec4aa874574b4305bf154dd2c0def963f5f0538a7c666f506415f",
+      "original_sha256": "577bb39d106ec4aa874574b4305bf154dd2c0def963f5f0538a7c666f506415f"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/visualize_track_once_views.py",
+      "delivered_sha256": "4baf74dde250d9caa91135104657cad81a2e57c6be10d077037d511de799c091",
+      "original_sha256": "4baf74dde250d9caa91135104657cad81a2e57c6be10d077037d511de799c091"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/source/scripts/watch_runtime_progress.py",
+      "delivered_sha256": "526c7838dd1b6deb468ca6a40cd19e614c8a0d2b262d4bbc979f4e8ea825f9e1",
+      "original_sha256": "526c7838dd1b6deb468ca6a40cd19e614c8a0d2b262d4bbc979f4e8ea825f9e1"
+    }
+  ],
+  "existing_files_changed": [
+    "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py"
+  ],
+  "change_reason": "portable orchestration helper import only; numerical equations unchanged"
+}

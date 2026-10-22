@@ -1,0 +1,69 @@
+{
+  "scope": "cached_incremental",
+  "start": 4678901.130605851,
+  "start_epoch_seconds": 1792478126.3432314,
+  "upstream_prefix_seconds": 0,
+  "input_boundary": "load_delivered_scene_state",
+  "output_boundary": "ply_and_video_write_complete",
+  "status": "completed",
+  "stages": [
+    {
+      "name": "replay",
+      "start": 4678901.130607909,
+      "command": [
+        "/root/miniconda3/envs/drivestudio/bin/python",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/VR-v1-b/source/scripts/render_final_global_runtime.py",
+        "--config",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/config_render.yaml",
+        "--ckpt",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/weights/pointforward_waymo_ds_paper_ckpt_020000.pt",
+        "--payload-dir",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/artifacts/scene017_vr_v1_b/runtime-payload-refined",
+        "--out",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/runtime-render-source",
+        "--scene",
+        "017",
+        "--device",
+        "cuda",
+        "--camera-batch-size",
+        "1",
+        "--fps",
+        "10",
+        "--dynamic-bbox-metrics",
+        "--per-track-bbox-metrics",
+        "--static-source-rgb-blend",
+        "0.75",
+        "--refiner-state",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/weights/refiner_scene017_vr_v1_b.pt"
+      ],
+      "end": 4679046.716040345,
+      "returncode": 0,
+      "seconds": 145.5854324363172
+    },
+    {
+      "name": "ply_export",
+      "start": 4679046.716089502,
+      "command": [
+        "/root/miniconda3/envs/drivestudio/bin/python",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/VR-v1-b/source/scripts/export_runtime_payload_ply.py",
+        "--payload-dir",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/artifacts/scene017_vr_v1_b/runtime-payload-refined",
+        "--out",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_gaussians_frame000_preview.ply",
+        "--frame",
+        "0"
+      ],
+      "end": 4679052.745882404,
+      "returncode": 0,
+      "seconds": 6.029792902059853
+    }
+  ],
+  "outputs": [
+    "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_gaussians_frame000_preview.ply",
+    "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_predicted_front3.mp4",
+    "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4"
+  ],
+  "end": 4679052.849503738,
+  "end_epoch_seconds": 1792478278.062132,
+  "seconds": 151.71889788657427
+}

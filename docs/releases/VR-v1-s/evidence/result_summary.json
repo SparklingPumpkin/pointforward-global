@@ -1,0 +1,10 @@
+{
+  "global_psnr": 31.13165373679919,
+  "vehicle_psnr": 28.32924439356877,
+  "raw_to_optimization_seconds": 1485.371231320314,
+  "cold_measured": true,
+  "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/final_global_runtime_gt_vs_predicted_front3.mp4",
+  "render": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/runtime-render-source",
+  "step": 1670,
+  "runtime_color_path": "rank32 PCA Gaussian features + folded/adapted U-Net; PLY preview only"
+}

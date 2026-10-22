@@ -1,0 +1,53 @@
+{
+  "release": "VR-v1-b",
+  "mode": "replay",
+  "scene": "017",
+  "checkpoint": "/mnt/data/fjn/projects/fjn/pointforward-global/weights/pointforward_waymo_ds_paper_ckpt_020000.pt",
+  "data_root": "/mnt/data/dataset/argoverse/processed/training",
+  "commands": [
+    [
+      "replay",
+      [
+        "/root/miniconda3/envs/drivestudio/bin/python",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/VR-v1-b/source/scripts/render_final_global_runtime.py",
+        "--config",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/config_render.yaml",
+        "--ckpt",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/weights/pointforward_waymo_ds_paper_ckpt_020000.pt",
+        "--payload-dir",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/artifacts/scene017_vr_v1_b/runtime-payload-refined",
+        "--out",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/runtime-render-source",
+        "--scene",
+        "017",
+        "--device",
+        "cuda",
+        "--camera-batch-size",
+        "1",
+        "--fps",
+        "10",
+        "--dynamic-bbox-metrics",
+        "--per-track-bbox-metrics",
+        "--static-source-rgb-blend",
+        "0.75",
+        "--refiner-state",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/weights/refiner_scene017_vr_v1_b.pt"
+      ]
+    ],
+    [
+      "ply_export",
+      [
+        "/root/miniconda3/envs/drivestudio/bin/python",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/VR-v1-b/source/scripts/export_runtime_payload_ply.py",
+        "--payload-dir",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/artifacts/scene017_vr_v1_b/runtime-payload-refined",
+        "--out",
+        "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_gaussians_frame000_preview.ply",
+        "--frame",
+        "0"
+      ]
+    ]
+  ],
+  "source": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/VR-v1-b/source",
+  "scene_state_reused": true
+}

@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "release": "VR-v1-b",
+  "candidate": "PFG-v2-a",
+  "source_run": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950",
+  "files": [
+    {
+      "path": "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_static_128d.pt",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-payload-refined/final_static_128d.pt",
+      "bytes": 5158134798,
+      "sha256": "a57494fee7d564353a7c99c63ac76c0ba88182571d6fa364fd855a22544d4548"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/runtime-payload/final_static_128d.pt",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/runtime-payload/final_static_128d.pt",
+      "bytes": 5158134798,
+      "sha256": "43f9486e194aaab4f00cd5a34534db1b8ab7ae80d27f307a3fc807c0ba3baffc"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_dynamic_128d.pt",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-payload-refined/final_dynamic_128d.pt",
+      "bytes": 266404477,
+      "sha256": "d03bca70a4c519904e11fc119b3e1e492844e70b56ac44e16d448c8c192be0d5"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/runtime-payload/final_dynamic_128d.pt",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/runtime-payload/final_dynamic_128d.pt",
+      "bytes": 266404477,
+      "sha256": "3a808c248bb2bb75b4c64e4b6fb9d61752f2334cf8b7a42cfa711ae97b113a7c"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/runtime-payload-refined/global_dynamic_meta.pt",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-payload-refined/global_dynamic_meta.pt",
+      "bytes": 1293326,
+      "sha256": "44c7c3268f08bfc49a053aa78065b98d99fadae8cad7c2df86fca74f142b7f00"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/runtime-payload/global_dynamic_meta.pt",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/runtime-payload/global_dynamic_meta.pt",
+      "bytes": 1293262,
+      "sha256": "a26947f782ce621fe389c28277a04406bd7751ef9e33d64c31809c2b7c555202"
+    },
+    {
+      "path": "weights/refiner_scene017_vr_v1_b.pt",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/refiner_state.pt",
+      "bytes": 7852933,
+      "sha256": "14b7f130c4f3091ab5e0f337ea7dae83de63d61be025c4c30800d920b4d435cf"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/final_global_gaussians_frame000_preview.ply",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_gaussians_frame000_preview.ply",
+      "bytes": 615188461,
+      "sha256": "45801c8a931af025a6837cfe42b0c6cfb225846d1e8addbfc726a91334ce66e5"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/final_global_runtime_predicted_front3.mp4",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_runtime_predicted_front3.mp4",
+      "bytes": 20030546,
+      "sha256": "a4a28119cad15ae82e8f91d5eb47b94582b3396e4f4d31977689b99e86d7fdef"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/final_global_runtime_gt_vs_predicted_front3.mp4",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_runtime_gt_vs_predicted_front3.mp4",
+      "bytes": 45857383,
+      "sha256": "300c4b7c2aff68a0133a80bfc795c1704d2d4efe26614043022911b187c26db1"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/quality_loss_time.png",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/quality_loss_time.png",
+      "bytes": 198144,
+      "sha256": "9f9eb459be7ef0c7ff25a15fa2051814e989d17707814116deb18c6ebdc1e2d7"
+    },
+    {
+      "path": "artifacts/scene017_vr_v1_b/vehicle_crop_comparison.jpg",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/vehicle_crop_comparison.jpg",
+      "bytes": 1587294,
+      "sha256": "da84776d96cb82a6306fa399ba23f5ca5bf438c733403e10b776fd271ad58881"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/report.md",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/report.md",
+      "bytes": 6110,
+      "sha256": "5d8883a5a05349b954a7296271bc3f7db8c4c8b59fb8339400efcbba887f9e06"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/pipeline_timing.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/pipeline_timing.json",
+      "bytes": 3969,
+      "sha256": "9b65a9892875e4cd7123a33b223d3a324c470cd21c747a4a07957aa502e2aad1"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/input_manifest.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/input_manifest.json",
+      "bytes": 13152,
+      "sha256": "7e02d6d187c3e1a2a17d4462d153472fac4b93b0b870625699651bfc28618932"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/options.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/options.json",
+      "bytes": 956,
+      "sha256": "aff9f161812ae4987495b458c7da72ab0c39d1b1154d2e356fbe3d121d360300"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/delivery_verification.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/delivery_verification.json",
+      "bytes": 4215,
+      "sha256": "a5a967a9374a4e019b9d6aa2fcec5d30dd1d509ebec06db98003338168d8c0c4"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/audit_summary.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/audit_summary.json",
+      "bytes": 5926,
+      "sha256": "37675a2a4fa894e28ca4c4308b2f2c6b042a5565ddd8265b43b84526a944c7c9"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/config_build.yaml",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/config_build.yaml",
+      "bytes": 824,
+      "sha256": "f8f367e3a51e49f330c54b074add8113cc033dba26eb138544b8f01a5bd17412"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/config_render.yaml",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/config_render.yaml",
+      "bytes": 954,
+      "sha256": "0b25cffa80c9038c6b5113ad2243bbbef9e17eb6cc918e1f1a326bbda0d1768a"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/joint-all/checkpoints.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoints.json",
+      "bytes": 4748,
+      "sha256": "7e255c6a237d3debd8e85dd9556513c504c4453f0ba41fbafb610c0c8ba3d434"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/joint-all/manifest.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/manifest.json",
+      "bytes": 6920,
+      "sha256": "4d8cded58d722a2dba1731a6403a9d809f34f00a5dbc6fb4c70ba65dc4404eb8"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/joint-all/parameter_contract.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/parameter_contract.json",
+      "bytes": 2862,
+      "sha256": "31f684e451cd403db994edf3433f8f7eda47fcb2b3204be322790f97e3f5e4d4"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/joint-all/loss_steps.jsonl",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/loss_steps.jsonl",
+      "bytes": 752439,
+      "sha256": "c081dcb057018ccfc61747bd77f4d200e62cb6989c065c7274939d0a879667d6"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/step-350-parameter-changes.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0350/parameter_changes.json",
+      "bytes": 2014,
+      "sha256": "8744cdae339e4712566872a661815ed6a3591b1a7374053ef44db47ac251e72e"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/step-550-parameter-changes.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0550/parameter_changes.json",
+      "bytes": 2016,
+      "sha256": "0f2161390d18d520b8f56f47468f27b7a1a2dbd7d50ba6454a36b2398746dfb3"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/step-750-parameter-changes.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0750/parameter_changes.json",
+      "bytes": 2015,
+      "sha256": "13ceed2aeb6587dfd9480d1fd006b4960b4bfc57a11e29dcab47776690ee25cd"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/step-950-parameter-changes.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/parameter_changes.json",
+      "bytes": 2010,
+      "sha256": "99a0939c3a5490a51b36a224fa44ad692bd7e04f6d7a81fc0b5de19865b1e156"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/original_render_manifest.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-render-source/manifest.json",
+      "bytes": 1060752,
+      "sha256": "99f3aded3b5d0405892c4d7869017d9a2f9d84d0250c463cb27d9cdedeec3232"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/feedforward_options.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/options.json",
+      "bytes": 6998,
+      "sha256": "06fd27146d3026cdca3f66d054784113d95af8f63b3c891ffcace3e27df05e3f"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/feedforward_pipeline_timing.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/pipeline_timing.json",
+      "bytes": 9764,
+      "sha256": "7f073517a664d2ca93b600dc381b2086c0fa58b8beabc953d22fda78c41d1fab"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/research_acceptance_contract.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/acceptance_contract.json",
+      "bytes": 1156,
+      "sha256": "4c7cd9d840444a2a967b2f413d08daa4d875e28087266caa9894110948af9817"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/evidence/research_acceptance_report.json",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/acceptance_report.json",
+      "bytes": 4535,
+      "sha256": "5502378888eb0a4c8d02755a0e0e1cfac08ba154d7632b9bb29856e3c630bc56"
+    }
+  ],
+  "cold_start_verified": false,
+  "timing": {
+    "cached_incremental_seconds": 2065.8302218783647,
+    "upstream_prefix_seconds": 442.9459108095616,
+    "historical_sum_seconds": 2508.7761326879263
+  },
+  "quality": {
+    "global_psnr": 30.29484172967764,
+    "dynamic_bbox_psnr": 26.334712175222542,
+    "non_sky_psnr": 29.824186985309307
+  },
+  "supported_entrypoints": [
+    "scripts/run_current_pipeline.py",
+    "scripts/run_vr_v1_b_pipeline.py"
+  ],
+  "source_manifest": "docs/releases/VR-v1-b/source_manifest.json",
+  "numerical_source_changes": [
+    "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py"
+  ],
+  "configuration_changes": [
+    "portable data/depth/weight paths",
+    "pretrained_backbone=false: avoid initializer downloads; load identical generic checkpoint"
+  ],
+  "runtime_contract": {
+    "feature_dimensions": 128,
+    "static_source_rgb_blend": 0.75,
+    "fps": 10,
+    "metrics": "source-frame 128D+U-Net runtime",
+    "ply": "frame000 cached vertex RGB preview only"
+  }
+}

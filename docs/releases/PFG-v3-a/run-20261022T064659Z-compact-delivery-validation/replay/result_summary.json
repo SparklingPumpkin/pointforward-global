@@ -1,0 +1,8 @@
+{
+  "global_psnr": 31.13165373679919,
+  "vehicle_psnr": 28.32924439356877,
+  "step": 1670,
+  "cold_measured": false,
+  "scene_state_reused": true,
+  "runtime_color_path": "32D Gaussian features + feature_projection.pt + adapted U-Net; PLY preview only"
+}

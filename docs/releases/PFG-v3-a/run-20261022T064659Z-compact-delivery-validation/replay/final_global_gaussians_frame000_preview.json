@@ -1,0 +1,18 @@
+{
+  "status": "completed",
+  "payload_dir": "/mnt/data/fjn/projects/fjn/pointforward-global/artifacts/scene017_vr_v1_s/runtime-payload-refined",
+  "out": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_gaussians_frame000_preview.ply",
+  "scene_frame": 0,
+  "target_time": 0.0,
+  "dynamic_source": "/mnt/data/fjn/projects/fjn/pointforward-global/artifacts/scene017_vr_v1_s/runtime-payload-refined/final_dynamic_128d.pt",
+  "dynamic_semantics": "scene-global dynamic payload",
+  "static_count": 8593116,
+  "dynamic_count": 470670,
+  "proxy": null,
+  "gaussian_count": 9063786,
+  "coordinate_frame": "scene017 shared world frame from runtime payload",
+  "colour": "cached preview_rgb encoded as degree-0 SH; not equivalent to 128-D+UNet output",
+  "rgb_residual_state": null,
+  "pedestrian_tracks": "/mnt/data/fjn/projects/fjn/pointforward-global/artifacts/scene017_vr_v1_s/pedestrian_tracks.pt",
+  "wall_seconds": 6.426337885670364
+}

@@ -1,0 +1,54 @@
+data:
+  cameras:
+  - 0
+  - 1
+  - 2
+  clip_length: 20
+  frame_stride: 5
+  layout: argoverse_drivestudio
+  load_lidar: true
+  max_instances: 24
+  num_context: 4
+  num_target: 4
+  require_instances: true
+  require_lidar: true
+  resolution:
+  - 576
+  - 768
+  root: __DATA_ROOT__
+  train_scenes:
+  - '017'
+  val_scenes:
+  - '017'
+  geometry_directory: __OUTPUT_ROOT__/geometry-input
+depth:
+  checkpoint: __PROJECT_ROOT__/weights/infinidepth_depthsensor.ckpt
+  encoder: vitl16
+  kind: infinidepth
+  repo_root: __PROJECT_ROOT__/docs/releases/VR-v1-s/source/InfiniDepth
+  variant: InfiniDepth_DepthSensor
+model:
+  backbone: tf_efficientnetv2_s
+  color_dim: 128
+  decoder_chunk: 262144
+  feat_dim: 128
+  fusion_chunk: 65536
+  grad_checkpoint: false
+  hidden: 128
+  num_dynamic: 10000
+  num_static: 100000
+  use_depth_cue: true
+  use_weighted_fusion: true
+  pretrained_backbone: false
+seed: 0
+train:
+  bf16: true
+pedestrians:
+  enabled: true
+  metrics: true
+  smpl_model_path: __PROJECT_ROOT__/weights/SMPL_NEUTRAL.npz
+  checkpoint: __PROJECT_ROOT__/weights/pedestrian_head_ckpt_002000.pt
+  tracks_file: __OUTPUT_ROOT__/pedestrian_tracks.pt
+  pose_completion:
+    internal_max_gap: 30
+    edge_hold: 5

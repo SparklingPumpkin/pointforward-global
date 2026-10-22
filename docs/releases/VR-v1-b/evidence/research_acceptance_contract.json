@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "initialization",
+      "criterion": "仅复用FFR-v1-z原始前馈载荷及通用预训练权重，不读取其scene350或车辆优化结果、适配U-Net；独立保存源码与参数。"
+    },
+    {
+      "id": "joint",
+      "criterion": "950步内静态和动态Gaussian的XYZ、scale、rotation、opacity、完整128D feature、time/sigma，以及U-Net和车辆轨迹平移/yaw始终属于同一优化器；350步处不冻结、不重置，检查点只评估；保留canonical参考位姿和原始评估框。"
+    },
+    {
+      "id": "evaluation",
+      "criterion": "350、550、750、950步均完成156帧三相机runtime指标与预测/GT对照视频，记录全局、非天空、动态bbox PSNR、逐步正值MSE、loss和参数变化；交付950步PLY预览与完整运行时资产。"
+    },
+    {
+      "id": "audit",
+      "criterion": "亲自检查车辆可视化并比较旧scene350、VR-v1-a和y；记录本次缓存后连续实际增量墙钟及加回原始前馈前缀的历史账目，不能宣称一次RGB冷启动实测；如质量不提升也如实报告。"
+    }
+  ]
+}

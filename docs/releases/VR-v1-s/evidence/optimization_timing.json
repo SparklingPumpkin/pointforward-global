@@ -1,0 +1,16 @@
+{
+  "run_id": "run-20261022T054208Z-cold-compact-union1700",
+  "scope": "end_to_end",
+  "status": "completed",
+  "input_boundary": "before_raw_input_preprocessing",
+  "output_boundary": "optimization_checkpoint_write_complete",
+  "start": 4848558.206084839,
+  "end": 4850043.577316159,
+  "seconds": 1485.371231320314,
+  "historical_scene_state_reused": [],
+  "outputs": [
+    "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/runtime-payload-refined",
+    "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/refiner_state.pt"
+  ],
+  "source_timer": "pipeline_timing.json"
+}

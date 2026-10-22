@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "assets",
+      "criterion": "完整固化VR-v1-s第1670步32D静态动态Gaussian、PCA基、轨迹、SMPL状态、配套U-Net、通用权重、源码、PLY预览及视频；源与交付资产SHA256一致。"
+    },
+    {
+      "id": "pipeline",
+      "criterion": "独立交付源码、依赖和可移植参数支持原始处理后RGB/LiDAR到几何校正、并行前馈、SMPL、32D投影、全三相机联合优化及视频和PLY；fresh不复用历史场景状态；提供固定资产replay。"
+    },
+    {
+      "id": "replay",
+      "criterion": "包内源码与资产重渲染完整156帧三相机；全局、车辆bbox和非天空PSNR相比源VR-v1-s误差各不超过0.0001dB，PLY一致并人工查看结果。"
+    },
+    {
+      "id": "honesty",
+      "criterion": "准确保留源记录的各阶段边界、完整交付开销以及研究验收失败结论；本次固化仅验证交付与重渲染，不伪称重新冷启动训练或单PLY复现RGB指标。"
+    }
+  ]
+}

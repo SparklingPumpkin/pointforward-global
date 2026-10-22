@@ -1,0 +1,28 @@
+{
+  "files": [
+    {
+      "path": "scripts/run_current_pipeline.py",
+      "sha256": "ebc3cca42c85df7aebd18d3a3cfdf5c0944b35f103c41886f4ecd8241a801366"
+    },
+    {
+      "path": "scripts/run_vr_v1_b_pipeline.py",
+      "sha256": "fa0b3ff8ce86cc10f025b95f5fa627fcb80766a866677ac5a142b8f567e4335f"
+    },
+    {
+      "path": "scripts/validate_vr_v1_b_delivery.py",
+      "sha256": "15f43a48ca763a63a2523de9262eeb76273fa3cb29b1168fba26ae3d341400e5"
+    },
+    {
+      "path": "scripts/run_legacy_pipeline.py",
+      "sha256": "205b697347c32931d880606deeeff5e5237c20e135d8d244e21d7c4669abf242"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/config_build.template.yaml",
+      "sha256": "694cfe7e160ff7ea6219bf46e99583ac7b6cf08a7e764ab648bf77f3bbc5ce99"
+    },
+    {
+      "path": "docs/releases/VR-v1-b/config_render.template.yaml",
+      "sha256": "392d90ce06ee975f34cb3bf78237b4157d64ab12ae637d26093458f0355c8177"
+    }
+  ]
+}

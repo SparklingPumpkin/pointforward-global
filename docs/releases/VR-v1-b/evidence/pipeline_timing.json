@@ -1,0 +1,77 @@
+{
+  "run_id": "run-20261020T012848Z-feedforward-unified-all950",
+  "scope": "cached_incremental",
+  "status": "completed",
+  "start": 4660520.929385935,
+  "start_epoch_seconds": 1792459746.1420228,
+  "input_boundary": "load_raw_feedforward_state",
+  "output_boundary": "ply_and_video_write_complete",
+  "upstream_prefix_seconds": 442.9459108095616,
+  "stages": [
+    {
+      "name": "joint_all950",
+      "command": [
+        "/root/miniconda3/envs/drivestudio/bin/python",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/source-snapshot/scripts/refine_unified_scene_rgb.py",
+        "--config",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/config_build.yaml",
+        "--ckpt",
+        "/mnt/data/fjn/projects/PointForward/ckpt/ckpt_020000_waymo_ds_paper_original.pt",
+        "--payload-dir",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/runtime-payload",
+        "--out",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all",
+        "--audit-run",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950",
+        "--scene",
+        "017",
+        "--steps",
+        "950",
+        "--milestones",
+        "350",
+        "550",
+        "750",
+        "950",
+        "--roi-weight",
+        "0.25",
+        "--pose-lr",
+        "0.001",
+        "--lr-decay-steps",
+        "240",
+        "700",
+        "--lr-decay-factor",
+        "0.4"
+      ],
+      "start": 4660520.929679706,
+      "end": 4662577.140160751,
+      "returncode": 0,
+      "seconds": 2056.2104810448363
+    },
+    {
+      "name": "ply_export",
+      "command": [
+        "/root/miniconda3/envs/drivestudio/bin/python",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/source-snapshot/scripts/export_runtime_payload_ply.py",
+        "--payload-dir",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-payload-refined",
+        "--out",
+        "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_gaussians_frame000_preview.ply",
+        "--frame",
+        "0"
+      ],
+      "start": 4662577.215804617,
+      "end": 4662586.758960436,
+      "returncode": 0,
+      "seconds": 9.543155819177628
+    }
+  ],
+  "end": 4662586.759607813,
+  "end_epoch_seconds": 1792461811.9722347,
+  "outputs": [
+    "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_gaussians_frame000_preview.ply",
+    "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_runtime_predicted_front3.mp4",
+    "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_runtime_gt_vs_predicted_front3.mp4"
+  ],
+  "seconds": 2065.8302218783647,
+  "historical_sum_seconds": 2508.7761326879263
+}

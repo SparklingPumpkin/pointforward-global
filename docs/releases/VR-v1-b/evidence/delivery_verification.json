@@ -1,0 +1,73 @@
+{
+  "snapshot_unchanged": true,
+  "optimizer_restarts": 0,
+  "steps": 950,
+  "all_milestones_evaluated": true,
+  "videos": [
+    {
+      "step": 350,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0350/runtime-render-source/final_global_runtime_predicted_front3.mp4",
+      "width": 2304,
+      "height": 576,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    {
+      "step": 350,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0350/runtime-render-source/final_global_runtime_gt_vs_predicted_front3.mp4",
+      "width": 2304,
+      "height": 1152,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    {
+      "step": 550,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0550/runtime-render-source/final_global_runtime_predicted_front3.mp4",
+      "width": 2304,
+      "height": 576,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    {
+      "step": 550,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0550/runtime-render-source/final_global_runtime_gt_vs_predicted_front3.mp4",
+      "width": 2304,
+      "height": 1152,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    {
+      "step": 750,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0750/runtime-render-source/final_global_runtime_predicted_front3.mp4",
+      "width": 2304,
+      "height": 576,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    {
+      "step": 750,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0750/runtime-render-source/final_global_runtime_gt_vs_predicted_front3.mp4",
+      "width": 2304,
+      "height": 1152,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    {
+      "step": 950,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-render-source/final_global_runtime_predicted_front3.mp4",
+      "width": 2304,
+      "height": 576,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    },
+    {
+      "step": 950,
+      "video": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-render-source/final_global_runtime_gt_vs_predicted_front3.mp4",
+      "width": 2304,
+      "height": 1152,
+      "r_frame_rate": "10/1",
+      "nb_frames": "156"
+    }
+  ],
+  "personal_visual_review": "已亲自查看第60、110、140帧同位置车辆裁剪、350/550/750/950检查点和旧scene350、VR-v1-a、历史y对照，以及全局/动态PSNR和正值MSE曲线。后期背景道路、建筑边缘和小车轮廓更稳定，黑色皮卡轮廓有改善；第140帧近处SUV的窗框、车门及轮胎仍明显模糊，部分车身边缘仍有颗粒，不能声称已解决车辆细节问题。950步全局30.294842、动态26.334712dB，相对旧同950步提高1.928848/1.755642dB；动态比历史y提高1.003704dB。750至950仍增加0.459758/0.464594dB，但边际收益已低于前200步。动态bbox指标包含框内背景，部分改善可能来自持续训练的静态和U-Net，不能等价为车辆表面单独提高同样dB；也未做仅改变冻结顺序的单因素归因。"
+}

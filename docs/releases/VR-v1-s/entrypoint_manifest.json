@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "path": "scripts/run_vr_v1_s_pipeline.py",
+      "sha256": "70509af39c186dd4377b3b79cd242b305f416fe8ab76d708adac2e523b768894"
+    },
+    {
+      "path": "scripts/validate_vr_v1_s_delivery.py",
+      "sha256": "1996e5b3fa42eb04c41cf95cafacf1197498f972081f4b0d34dbf97746ec9bb5"
+    },
+    {
+      "path": "docs/releases/VR-v1-s/config.template.yaml",
+      "sha256": "2bc245d810b14c55916b664cf1fc426d5191e6ae77321d8a1eff137732f3fb6a"
+    },
+    {
+      "path": "docs/releases/VR-v1-s/pipeline_recipe.json",
+      "sha256": "149b2f3a5479bf3cad70453946d2cf35969698b6b7c16465630bba6eb296af30"
+    },
+    {
+      "path": "docs/releases/VR-v1-s/README.md",
+      "sha256": "7baa0d256fc3eeac6ecc6407e958c4150d2843ed3a4e08975bb786cb5c1cde60"
+    }
+  ],
+  "mutable_alias": "scripts/run_pipeline.py intentionally excluded from immutable evidence"
+}

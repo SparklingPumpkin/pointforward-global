@@ -1,0 +1,140 @@
+{
+  "comparisons": [
+    {
+      "step": 350,
+      "global_psnr": 28.106923482356926,
+      "dynamic_psnr": 23.96167088777591,
+      "gain_global_vs_staged": -0.05067326472356015,
+      "gain_dynamic_vs_staged": 0.4066151594504319
+    },
+    {
+      "step": 550,
+      "global_psnr": 28.914481664315247,
+      "dynamic_psnr": 24.734797282096668,
+      "gain_global_vs_staged": 0.6611356857495423,
+      "gain_dynamic_vs_staged": 0.7304152341989365
+    },
+    {
+      "step": 750,
+      "global_psnr": 29.835083680275158,
+      "dynamic_psnr": 25.870118128947723,
+      "gain_global_vs_staged": 1.5094136335910875,
+      "gain_dynamic_vs_staged": 1.4940082476689263
+    },
+    {
+      "step": 950,
+      "global_psnr": 30.29484172967764,
+      "dynamic_psnr": 26.334712175222542,
+      "gain_global_vs_staged": 1.9288482176951867,
+      "gain_dynamic_vs_staged": 1.755641814989918
+    }
+  ],
+  "observation_intervals": [
+    {
+      "start_step": 1,
+      "end_step": 350,
+      "mean_global_mse": 0.0029994424931438905,
+      "mean_bbox_mse": 0.00850590986133154,
+      "mean_loss": -7.209549976076398
+    },
+    {
+      "start_step": 351,
+      "end_step": 550,
+      "mean_global_mse": 0.0015094345633406192,
+      "mean_bbox_mse": 0.0038794287166092544,
+      "mean_loss": -8.044578616619111
+    },
+    {
+      "start_step": 551,
+      "end_step": 750,
+      "mean_global_mse": 0.0012806282762903721,
+      "mean_bbox_mse": 0.003500323445769027,
+      "mean_loss": -8.225802972316743
+    },
+    {
+      "start_step": 751,
+      "end_step": 950,
+      "mean_global_mse": 0.0010805513028753922,
+      "mean_bbox_mse": 0.0027414867613697424,
+      "mean_loss": -8.491774582862854
+    }
+  ],
+  "note": "Observation intervals only: every parameter group stays enabled across all milestones.",
+  "timer": {
+    "run_id": "run-20261020T012848Z-feedforward-unified-all950",
+    "scope": "cached_incremental",
+    "status": "completed",
+    "start": 4660520.929385935,
+    "start_epoch_seconds": 1792459746.1420228,
+    "input_boundary": "load_raw_feedforward_state",
+    "output_boundary": "ply_and_video_write_complete",
+    "upstream_prefix_seconds": 442.9459108095616,
+    "stages": [
+      {
+        "name": "joint_all950",
+        "command": [
+          "/root/miniconda3/envs/drivestudio/bin/python",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/source-snapshot/scripts/refine_unified_scene_rgb.py",
+          "--config",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/config_build.yaml",
+          "--ckpt",
+          "/mnt/data/fjn/projects/PointForward/ckpt/ckpt_020000_waymo_ds_paper_original.pt",
+          "--payload-dir",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-trajectory/FFR-v1-z/run-20261019T084334Z-cold-scene350-vehicle-joint600-retry/runtime-payload",
+          "--out",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all",
+          "--audit-run",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950",
+          "--scene",
+          "017",
+          "--steps",
+          "950",
+          "--milestones",
+          "350",
+          "550",
+          "750",
+          "950",
+          "--roi-weight",
+          "0.25",
+          "--pose-lr",
+          "0.001",
+          "--lr-decay-steps",
+          "240",
+          "700",
+          "--lr-decay-factor",
+          "0.4"
+        ],
+        "start": 4660520.929679706,
+        "end": 4662577.140160751,
+        "returncode": 0,
+        "seconds": 2056.2104810448363
+      },
+      {
+        "name": "ply_export",
+        "command": [
+          "/root/miniconda3/envs/drivestudio/bin/python",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/source-snapshot/scripts/export_runtime_payload_ply.py",
+          "--payload-dir",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoint-0950/runtime-payload-refined",
+          "--out",
+          "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_gaussians_frame000_preview.ply",
+          "--frame",
+          "0"
+        ],
+        "start": 4662577.215804617,
+        "end": 4662586.758960436,
+        "returncode": 0,
+        "seconds": 9.543155819177628
+      }
+    ],
+    "end": 4662586.759607813,
+    "end_epoch_seconds": 1792461811.9722347,
+    "outputs": [
+      "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_gaussians_frame000_preview.ply",
+      "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_runtime_predicted_front3.mp4",
+      "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_runtime_gt_vs_predicted_front3.mp4"
+    ],
+    "seconds": 2065.8302218783647,
+    "historical_sum_seconds": 2508.7761326879263
+  }
+}

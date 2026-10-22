@@ -1,19 +1,7 @@
 {
   "schema_version": 2,
-  "project_version": "FFR-v1-l-ver2",
+  "project_version": "VR-v1-s",
   "files": [
-    {
-      "path": "weights/pointforward_waymo_ds_paper_ckpt_020000.pt",
-      "bytes": 271714184,
-      "sha256": "318205d7475b4687dc59412f5a4432b5ae2a58da0ae143b5a69d1f18071d52ea",
-      "purpose": "PointForward base checkpoint"
-    },
-    {
-      "path": "weights/infinidepth_depthsensor.ckpt",
-      "bytes": 1433096532,
-      "sha256": "53230af7c46e987acc993f250e76f99914e7321ee8a13966136fdb0619f98267",
-      "purpose": "Frozen InfiniDepth sparse-depth-conditioned prior"
-    },
     {
       "path": "weights/refiner_scene017_ffr_v1_l.pt",
       "bytes": 7852997,
@@ -43,6 +31,54 @@
       "bytes": 86523256,
       "sha256": "6f1933fb6c0d760eae03863ad0110570393e16c0610f8fe94dc9f978e52ec59c",
       "purpose": "Offline timm EfficientNetV2-S initialization"
+    },
+    {
+      "path": "weights/refiner_scene017_vr_v1_b.pt",
+      "bytes": 7852933,
+      "sha256": "14b7f130c4f3091ab5e0f337ea7dae83de63d61be025c4c30800d920b4d435cf",
+      "purpose": "VR-v1-b scene017 joint950 refiner; pair only with matching payload"
+    },
+    {
+      "path": "weights/pointforward_waymo_ds_paper_ckpt_020000.pt",
+      "bytes": 271714184,
+      "sha256": "318205d7475b4687dc59412f5a4432b5ae2a58da0ae143b5a69d1f18071d52ea",
+      "source": null,
+      "purpose": "Generic PointForward initialization"
+    },
+    {
+      "path": "weights/infinidepth_depthsensor.ckpt",
+      "bytes": 1433096532,
+      "sha256": "53230af7c46e987acc993f250e76f99914e7321ee8a13966136fdb0619f98267",
+      "source": null,
+      "purpose": "Generic sparse-depth prior"
+    },
+    {
+      "path": "weights/sam2.1_hiera_tiny.pt",
+      "bytes": 156008466,
+      "sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+      "source": "/mnt/data/fjn/projects/tools/sam2/checkpoints/sam2.1_hiera_tiny.pt",
+      "purpose": "Generic RGB segmentation"
+    },
+    {
+      "path": "weights/pedestrian_head_ckpt_002000.pt",
+      "bytes": 273362272,
+      "sha256": "a5d470e8b56c35dd99e3a608d671de37f9d08fe2820bea50ea0dc578007af5f7",
+      "source": "/mnt/fjn/projects/Pointforward-pedestrian/ckpt/ckpt_002000.pt",
+      "purpose": "Generic canonical pedestrian head"
+    },
+    {
+      "path": "weights/SMPL_NEUTRAL.npz",
+      "bytes": 2564688,
+      "sha256": "ad9bb6cc1064f498cfae2a16e8f3fc8e65ad7c79b438cfd053a7a70839006656",
+      "source": "/mnt/data/output/pointforward/smpl_models/SMPL_NEUTRAL.npz",
+      "purpose": "Generic neutral SMPL template"
+    },
+    {
+      "path": "weights/refiner_scene017_vr_v1_s.pt",
+      "bytes": 7631749,
+      "sha256": "c3181ce6d038cc39271279196e004ea687cdacd2229114bc5dd9b29ab6f5b61c",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/refiner_state.pt",
+      "purpose": "Scene017 step1670 rank32 U-Net; matching payload/projection required"
     }
   ]
 }

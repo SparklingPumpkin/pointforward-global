@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "subject_id": "PFG-v3-a",
+  "checks": [
+    {
+      "id": "assets",
+      "criterion": "完整固化VR-v1-s第1670步32D静态动态Gaussian、PCA基、轨迹、SMPL状态、配套U-Net、通用权重、源码、PLY预览及视频；源与交付资产SHA256一致。",
+      "passed": true,
+      "run_id": "run-20261022T064659Z-compact-delivery-validation",
+      "evidence": [
+        "docs/releases/VR-v1-s/delivery_manifest.json::逐文件SHA256及原始来源",
+        "docs/releases/VR-v1-s/source_manifest.json::全部交付源码指纹及明确的便携差异",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json::3922项资产及443项源码验证通过",
+        "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_static_128d.pt::已冻结32D静态Gaussian",
+        "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_dynamic_128d.pt::已冻结32D动态Gaussian",
+        "artifacts/scene017_vr_v1_s/runtime-payload-refined/global_dynamic_meta.pt::修正轨迹及固定评估框",
+        "artifacts/scene017_vr_v1_s/runtime-payload-refined/feature_projection.pt::配套PCA投影基",
+        "artifacts/scene017_vr_v1_s/pedestrian_tracks.pt::配套SMPL姿态",
+        "weights/refiner_scene017_vr_v1_s.pt::配套32D U-Net",
+        "weights/SMPL_NEUTRAL.npz::配套SMPL模板"
+      ]
+    },
+    {
+      "id": "pipeline",
+      "criterion": "独立交付源码、依赖和可移植参数支持原始处理后RGB/LiDAR到几何校正、并行前馈、SMPL、32D投影、全三相机联合优化及视频和PLY；fresh不复用历史场景状态；提供固定资产replay。",
+      "passed": true,
+      "run_id": "run-20261022T064659Z-compact-delivery-validation",
+      "evidence": [
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/pipeline_review.json::fresh完整配方及9个真实入口import成功和原配置等价核对；未重训",
+        "docs/releases/VR-v1-s/entrypoint_manifest.json::版本专属入口与模板指纹，默认别名允许维护",
+        "docs/releases/VR-v1-s/evidence/config_build.original.yaml::原始冷启动数值配置",
+        "scripts/run_vr_v1_s_pipeline.py::包内fresh/replay编排和完整真实计时",
+        "scripts/validate_vr_v1_s_delivery.py::资产及数值重放校验实现",
+        "docs/releases/VR-v1-s/source/scripts/delivery_runtime_helpers.py::可移植编排适配",
+        "docs/releases/VR-v1-s/source/scripts/refine_unified_scene_rgb.py::原联合优化数值实现",
+        "docs/releases/VR-v1-s/source/scripts/geometry_rgb_masks.py::包内SAM2参数适配",
+        "docs/releases/VR-v1-s/source/sitecustomize.py::预编译扩展显式启用边界"
+      ]
+    },
+    {
+      "id": "replay",
+      "criterion": "包内源码与资产重渲染完整156帧三相机；全局、车辆bbox和非天空PSNR相比源VR-v1-s误差各不超过0.0001dB，PLY一致并人工查看结果。",
+      "passed": true,
+      "run_id": "run-20261022T064659Z-compact-delivery-validation",
+      "evidence": [
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json::完整156帧三相机三项PSNR误差零及PLY一致",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/runtime-render-source/manifest.json::原始独立重渲染指标",
+        "docs/releases/VR-v1-s/evidence/original_render_manifest.json::源1670步原始指标",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4::独立完整GT对比视频",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_predicted_front3.mp4::独立完整预测视频",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_gaussians_frame000_preview.ply::独立导出且指纹一致的预览",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/review.png::亲自查看的20/80/140帧三相机对比",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md::人工视觉检查与原有模糊缺陷"
+      ]
+    },
+    {
+      "id": "honesty",
+      "criterion": "准确保留源记录的各阶段边界、完整交付开销以及研究验收失败结论；本次固化仅验证交付与重渲染，不伪称重新冷启动训练或单PLY复现RGB指标。",
+      "passed": true,
+      "run_id": "run-20261022T064659Z-compact-delivery-validation",
+      "evidence": [
+        "docs/releases/VR-v1-s/README.md::源冷启动阶段边界和完整交付耗时及本次仅固定状态重放",
+        "docs/releases/VR-v1-s/evidence/pipeline_timing.json::源完整交付真实原始计时",
+        "docs/releases/VR-v1-s/evidence/optimization_timing.json::源预处理到优化退出计时",
+        "docs/releases/VR-v1-s/evidence/acceptance_report.json::研究车辆29dB失败未改写",
+        "docs/releases/VR-v1-s/evidence/input_provenance.md::原始处理后输入边界和通用离线前提",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/pipeline_timing.json::本次仅cached_incremental重放计时",
+        "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md::不宣称新冷启动训练或单PLY复现RGB指标"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,17 @@
 # 源码快照身份
 
+## 当前 VR-v1-s 隔离快照（2026-10-22）
+
+当前数值源码 `docs/releases/VR-v1-s/source/` 来自 `VR-v1-s/run-20261022T054208Z-cold-compact-union1700/source-snapshot/`，指纹与便携改动见该版本 `source_manifest.json`。Gaussian、PCA、U-Net、轨迹、SMPL成套固化；仅修改训练器编排helper import、SAM路径参数及预编译扩展启用条件，不改数值公式。
+
+默认入口为 `scripts/run_pipeline.py`，旧 `run_current_pipeline.py` 因历史验收冻结保留为VR-v1-b。当前以 [VR-v1-s release](releases/VR-v1-s/README.md) 为准，下面记录为历史版本。
+
+## 当前 VR-v1-b 独立快照（2026-10-20）
+
+当前入口使用 `docs/releases/VR-v1-b/source/`，来自已验收 `VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/source-snapshot/`，不覆盖旧 `src/pointforward`。完整原始/交付源码 SHA256 见 `docs/releases/VR-v1-b/source_manifest.json`。唯一已有数值文件差异为联合训练器的编排helper import，新增portable helper解析包内路径；优化公式、模型和renderer未改动。新增根统一入口支持fresh/replay，原入口完整保存为 `scripts/run_legacy_pipeline.py`。配置移植替换机器路径并禁用初始化下载，随后加载同一通用checkpoint。
+
+当前默认数值实现及其验证身份以上述快照和 [release](releases/VR-v1-b/README.md) 为准；以下内容属于更早交付历史。
+
 本交付不是从一个干净上游 tag 机械发布，而是对当前研究工作树中已验收文件的可审计快照。源研究仓库当时存在其他用户实验改动，因此没有对源仓库执行 reset、checkout 或清理。
 
 | 组件 | 基础 commit | 交付方式 |

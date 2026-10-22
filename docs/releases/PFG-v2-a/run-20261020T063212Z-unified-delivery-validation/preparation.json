@@ -1,0 +1,8 @@
+{
+  "candidate": "PFG-v2-a",
+  "run_id": "run-20261020T063212Z-unified-delivery-validation",
+  "release": "docs/releases/VR-v1-b",
+  "source_run": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950",
+  "asset_checksums_verified": true,
+  "copied_file_count": 33
+}

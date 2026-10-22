@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "subject_id": "PFG-v2-a",
+  "checks": [
+    {
+      "id": "assets",
+      "criterion": "独立交付包包含VR-v1-b第950步128D静动态Gaussian、修正轨迹meta、配套U-Net、通用权重、PLY、视频和原始审计证据；文件大小与SHA256逐项核验，旧FFR-v1-l资产及代码入口保留。",
+      "passed": true,
+      "run_id": "run-20261020T063212Z-unified-delivery-validation",
+      "evidence": [
+        "docs/releases/VR-v1-b/delivery_manifest.json::完整资产来源和SHA256",
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json::33文件、通用权重与旧版资产SHA256核验通过",
+        "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_static_128d.pt::已冻结静态Gaussian资产",
+        "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_dynamic_128d.pt::已冻结动态Gaussian资产",
+        "artifacts/scene017_vr_v1_b/runtime-payload-refined/global_dynamic_meta.pt::已冻结轨迹及评估框",
+        "weights/refiner_scene017_vr_v1_b.pt::与payload配套的场景U-Net"
+      ]
+    },
+    {
+      "id": "pipeline",
+      "criterion": "版本隔离源码与可移植配置支持原始处理后RGB/LiDAR/标定/实例到前馈、950步联合优化、检查点评估、PLY和视频；无源研究仓库执行依赖；固定950步数值配置，提供已交付资产重渲染入口与默认入口。",
+      "passed": true,
+      "run_id": "run-20261020T063212Z-unified-delivery-validation",
+      "evidence": [
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/pipeline_review.json::完整fresh命令与各数值入口实际import检查；未执行全量冷启动训练",
+        "docs/releases/VR-v1-b/source_manifest.json::原数值代码仅改编排helper导入",
+        "docs/releases/VR-v1-b/entrypoint_manifest.json::入口及模板指纹",
+        "scripts/run_current_pipeline.py::默认VR-v1-b入口",
+        "scripts/run_vr_v1_b_pipeline.py::全流程可移植编排与统一计时",
+        "docs/releases/VR-v1-b/source/scripts/delivery_runtime_helpers.py::无研究路径的渲染编排工具",
+        "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py::原950步数值优化流程"
+      ]
+    },
+    {
+      "id": "replay",
+      "criterion": "在交付仓库内仅使用交付源码、权重、payload和指定原始数据，完整156帧三相机重渲染；全局和动态bbox PSNR与VR-v1-b原始950步结果绝对误差均不超过0.0001dB；保存完整视频并亲自查看。",
+      "passed": true,
+      "run_id": "run-20261020T063212Z-unified-delivery-validation",
+      "evidence": [
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json::156帧三相机三项PSNR与原结果误差为零；PLY哈希一致",
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/runtime-render-source/manifest.json::原始独立重渲染指标",
+        "docs/releases/VR-v1-b/evidence/original_render_manifest.json::源实验950步指标",
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_predicted_front3.mp4::独立完整预测视频",
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4::独立完整对照视频",
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/REPORT.md::亲自查看对照和车辆图并记录已有缺陷"
+      ]
+    },
+    {
+      "id": "honesty",
+      "criterion": "README、变更记录、manifest明确区分缓存后增量、前馈历史前缀与历史累计，不宣称为新的冷启动实测；PLY仅为frame000预览，指标属于128D+U-Net运行时。",
+      "passed": true,
+      "run_id": "run-20261020T063212Z-unified-delivery-validation",
+      "evidence": [
+        "docs/releases/VR-v1-b/README.md::区分历史增量、前缀、累计及本次缓存重渲染，不认证新冷启动；PLY为预览",
+        "docs/ALGORITHM_CHANGES.md::持续变更记录和计时质量边界",
+        "docs/releases/VR-v1-b/evidence/pipeline_timing.json::原始缓存增量及历史计时",
+        "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/pipeline_timing.json::本次实际重渲染与导出计时，仅cached_incremental"
+      ]
+    }
+  ]
+}

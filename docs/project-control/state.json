@@ -23,14 +23,18 @@
       "label": "项目主线",
       "purpose": "可在新机器独立完成数据预处理、模型预训练、全局Gaussian推理、PLY导出与128D渲染的交付主线",
       "parent_scope_id": null,
-      "current_version_id": "PFG-v2",
-      "next_version_number": 3,
+      "current_version_id": "PFG-v4",
+      "next_version_number": 5,
       "version_ids": [
         "PFG-v1",
-        "PFG-v2"
+        "PFG-v2",
+        "PFG-v3",
+        "PFG-v4"
       ],
       "candidate_ids": [
-        "PFG-v1-a"
+        "PFG-v1-a",
+        "PFG-v2-a",
+        "PFG-v3-a"
       ],
       "created_at": "2026-09-25T15:51:53+00:00"
     },
@@ -98,7 +102,7 @@
       "scope_id": "project",
       "number": 2,
       "slug": "fast-g8-27db-mainline",
-      "status": "current",
+      "status": "superseded",
       "parent_version_id": "PFG-v1",
       "promoted_from_candidate_id": "PFG-v1-a",
       "change_types": [
@@ -128,7 +132,784 @@
         }
       ],
       "legacy_id": null,
-      "created_at": "2026-09-28T04:27:48+00:00"
+      "created_at": "2026-09-28T04:27:48+00:00",
+      "superseded_at": "2026-10-20T06:47:34+00:00"
+    },
+    "PFG-v3": {
+      "version_id": "PFG-v3",
+      "scope_id": "project",
+      "number": 3,
+      "slug": "unified-scene-joint950-delivery",
+      "status": "superseded",
+      "parent_version_id": "PFG-v2",
+      "promoted_from_candidate_id": "PFG-v2-a",
+      "change_types": [
+        "code_architecture"
+      ],
+      "summary": "当前交付算法VR-v1-b：原始前馈后全参数、U-Net与车辆轨迹连续950步联合优化；portable fresh/replay成为默认；旧入口保留；独立完整156帧复现30.294842dB/动态26.334712dB，历史累计非新冷启动实测",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json",
+          "claim": "独立完整重渲染与校验通过",
+          "recorded_at": "2026-10-20T06:47:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "47f80b696a756fe269bbce16678958f02e5c8ff4c2f53025932f69dd6f0b6872",
+          "size_when_recorded": 1286,
+          "mtime_ns_when_recorded": 1792478741097758966
+        },
+        {
+          "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json",
+          "claim": "支持将已独立验收的交付架构设为当前主线",
+          "recorded_at": "2026-10-20T06:47:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "47f80b696a756fe269bbce16678958f02e5c8ff4c2f53025932f69dd6f0b6872",
+          "size_when_recorded": 1286,
+          "mtime_ns_when_recorded": 1792478741097758966
+        }
+      ],
+      "legacy_id": null,
+      "created_at": "2026-10-20T06:47:34+00:00",
+      "acceptance_report": {
+        "source": {
+          "reference": "docs/releases/PFG-v2-a/acceptance_report.json",
+          "claim": "structured acceptance checked against raw evidence",
+          "recorded_at": "2026-10-20T06:47:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "4b44dbf5c0b682214d82b12ed6844e36f99f089a82652965172adb0d83c0e187",
+          "size_when_recorded": 4467,
+          "mtime_ns_when_recorded": 1792478853874594647
+        },
+        "content": {
+          "schema_version": 1,
+          "subject_id": "PFG-v2-a",
+          "checks": [
+            {
+              "id": "assets",
+              "criterion": "独立交付包包含VR-v1-b第950步128D静动态Gaussian、修正轨迹meta、配套U-Net、通用权重、PLY、视频和原始审计证据；文件大小与SHA256逐项核验，旧FFR-v1-l资产及代码入口保留。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-b/delivery_manifest.json::完整资产来源和SHA256",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json::33文件、通用权重与旧版资产SHA256核验通过",
+                "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_static_128d.pt::已冻结静态Gaussian资产",
+                "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_dynamic_128d.pt::已冻结动态Gaussian资产",
+                "artifacts/scene017_vr_v1_b/runtime-payload-refined/global_dynamic_meta.pt::已冻结轨迹及评估框",
+                "weights/refiner_scene017_vr_v1_b.pt::与payload配套的场景U-Net"
+              ]
+            },
+            {
+              "id": "pipeline",
+              "criterion": "版本隔离源码与可移植配置支持原始处理后RGB/LiDAR/标定/实例到前馈、950步联合优化、检查点评估、PLY和视频；无源研究仓库执行依赖；固定950步数值配置，提供已交付资产重渲染入口与默认入口。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/pipeline_review.json::完整fresh命令与各数值入口实际import检查；未执行全量冷启动训练",
+                "docs/releases/VR-v1-b/source_manifest.json::原数值代码仅改编排helper导入",
+                "docs/releases/VR-v1-b/entrypoint_manifest.json::入口及模板指纹",
+                "scripts/run_current_pipeline.py::默认VR-v1-b入口",
+                "scripts/run_vr_v1_b_pipeline.py::全流程可移植编排与统一计时",
+                "docs/releases/VR-v1-b/source/scripts/delivery_runtime_helpers.py::无研究路径的渲染编排工具",
+                "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py::原950步数值优化流程"
+              ]
+            },
+            {
+              "id": "replay",
+              "criterion": "在交付仓库内仅使用交付源码、权重、payload和指定原始数据，完整156帧三相机重渲染；全局和动态bbox PSNR与VR-v1-b原始950步结果绝对误差均不超过0.0001dB；保存完整视频并亲自查看。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json::156帧三相机三项PSNR与原结果误差为零；PLY哈希一致",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/runtime-render-source/manifest.json::原始独立重渲染指标",
+                "docs/releases/VR-v1-b/evidence/original_render_manifest.json::源实验950步指标",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_predicted_front3.mp4::独立完整预测视频",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4::独立完整对照视频",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/REPORT.md::亲自查看对照和车辆图并记录已有缺陷"
+              ]
+            },
+            {
+              "id": "honesty",
+              "criterion": "README、变更记录、manifest明确区分缓存后增量、前馈历史前缀与历史累计，不宣称为新的冷启动实测；PLY仅为frame000预览，指标属于128D+U-Net运行时。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-b/README.md::区分历史增量、前缀、累计及本次缓存重渲染，不认证新冷启动；PLY为预览",
+                "docs/ALGORITHM_CHANGES.md::持续变更记录和计时质量边界",
+                "docs/releases/VR-v1-b/evidence/pipeline_timing.json::原始缓存增量及历史计时",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/pipeline_timing.json::本次实际重渲染与导出计时，仅cached_incremental"
+              ]
+            }
+          ]
+        },
+        "evidence_snapshots": [
+          {
+            "reference": "docs/releases/VR-v1-b/delivery_manifest.json",
+            "claim": "完整资产来源和SHA256",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "5f62c75b8d21f16757e5a3b146c4ecf0329e2552237fa35126db1a6d9069d839",
+            "size_when_recorded": 14965,
+            "mtime_ns_when_recorded": 1792478707553510121
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json",
+            "claim": "33文件、通用权重与旧版资产SHA256核验通过",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "47f80b696a756fe269bbce16678958f02e5c8ff4c2f53025932f69dd6f0b6872",
+            "size_when_recorded": 1286,
+            "mtime_ns_when_recorded": 1792478741097758966
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_static_128d.pt",
+            "claim": "已冻结静态Gaussian资产",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 5158134798,
+            "mtime_ns_when_recorded": 1792461634058991703
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_dynamic_128d.pt",
+            "claim": "已冻结动态Gaussian资产",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 266404477,
+            "mtime_ns_when_recorded": 1792461634466994741
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_b/runtime-payload-refined/global_dynamic_meta.pt",
+            "claim": "已冻结轨迹及评估框",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "44c7c3268f08bfc49a053aa78065b98d99fadae8cad7c2df86fca74f142b7f00",
+            "size_when_recorded": 1293326,
+            "mtime_ns_when_recorded": 1792461634466994741
+          },
+          {
+            "reference": "weights/refiner_scene017_vr_v1_b.pt",
+            "claim": "与payload配套的场景U-Net",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "14b7f130c4f3091ab5e0f337ea7dae83de63d61be025c4c30800d920b4d435cf",
+            "size_when_recorded": 7852933,
+            "mtime_ns_when_recorded": 1792461634842997542
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/pipeline_review.json",
+            "claim": "完整fresh命令与各数值入口实际import检查；未执行全量冷启动训练",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "6245facfb4a80345379b0d30129f83f044d8fb833e6436be72db450e8a973be7",
+            "size_when_recorded": 5560,
+            "mtime_ns_when_recorded": 1792478605948755651
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/source_manifest.json",
+            "claim": "原数值代码仅改编排helper导入",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "de512785a854453801d841298074ff35ad8d88f8b6dd40afcaf266f7640ceea0",
+            "size_when_recorded": 31362,
+            "mtime_ns_when_recorded": 1792478707553510121
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/entrypoint_manifest.json",
+            "claim": "入口及模板指纹",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "92fff17e33f5260c288ad99a6a8017641bcf0a84e3a90e46467541b7edc3d07e",
+            "size_when_recorded": 929,
+            "mtime_ns_when_recorded": 1792478707553510121
+          },
+          {
+            "reference": "scripts/run_current_pipeline.py",
+            "claim": "默认VR-v1-b入口",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ebc3cca42c85df7aebd18d3a3cfdf5c0944b35f103c41886f4ecd8241a801366",
+            "size_when_recorded": 216,
+            "mtime_ns_when_recorded": 1792478603920740592
+          },
+          {
+            "reference": "scripts/run_vr_v1_b_pipeline.py",
+            "claim": "全流程可移植编排与统一计时",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "fa0b3ff8ce86cc10f025b95f5fa627fcb80766a866677ac5a142b8f567e4335f",
+            "size_when_recorded": 8517,
+            "mtime_ns_when_recorded": 1792478080160849706
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/source/scripts/delivery_runtime_helpers.py",
+            "claim": "无研究路径的渲染编排工具",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "5d1dd66bc181a8aa96eb006a8148533c0e5477d559db0006fa703b1b223c68b1",
+            "size_when_recorded": 904,
+            "mtime_ns_when_recorded": 1792478080160849706
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py",
+            "claim": "原950步数值优化流程",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "e7cfe8749f7719c9d2dd0a95355328da63e32dc22964e87c96070e258cad9453",
+            "size_when_recorded": 15887,
+            "mtime_ns_when_recorded": 1792478095476963631
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/runtime-render-source/manifest.json",
+            "claim": "原始独立重渲染指标",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3d8fef6a5aa280231d22def89c96f9cb68e48529804140969e7bfcb965eb6823",
+            "size_when_recorded": 1060349,
+            "mtime_ns_when_recorded": 1792478270514264860
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/evidence/original_render_manifest.json",
+            "claim": "源实验950步指标",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "99f3aded3b5d0405892c4d7869017d9a2f9d84d0250c463cb27d9cdedeec3232",
+            "size_when_recorded": 1060752,
+            "mtime_ns_when_recorded": 1792461799208221592
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_predicted_front3.mp4",
+            "claim": "独立完整预测视频",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 20030546,
+            "mtime_ns_when_recorded": 1792478259134180356
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4",
+            "claim": "独立完整对照视频",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 45857383,
+            "mtime_ns_when_recorded": 1792478263430212257
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/REPORT.md",
+            "claim": "亲自查看对照和车辆图并记录已有缺陷",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "dffbdd3ce0d9be907324942240f0f0fc289082a4ed9516495cecb5134a985dad",
+            "size_when_recorded": 3272,
+            "mtime_ns_when_recorded": 1792478791610133265
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/README.md",
+            "claim": "区分历史增量、前缀、累计及本次缓存重渲染，不认证新冷启动；PLY为预览",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "337fde8ad478ba3fd2add4cd566ffa415c8079ae434e6aedb8a75b374edc13e2",
+            "size_when_recorded": 5818,
+            "mtime_ns_when_recorded": 1792478791610133265
+          },
+          {
+            "reference": "docs/ALGORITHM_CHANGES.md",
+            "claim": "持续变更记录和计时质量边界",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "84f925df16040296eaaccc9c85367a058f667c68cd116267e2e7ac2e9e860f82",
+            "size_when_recorded": 1921,
+            "mtime_ns_when_recorded": 1792478278118321324
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/evidence/pipeline_timing.json",
+            "claim": "原始缓存增量及历史计时",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "9b65a9892875e4cd7123a33b223d3a324c470cd21c747a4a07957aa502e2aad1",
+            "size_when_recorded": 3969,
+            "mtime_ns_when_recorded": 1792461811968316618
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/pipeline_timing.json",
+            "claim": "本次实际重渲染与导出计时，仅cached_incremental",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "cbcb2265bd79da1009419d623845262f44ddf60c33cdd5c62de3f157923d0ebb",
+            "size_when_recorded": 3053,
+            "mtime_ns_when_recorded": 1792478278058320879
+          }
+        ]
+      },
+      "superseded_at": "2026-10-22T07:07:04+00:00"
+    },
+    "PFG-v4": {
+      "version_id": "PFG-v4",
+      "scope_id": "project",
+      "number": 4,
+      "slug": "compact32-union-smpl-delivery",
+      "status": "current",
+      "parent_version_id": "PFG-v3",
+      "promoted_from_candidate_id": "PFG-v3-a",
+      "change_types": [
+        "code_architecture"
+      ],
+      "summary": "当前交付VR-v1-s第1670步：车辆几何校正、32D Gaussian/PCA/U-Net、SMPL插值、全三相机union联合训练；fresh/replay便携入口；独立156帧全局31.131654/车辆28.329244dB，源完整RGB处理后输入至视频PLY1609.087s，研究29dB目标仍未达标",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json",
+          "claim": "完整独立重放及资产核验通过",
+          "recorded_at": "2026-10-22T07:07:04+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "b7bce820f2b35a9003ed9c7fa67d7ac4e059333a68a585b6c0cee5ace3366578",
+          "size_when_recorded": 1323,
+          "mtime_ns_when_recorded": 1792652376972930080
+        },
+        {
+          "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json",
+          "claim": "用户指定当前最佳交付，独立完整验证通过",
+          "recorded_at": "2026-10-22T07:07:04+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "b7bce820f2b35a9003ed9c7fa67d7ac4e059333a68a585b6c0cee5ace3366578",
+          "size_when_recorded": 1323,
+          "mtime_ns_when_recorded": 1792652376972930080
+        }
+      ],
+      "legacy_id": null,
+      "created_at": "2026-10-22T07:07:04+00:00",
+      "acceptance_report": {
+        "source": {
+          "reference": "docs/releases/PFG-v3-a/acceptance_report.json",
+          "claim": "structured acceptance checked against raw evidence",
+          "recorded_at": "2026-10-22T07:07:04+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "132f2ededbb20049b57cca0cd933a34911810a7328d1605d7795aed0611c4986",
+          "size_when_recorded": 5493,
+          "mtime_ns_when_recorded": 1792652824616324332
+        },
+        "content": {
+          "schema_version": 1,
+          "subject_id": "PFG-v3-a",
+          "checks": [
+            {
+              "id": "assets",
+              "criterion": "完整固化VR-v1-s第1670步32D静态动态Gaussian、PCA基、轨迹、SMPL状态、配套U-Net、通用权重、源码、PLY预览及视频；源与交付资产SHA256一致。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-s/delivery_manifest.json::逐文件SHA256及原始来源",
+                "docs/releases/VR-v1-s/source_manifest.json::全部交付源码指纹及明确的便携差异",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json::3922项资产及443项源码验证通过",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_static_128d.pt::已冻结32D静态Gaussian",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_dynamic_128d.pt::已冻结32D动态Gaussian",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/global_dynamic_meta.pt::修正轨迹及固定评估框",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/feature_projection.pt::配套PCA投影基",
+                "artifacts/scene017_vr_v1_s/pedestrian_tracks.pt::配套SMPL姿态",
+                "weights/refiner_scene017_vr_v1_s.pt::配套32D U-Net",
+                "weights/SMPL_NEUTRAL.npz::配套SMPL模板"
+              ]
+            },
+            {
+              "id": "pipeline",
+              "criterion": "独立交付源码、依赖和可移植参数支持原始处理后RGB/LiDAR到几何校正、并行前馈、SMPL、32D投影、全三相机联合优化及视频和PLY；fresh不复用历史场景状态；提供固定资产replay。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/pipeline_review.json::fresh完整配方及9个真实入口import成功和原配置等价核对；未重训",
+                "docs/releases/VR-v1-s/entrypoint_manifest.json::版本专属入口与模板指纹，默认别名允许维护",
+                "docs/releases/VR-v1-s/evidence/config_build.original.yaml::原始冷启动数值配置",
+                "scripts/run_vr_v1_s_pipeline.py::包内fresh/replay编排和完整真实计时",
+                "scripts/validate_vr_v1_s_delivery.py::资产及数值重放校验实现",
+                "docs/releases/VR-v1-s/source/scripts/delivery_runtime_helpers.py::可移植编排适配",
+                "docs/releases/VR-v1-s/source/scripts/refine_unified_scene_rgb.py::原联合优化数值实现",
+                "docs/releases/VR-v1-s/source/scripts/geometry_rgb_masks.py::包内SAM2参数适配",
+                "docs/releases/VR-v1-s/source/sitecustomize.py::预编译扩展显式启用边界"
+              ]
+            },
+            {
+              "id": "replay",
+              "criterion": "包内源码与资产重渲染完整156帧三相机；全局、车辆bbox和非天空PSNR相比源VR-v1-s误差各不超过0.0001dB，PLY一致并人工查看结果。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json::完整156帧三相机三项PSNR误差零及PLY一致",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/runtime-render-source/manifest.json::原始独立重渲染指标",
+                "docs/releases/VR-v1-s/evidence/original_render_manifest.json::源1670步原始指标",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4::独立完整GT对比视频",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_predicted_front3.mp4::独立完整预测视频",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_gaussians_frame000_preview.ply::独立导出且指纹一致的预览",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/review.png::亲自查看的20/80/140帧三相机对比",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md::人工视觉检查与原有模糊缺陷"
+              ]
+            },
+            {
+              "id": "honesty",
+              "criterion": "准确保留源记录的各阶段边界、完整交付开销以及研究验收失败结论；本次固化仅验证交付与重渲染，不伪称重新冷启动训练或单PLY复现RGB指标。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-s/README.md::源冷启动阶段边界和完整交付耗时及本次仅固定状态重放",
+                "docs/releases/VR-v1-s/evidence/pipeline_timing.json::源完整交付真实原始计时",
+                "docs/releases/VR-v1-s/evidence/optimization_timing.json::源预处理到优化退出计时",
+                "docs/releases/VR-v1-s/evidence/acceptance_report.json::研究车辆29dB失败未改写",
+                "docs/releases/VR-v1-s/evidence/input_provenance.md::原始处理后输入边界和通用离线前提",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/pipeline_timing.json::本次仅cached_incremental重放计时",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md::不宣称新冷启动训练或单PLY复现RGB指标"
+              ]
+            }
+          ]
+        },
+        "evidence_snapshots": [
+          {
+            "reference": "docs/releases/VR-v1-s/delivery_manifest.json",
+            "claim": "逐文件SHA256及原始来源",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "608e46a72e6cb9b173c19000fca0162c771be67fb20c4495bbc447116cfe370c",
+            "size_when_recorded": 1934641,
+            "mtime_ns_when_recorded": 1792652207827653054
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source_manifest.json",
+            "claim": "全部交付源码指纹及明确的便携差异",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3a9b9fada8d3ef4ec435928dd1525562acc5adc73e5d53931309d9ff4279c1e6",
+            "size_when_recorded": 218361,
+            "mtime_ns_when_recorded": 1792652179403439235
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json",
+            "claim": "3922项资产及443项源码验证通过",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "b7bce820f2b35a9003ed9c7fa67d7ac4e059333a68a585b6c0cee5ace3366578",
+            "size_when_recorded": 1323,
+            "mtime_ns_when_recorded": 1792652376972930080
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_static_128d.pt",
+            "claim": "已冻结32D静态Gaussian",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 1856117690,
+            "mtime_ns_when_recorded": 1792649266709733876
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_dynamic_128d.pt",
+            "claim": "已冻结32D动态Gaussian",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 94137710,
+            "mtime_ns_when_recorded": 1792649266853734945
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/global_dynamic_meta.pt",
+            "claim": "修正轨迹及固定评估框",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3fdad8a130c3e4a48a0900d81ff20fe13aaa79d251bc81b0cf87ca692af82824",
+            "size_when_recorded": 1323726,
+            "mtime_ns_when_recorded": 1792649266857734975
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/feature_projection.pt",
+            "claim": "配套PCA投影基",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "cd9e9bb146e1eb0a7ce3d5730a11c71433f17438cd9b580a40b3d9112de02df5",
+            "size_when_recorded": 19197,
+            "mtime_ns_when_recorded": 1792649266853734945
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/pedestrian_tracks.pt",
+            "claim": "配套SMPL姿态",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "79d44546a3bea00c4bedc2936d0deab41f42a1c48825c101d9c1466e9b5c9f09",
+            "size_when_recorded": 438495,
+            "mtime_ns_when_recorded": 1792648251882139230
+          },
+          {
+            "reference": "weights/refiner_scene017_vr_v1_s.pt",
+            "claim": "配套32D U-Net",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "c3181ce6d038cc39271279196e004ea687cdacd2229114bc5dd9b29ab6f5b61c",
+            "size_when_recorded": 7631749,
+            "mtime_ns_when_recorded": 1792649266877735123
+          },
+          {
+            "reference": "weights/SMPL_NEUTRAL.npz",
+            "claim": "配套SMPL模板",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ad9bb6cc1064f498cfae2a16e8f3fc8e65ad7c79b438cfd053a7a70839006656",
+            "size_when_recorded": 2564688,
+            "mtime_ns_when_recorded": 1789461080182790004
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/pipeline_review.json",
+            "claim": "fresh完整配方及9个真实入口import成功和原配置等价核对；未重训",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ee15e23a19931227145bc028522a3410e25d45fbde991d0e88cfb7b36c77695a",
+            "size_when_recorded": 10870,
+            "mtime_ns_when_recorded": 1792652609378691643
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/entrypoint_manifest.json",
+            "claim": "版本专属入口与模板指纹，默认别名允许维护",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "76213988d41e7c9ceff8024c819cad912c83ae835560c3040b74b7f123ed2034",
+            "size_when_recorded": 865,
+            "mtime_ns_when_recorded": 1792652207831653084
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/config_build.original.yaml",
+            "claim": "原始冷启动数值配置",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "1f0713dc70760be4eb106c5e88481be3dcf1388b7871d4491d7be7b95a55796d",
+            "size_when_recorded": 1500,
+            "mtime_ns_when_recorded": 1792647783418615171
+          },
+          {
+            "reference": "scripts/run_vr_v1_s_pipeline.py",
+            "claim": "包内fresh/replay编排和完整真实计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "70509af39c186dd4377b3b79cd242b305f416fe8ab76d708adac2e523b768894",
+            "size_when_recorded": 10763,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "scripts/validate_vr_v1_s_delivery.py",
+            "claim": "资产及数值重放校验实现",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "1996e5b3fa42eb04c41cf95cafacf1197498f972081f4b0d34dbf97746ec9bb5",
+            "size_when_recorded": 3975,
+            "mtime_ns_when_recorded": 1792651888937254230
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/scripts/delivery_runtime_helpers.py",
+            "claim": "可移植编排适配",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "f2837fc34e59bedd3b3d77d854df9e32ae2ef189008a84646a20b901a6d0de71",
+            "size_when_recorded": 892,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/scripts/refine_unified_scene_rgb.py",
+            "claim": "原联合优化数值实现",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "4aeca2f57cad6c399f18bb450e5972e5fb56863cc85cd11364d13165a27ea921",
+            "size_when_recorded": 22874,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/scripts/geometry_rgb_masks.py",
+            "claim": "包内SAM2参数适配",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "a26b233a3190fc68670413d13993931802e104e3e7e58128ca5d137ebb2639ab",
+            "size_when_recorded": 2234,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/sitecustomize.py",
+            "claim": "预编译扩展显式启用边界",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "51397a8243b8be3d32f71b4679372a7ac78dc10f33a3c8580f64b8a28e2bf395",
+            "size_when_recorded": 485,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/runtime-render-source/manifest.json",
+            "claim": "原始独立重渲染指标",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "7e1fbbe7377e3d337305bd70f92772559324f5a9d17503983a515a3b268dc909",
+            "size_when_recorded": 1079947,
+            "mtime_ns_when_recorded": 1792651943481664535
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/original_render_manifest.json",
+            "claim": "源1670步原始指标",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "031cef53a243c810c711c25877a5fbc47655928324b6b81b60ac28643bd969aa",
+            "size_when_recorded": 1080278,
+            "mtime_ns_when_recorded": 1792649386094620332
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4",
+            "claim": "独立完整GT对比视频",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 46104184,
+            "mtime_ns_when_recorded": 1792651940605642900
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_predicted_front3.mp4",
+            "claim": "独立完整预测视频",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 20312493,
+            "mtime_ns_when_recorded": 1792651931621575318
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_gaussians_frame000_preview.ply",
+            "claim": "独立导出且指纹一致的预览",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 616337865,
+            "mtime_ns_when_recorded": 1792651952537732658
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/review.png",
+            "claim": "亲自查看的20/80/140帧三相机对比",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "cdb8aac0b3e2e7d79120ea3bc37e113c27599f041a22f3456e771c70b011235e",
+            "size_when_recorded": 3616329,
+            "mtime_ns_when_recorded": 1792652184163475042
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md",
+            "claim": "人工视觉检查与原有模糊缺陷",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "8d44211c3990158b309110250643f3e25826421c70ca00b1243ddc38821362cb",
+            "size_when_recorded": 2655,
+            "mtime_ns_when_recorded": 1792652591170553631
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/README.md",
+            "claim": "源冷启动阶段边界和完整交付耗时及本次仅固定状态重放",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "7baa0d256fc3eeac6ecc6407e958c4150d2843ed3a4e08975bb786cb5c1cde60",
+            "size_when_recorded": 6367,
+            "mtime_ns_when_recorded": 1792652160707298595
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/pipeline_timing.json",
+            "claim": "源完整交付真实原始计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "43769a1ac347d4cd945855021a8ad68201065eb8397b19fb464dd327a5df3f98",
+            "size_when_recorded": 15498,
+            "mtime_ns_when_recorded": 1792649392502667913
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/optimization_timing.json",
+            "claim": "源预处理到优化退出计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "fcb3cbc1f96dc2385c1aab77e047c95a9db79eba7a1541bc80a4526db2627fc0",
+            "size_when_recorded": 851,
+            "mtime_ns_when_recorded": 1792649268793749350
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/acceptance_report.json",
+            "claim": "研究车辆29dB失败未改写",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "fb28b9ad108a60e41afb3455d0a34be5c48c5ab027be800ac7027434f2c11cf0",
+            "size_when_recorded": 9261,
+            "mtime_ns_when_recorded": 1792649514943577061
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/input_provenance.md",
+            "claim": "原始处理后输入边界和通用离线前提",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "6cfef60ea2bb0c48f79485fe1d47269d1d651e08b838582635b854f2507cbc4c",
+            "size_when_recorded": 2011,
+            "mtime_ns_when_recorded": 1792648309926573926
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/pipeline_timing.json",
+            "claim": "本次仅cached_incremental重放计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "0906526af9eb0bf3b1b26ef68851eea70c7b658c927d8a2700101250528e8008",
+            "size_when_recorded": 3747,
+            "mtime_ns_when_recorded": 1792651953977743490
+          }
+        ]
+      }
     }
   },
   "candidates": {
@@ -193,6 +974,835 @@
       "promoted_to_version_id": "PFG-v2",
       "created_at": "2026-09-28T04:05:20+00:00",
       "updated_at": "2026-09-28T04:27:48+00:00"
+    },
+    "PFG-v2-a": {
+      "candidate_id": "PFG-v2-a",
+      "scope_id": "project",
+      "base_version_id": "PFG-v2",
+      "slug": "vr-v1-b-unified-delivery",
+      "status": "promoted",
+      "hypothesis": "VR-v1-b联合优化可独立固化交付并在交付环境精确复现30.294842dB",
+      "change_types": [
+        "code_architecture"
+      ],
+      "directory_id": "dir-0018",
+      "run_ids": [
+        "run-20261020T063212Z-unified-delivery-validation"
+      ],
+      "conclusion": "VR-v1-b固定950步完整状态独立交付，156帧全局30.294842/动态26.334712dB精确重现；保留旧入口与资产，无新冷启动耗时认证",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json",
+          "claim": "独立完整重渲染与校验通过",
+          "recorded_at": "2026-10-20T06:47:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "47f80b696a756fe269bbce16678958f02e5c8ff4c2f53025932f69dd6f0b6872",
+          "size_when_recorded": 1286,
+          "mtime_ns_when_recorded": 1792478741097758966
+        }
+      ],
+      "promoted_to_version_id": "PFG-v3",
+      "created_at": "2026-10-20T06:31:44+00:00",
+      "updated_at": "2026-10-20T06:47:34+00:00",
+      "acceptance_contract": {
+        "source": {
+          "reference": "docs/releases/PFG-v2-a/acceptance_contract.json",
+          "claim": "pre-registered user acceptance criteria",
+          "recorded_at": "2026-10-20T06:31:44+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "229d4616f9b1918313f26322332c78e8572d04617869e7bda928aa2bc9ace986",
+          "size_when_recorded": 1191,
+          "mtime_ns_when_recorded": 1792477904079539978
+        },
+        "content": {
+          "schema_version": 1,
+          "criteria": [
+            {
+              "id": "assets",
+              "criterion": "独立交付包包含VR-v1-b第950步128D静动态Gaussian、修正轨迹meta、配套U-Net、通用权重、PLY、视频和原始审计证据；文件大小与SHA256逐项核验，旧FFR-v1-l资产及代码入口保留。"
+            },
+            {
+              "id": "pipeline",
+              "criterion": "版本隔离源码与可移植配置支持原始处理后RGB/LiDAR/标定/实例到前馈、950步联合优化、检查点评估、PLY和视频；无源研究仓库执行依赖；固定950步数值配置，提供已交付资产重渲染入口与默认入口。"
+            },
+            {
+              "id": "replay",
+              "criterion": "在交付仓库内仅使用交付源码、权重、payload和指定原始数据，完整156帧三相机重渲染；全局和动态bbox PSNR与VR-v1-b原始950步结果绝对误差均不超过0.0001dB；保存完整视频并亲自查看。"
+            },
+            {
+              "id": "honesty",
+              "criterion": "README、变更记录、manifest明确区分缓存后增量、前馈历史前缀与历史累计，不宣称为新的冷启动实测；PLY仅为frame000预览，指标属于128D+U-Net运行时。"
+            }
+          ]
+        }
+      },
+      "acceptance_report": {
+        "source": {
+          "reference": "docs/releases/PFG-v2-a/acceptance_report.json",
+          "claim": "structured acceptance checked against raw evidence",
+          "recorded_at": "2026-10-20T06:47:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "4b44dbf5c0b682214d82b12ed6844e36f99f089a82652965172adb0d83c0e187",
+          "size_when_recorded": 4467,
+          "mtime_ns_when_recorded": 1792478853874594647
+        },
+        "content": {
+          "schema_version": 1,
+          "subject_id": "PFG-v2-a",
+          "checks": [
+            {
+              "id": "assets",
+              "criterion": "独立交付包包含VR-v1-b第950步128D静动态Gaussian、修正轨迹meta、配套U-Net、通用权重、PLY、视频和原始审计证据；文件大小与SHA256逐项核验，旧FFR-v1-l资产及代码入口保留。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-b/delivery_manifest.json::完整资产来源和SHA256",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json::33文件、通用权重与旧版资产SHA256核验通过",
+                "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_static_128d.pt::已冻结静态Gaussian资产",
+                "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_dynamic_128d.pt::已冻结动态Gaussian资产",
+                "artifacts/scene017_vr_v1_b/runtime-payload-refined/global_dynamic_meta.pt::已冻结轨迹及评估框",
+                "weights/refiner_scene017_vr_v1_b.pt::与payload配套的场景U-Net"
+              ]
+            },
+            {
+              "id": "pipeline",
+              "criterion": "版本隔离源码与可移植配置支持原始处理后RGB/LiDAR/标定/实例到前馈、950步联合优化、检查点评估、PLY和视频；无源研究仓库执行依赖；固定950步数值配置，提供已交付资产重渲染入口与默认入口。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/pipeline_review.json::完整fresh命令与各数值入口实际import检查；未执行全量冷启动训练",
+                "docs/releases/VR-v1-b/source_manifest.json::原数值代码仅改编排helper导入",
+                "docs/releases/VR-v1-b/entrypoint_manifest.json::入口及模板指纹",
+                "scripts/run_current_pipeline.py::默认VR-v1-b入口",
+                "scripts/run_vr_v1_b_pipeline.py::全流程可移植编排与统一计时",
+                "docs/releases/VR-v1-b/source/scripts/delivery_runtime_helpers.py::无研究路径的渲染编排工具",
+                "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py::原950步数值优化流程"
+              ]
+            },
+            {
+              "id": "replay",
+              "criterion": "在交付仓库内仅使用交付源码、权重、payload和指定原始数据，完整156帧三相机重渲染；全局和动态bbox PSNR与VR-v1-b原始950步结果绝对误差均不超过0.0001dB；保存完整视频并亲自查看。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json::156帧三相机三项PSNR与原结果误差为零；PLY哈希一致",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/runtime-render-source/manifest.json::原始独立重渲染指标",
+                "docs/releases/VR-v1-b/evidence/original_render_manifest.json::源实验950步指标",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_predicted_front3.mp4::独立完整预测视频",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4::独立完整对照视频",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/REPORT.md::亲自查看对照和车辆图并记录已有缺陷"
+              ]
+            },
+            {
+              "id": "honesty",
+              "criterion": "README、变更记录、manifest明确区分缓存后增量、前馈历史前缀与历史累计，不宣称为新的冷启动实测；PLY仅为frame000预览，指标属于128D+U-Net运行时。",
+              "passed": true,
+              "run_id": "run-20261020T063212Z-unified-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-b/README.md::区分历史增量、前缀、累计及本次缓存重渲染，不认证新冷启动；PLY为预览",
+                "docs/ALGORITHM_CHANGES.md::持续变更记录和计时质量边界",
+                "docs/releases/VR-v1-b/evidence/pipeline_timing.json::原始缓存增量及历史计时",
+                "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/pipeline_timing.json::本次实际重渲染与导出计时，仅cached_incremental"
+              ]
+            }
+          ]
+        },
+        "evidence_snapshots": [
+          {
+            "reference": "docs/releases/VR-v1-b/delivery_manifest.json",
+            "claim": "完整资产来源和SHA256",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "5f62c75b8d21f16757e5a3b146c4ecf0329e2552237fa35126db1a6d9069d839",
+            "size_when_recorded": 14965,
+            "mtime_ns_when_recorded": 1792478707553510121
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json",
+            "claim": "33文件、通用权重与旧版资产SHA256核验通过",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "47f80b696a756fe269bbce16678958f02e5c8ff4c2f53025932f69dd6f0b6872",
+            "size_when_recorded": 1286,
+            "mtime_ns_when_recorded": 1792478741097758966
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_static_128d.pt",
+            "claim": "已冻结静态Gaussian资产",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 5158134798,
+            "mtime_ns_when_recorded": 1792461634058991703
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_b/runtime-payload-refined/final_dynamic_128d.pt",
+            "claim": "已冻结动态Gaussian资产",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 266404477,
+            "mtime_ns_when_recorded": 1792461634466994741
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_b/runtime-payload-refined/global_dynamic_meta.pt",
+            "claim": "已冻结轨迹及评估框",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "44c7c3268f08bfc49a053aa78065b98d99fadae8cad7c2df86fca74f142b7f00",
+            "size_when_recorded": 1293326,
+            "mtime_ns_when_recorded": 1792461634466994741
+          },
+          {
+            "reference": "weights/refiner_scene017_vr_v1_b.pt",
+            "claim": "与payload配套的场景U-Net",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "14b7f130c4f3091ab5e0f337ea7dae83de63d61be025c4c30800d920b4d435cf",
+            "size_when_recorded": 7852933,
+            "mtime_ns_when_recorded": 1792461634842997542
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/pipeline_review.json",
+            "claim": "完整fresh命令与各数值入口实际import检查；未执行全量冷启动训练",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "6245facfb4a80345379b0d30129f83f044d8fb833e6436be72db450e8a973be7",
+            "size_when_recorded": 5560,
+            "mtime_ns_when_recorded": 1792478605948755651
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/source_manifest.json",
+            "claim": "原数值代码仅改编排helper导入",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "de512785a854453801d841298074ff35ad8d88f8b6dd40afcaf266f7640ceea0",
+            "size_when_recorded": 31362,
+            "mtime_ns_when_recorded": 1792478707553510121
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/entrypoint_manifest.json",
+            "claim": "入口及模板指纹",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "92fff17e33f5260c288ad99a6a8017641bcf0a84e3a90e46467541b7edc3d07e",
+            "size_when_recorded": 929,
+            "mtime_ns_when_recorded": 1792478707553510121
+          },
+          {
+            "reference": "scripts/run_current_pipeline.py",
+            "claim": "默认VR-v1-b入口",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ebc3cca42c85df7aebd18d3a3cfdf5c0944b35f103c41886f4ecd8241a801366",
+            "size_when_recorded": 216,
+            "mtime_ns_when_recorded": 1792478603920740592
+          },
+          {
+            "reference": "scripts/run_vr_v1_b_pipeline.py",
+            "claim": "全流程可移植编排与统一计时",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "fa0b3ff8ce86cc10f025b95f5fa627fcb80766a866677ac5a142b8f567e4335f",
+            "size_when_recorded": 8517,
+            "mtime_ns_when_recorded": 1792478080160849706
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/source/scripts/delivery_runtime_helpers.py",
+            "claim": "无研究路径的渲染编排工具",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "5d1dd66bc181a8aa96eb006a8148533c0e5477d559db0006fa703b1b223c68b1",
+            "size_when_recorded": 904,
+            "mtime_ns_when_recorded": 1792478080160849706
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/source/scripts/refine_unified_scene_rgb.py",
+            "claim": "原950步数值优化流程",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "e7cfe8749f7719c9d2dd0a95355328da63e32dc22964e87c96070e258cad9453",
+            "size_when_recorded": 15887,
+            "mtime_ns_when_recorded": 1792478095476963631
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/runtime-render-source/manifest.json",
+            "claim": "原始独立重渲染指标",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3d8fef6a5aa280231d22def89c96f9cb68e48529804140969e7bfcb965eb6823",
+            "size_when_recorded": 1060349,
+            "mtime_ns_when_recorded": 1792478270514264860
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/evidence/original_render_manifest.json",
+            "claim": "源实验950步指标",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "99f3aded3b5d0405892c4d7869017d9a2f9d84d0250c463cb27d9cdedeec3232",
+            "size_when_recorded": 1060752,
+            "mtime_ns_when_recorded": 1792461799208221592
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_predicted_front3.mp4",
+            "claim": "独立完整预测视频",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 20030546,
+            "mtime_ns_when_recorded": 1792478259134180356
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4",
+            "claim": "独立完整对照视频",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 45857383,
+            "mtime_ns_when_recorded": 1792478263430212257
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/REPORT.md",
+            "claim": "亲自查看对照和车辆图并记录已有缺陷",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "dffbdd3ce0d9be907324942240f0f0fc289082a4ed9516495cecb5134a985dad",
+            "size_when_recorded": 3272,
+            "mtime_ns_when_recorded": 1792478791610133265
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/README.md",
+            "claim": "区分历史增量、前缀、累计及本次缓存重渲染，不认证新冷启动；PLY为预览",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "337fde8ad478ba3fd2add4cd566ffa415c8079ae434e6aedb8a75b374edc13e2",
+            "size_when_recorded": 5818,
+            "mtime_ns_when_recorded": 1792478791610133265
+          },
+          {
+            "reference": "docs/ALGORITHM_CHANGES.md",
+            "claim": "持续变更记录和计时质量边界",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "84f925df16040296eaaccc9c85367a058f667c68cd116267e2e7ac2e9e860f82",
+            "size_when_recorded": 1921,
+            "mtime_ns_when_recorded": 1792478278118321324
+          },
+          {
+            "reference": "docs/releases/VR-v1-b/evidence/pipeline_timing.json",
+            "claim": "原始缓存增量及历史计时",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "9b65a9892875e4cd7123a33b223d3a324c470cd21c747a4a07957aa502e2aad1",
+            "size_when_recorded": 3969,
+            "mtime_ns_when_recorded": 1792461811968316618
+          },
+          {
+            "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay/pipeline_timing.json",
+            "claim": "本次实际重渲染与导出计时，仅cached_incremental",
+            "recorded_at": "2026-10-20T06:47:34+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "cbcb2265bd79da1009419d623845262f44ddf60c33cdd5c62de3f157923d0ebb",
+            "size_when_recorded": 3053,
+            "mtime_ns_when_recorded": 1792478278058320879
+          }
+        ]
+      }
+    },
+    "PFG-v3-a": {
+      "candidate_id": "PFG-v3-a",
+      "scope_id": "project",
+      "base_version_id": "PFG-v3",
+      "slug": "compact32-union-delivery",
+      "status": "promoted",
+      "hypothesis": "用户选定VR-v1-s可独立固化并精确重渲染；交付验收独立于未通过的研究29dB目标",
+      "change_types": [
+        "code_architecture"
+      ],
+      "directory_id": "dir-0025",
+      "run_ids": [
+        "run-20261022T064659Z-compact-delivery-validation"
+      ],
+      "conclusion": "VR-v1-s第1670步32D运行时独立交付：全局31.131654、车辆28.329244dB精确复现；研究车辆29dB目标仍失败",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json",
+          "claim": "完整独立重放及资产核验通过",
+          "recorded_at": "2026-10-22T07:07:04+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "b7bce820f2b35a9003ed9c7fa67d7ac4e059333a68a585b6c0cee5ace3366578",
+          "size_when_recorded": 1323,
+          "mtime_ns_when_recorded": 1792652376972930080
+        }
+      ],
+      "promoted_to_version_id": "PFG-v4",
+      "created_at": "2026-10-22T06:46:59+00:00",
+      "updated_at": "2026-10-22T07:07:04+00:00",
+      "acceptance_contract": {
+        "source": {
+          "reference": "docs/releases/PFG-v3-a/acceptance_contract.json",
+          "claim": "pre-registered user acceptance criteria",
+          "recorded_at": "2026-10-22T06:46:59+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "f9fcf54a719a3c48a7555854dbcec67c8cc23a1288e86c730e79d6a7db7cd1f1",
+          "size_when_recorded": 1045,
+          "mtime_ns_when_recorded": 1792651619095231047
+        },
+        "content": {
+          "schema_version": 1,
+          "criteria": [
+            {
+              "id": "assets",
+              "criterion": "完整固化VR-v1-s第1670步32D静态动态Gaussian、PCA基、轨迹、SMPL状态、配套U-Net、通用权重、源码、PLY预览及视频；源与交付资产SHA256一致。"
+            },
+            {
+              "id": "pipeline",
+              "criterion": "独立交付源码、依赖和可移植参数支持原始处理后RGB/LiDAR到几何校正、并行前馈、SMPL、32D投影、全三相机联合优化及视频和PLY；fresh不复用历史场景状态；提供固定资产replay。"
+            },
+            {
+              "id": "replay",
+              "criterion": "包内源码与资产重渲染完整156帧三相机；全局、车辆bbox和非天空PSNR相比源VR-v1-s误差各不超过0.0001dB，PLY一致并人工查看结果。"
+            },
+            {
+              "id": "honesty",
+              "criterion": "准确保留源记录的各阶段边界、完整交付开销以及研究验收失败结论；本次固化仅验证交付与重渲染，不伪称重新冷启动训练或单PLY复现RGB指标。"
+            }
+          ]
+        }
+      },
+      "acceptance_report": {
+        "source": {
+          "reference": "docs/releases/PFG-v3-a/acceptance_report.json",
+          "claim": "structured acceptance checked against raw evidence",
+          "recorded_at": "2026-10-22T07:07:04+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "132f2ededbb20049b57cca0cd933a34911810a7328d1605d7795aed0611c4986",
+          "size_when_recorded": 5493,
+          "mtime_ns_when_recorded": 1792652824616324332
+        },
+        "content": {
+          "schema_version": 1,
+          "subject_id": "PFG-v3-a",
+          "checks": [
+            {
+              "id": "assets",
+              "criterion": "完整固化VR-v1-s第1670步32D静态动态Gaussian、PCA基、轨迹、SMPL状态、配套U-Net、通用权重、源码、PLY预览及视频；源与交付资产SHA256一致。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-s/delivery_manifest.json::逐文件SHA256及原始来源",
+                "docs/releases/VR-v1-s/source_manifest.json::全部交付源码指纹及明确的便携差异",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json::3922项资产及443项源码验证通过",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_static_128d.pt::已冻结32D静态Gaussian",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_dynamic_128d.pt::已冻结32D动态Gaussian",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/global_dynamic_meta.pt::修正轨迹及固定评估框",
+                "artifacts/scene017_vr_v1_s/runtime-payload-refined/feature_projection.pt::配套PCA投影基",
+                "artifacts/scene017_vr_v1_s/pedestrian_tracks.pt::配套SMPL姿态",
+                "weights/refiner_scene017_vr_v1_s.pt::配套32D U-Net",
+                "weights/SMPL_NEUTRAL.npz::配套SMPL模板"
+              ]
+            },
+            {
+              "id": "pipeline",
+              "criterion": "独立交付源码、依赖和可移植参数支持原始处理后RGB/LiDAR到几何校正、并行前馈、SMPL、32D投影、全三相机联合优化及视频和PLY；fresh不复用历史场景状态；提供固定资产replay。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/pipeline_review.json::fresh完整配方及9个真实入口import成功和原配置等价核对；未重训",
+                "docs/releases/VR-v1-s/entrypoint_manifest.json::版本专属入口与模板指纹，默认别名允许维护",
+                "docs/releases/VR-v1-s/evidence/config_build.original.yaml::原始冷启动数值配置",
+                "scripts/run_vr_v1_s_pipeline.py::包内fresh/replay编排和完整真实计时",
+                "scripts/validate_vr_v1_s_delivery.py::资产及数值重放校验实现",
+                "docs/releases/VR-v1-s/source/scripts/delivery_runtime_helpers.py::可移植编排适配",
+                "docs/releases/VR-v1-s/source/scripts/refine_unified_scene_rgb.py::原联合优化数值实现",
+                "docs/releases/VR-v1-s/source/scripts/geometry_rgb_masks.py::包内SAM2参数适配",
+                "docs/releases/VR-v1-s/source/sitecustomize.py::预编译扩展显式启用边界"
+              ]
+            },
+            {
+              "id": "replay",
+              "criterion": "包内源码与资产重渲染完整156帧三相机；全局、车辆bbox和非天空PSNR相比源VR-v1-s误差各不超过0.0001dB，PLY一致并人工查看结果。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json::完整156帧三相机三项PSNR误差零及PLY一致",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/runtime-render-source/manifest.json::原始独立重渲染指标",
+                "docs/releases/VR-v1-s/evidence/original_render_manifest.json::源1670步原始指标",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4::独立完整GT对比视频",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_predicted_front3.mp4::独立完整预测视频",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_gaussians_frame000_preview.ply::独立导出且指纹一致的预览",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/review.png::亲自查看的20/80/140帧三相机对比",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md::人工视觉检查与原有模糊缺陷"
+              ]
+            },
+            {
+              "id": "honesty",
+              "criterion": "准确保留源记录的各阶段边界、完整交付开销以及研究验收失败结论；本次固化仅验证交付与重渲染，不伪称重新冷启动训练或单PLY复现RGB指标。",
+              "passed": true,
+              "run_id": "run-20261022T064659Z-compact-delivery-validation",
+              "evidence": [
+                "docs/releases/VR-v1-s/README.md::源冷启动阶段边界和完整交付耗时及本次仅固定状态重放",
+                "docs/releases/VR-v1-s/evidence/pipeline_timing.json::源完整交付真实原始计时",
+                "docs/releases/VR-v1-s/evidence/optimization_timing.json::源预处理到优化退出计时",
+                "docs/releases/VR-v1-s/evidence/acceptance_report.json::研究车辆29dB失败未改写",
+                "docs/releases/VR-v1-s/evidence/input_provenance.md::原始处理后输入边界和通用离线前提",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/pipeline_timing.json::本次仅cached_incremental重放计时",
+                "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md::不宣称新冷启动训练或单PLY复现RGB指标"
+              ]
+            }
+          ]
+        },
+        "evidence_snapshots": [
+          {
+            "reference": "docs/releases/VR-v1-s/delivery_manifest.json",
+            "claim": "逐文件SHA256及原始来源",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "608e46a72e6cb9b173c19000fca0162c771be67fb20c4495bbc447116cfe370c",
+            "size_when_recorded": 1934641,
+            "mtime_ns_when_recorded": 1792652207827653054
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source_manifest.json",
+            "claim": "全部交付源码指纹及明确的便携差异",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3a9b9fada8d3ef4ec435928dd1525562acc5adc73e5d53931309d9ff4279c1e6",
+            "size_when_recorded": 218361,
+            "mtime_ns_when_recorded": 1792652179403439235
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json",
+            "claim": "3922项资产及443项源码验证通过",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "b7bce820f2b35a9003ed9c7fa67d7ac4e059333a68a585b6c0cee5ace3366578",
+            "size_when_recorded": 1323,
+            "mtime_ns_when_recorded": 1792652376972930080
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_static_128d.pt",
+            "claim": "已冻结32D静态Gaussian",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 1856117690,
+            "mtime_ns_when_recorded": 1792649266709733876
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/final_dynamic_128d.pt",
+            "claim": "已冻结32D动态Gaussian",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 94137710,
+            "mtime_ns_when_recorded": 1792649266853734945
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/global_dynamic_meta.pt",
+            "claim": "修正轨迹及固定评估框",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3fdad8a130c3e4a48a0900d81ff20fe13aaa79d251bc81b0cf87ca692af82824",
+            "size_when_recorded": 1323726,
+            "mtime_ns_when_recorded": 1792649266857734975
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/runtime-payload-refined/feature_projection.pt",
+            "claim": "配套PCA投影基",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "cd9e9bb146e1eb0a7ce3d5730a11c71433f17438cd9b580a40b3d9112de02df5",
+            "size_when_recorded": 19197,
+            "mtime_ns_when_recorded": 1792649266853734945
+          },
+          {
+            "reference": "artifacts/scene017_vr_v1_s/pedestrian_tracks.pt",
+            "claim": "配套SMPL姿态",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "79d44546a3bea00c4bedc2936d0deab41f42a1c48825c101d9c1466e9b5c9f09",
+            "size_when_recorded": 438495,
+            "mtime_ns_when_recorded": 1792648251882139230
+          },
+          {
+            "reference": "weights/refiner_scene017_vr_v1_s.pt",
+            "claim": "配套32D U-Net",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "c3181ce6d038cc39271279196e004ea687cdacd2229114bc5dd9b29ab6f5b61c",
+            "size_when_recorded": 7631749,
+            "mtime_ns_when_recorded": 1792649266877735123
+          },
+          {
+            "reference": "weights/SMPL_NEUTRAL.npz",
+            "claim": "配套SMPL模板",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ad9bb6cc1064f498cfae2a16e8f3fc8e65ad7c79b438cfd053a7a70839006656",
+            "size_when_recorded": 2564688,
+            "mtime_ns_when_recorded": 1789461080182790004
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/pipeline_review.json",
+            "claim": "fresh完整配方及9个真实入口import成功和原配置等价核对；未重训",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ee15e23a19931227145bc028522a3410e25d45fbde991d0e88cfb7b36c77695a",
+            "size_when_recorded": 10870,
+            "mtime_ns_when_recorded": 1792652609378691643
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/entrypoint_manifest.json",
+            "claim": "版本专属入口与模板指纹，默认别名允许维护",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "76213988d41e7c9ceff8024c819cad912c83ae835560c3040b74b7f123ed2034",
+            "size_when_recorded": 865,
+            "mtime_ns_when_recorded": 1792652207831653084
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/config_build.original.yaml",
+            "claim": "原始冷启动数值配置",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "1f0713dc70760be4eb106c5e88481be3dcf1388b7871d4491d7be7b95a55796d",
+            "size_when_recorded": 1500,
+            "mtime_ns_when_recorded": 1792647783418615171
+          },
+          {
+            "reference": "scripts/run_vr_v1_s_pipeline.py",
+            "claim": "包内fresh/replay编排和完整真实计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "70509af39c186dd4377b3b79cd242b305f416fe8ab76d708adac2e523b768894",
+            "size_when_recorded": 10763,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "scripts/validate_vr_v1_s_delivery.py",
+            "claim": "资产及数值重放校验实现",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "1996e5b3fa42eb04c41cf95cafacf1197498f972081f4b0d34dbf97746ec9bb5",
+            "size_when_recorded": 3975,
+            "mtime_ns_when_recorded": 1792651888937254230
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/scripts/delivery_runtime_helpers.py",
+            "claim": "可移植编排适配",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "f2837fc34e59bedd3b3d77d854df9e32ae2ef189008a84646a20b901a6d0de71",
+            "size_when_recorded": 892,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/scripts/refine_unified_scene_rgb.py",
+            "claim": "原联合优化数值实现",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "4aeca2f57cad6c399f18bb450e5972e5fb56863cc85cd11364d13165a27ea921",
+            "size_when_recorded": 22874,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/scripts/geometry_rgb_masks.py",
+            "claim": "包内SAM2参数适配",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "a26b233a3190fc68670413d13993931802e104e3e7e58128ca5d137ebb2639ab",
+            "size_when_recorded": 2234,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/source/sitecustomize.py",
+            "claim": "预编译扩展显式启用边界",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "51397a8243b8be3d32f71b4679372a7ac78dc10f33a3c8580f64b8a28e2bf395",
+            "size_when_recorded": 485,
+            "mtime_ns_when_recorded": 1792651713607938088
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/runtime-render-source/manifest.json",
+            "claim": "原始独立重渲染指标",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "7e1fbbe7377e3d337305bd70f92772559324f5a9d17503983a515a3b268dc909",
+            "size_when_recorded": 1079947,
+            "mtime_ns_when_recorded": 1792651943481664535
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/original_render_manifest.json",
+            "claim": "源1670步原始指标",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "031cef53a243c810c711c25877a5fbc47655928324b6b81b60ac28643bd969aa",
+            "size_when_recorded": 1080278,
+            "mtime_ns_when_recorded": 1792649386094620332
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_gt_vs_predicted_front3.mp4",
+            "claim": "独立完整GT对比视频",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 46104184,
+            "mtime_ns_when_recorded": 1792651940605642900
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_runtime_predicted_front3.mp4",
+            "claim": "独立完整预测视频",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 20312493,
+            "mtime_ns_when_recorded": 1792651931621575318
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/final_global_gaussians_frame000_preview.ply",
+            "claim": "独立导出且指纹一致的预览",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": null,
+            "size_when_recorded": 616337865,
+            "mtime_ns_when_recorded": 1792651952537732658
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/review.png",
+            "claim": "亲自查看的20/80/140帧三相机对比",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "cdb8aac0b3e2e7d79120ea3bc37e113c27599f041a22f3456e771c70b011235e",
+            "size_when_recorded": 3616329,
+            "mtime_ns_when_recorded": 1792652184163475042
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md",
+            "claim": "人工视觉检查与原有模糊缺陷",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "8d44211c3990158b309110250643f3e25826421c70ca00b1243ddc38821362cb",
+            "size_when_recorded": 2655,
+            "mtime_ns_when_recorded": 1792652591170553631
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/README.md",
+            "claim": "源冷启动阶段边界和完整交付耗时及本次仅固定状态重放",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "7baa0d256fc3eeac6ecc6407e958c4150d2843ed3a4e08975bb786cb5c1cde60",
+            "size_when_recorded": 6367,
+            "mtime_ns_when_recorded": 1792652160707298595
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/pipeline_timing.json",
+            "claim": "源完整交付真实原始计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "43769a1ac347d4cd945855021a8ad68201065eb8397b19fb464dd327a5df3f98",
+            "size_when_recorded": 15498,
+            "mtime_ns_when_recorded": 1792649392502667913
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/optimization_timing.json",
+            "claim": "源预处理到优化退出计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "fcb3cbc1f96dc2385c1aab77e047c95a9db79eba7a1541bc80a4526db2627fc0",
+            "size_when_recorded": 851,
+            "mtime_ns_when_recorded": 1792649268793749350
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/acceptance_report.json",
+            "claim": "研究车辆29dB失败未改写",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "fb28b9ad108a60e41afb3455d0a34be5c48c5ab027be800ac7027434f2c11cf0",
+            "size_when_recorded": 9261,
+            "mtime_ns_when_recorded": 1792649514943577061
+          },
+          {
+            "reference": "docs/releases/VR-v1-s/evidence/input_provenance.md",
+            "claim": "原始处理后输入边界和通用离线前提",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "6cfef60ea2bb0c48f79485fe1d47269d1d651e08b838582635b854f2507cbc4c",
+            "size_when_recorded": 2011,
+            "mtime_ns_when_recorded": 1792648309926573926
+          },
+          {
+            "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay/pipeline_timing.json",
+            "claim": "本次仅cached_incremental重放计时",
+            "recorded_at": "2026-10-22T07:07:04+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "0906526af9eb0bf3b1b26ef68851eea70c7b658c927d8a2700101250528e8008",
+            "size_when_recorded": 3747,
+            "mtime_ns_when_recorded": 1792651953977743490
+          }
+        ]
+      }
     }
   },
   "runs": {
@@ -245,6 +1855,76 @@
       ],
       "created_at": "2026-09-28T04:05:53+00:00",
       "updated_at": "2026-09-28T04:27:26+00:00"
+    },
+    "run-20261020T063212Z-unified-delivery-validation": {
+      "run_id": "run-20261020T063212Z-unified-delivery-validation",
+      "candidate_id": "PFG-v2-a",
+      "variant": "unified-delivery-validation",
+      "status": "completed",
+      "directory_id": "dir-0019",
+      "config_identity": "docs/releases/VR-v1-b/delivery_manifest.json::数值配方与资产校验",
+      "code_identity": "docs/releases/VR-v1-b/source::已验收实验的独立数值源码",
+      "data_identity": "artifacts/scene017_vr_v1_b::原始前馈与950步runtime资产；重新读取外部原始数据重渲染",
+      "summary": "独立交付重渲染三项PSNR误差零、PLY一致、源码和旧资产审计通过；未重训冷启动",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json",
+          "claim": "完整重渲染与资产校验",
+          "recorded_at": "2026-10-20T06:47:33+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "47f80b696a756fe269bbce16678958f02e5c8ff4c2f53025932f69dd6f0b6872",
+          "size_when_recorded": 1286,
+          "mtime_ns_when_recorded": 1792478741097758966
+        },
+        {
+          "reference": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/REPORT.md",
+          "claim": "代码审查与耗时边界",
+          "recorded_at": "2026-10-20T06:47:33+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "dffbdd3ce0d9be907324942240f0f0fc289082a4ed9516495cecb5134a985dad",
+          "size_when_recorded": 3272,
+          "mtime_ns_when_recorded": 1792478791610133265
+        }
+      ],
+      "created_at": "2026-10-20T06:34:01+00:00",
+      "updated_at": "2026-10-20T06:47:33+00:00"
+    },
+    "run-20261022T064659Z-compact-delivery-validation": {
+      "run_id": "run-20261022T064659Z-compact-delivery-validation",
+      "candidate_id": "PFG-v3-a",
+      "variant": "compact-delivery-validation",
+      "status": "completed",
+      "directory_id": "dir-0026",
+      "config_identity": "docs/releases/VR-v1-s/pipeline_recipe.json;rank32;full3cam;union1;1700max;raw1480stop",
+      "code_identity": "docs/releases/VR-v1-s/source;portable orchestration only",
+      "data_identity": "delivered scene017 state; original156frame3cam dataset for independent replay",
+      "summary": "独立156帧三相机重放PSNR零误差、PLY一致、资产与源码审查通过；未重新冷启动训练",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json",
+          "claim": "完整独立重放与指纹核验",
+          "recorded_at": "2026-10-22T07:07:04+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "b7bce820f2b35a9003ed9c7fa67d7ac4e059333a68a585b6c0cee5ace3366578",
+          "size_when_recorded": 1323,
+          "mtime_ns_when_recorded": 1792652376972930080
+        },
+        {
+          "reference": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/REPORT.md",
+          "claim": "人工审查及计时质量边界",
+          "recorded_at": "2026-10-22T07:07:04+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "8d44211c3990158b309110250643f3e25826421c70ca00b1243ddc38821362cb",
+          "size_when_recorded": 2655,
+          "mtime_ns_when_recorded": 1792652591170553631
+        }
+      ],
+      "created_at": "2026-10-22T06:47:10+00:00",
+      "updated_at": "2026-10-22T07:07:04+00:00"
     }
   },
   "directories": {
@@ -485,6 +2165,230 @@
       "decision_id": "layout-0016",
       "created_at": "2026-09-28T04:27:07+00:00",
       "updated_at": "2026-09-28T04:27:07+00:00"
+    },
+    "dir-0018": {
+      "directory_id": "dir-0018",
+      "path": "docs/releases/PFG-v2-a",
+      "level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "scope_id": "project",
+      "purpose": "VR-v1-b独立交付包升级验证",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0017",
+      "created_at": "2026-10-20T06:29:23+00:00",
+      "updated_at": "2026-10-20T06:29:23+00:00"
+    },
+    "dir-0019": {
+      "directory_id": "dir-0019",
+      "path": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation",
+      "level": "run",
+      "parent_directory_id": "dir-0018",
+      "scope_id": "project",
+      "purpose": "独立交付复制核验与156帧重渲染",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0018",
+      "created_at": "2026-10-20T06:32:12+00:00",
+      "updated_at": "2026-10-20T06:32:12+00:00"
+    },
+    "dir-0020": {
+      "directory_id": "dir-0020",
+      "path": "docs/releases/VR-v1-b",
+      "level": "archive",
+      "parent_directory_id": "dir-0013",
+      "scope_id": "project",
+      "purpose": "VR-v1-b版本说明、源码与固定证据",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0019",
+      "created_at": "2026-10-20T06:33:13+00:00",
+      "updated_at": "2026-10-20T06:33:13+00:00"
+    },
+    "dir-0021": {
+      "directory_id": "dir-0021",
+      "path": "docs/releases/VR-v1-b/source",
+      "level": "archive",
+      "parent_directory_id": "dir-0020",
+      "scope_id": "project",
+      "purpose": "VR-v1-b精确数值源码快照",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0020",
+      "created_at": "2026-10-20T06:33:14+00:00",
+      "updated_at": "2026-10-20T06:33:14+00:00"
+    },
+    "dir-0022": {
+      "directory_id": "dir-0022",
+      "path": "artifacts",
+      "level": "area",
+      "parent_directory_id": "dir-0001",
+      "scope_id": "project",
+      "purpose": "版本化场景载荷、PLY和视频",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0022",
+      "created_at": "2026-10-20T06:33:28+00:00",
+      "updated_at": "2026-10-20T06:33:28+00:00"
+    },
+    "dir-0023": {
+      "directory_id": "dir-0023",
+      "path": "artifacts/scene017_vr_v1_b",
+      "level": "archive",
+      "parent_directory_id": "dir-0022",
+      "scope_id": "project",
+      "purpose": "VR-v1-b原始前馈和950步资产",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0023",
+      "created_at": "2026-10-20T06:33:28+00:00",
+      "updated_at": "2026-10-20T06:33:28+00:00"
+    },
+    "dir-0024": {
+      "directory_id": "dir-0024",
+      "path": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay",
+      "level": "artifact",
+      "parent_directory_id": "dir-0019",
+      "scope_id": "project",
+      "purpose": "包内完整156帧独立重渲染",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0024",
+      "created_at": "2026-10-20T06:35:26+00:00",
+      "updated_at": "2026-10-20T06:35:26+00:00"
+    },
+    "dir-0025": {
+      "directory_id": "dir-0025",
+      "path": "docs/releases/PFG-v3-a",
+      "level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "scope_id": "project",
+      "purpose": "VR-v1-s独立交付验收",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0025",
+      "created_at": "2026-10-22T06:43:26+00:00",
+      "updated_at": "2026-10-22T06:43:26+00:00"
+    },
+    "dir-0026": {
+      "directory_id": "dir-0026",
+      "path": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation",
+      "level": "run",
+      "parent_directory_id": "dir-0025",
+      "scope_id": "project",
+      "purpose": "完整独立重渲染与交付校验",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0026",
+      "created_at": "2026-10-22T06:46:59+00:00",
+      "updated_at": "2026-10-22T06:46:59+00:00"
+    },
+    "dir-0027": {
+      "directory_id": "dir-0027",
+      "path": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay",
+      "level": "artifact",
+      "parent_directory_id": "dir-0026",
+      "scope_id": "project",
+      "purpose": "包内重渲染输出",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0027",
+      "created_at": "2026-10-22T06:46:59+00:00",
+      "updated_at": "2026-10-22T06:46:59+00:00"
+    },
+    "dir-0028": {
+      "directory_id": "dir-0028",
+      "path": "docs/releases/VR-v1-s",
+      "level": "archive",
+      "parent_directory_id": "dir-0013",
+      "scope_id": "project",
+      "purpose": "VR-v1-s不可变版本源码与证据",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0028",
+      "created_at": "2026-10-22T06:46:59+00:00",
+      "updated_at": "2026-10-22T06:46:59+00:00"
+    },
+    "dir-0029": {
+      "directory_id": "dir-0029",
+      "path": "docs/releases/VR-v1-s/source",
+      "level": "archive",
+      "parent_directory_id": "dir-0028",
+      "scope_id": "project",
+      "purpose": "VR-v1-s数值源码及便携依赖",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0029",
+      "created_at": "2026-10-22T06:47:00+00:00",
+      "updated_at": "2026-10-22T06:47:00+00:00"
+    },
+    "dir-0030": {
+      "directory_id": "dir-0030",
+      "path": "docs/releases/VR-v1-s/source/SAM2",
+      "level": "archive",
+      "parent_directory_id": "dir-0029",
+      "scope_id": "project",
+      "purpose": "SAM2.1 Tiny源码及许可",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0030",
+      "created_at": "2026-10-22T06:47:00+00:00",
+      "updated_at": "2026-10-22T06:47:00+00:00"
+    },
+    "dir-0031": {
+      "directory_id": "dir-0031",
+      "path": "docs/releases/VR-v1-s/source/InfiniDepth",
+      "level": "archive",
+      "parent_directory_id": "dir-0029",
+      "scope_id": "project",
+      "purpose": "本次原始深度模型源码",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0031",
+      "created_at": "2026-10-22T06:47:00+00:00",
+      "updated_at": "2026-10-22T06:47:00+00:00"
+    },
+    "dir-0032": {
+      "directory_id": "dir-0032",
+      "path": "docs/releases/VR-v1-s/evidence",
+      "level": "archive",
+      "parent_directory_id": "dir-0028",
+      "scope_id": "project",
+      "purpose": "原始计时指标与研究失败验收记录",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0032",
+      "created_at": "2026-10-22T06:47:00+00:00",
+      "updated_at": "2026-10-22T06:47:00+00:00"
+    },
+    "dir-0033": {
+      "directory_id": "dir-0033",
+      "path": "artifacts/scene017_vr_v1_s",
+      "level": "archive",
+      "parent_directory_id": "dir-0022",
+      "scope_id": "project",
+      "purpose": "当前VR-v1-s运行时及预览资产",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0033",
+      "created_at": "2026-10-22T06:47:00+00:00",
+      "updated_at": "2026-10-22T06:47:00+00:00"
     }
   },
   "layout_decisions": {
@@ -787,11 +2691,334 @@
       "status": "applied",
       "applied_directory_id": "dir-0017",
       "created_at": "2026-09-28T04:27:00+00:00"
+    },
+    "layout-0017": {
+      "decision_id": "layout-0017",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v2-a",
+      "target_level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "purpose": "VR-v1-b独立交付包升级验证",
+      "reason": "独立固化VR-v1-b并保留旧交付版本",
+      "alternatives_considered": [
+        "覆盖旧源码和资产会损害旧版本复现"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0018",
+      "created_at": "2026-10-20T06:29:23+00:00"
+    },
+    "layout-0018": {
+      "decision_id": "layout-0018",
+      "scope_id": "project",
+      "candidate_id": "PFG-v2-a",
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation",
+      "target_level": "run",
+      "parent_directory_id": "dir-0018",
+      "purpose": "独立交付复制核验与156帧重渲染",
+      "reason": "独立固化VR-v1-b并保留旧交付版本",
+      "alternatives_considered": [
+        "覆盖旧源码和资产会损害旧版本复现"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0019",
+      "created_at": "2026-10-20T06:32:12+00:00"
+    },
+    "layout-0019": {
+      "decision_id": "layout-0019",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/VR-v1-b",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0013",
+      "purpose": "VR-v1-b版本说明、源码与固定证据",
+      "reason": "独立固化VR-v1-b并保留旧交付版本",
+      "alternatives_considered": [
+        "覆盖旧源码和资产会损害旧版本复现"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0020",
+      "created_at": "2026-10-20T06:33:13+00:00"
+    },
+    "layout-0020": {
+      "decision_id": "layout-0020",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/VR-v1-b/source",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0020",
+      "purpose": "VR-v1-b精确数值源码快照",
+      "reason": "独立固化VR-v1-b并保留旧交付版本",
+      "alternatives_considered": [
+        "覆盖旧源码和资产会损害旧版本复现"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0021",
+      "created_at": "2026-10-20T06:33:14+00:00"
+    },
+    "layout-0021": {
+      "decision_id": "layout-0021",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "artifacts",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "版本化场景载荷、PLY和视频",
+      "reason": "独立固化VR-v1-b并保留旧交付版本",
+      "alternatives_considered": [
+        "覆盖旧源码和资产会损害旧版本复现"
+      ],
+      "active_sibling_count_at_decision": 6,
+      "override_reason": null,
+      "status": "planned",
+      "applied_directory_id": null,
+      "created_at": "2026-10-20T06:33:14+00:00"
+    },
+    "layout-0022": {
+      "decision_id": "layout-0022",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "artifacts",
+      "target_level": "area",
+      "parent_directory_id": "dir-0001",
+      "purpose": "版本化场景载荷、PLY和视频",
+      "reason": "独立固化VR-v1-b并保留旧交付版本",
+      "alternatives_considered": [
+        "覆盖旧源码和资产会损害旧版本复现"
+      ],
+      "active_sibling_count_at_decision": 6,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0022",
+      "created_at": "2026-10-20T06:33:28+00:00"
+    },
+    "layout-0023": {
+      "decision_id": "layout-0023",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "artifacts/scene017_vr_v1_b",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0022",
+      "purpose": "VR-v1-b原始前馈和950步资产",
+      "reason": "独立固化VR-v1-b并保留旧交付版本",
+      "alternatives_considered": [
+        "覆盖旧源码和资产会损害旧版本复现"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0023",
+      "created_at": "2026-10-20T06:33:28+00:00"
+    },
+    "layout-0024": {
+      "decision_id": "layout-0024",
+      "scope_id": "project",
+      "candidate_id": "PFG-v2-a",
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0019",
+      "purpose": "包内完整156帧独立重渲染",
+      "reason": "验证独立交付的数值一致性",
+      "alternatives_considered": [
+        "仅复制旧视频不足以验证执行能力"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0024",
+      "created_at": "2026-10-20T06:35:16+00:00"
+    },
+    "layout-0025": {
+      "decision_id": "layout-0025",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v3-a",
+      "target_level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "purpose": "VR-v1-s独立交付验收",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 2,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0025",
+      "created_at": "2026-10-22T06:43:26+00:00"
+    },
+    "layout-0026": {
+      "decision_id": "layout-0026",
+      "scope_id": "project",
+      "candidate_id": "PFG-v3-a",
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation",
+      "target_level": "run",
+      "parent_directory_id": "dir-0025",
+      "purpose": "完整独立重渲染与交付校验",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0026",
+      "created_at": "2026-10-22T06:46:59+00:00"
+    },
+    "layout-0027": {
+      "decision_id": "layout-0027",
+      "scope_id": "project",
+      "candidate_id": "PFG-v3-a",
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0026",
+      "purpose": "包内重渲染输出",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0027",
+      "created_at": "2026-10-22T06:46:59+00:00"
+    },
+    "layout-0028": {
+      "decision_id": "layout-0028",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/VR-v1-s",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0013",
+      "purpose": "VR-v1-s不可变版本源码与证据",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0028",
+      "created_at": "2026-10-22T06:46:59+00:00"
+    },
+    "layout-0029": {
+      "decision_id": "layout-0029",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/VR-v1-s/source",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0028",
+      "purpose": "VR-v1-s数值源码及便携依赖",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0029",
+      "created_at": "2026-10-22T06:46:59+00:00"
+    },
+    "layout-0030": {
+      "decision_id": "layout-0030",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/VR-v1-s/source/SAM2",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0029",
+      "purpose": "SAM2.1 Tiny源码及许可",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0030",
+      "created_at": "2026-10-22T06:47:00+00:00"
+    },
+    "layout-0031": {
+      "decision_id": "layout-0031",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/VR-v1-s/source/InfiniDepth",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0029",
+      "purpose": "本次原始深度模型源码",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0031",
+      "created_at": "2026-10-22T06:47:00+00:00"
+    },
+    "layout-0032": {
+      "decision_id": "layout-0032",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/VR-v1-s/evidence",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0028",
+      "purpose": "原始计时指标与研究失败验收记录",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0032",
+      "created_at": "2026-10-22T06:47:00+00:00"
+    },
+    "layout-0033": {
+      "decision_id": "layout-0033",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "artifacts/scene017_vr_v1_s",
+      "target_level": "archive",
+      "parent_directory_id": "dir-0022",
+      "purpose": "当前VR-v1-s运行时及预览资产",
+      "reason": "用户指定将当前VR-v1-s固化为当前交付主线",
+      "alternatives_considered": [
+        "保留历史冻结证据，仅覆盖当前入口和根说明"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": "用户授权在既有包内固化新主线，历史文件不删除",
+      "status": "applied",
+      "applied_directory_id": "dir-0033",
+      "created_at": "2026-10-22T06:47:00+00:00"
     }
   },
-  "updated_at": "2026-09-28T04:27:48+00:00",
+  "updated_at": "2026-10-22T07:07:04+00:00",
   "ledger": {
-    "event_count": 44,
-    "head_hash": "1040bc800d1ba5cb92506d2ba9bed223757e05c6fc2cf0fcb08f6b18eae4e9d1"
+    "event_count": 89,
+    "head_hash": "137e9526fd086763228aaa75ae23f6a39287a63364256333de2e6637a6faee36"
   }
 }

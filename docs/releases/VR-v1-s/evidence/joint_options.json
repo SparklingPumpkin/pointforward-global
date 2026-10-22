@@ -1,0 +1,28 @@
+{
+  "config": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/config_build.yaml",
+  "ckpt": "/mnt/data/fjn/projects/PointForward/ckpt/ckpt_020000_waymo_ds_paper_original.pt",
+  "payload_dir": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/runtime-payload-compressed",
+  "out": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all",
+  "audit_run": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700",
+  "scene": "017",
+  "steps": 1700,
+  "milestones": [
+    1700
+  ],
+  "roi_weight": 1.0,
+  "pose_lr": 0.001,
+  "lr_decay_steps": [
+    600,
+    1200
+  ],
+  "lr_decay_factor": 0.5,
+  "target_psnr": null,
+  "quality_every": 100,
+  "cold_stop_at": 1480.0,
+  "single_camera_training": false,
+  "defer_audit_render": true,
+  "save_final_training_state": false,
+  "seed": 0,
+  "vehicle_loss": "union",
+  "freeze_static_after": 100000
+}

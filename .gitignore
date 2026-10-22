@@ -26,3 +26,8 @@ weights/*
 !weights/README.md
 !weights/manifest.json
 !weights/pointforward_waymo_ds_paper_ckpt_020000.pt
+
+# Optional ABI-specific binary is delivered on disk and hashed in the release.
+docs/releases/VR-v1-s/source/gsplat_cuda.so
+# Retain representative review sheets and manifests, not every rendered frame.
+docs/releases/*/run-*/replay/runtime-render-source/frames/

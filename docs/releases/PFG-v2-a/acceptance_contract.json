@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "criteria": [
+    {
+      "id": "assets",
+      "criterion": "独立交付包包含VR-v1-b第950步128D静动态Gaussian、修正轨迹meta、配套U-Net、通用权重、PLY、视频和原始审计证据；文件大小与SHA256逐项核验，旧FFR-v1-l资产及代码入口保留。"
+    },
+    {
+      "id": "pipeline",
+      "criterion": "版本隔离源码与可移植配置支持原始处理后RGB/LiDAR/标定/实例到前馈、950步联合优化、检查点评估、PLY和视频；无源研究仓库执行依赖；固定950步数值配置，提供已交付资产重渲染入口与默认入口。"
+    },
+    {
+      "id": "replay",
+      "criterion": "在交付仓库内仅使用交付源码、权重、payload和指定原始数据，完整156帧三相机重渲染；全局和动态bbox PSNR与VR-v1-b原始950步结果绝对误差均不超过0.0001dB；保存完整视频并亲自查看。"
+    },
+    {
+      "id": "honesty",
+      "criterion": "README、变更记录、manifest明确区分缓存后增量、前馈历史前缀与历史累计，不宣称为新的冷启动实测；PLY仅为frame000预览，指标属于128D+U-Net运行时。"
+    }
+  ]
+}

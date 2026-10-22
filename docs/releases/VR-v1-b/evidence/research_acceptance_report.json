@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "subject_id": "VR-v1-b",
+  "checks": [
+    {
+      "id": "initialization",
+      "criterion": "仅复用FFR-v1-z原始前馈载荷及通用预训练权重，不读取其scene350或车辆优化结果、适配U-Net；独立保存源码与参数。",
+      "passed": true,
+      "run_id": "run-20261020T012848Z-feedforward-unified-all950",
+      "evidence": [
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/input_manifest.json::仅原始前馈缓存与通用检查点；未复用适配U-Net",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/source-snapshot/scripts/refine_unified_scene_rgb.py::从通用模型初始化并为全部参数创建零delta"
+      ]
+    },
+    {
+      "id": "joint",
+      "criterion": "950步内静态和动态Gaussian的XYZ、scale、rotation、opacity、完整128D feature、time/sigma，以及U-Net和车辆轨迹平移/yaw始终属于同一优化器；350步处不冻结、不重置，检查点只评估；保留canonical参考位姿和原始评估框。",
+      "passed": true,
+      "run_id": "run-20261020T012848Z-feedforward-unified-all950",
+      "evidence": [
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/parameter_contract.json::全参数优化组、LR、边界与strict ROI",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/loss_steps.jsonl::连续950步、首步和检查点梯度及一致loss",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoints.json::350/550/750/950步optimizer_max_step连续，无重置"
+      ]
+    },
+    {
+      "id": "evaluation",
+      "criterion": "350、550、750、950步均完成156帧三相机runtime指标与预测/GT对照视频，记录全局、非天空、动态bbox PSNR、逐步正值MSE、loss和参数变化；交付950步PLY预览与完整运行时资产。",
+      "passed": true,
+      "run_id": "run-20261020T012848Z-feedforward-unified-all950",
+      "evidence": [
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/joint-all/checkpoints.json::完整156帧三相机正式PSNR和检查点资产",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/delivery_verification.json::全部八份视频156帧10fps及源码快照不变、pose round-trip",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/final_global_gaussians_frame000_preview.ply::950步最终Gaussian几何预览",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/report.md::全套runtime与预览PLY的交付口径"
+      ]
+    },
+    {
+      "id": "audit",
+      "criterion": "亲自检查车辆可视化并比较旧scene350、VR-v1-a和y；记录本次缓存后连续实际增量墙钟及加回原始前馈前缀的历史账目，不能宣称一次RGB冷启动实测；如质量不提升也如实报告。",
+      "passed": true,
+      "run_id": "run-20261020T012848Z-feedforward-unified-all950",
+      "evidence": [
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/report.md::亲自检查车辆图、与旧方案质量比较和时间审计",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/quality_loss_time.png::固定帧PSNR与正值MSE趋势",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/vehicle_crop_comparison.jpg::GT、前馈、各联合检查点与旧方案近车对照",
+        "experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-b/run-20261020T012848Z-feedforward-unified-all950/pipeline_timing.json::本次实际增量加原始前馈前缀，非新冷启动"
+      ]
+    }
+  ]
+}
