@@ -32,10 +32,12 @@ python scripts/run_pipeline.py --mode fresh \
 
 输出目录必须为空。`--dry-run` 打印配方；两GPU并行静态/车辆前馈，省略 `--vehicle-gpu` 则串行。`--sam-python` 可指定SAM2解释器。`--use-pinned-extension` 仅适用于release记录的相同Torch/CUDA ABI；普通环境默认使用gsplat自身扩展。
 
+当前新场景fresh默认停止条件：**全局PSNR≥30dB且车辆bbox PSNR≥28dB，或从冷启动输入开始累计达到3600s（60min）**。优化前及每100步检查完整场景、全部三相机，统计口径同正式渲染器；质量检查成本计入冷启动时间。取消原1700步提前停止，达到条件后保存状态并完成视频/PLY；最终保存与交付耗时仍单独如实记录，60min是优化停止触发点。配置在 `configs/runtime-stop/`；此次仅改停止逻辑，未重测。冻结历史入口 `run_vr_v1_s_pipeline.py` 保留原实验配方，replay固定资产保持原状态。
+
 输入为已预处理RGB、LiDAR、标定、自车位姿、实例、天空mask与SMPL标注，数据集不随包提供。冷启动起点是这些输入，不包含数据集格式转换或SMPL标注生成。环境见 [requirements.txt](requirements.txt) / [environment.yml](environment.yml) 及release。
 
 ## 时间与交付边界
 
-源一次真实冷启动：预处理、前馈、PCA、优化初始化、1670步与保存共 **1485.371s（24.76min）**；继续到完整视频、指标、PLY的总耗时 **1609.087s（26.82min）**。静态/车辆前馈并行，不能累加GPU阶段时间。本次固化仅独立重放固定资产，未重复冷启动训练。新机器fresh的实际步数受1480s停止请求与硬件影响。
+源一次真实冷启动：预处理、前馈、PCA、优化初始化、1670步与保存共 **1485.371s（24.76min）**；继续到完整视频、指标、PLY的总耗时 **1609.087s（26.82min）**。静态/车辆前馈并行，不能累加GPU阶段时间。这是已固化历史状态的原计时；当前fresh使用上面的双质量阈值/60min停止策略，尚未重测。
 
 完整复制须包含 `artifacts/scene017_vr_v1_s/`、`weights/` 及 `docs/releases/VR-v1-s/source/`，保留许可证。大资产沿用Git ignore策略，单独clone不包含完整交付包。资产SHA256、源码差异及独立验证见release。旧版本冻结证据保留，当前默认交付已由新主线替代。

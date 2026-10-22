@@ -3,7 +3,7 @@
 > 由机器状态生成，只展示当前版本与仍活跃的候选；完整历史见 `VERSION_LEDGER.md`。
 
 项目：PointForward Global（`pointforward-global`）  
-更新时间：2026-10-22T07:07:04+00:00
+更新时间：2026-10-22T07:18:06+00:00
 
 ## 项目主线
 

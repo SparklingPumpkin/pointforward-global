@@ -2389,6 +2389,20 @@
       "decision_id": "layout-0033",
       "created_at": "2026-10-22T06:47:00+00:00",
       "updated_at": "2026-10-22T06:47:00+00:00"
+    },
+    "dir-0034": {
+      "directory_id": "dir-0034",
+      "path": "configs/runtime-stop",
+      "level": "area",
+      "parent_directory_id": "dir-0004",
+      "scope_id": "project",
+      "purpose": "当前fresh运行停止条件，保留已冻结VR-v1-s历史配方",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0034",
+      "created_at": "2026-10-22T07:18:06+00:00",
+      "updated_at": "2026-10-22T07:18:06+00:00"
     }
   },
   "layout_decisions": {
@@ -3014,11 +3028,30 @@
       "status": "applied",
       "applied_directory_id": "dir-0033",
       "created_at": "2026-10-22T06:47:00+00:00"
+    },
+    "layout-0034": {
+      "decision_id": "layout-0034",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "configs/runtime-stop",
+      "target_level": "area",
+      "parent_directory_id": "dir-0004",
+      "purpose": "当前fresh运行停止条件，保留已冻结VR-v1-s历史配方",
+      "reason": "用户要求只修改新场景停止条件，不重测；运行时覆盖与历史证据分离",
+      "alternatives_considered": [
+        "直接修改已验收配方会破坏历史指纹"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0034",
+      "created_at": "2026-10-22T07:16:37+00:00"
     }
   },
-  "updated_at": "2026-10-22T07:07:04+00:00",
+  "updated_at": "2026-10-22T07:18:06+00:00",
   "ledger": {
-    "event_count": 89,
-    "head_hash": "137e9526fd086763228aaa75ae23f6a39287a63364256333de2e6637a6faee36"
+    "event_count": 91,
+    "head_hash": "56ca5e4ca91cfd68d820f8f6cf1b002b98cfbe50888cb5c7d622fffc4fd68aea"
   }
 }

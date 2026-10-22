@@ -18,6 +18,7 @@
 | dir-0005 | weights | area | dir-0001 | project | active | 否 | 交付所需模型权重及校验清单 |
 | dir-0023 | artifacts/scene017_vr_v1_b | archive | dir-0022 | project | active | 否 | VR-v1-b原始前馈和950步资产 |
 | dir-0033 | artifacts/scene017_vr_v1_s | archive | dir-0022 | project | active | 否 | 当前VR-v1-s运行时及预览资产 |
+| dir-0034 | configs/runtime-stop | area | dir-0004 | project | active | 否 | 当前fresh运行停止条件，保留已冻结VR-v1-s历史配方 |
 | dir-0013 | docs/releases | experiment_family | dir-0007 | project | active | 否 | 主线交付升级候选与验证记录 |
 | dir-0008 | docs/validation | workstream | dir-0007 | project | active | 否 | PFG-v1独立交付的轻量与27dB复现证据 |
 | dir-0010 | validation-delivery/scene017-27db | experiment_family | dir-0009 | delivery-validation | active | 否 | scene017 27dB交付复现验证实验族 |
@@ -78,3 +79,4 @@
 | layout-0031 | applied | new_child | docs/releases/VR-v1-s/source/InfiniDepth | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
 | layout-0032 | applied | new_child | docs/releases/VR-v1-s/evidence | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
 | layout-0033 | applied | new_child | artifacts/scene017_vr_v1_s | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
+| layout-0034 | applied | new_child | configs/runtime-stop | 用户要求只修改新场景停止条件，不重测；运行时覆盖与历史证据分离 | 直接修改已验收配方会破坏历史指纹 | — |
