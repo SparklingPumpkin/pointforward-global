@@ -1,0 +1,79 @@
+{
+  "files": {
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/026.bin": {
+      "size": 4669920,
+      "sha256": "b0e688348e26914af872286251f2a19a1d0b1aec25f59a6dc8f6f5b6b7efc3e2"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/077.bin": {
+      "size": 4811712,
+      "sha256": "487a7e1c4aaf18ebca9d684697f7f085d6f651b412485324a46655f278726ff6"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/090.bin": {
+      "size": 4831776,
+      "sha256": "4165d3ff014667add3356e687aa2f66ac4161b0fd21026d7ebf73e130fe0dac2"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/134.bin": {
+      "size": 4371184,
+      "sha256": "9fad6da1d22aec40fd3443b2dde4ea7ec36926f1e72e8abf3a2d9169c36ddbd0"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/138.bin": {
+      "size": 4258496,
+      "sha256": "d97ca4d7c9aa280e39c4c83b9b752fa999026874089e9874fe6b8a4c4341f6ec"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/143.bin": {
+      "size": 4190304,
+      "sha256": "b06d32e7a3566e70632fc074aee5483e0fd29143b287cedd4a6b681acd7afda6"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/025.bin": {
+      "size": 4673504,
+      "sha256": "7798cf4925f209d24714da33ba38deb15113b87ca4dbf292d761e08942399059"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/027.bin": {
+      "size": 4671552,
+      "sha256": "de0023d217553686c9cf283520ac6a58f57374555bef8f2cb08a33ca2e4d1878"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/076.bin": {
+      "size": 4818400,
+      "sha256": "cc4e021ddd096b68dbaae804a901e07c2f2e95f978ebcc7249bd29a9e752c0d7"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/078.bin": {
+      "size": 4828624,
+      "sha256": "38a43cc7cd9d15b2774f42d9827a28d4b979566d657c5125c8bd6150d0cb6ae8"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/089.bin": {
+      "size": 4827712,
+      "sha256": "cc444ad60de73d25e9e47ae1f4eea55a67b69528924d0ac8c3beee62dfa2eacb"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/091.bin": {
+      "size": 4835872,
+      "sha256": "e58e2a54f36cf8de945d7abf4fa8e8a38f797f558b104a128a4946cf2d5480a8"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/133.bin": {
+      "size": 4378832,
+      "sha256": "238e207c421a86964cc04694af58f0366a63188a0d2aad952c605ead8c2cc2cb"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/135.bin": {
+      "size": 4363552,
+      "sha256": "edac1467b1f8bd0edd94bda120838ede51cc05b2c192af7c805bf613275121f8"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/137.bin": {
+      "size": 4290688,
+      "sha256": "c2fa90d0e65704a9346a320977ee5d9fc054ebf2403d6daa5a514d480e6f0013"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/139.bin": {
+      "size": 4235808,
+      "sha256": "87f51b85b226284e690a62d9bd4cb4c1f45f5a50c1c12685dc5706bbc8d95173"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/142.bin": {
+      "size": 4182800,
+      "sha256": "d881bd4be64dc58d7b98e89ed6ef1877629d87e6f5b46ec8f8a97d99efba8cc8"
+    },
+    "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/lidar/144.bin": {
+      "size": 4202784,
+      "sha256": "24a130d3f2ecc3ff114d84999262597af74e887c8c34d17778196d5758f3787d"
+    }
+  },
+  "timestamp_source": "/mnt/data/dataset/ncore/250d2261-e28c-47a7-b317-cb340a6722c0/infos/timestep_to_timestamps.json",
+  "static_world_coordinates_unchanged": true,
+  "rolling_shutter": "not corrected"
+}

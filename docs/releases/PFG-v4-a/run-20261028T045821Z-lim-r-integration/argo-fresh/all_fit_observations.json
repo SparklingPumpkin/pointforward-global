@@ -1,0 +1,50 @@
+{
+  "records": [
+    {
+      "key": "t041_f085_c0",
+      "original_split": "fit",
+      "original_mask_accepted": false,
+      "mode": "geometry_only_no_reliable_image_association",
+      "warning": "Participates in geometry fitting; no invented RGB mask",
+      "point_count": 2
+    },
+    {
+      "key": "t041_f125_c0",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 239
+    },
+    {
+      "key": "t041_f140_c1",
+      "original_split": "gate",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 2164
+    },
+    {
+      "key": "t047_f104_c0",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 194
+    },
+    {
+      "key": "t047_f111_c0",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 436
+    },
+    {
+      "key": "t047_f118_c1",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 1143
+    }
+  ],
+  "no_heldout_tracks": true,
+  "no_observation_mask_application_gate": true,
+  "note": "All existing selected observations are used in fitting, so all reported errors are in-sample diagnostics."
+}

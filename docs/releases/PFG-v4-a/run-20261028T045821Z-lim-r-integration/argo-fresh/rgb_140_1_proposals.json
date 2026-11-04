@@ -1,0 +1,102 @@
+[
+  {
+    "index": 0,
+    "class_id": 2,
+    "confidence": 0.94140625,
+    "box": [
+      0.0,
+      260.0,
+      400.0,
+      568.0
+    ],
+    "flip_confidence": 0.94921875,
+    "flip_iou": 0.99160927456382,
+    "sam_iou": 0.9778477029578351,
+    "sam_model_confidence": 0.98046875,
+    "all_sam_detector_ious": [
+      0.9778477029578351,
+      0.7064813746972668,
+      0.9537895562321247
+    ],
+    "component_fraction": 0.9996866404373107,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "fb26751118fd3550646e432c9c6a0f50140234c11b637226e5cf9a4fa403d778"
+  },
+  {
+    "index": 1,
+    "class_id": 2,
+    "confidence": 0.69140625,
+    "box": [
+      322.0,
+      266.0,
+      398.0,
+      310.0
+    ],
+    "flip_confidence": 0.609375,
+    "flip_iou": 0.9506866416978776,
+    "sam_iou": 0.9393939393939394,
+    "sam_model_confidence": 0.9296875,
+    "all_sam_detector_ious": [
+      0.8694610778443114,
+      0.893368010403121,
+      0.9393939393939394
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "9cba0a547df6fb4a0acd15e663457c188f0d7668c98848efbb160f5f3d8f9ffb"
+  },
+  {
+    "index": 2,
+    "class_id": 2,
+    "confidence": 0.69140625,
+    "box": [
+      520.0,
+      260.0,
+      640.0,
+      300.0
+    ],
+    "flip_confidence": 0.765625,
+    "flip_iou": 0.9228251977092992,
+    "sam_iou": 0.8620218579234973,
+    "sam_model_confidence": 0.890625,
+    "all_sam_detector_ious": [
+      0.8620218579234973,
+      0.6985619469026548,
+      0.7789625360230548
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "081c970c8bc05145d82b561dc0968c5a65fedfafa4c75903c03574fc864f26fd"
+  },
+  {
+    "index": 3,
+    "class_id": 2,
+    "confidence": 0.349609375,
+    "box": [
+      592.0,
+      264.0,
+      640.0,
+      292.0
+    ],
+    "flip_confidence": 0.765625,
+    "flip_iou": 0.1321762349799733,
+    "sam_iou": 0.695906432748538,
+    "sam_model_confidence": 0.86328125,
+    "all_sam_detector_ious": [
+      0.6058002148227712,
+      0.6651785714285714,
+      0.695906432748538
+    ],
+    "component_fraction": 1.0,
+    "reasons": [
+      "normal_confidence",
+      "not_mutual_flip_match",
+      "flip_iou"
+    ],
+    "qualified": false,
+    "sha256": "7a29d5d340aac7876a3558df6e6c0f0cca43b9e5aa86813b3654d15ff9c6806c"
+  }
+]

@@ -1,0 +1,813 @@
+{
+  "summary": {
+    "observations": 6,
+    "tracks": 2,
+    "image_scored": 6,
+    "stages": {
+      "old": {
+        "point_mask_distance_px": 2.2634650940696397,
+        "point_mask_inside": 0.8763675616248924,
+        "outside3_fraction": 0.1014931005890143,
+        "hull_mask_iou": 0.652148056224329,
+        "containment": 0.97907922547496
+      },
+      "selected": {
+        "point_mask_distance_px": 8.45149532953898,
+        "point_mask_inside": 0.7514826955969279,
+        "outside3_fraction": 0.22800552821153408,
+        "hull_mask_iou": 0.6771528203757624,
+        "containment": 0.7328979271244752
+      },
+      "owned_before": {
+        "point_mask_distance_px": 8.451405684153238,
+        "point_mask_inside": 0.7514846682429788,
+        "outside3_fraction": 0.22800257853777062,
+        "hull_mask_iou": 0.6771528203757624,
+        "containment": 0.7329025321023771
+      },
+      "time": {
+        "point_mask_distance_px": 0.7028310832877954,
+        "point_mask_inside": 0.9561601320384522,
+        "outside3_fraction": 0.03060330115492513,
+        "hull_mask_iou": 0.6998518539799555,
+        "containment": 0.9630605264548483
+      },
+      "final": {
+        "point_mask_distance_px": 0.6438214518129826,
+        "point_mask_inside": 0.9626647136453729,
+        "outside3_fraction": 0.024807558268091848,
+        "hull_mask_iou": 0.6998518539799555,
+        "containment": 0.969398574109538
+      },
+      "time_on_original_pool": {
+        "point_mask_distance_px": 0.7029241162041823,
+        "point_mask_inside": 0.9561507028023923,
+        "outside3_fraction": 0.030613176220637296,
+        "hull_mask_iou": 0.6998518539799555,
+        "containment": 0.9630515985405516
+      },
+      "old_on_owned": {
+        "point_mask_distance_px": 2.263480670750141,
+        "point_mask_inside": 0.8763699179815719,
+        "outside3_fraction": 0.10148971401648987,
+        "hull_mask_iou": 0.652148056224329,
+        "containment": 0.9790786448358147
+      }
+    },
+    "candidate_points": 139991,
+    "owned_points": 139987
+  },
+  "records": [
+    {
+      "key": "t118_f026_c2",
+      "track": 118,
+      "frame": 26,
+      "camera": 2,
+      "ownership": {
+        "candidate_points": 15181,
+        "retained_points": 15181,
+        "removed_points": 0,
+        "fraction": 1.0,
+        "image_supported": true,
+        "mask_identity_note": "independent RGB measurement; original_mask",
+        "previous_good_reference": false,
+        "trusted_reference_points": 0,
+        "trusted_reference_retained": 0,
+        "unresolved_geometry_fallback": false,
+        "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+      },
+      "mask_accepted": true,
+      "image_supported": true,
+      "lidar_frame": 26,
+      "bbox_frame": 26,
+      "old": {
+        "containment": 0.9665371187668796,
+        "outside_mean_m": 0.0007833049837230191,
+        "points": 15181,
+        "point_mask_inside": 0.8724062973453659,
+        "point_mask_distance_px": 1.1003209352493286,
+        "outside3_fraction": 0.0875436400764113,
+        "p95_distance_px": 8.359185218811035,
+        "hull_mask_iou": 0.5287026904972817
+      },
+      "selected": {
+        "containment": 0.8876885580660036,
+        "outside_mean_m": 0.011423951975371431,
+        "points": 15181,
+        "point_mask_inside": 0.8257690534220407,
+        "point_mask_distance_px": 2.234900951385498,
+        "outside3_fraction": 0.13945062907581846,
+        "p95_distance_px": 15.913777351379395,
+        "hull_mask_iou": 0.595943379603344
+      },
+      "owned_before": {
+        "containment": 0.8876885580660036,
+        "outside_mean_m": 0.011423951975371431,
+        "points": 15181,
+        "point_mask_inside": 0.8257690534220407,
+        "point_mask_distance_px": 2.234900951385498,
+        "outside3_fraction": 0.13945062907581846,
+        "p95_distance_px": 15.913777351379395,
+        "hull_mask_iou": 0.595943379603344
+      },
+      "time": {
+        "containment": 0.956590474935775,
+        "outside_mean_m": 0.000744864422695854,
+        "points": 15181,
+        "point_mask_inside": 0.9757591726500231,
+        "point_mask_distance_px": 0.10073470324277878,
+        "outside3_fraction": 0.00856333574863316,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.6220487804878049
+      },
+      "final": {
+        "containment": 0.956590474935775,
+        "outside_mean_m": 0.000744864422695854,
+        "points": 15181,
+        "point_mask_inside": 0.9757591726500231,
+        "point_mask_distance_px": 0.10073470324277878,
+        "outside3_fraction": 0.00856333574863316,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.6220487804878049
+      },
+      "space": {
+        "point_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "point_applied": false,
+        "point_reasons": [
+          "insufficient_small_space_gain"
+        ],
+        "bbox_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bbox_applied": false
+      },
+      "time_on_original_pool": {
+        "containment": 0.956590474935775,
+        "outside_mean_m": 0.000744864422695854,
+        "points": 15181,
+        "point_mask_inside": 0.9757591726500231,
+        "point_mask_distance_px": 0.10073470324277878,
+        "outside3_fraction": 0.00856333574863316,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.6220487804878049
+      },
+      "old_on_owned": {
+        "containment": 0.9665371187668796,
+        "outside_mean_m": 0.0007833049837230191,
+        "points": 15181,
+        "point_mask_inside": 0.8724062973453659,
+        "point_mask_distance_px": 1.1003209352493286,
+        "outside3_fraction": 0.0875436400764113,
+        "p95_distance_px": 8.359185218811035,
+        "hull_mask_iou": 0.5287026904972817
+      },
+      "trajectory_support": {
+        "lidar": {
+          "source_s": 2.599951,
+          "clock_s": -0.03354281332663831,
+          "camera_s": 2.60278,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        },
+        "bbox": {
+          "source_s": 2.599951,
+          "clock_s": -0.00999079564038335,
+          "camera_s": 2.60278,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        }
+      }
+    },
+    {
+      "key": "t118_f077_c2",
+      "track": 118,
+      "frame": 77,
+      "camera": 2,
+      "ownership": {
+        "candidate_points": 22140,
+        "retained_points": 22137,
+        "removed_points": 3,
+        "fraction": 0.9998644986449865,
+        "image_supported": true,
+        "mask_identity_note": "independent RGB measurement; original_mask",
+        "previous_good_reference": false,
+        "trusted_reference_points": 0,
+        "trusted_reference_retained": 0,
+        "unresolved_geometry_fallback": false,
+        "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+      },
+      "mask_accepted": true,
+      "image_supported": true,
+      "lidar_frame": 77,
+      "bbox_frame": 77,
+      "old": {
+        "containment": 0.9878952122854562,
+        "outside_mean_m": 0.0003248446314304348,
+        "points": 22140,
+        "point_mask_inside": 0.7468383017163505,
+        "point_mask_distance_px": 3.1679766178131104,
+        "outside3_fraction": 0.21969286359530263,
+        "p95_distance_px": 19.54523973464965,
+        "hull_mask_iou": 0.4376449822620198
+      },
+      "selected": {
+        "containment": 0.8327913279132791,
+        "outside_mean_m": 0.022443400187849696,
+        "points": 22140,
+        "point_mask_inside": 0.738256549232159,
+        "point_mask_distance_px": 8.164423942565918,
+        "outside3_fraction": 0.22700993676603431,
+        "p95_distance_px": 57.52885971069336,
+        "hull_mask_iou": 0.5261103120321718
+      },
+      "owned_before": {
+        "containment": 0.8327686678411709,
+        "outside_mean_m": 0.022446441711116788,
+        "points": 22137,
+        "point_mask_inside": 0.7382210778334914,
+        "point_mask_distance_px": 8.16553020477295,
+        "outside3_fraction": 0.22704070108867508,
+        "p95_distance_px": 57.528978729248045,
+        "hull_mask_iou": 0.5261103120321718
+      },
+      "time": {
+        "containment": 0.950444956407824,
+        "outside_mean_m": 0.0007971829198871977,
+        "points": 22137,
+        "point_mask_inside": 0.9660748972308805,
+        "point_mask_distance_px": 0.18428131937980652,
+        "outside3_fraction": 0.017978949270452182,
+        "p95_distance_px": 0.007190901972354086,
+        "hull_mask_iou": 0.5772011438233079
+      },
+      "final": {
+        "containment": 0.950444956407824,
+        "outside_mean_m": 0.0007971829198871977,
+        "points": 22137,
+        "point_mask_inside": 0.9660748972308805,
+        "point_mask_distance_px": 0.18428131937980652,
+        "outside3_fraction": 0.017978949270452182,
+        "p95_distance_px": 0.007190901972354086,
+        "hull_mask_iou": 0.5772011438233079
+      },
+      "space": {
+        "point_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "point_applied": false,
+        "point_reasons": [
+          "insufficient_small_space_gain"
+        ],
+        "bbox_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bbox_applied": false
+      },
+      "time_on_original_pool": {
+        "containment": 0.9504516711833785,
+        "outside_mean_m": 0.0007970749005213594,
+        "points": 22140,
+        "point_mask_inside": 0.9660794941282747,
+        "point_mask_distance_px": 0.18425634503364563,
+        "outside3_fraction": 0.01797651309846432,
+        "p95_distance_px": 0.00706155544612494,
+        "hull_mask_iou": 0.5772011438233079
+      },
+      "old_on_owned": {
+        "containment": 0.9878935718480373,
+        "outside_mean_m": 0.0003248886542833188,
+        "points": 22137,
+        "point_mask_inside": 0.7468039933143605,
+        "point_mask_distance_px": 3.168405771255493,
+        "outside3_fraction": 0.2197226363102498,
+        "p95_distance_px": 19.547171783447276,
+        "hull_mask_iou": 0.4376449822620198
+      },
+      "trajectory_support": {
+        "lidar": {
+          "source_s": 7.700031,
+          "clock_s": -0.03354281332663831,
+          "camera_s": 7.702865,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        },
+        "bbox": {
+          "source_s": 7.700031,
+          "clock_s": -0.00999079564038335,
+          "camera_s": 7.702865,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        }
+      }
+    },
+    {
+      "key": "t118_f090_c2",
+      "track": 118,
+      "frame": 90,
+      "camera": 2,
+      "ownership": {
+        "candidate_points": 15900,
+        "retained_points": 15899,
+        "removed_points": 1,
+        "fraction": 0.999937106918239,
+        "image_supported": true,
+        "mask_identity_note": "independent RGB measurement; original_mask",
+        "previous_good_reference": false,
+        "trusted_reference_points": 0,
+        "trusted_reference_retained": 0,
+        "unresolved_geometry_fallback": false,
+        "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+      },
+      "mask_accepted": true,
+      "image_supported": true,
+      "lidar_frame": 90,
+      "bbox_frame": 90,
+      "old": {
+        "containment": 0.970691823899371,
+        "outside_mean_m": 0.0010363792793181593,
+        "points": 15900,
+        "point_mask_inside": 0.770251572327044,
+        "point_mask_distance_px": 8.029491424560547,
+        "outside3_fraction": 0.20358490566037735,
+        "p95_distance_px": 100.0,
+        "hull_mask_iou": 0.5818990580300035
+      },
+      "selected": {
+        "containment": 0.799559748427673,
+        "outside_mean_m": 0.048912185024731526,
+        "points": 15900,
+        "point_mask_inside": 0.7521383647798742,
+        "point_mask_distance_px": 4.817601680755615,
+        "outside3_fraction": 0.22949685534591194,
+        "p95_distance_px": 30.293341541290282,
+        "hull_mask_iou": 0.6328953817451659
+      },
+      "owned_before": {
+        "containment": 0.7996100383671929,
+        "outside_mean_m": 0.048910342553272104,
+        "points": 15899,
+        "point_mask_inside": 0.7521856720548462,
+        "point_mask_distance_px": 4.815957546234131,
+        "outside3_fraction": 0.2294483929806906,
+        "p95_distance_px": 30.24033012390128,
+        "hull_mask_iou": 0.6328953817451659
+      },
+      "time": {
+        "containment": 0.9584879552173092,
+        "outside_mean_m": 0.002827687956143739,
+        "points": 15899,
+        "point_mask_inside": 0.9726397886659538,
+        "point_mask_distance_px": 1.1062926054000854,
+        "outside3_fraction": 0.01918359645260708,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.6672862764799464
+      },
+      "final": {
+        "containment": 0.9584879552173092,
+        "outside_mean_m": 0.002827687956143739,
+        "points": 15899,
+        "point_mask_inside": 0.9726397886659538,
+        "point_mask_distance_px": 1.1062926054000854,
+        "outside3_fraction": 0.01918359645260708,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.6672862764799464
+      },
+      "space": {
+        "point_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "point_applied": false,
+        "point_reasons": [
+          "insufficient_small_space_gain"
+        ],
+        "bbox_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bbox_applied": false
+      },
+      "time_on_original_pool": {
+        "containment": 0.9584276729559749,
+        "outside_mean_m": 0.0028322278149218007,
+        "points": 15900,
+        "point_mask_inside": 0.9725786163522012,
+        "point_mask_distance_px": 1.1068757772445679,
+        "outside3_fraction": 0.019245283018867923,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.6672862764799464
+      },
+      "old_on_owned": {
+        "containment": 0.9706899805019183,
+        "outside_mean_m": 0.001036444464504606,
+        "points": 15899,
+        "point_mask_inside": 0.7703000188691113,
+        "point_mask_distance_px": 8.029155731201172,
+        "outside3_fraction": 0.20353481351028366,
+        "p95_distance_px": 100.0,
+        "hull_mask_iou": 0.5818990580300035
+      },
+      "trajectory_support": {
+        "lidar": {
+          "source_s": 9.000005999999999,
+          "clock_s": -0.03354281332663831,
+          "camera_s": 9.002766,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        },
+        "bbox": {
+          "source_s": 9.000005999999999,
+          "clock_s": -0.00999079564038335,
+          "camera_s": 9.002766,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        }
+      }
+    },
+    {
+      "key": "t113_f134_c1",
+      "track": 113,
+      "frame": 134,
+      "camera": 1,
+      "ownership": {
+        "candidate_points": 41749,
+        "retained_points": 41749,
+        "removed_points": 0,
+        "fraction": 1.0,
+        "image_supported": true,
+        "mask_identity_note": "independent RGB measurement; original_mask",
+        "previous_good_reference": true,
+        "trusted_reference_points": 39954,
+        "trusted_reference_retained": 39954,
+        "unresolved_geometry_fallback": false,
+        "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+      },
+      "mask_accepted": true,
+      "image_supported": true,
+      "lidar_frame": 134,
+      "bbox_frame": 134,
+      "old": {
+        "containment": 0.9871613691345901,
+        "outside_mean_m": 0.001051353115369392,
+        "points": 41749,
+        "point_mask_inside": 0.9602864739275192,
+        "point_mask_distance_px": 0.20661960542201996,
+        "outside3_fraction": 0.02646769982514551,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.7986904668085218
+      },
+      "selected": {
+        "containment": 0.7602816833936142,
+        "outside_mean_m": 0.16597255422417306,
+        "points": 41749,
+        "point_mask_inside": 0.7124721550216772,
+        "point_mask_distance_px": 18.554880142211914,
+        "outside3_fraction": 0.2811564348846679,
+        "p95_distance_px": 100.0,
+        "hull_mask_iou": 0.7721346231972375
+      },
+      "owned_before": {
+        "containment": 0.7602816833936142,
+        "outside_mean_m": 0.16597255422417306,
+        "points": 41749,
+        "point_mask_inside": 0.7124721550216772,
+        "point_mask_distance_px": 18.554880142211914,
+        "outside3_fraction": 0.2811564348846679,
+        "p95_distance_px": 100.0,
+        "hull_mask_iou": 0.7721346231972375
+      },
+      "time": {
+        "containment": 0.9792090828522839,
+        "outside_mean_m": 0.0020800470070198094,
+        "points": 41749,
+        "point_mask_inside": 0.926393446549618,
+        "point_mask_distance_px": 0.5251323580741882,
+        "outside3_fraction": 0.05782174423339481,
+        "p95_distance_px": 4.026313686370849,
+        "hull_mask_iou": 0.7793375192209123
+      },
+      "final": {
+        "containment": 0.9841672854439627,
+        "outside_mean_m": 0.0013002912689582533,
+        "points": 41749,
+        "point_mask_inside": 0.9511126014994371,
+        "point_mask_distance_px": 0.2822563052177429,
+        "outside3_fraction": 0.03307863661405064,
+        "p95_distance_px": 0.8743999123573303,
+        "hull_mask_iou": 0.7793375192209123
+      },
+      "space": {
+        "point_bias_m": [
+          0.06947500173330566,
+          0.02307386554220106,
+          0.01629989160136968
+        ],
+        "point_applied": true,
+        "point_reasons": [],
+        "bbox_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bbox_applied": false
+      },
+      "time_on_original_pool": {
+        "containment": 0.9792090828522839,
+        "outside_mean_m": 0.0020800470070198094,
+        "points": 41749,
+        "point_mask_inside": 0.926393446549618,
+        "point_mask_distance_px": 0.5251323580741882,
+        "outside3_fraction": 0.05782174423339481,
+        "p95_distance_px": 4.026313686370849,
+        "hull_mask_iou": 0.7793375192209123
+      },
+      "old_on_owned": {
+        "containment": 0.9871613691345901,
+        "outside_mean_m": 0.001051353115369392,
+        "points": 41749,
+        "point_mask_inside": 0.9602864739275192,
+        "point_mask_distance_px": 0.20661960542201996,
+        "outside3_fraction": 0.02646769982514551,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.7986904668085218
+      },
+      "trajectory_support": {
+        "lidar": {
+          "source_s": 13.399963999999999,
+          "clock_s": -0.05499964505122649,
+          "camera_s": 13.402873,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        },
+        "bbox": {
+          "source_s": 13.399963999999999,
+          "clock_s": -0.0010743666874003443,
+          "camera_s": 13.402873,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        }
+      }
+    },
+    {
+      "key": "t113_f138_c1",
+      "track": 113,
+      "frame": 138,
+      "camera": 1,
+      "ownership": {
+        "candidate_points": 28536,
+        "retained_points": 28536,
+        "removed_points": 0,
+        "fraction": 1.0,
+        "image_supported": true,
+        "mask_identity_note": "independent RGB measurement; original_mask",
+        "previous_good_reference": true,
+        "trusted_reference_points": 27501,
+        "trusted_reference_retained": 27501,
+        "unresolved_geometry_fallback": false,
+        "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+      },
+      "mask_accepted": true,
+      "image_supported": true,
+      "lidar_frame": 138,
+      "bbox_frame": 138,
+      "old": {
+        "containment": 0.9687412391365293,
+        "outside_mean_m": 0.0015784083478908824,
+        "points": 28536,
+        "point_mask_inside": 0.9667788057190917,
+        "point_mask_distance_px": 0.5434709191322327,
+        "outside3_fraction": 0.02502102607232969,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.8211068211068211
+      },
+      "selected": {
+        "containment": 0.6066021867115223,
+        "outside_mean_m": 0.34047669707789585,
+        "points": 28536,
+        "point_mask_inside": 0.7215096719932717,
+        "point_mask_distance_px": 8.529950141906738,
+        "outside3_fraction": 0.2682926829268293,
+        "p95_distance_px": 48.69417095184326,
+        "hull_mask_iou": 0.8009239896902203
+      },
+      "owned_before": {
+        "containment": 0.6066021867115223,
+        "outside_mean_m": 0.34047669707789585,
+        "points": 28536,
+        "point_mask_inside": 0.7215096719932717,
+        "point_mask_distance_px": 8.529950141906738,
+        "outside3_fraction": 0.2682926829268293,
+        "p95_distance_px": 48.69417095184326,
+        "hull_mask_iou": 0.8009239896902203
+      },
+      "time": {
+        "containment": 0.9586837678721615,
+        "outside_mean_m": 0.003320371510900474,
+        "points": 28536,
+        "point_mask_inside": 0.9589991589571069,
+        "point_mask_distance_px": 1.7209737300872803,
+        "outside3_fraction": 0.031118587047939444,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.8121338251829641
+      },
+      "final": {
+        "containment": 0.9747687132043734,
+        "outside_mean_m": 0.0012796820255461768,
+        "points": 28536,
+        "point_mask_inside": 0.9654821979254276,
+        "point_mask_distance_px": 1.7006081342697144,
+        "outside3_fraction": 0.026668068404821978,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.8121338251829641
+      },
+      "space": {
+        "point_bias_m": [
+          0.06947500173330566,
+          0.02307386554220106,
+          0.01629989160136968
+        ],
+        "point_applied": true,
+        "point_reasons": [],
+        "bbox_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bbox_applied": false
+      },
+      "time_on_original_pool": {
+        "containment": 0.9586837678721615,
+        "outside_mean_m": 0.003320371510900474,
+        "points": 28536,
+        "point_mask_inside": 0.9589991589571069,
+        "point_mask_distance_px": 1.7209737300872803,
+        "outside3_fraction": 0.031118587047939444,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.8121338251829641
+      },
+      "old_on_owned": {
+        "containment": 0.9687412391365293,
+        "outside_mean_m": 0.0015784083478908824,
+        "points": 28536,
+        "point_mask_inside": 0.9667788057190917,
+        "point_mask_distance_px": 0.5434709191322327,
+        "outside3_fraction": 0.02502102607232969,
+        "p95_distance_px": 0.0,
+        "hull_mask_iou": 0.8211068211068211
+      },
+      "trajectory_support": {
+        "lidar": {
+          "source_s": 13.800018,
+          "clock_s": -0.05499964505122649,
+          "camera_s": 13.802840999999999,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        },
+        "bbox": {
+          "source_s": 13.800018,
+          "clock_s": -0.0010743666874003443,
+          "camera_s": 13.802840999999999,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        }
+      }
+    },
+    {
+      "key": "t113_f143_c0",
+      "track": 113,
+      "frame": 143,
+      "camera": 0,
+      "ownership": {
+        "candidate_points": 16485,
+        "retained_points": 16485,
+        "removed_points": 0,
+        "fraction": 1.0,
+        "image_supported": true,
+        "mask_identity_note": "independent RGB measurement; original_mask",
+        "previous_good_reference": true,
+        "trusted_reference_points": 15480,
+        "trusted_reference_retained": 15480,
+        "unresolved_geometry_fallback": false,
+        "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+      },
+      "mask_accepted": true,
+      "image_supported": true,
+      "lidar_frame": 143,
+      "bbox_frame": 143,
+      "old": {
+        "containment": 0.9934485896269336,
+        "outside_mean_m": 0.00040527346189301477,
+        "points": 16485,
+        "point_mask_inside": 0.9416439187139825,
+        "point_mask_distance_px": 0.5329110622406006,
+        "outside3_fraction": 0.04664846830451926,
+        "p95_distance_px": 2.36955323219299,
+        "hull_mask_iou": 0.7448443186413263
+      },
+      "selected": {
+        "containment": 0.5104640582347588,
+        "outside_mean_m": 0.4018535067914185,
+        "points": 16485,
+        "point_mask_inside": 0.7587503791325447,
+        "point_mask_distance_px": 8.407215118408203,
+        "outside3_fraction": 0.22262663026994237,
+        "p95_distance_px": 46.904760742187364,
+        "hull_mask_iou": 0.7349092359864353
+      },
+      "owned_before": {
+        "containment": 0.5104640582347588,
+        "outside_mean_m": 0.4018535067914185,
+        "points": 16485,
+        "point_mask_inside": 0.7587503791325447,
+        "point_mask_distance_px": 8.407215118408203,
+        "outside3_fraction": 0.22262663026994237,
+        "p95_distance_px": 46.904760742187364,
+        "hull_mask_iou": 0.7349092359864353
+      },
+      "time": {
+        "containment": 0.9749469214437367,
+        "outside_mean_m": 0.001001456152696112,
+        "points": 16485,
+        "point_mask_inside": 0.9370943281771307,
+        "point_mask_distance_px": 0.5795717835426331,
+        "outside3_fraction": 0.04895359417652411,
+        "p95_distance_px": 2.739921617507929,
+        "hull_mask_iou": 0.7411035786847981
+      },
+      "final": {
+        "containment": 0.991932059447983,
+        "outside_mean_m": 0.00037365079081562674,
+        "points": 16485,
+        "point_mask_inside": 0.9449196239005156,
+        "point_mask_distance_px": 0.48875564336776733,
+        "outside3_fraction": 0.043372763117986046,
+        "p95_distance_px": 1.5930448770523,
+        "hull_mask_iou": 0.7411035786847981
+      },
+      "space": {
+        "point_bias_m": [
+          0.06947500173330566,
+          0.02307386554220106,
+          0.01629989160136968
+        ],
+        "point_applied": true,
+        "point_reasons": [],
+        "bbox_bias_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bbox_applied": false
+      },
+      "time_on_original_pool": {
+        "containment": 0.9749469214437367,
+        "outside_mean_m": 0.001001456152696112,
+        "points": 16485,
+        "point_mask_inside": 0.9370943281771307,
+        "point_mask_distance_px": 0.5795717835426331,
+        "outside3_fraction": 0.04895359417652411,
+        "p95_distance_px": 2.739921617507929,
+        "hull_mask_iou": 0.7411035786847981
+      },
+      "old_on_owned": {
+        "containment": 0.9934485896269336,
+        "outside_mean_m": 0.00040527346189301477,
+        "points": 16485,
+        "point_mask_inside": 0.9416439187139825,
+        "point_mask_distance_px": 0.5329110622406006,
+        "outside3_fraction": 0.04664846830451926,
+        "p95_distance_px": 2.36955323219299,
+        "hull_mask_iou": 0.7448443186413263
+      },
+      "trajectory_support": {
+        "lidar": {
+          "source_s": 14.300002,
+          "clock_s": -0.05499964505122649,
+          "camera_s": 14.300002,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        },
+        "bbox": {
+          "source_s": 14.300002,
+          "clock_s": -0.0010743666874003443,
+          "camera_s": 14.300002,
+          "source_extrapolation_s": 0.0,
+          "target_extrapolation_s": 0.0
+        }
+      }
+    }
+  ],
+  "note": "All observations participate; automatic in-sample masks. Membership changes reported explicitly; old/owned means have different point populations."
+}

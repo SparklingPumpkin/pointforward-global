@@ -1,0 +1,71 @@
+{
+  "seed": 20261028,
+  "ownership": {
+    "time_tube_bound_s": 0.25,
+    "time_tube_step_s": 0.01,
+    "box_margin_m": [
+      0.25,
+      0.15,
+      0.12
+    ],
+    "mask_margin_px": 4.0,
+    "geometry_excess_m": 0.08,
+    "voxel_m": 0.12,
+    "component_radius_m": 0.27,
+    "minimum_component_points": 3,
+    "protect_previous_good_mean_px": 1.0,
+    "protect_previous_good_containment": 0.9,
+    "trusted_reference_distance_px": 1.0,
+    "trusted_reference_box_margin_m": 0.05,
+    "pointwise_reference_protection": true,
+    "pointwise_reference_box_factor": 1.5,
+    "pointwise_maximum_sparse_pool_points": 128
+  },
+  "time": {
+    "scene_bound_s": 0.2,
+    "track_residual_bound_s": 0.06,
+    "track_residual_sigma_s": 0.03,
+    "track_prior_weight": 0.012,
+    "scene_prior_weight": 0.002,
+    "profile_step_s": 0.005,
+    "sample_points": 1800,
+    "outside_pixel_scale": 5.0,
+    "extent_weight": 0.25,
+    "good_frame_regression_tolerance_px": 0.1,
+    "good_frame_regression_weight": 4.0,
+    "maximum_pose_extrapolation_s": 0.27,
+    "static_speed_threshold_mps": 0.5,
+    "local_profile_radius_s": 0.008,
+    "local_profile_step_s": 0.0005
+  },
+  "space": {
+    "point_bounds_m": [
+      0.12,
+      0.08,
+      0.04
+    ],
+    "bbox_bounds_m": [
+      0.15,
+      0.12,
+      0.08
+    ],
+    "prior_weight": 0.03,
+    "minimum_image_gain_px": 0.05,
+    "minimum_relative_gain": 0.1,
+    "maximum_good_frame_regression_px": 0.25,
+    "minimum_containment_gain": 0.02,
+    "maximum_bbox_iou_drop": 0.005
+  },
+  "contract": {
+    "batches": 9,
+    "same_vehicle_lists": true,
+    "same_source_scan_ids_as_P_Q": true,
+    "source_offset_mismatch_excluded": true,
+    "shared_clocks_pooled_by_actual_scene": true,
+    "independent_lidar_and_bbox_clocks": true,
+    "track_residual_weighted_mean_zero": true,
+    "no_heldout_or_mask_based_vehicle_skip": true,
+    "static_background_unchanged": true,
+    "point_ownership_is_proxy_not_certified_ground_truth": true
+  }
+}

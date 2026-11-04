@@ -1,0 +1,141 @@
+{
+  "accepted_version": "LIM-v1-r",
+  "accepted_run": "run-20261028T034618Z-ownership-time-nine-batches",
+  "files": [
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-c/config.json",
+      "source_sha256": "0fb6bba6d247fef4e663da84b71c22251db5b06175a81eb9e5d2b4651d728838",
+      "target": "c_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-e/config.json",
+      "source_sha256": "6dd1783b8db03713ef3fd4342d2070233c45e10278ba7d14e1955c5eb77ade68",
+      "target": "e_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-j/config.json",
+      "source_sha256": "69769537676ed7d33bb0bbd3d487e8fa71bc11a6ce578dd3518566b6c2d4e1dc",
+      "target": "j_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-k/config.json",
+      "source_sha256": "65ffb900a7f12db9cfb03b8807143732b0385297effe7df4eda027a701e3eb0e",
+      "target": "k_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-l/config.json",
+      "source_sha256": "8b528ba7665d3beabcbb487def88a47f87546998ec88e279cad57e3f7c121fc5",
+      "target": "l_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-m/config.json",
+      "source_sha256": "7ba9888026acff0558d4bf90185fd96c101904e28d640dadd75531a26a9bcedc",
+      "target": "m_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-n/config.json",
+      "source_sha256": "fb103cc9a9630938b46834edd6a844fd9194cc86d733bdf94153235c5d3e65c3",
+      "target": "n_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-p/config.json",
+      "source_sha256": "122d414dde1a9236e9afc37494d2300e2c73b7dc853b12e0561b0e08f5f16b50",
+      "target": "p_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-r/config.json",
+      "source_sha256": "6c28a199ff5afa90f26a31b5ed7299da3a249d353744ccdbd29ec2b331c6fbf6",
+      "target": "r_config.json"
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/benchmark/calibration_core.py",
+      "source_sha256": "71982e73e70428b5b1bcd6ce35b86990c03b26067c17bcc5f73614c5dda83008",
+      "target": "geometry.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-a/run-20261022T173801Z-dense-rawpoint-image-motion/raw-geometry-overlays/export_overlays.py",
+      "source_sha256": "be2853e3bab90dbad4d87b9ac915e07bd3e88010acb46d3b72310d883ef27d55",
+      "target": "drawing.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-a/run-20261022T173801Z-dense-rawpoint-image-motion/large-moving-vehicle-overlays/reselect.py",
+      "source_sha256": "15d94162b881ed5fed94fc8f5f2c811d3097d391ec4016645a99c1c31cd2c16f",
+      "target": "selection.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-b/run-20261023T073615Z-ncore-ground-lag-track-offset/calibrate.py",
+      "source_sha256": "c27903d4b1d0bd92992c53dc6092adc990a1c65a3aeb15053c80d2ce84a9f0ad",
+      "target": "ground.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/benchmark/LC-v1-e/independent_masks.py",
+      "source_sha256": "9ecbd8bfddfa6d525f6f7acdfc9e58c719a0583a37dd05b65b2ec7f7a6c89aae",
+      "target": "masks.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-c/pipeline.py",
+      "source_sha256": "0d4c6a50b1bdd6b750e50ff210b87dfa7f295693571a45f6d4c905e8b301a538",
+      "target": "c.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-e/compare.py",
+      "source_sha256": "7678a10d9b955a855701342d66859ab45a2b5b8d345b23d0af3d4d6013ad43ae",
+      "target": "e.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-j/complete.py",
+      "source_sha256": "43d2aa11584bb86c7efb7c7df79c569fe2df2e0747f62cdf52bb2ebf6600197e",
+      "target": "j.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-k/refine.py",
+      "source_sha256": "d4cdde36074dbc394aab513b849fe8438bfddb24aa2e515b6a5fbc50c69d5a65",
+      "target": "k.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-l/audit_frames.py",
+      "source_sha256": "63bc8c617853454846c8ffc277f502b067968e1f950596b6c18755582ff8fc6a",
+      "target": "l.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-m/pipeline.py",
+      "source_sha256": "63f78a8ed1d2ecd3bc9dd73ad6251ad9aac06e396dbd703f9095ef80764feaa9",
+      "target": "m.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-n/all_fit.py",
+      "source_sha256": "eba5c8aae833e7568cc02ca5a6609149dbe59964e114ef3801c54f96d5020a30",
+      "target": "n.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-q/generalize.py",
+      "source_sha256": "521a53894240d2a96a29efa8208c9be3fa350d819dac1b9023622e32e65c7154",
+      "target": "q.py",
+      "extracted_definitions": true
+    },
+    {
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/lidar-bbox-calibration/point-ownership/LIM-v1-r/calibrate.py",
+      "source_sha256": "ee2ccaf6da3176cb05ab7e4d62b02b7c25a52d50081d629493d66a7f1d71c826",
+      "target": "r.py",
+      "extracted_definitions": true
+    }
+  ],
+  "adaptations": [
+    "Portable imports replace research import graph; numerical definitions preserved",
+    "Fresh raw-data initialization and scene selection use runtime configuration",
+    "SAM root and generic weight paths are supplied locally",
+    "Full-scene application bridge is new engineering, separate from frozen fit"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "algorithm": "LIM-v1-r",
+  "application": {
+    "frames": 1,
+    "camera_views": 3,
+    "excluded_frames": 0
+  },
+  "diagnostic_only_partial_export": true,
+  "shared_lidar_seconds": 0.09960062144319963,
+  "shared_bbox_seconds": 0.08899754875355663
+}

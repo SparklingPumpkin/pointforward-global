@@ -13,3 +13,5 @@ Git 只跟踪 `pointforward_waymo_ds_paper_ckpt_020000.pt`，通过 Git LFS 下�
 所有随包权重的 SHA256、大小和用途均在 `manifest.json` 中，便于交付后校验。
 
 `refiner_scene017_ffr_v1_l.pt` 是本交付固定结果的 scene017 联合 refiner；`refiner_scene017_fast_g8.pt` 和 `refiner_scene017_27db.pt` 仅作为历史配方保留。scene017 refiner 不是通用预训练权重，对新场景应由 `run_current_pipeline.py` 的 refiner 阶段重新生成。最终渲染还需要 `artifacts/scene017_ffr_v1_l/` 中相同配方生成的 runtime payload。
+
+LIM-v1-r 默认前处理额外使用本目录 `yolo11n-seg.pt`（通用车辆实例分割，与研究版本相同权重）；安装 `requirements-calibration.txt`。SAM2.1 Tiny 沿用既有权重。两者都不含当前场景拟合状态；SHA256 在 manifest 中。请遵守 Ultralytics 相应代码/模型许可。

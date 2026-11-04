@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "start": 5364837.395984157,
+  "end": 5364935.803693586,
+  "stages_seconds": {
+    "initialization": 0.5625895746052265,
+    "fit_and_diagnostics": 73.47630779165775,
+    "full_scene_export": 24.367923695594072
+  },
+  "scope": "stage",
+  "input_boundary": "before_fresh_dataset_and_models",
+  "output_boundary": "diagnostics_corrected_instances_and_sparse_depth_written",
+  "scene_cache_reused": false
+}

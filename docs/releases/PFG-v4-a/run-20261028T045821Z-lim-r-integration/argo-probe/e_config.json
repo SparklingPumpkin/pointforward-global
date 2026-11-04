@@ -1,0 +1,24 @@
+{
+  "seed": 20261027,
+  "base_implementation": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-c/run-20261023T105040Z-ncore-argo-multitime/pipeline_snapshot.py",
+  "inputs": {
+    "argoverse017": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-d/run-20261024T002455Z-argo017-anchor-trajectory",
+    "ncore250d": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-c/run-20261023T105040Z-ncore-argo-multitime/ncore250d"
+  },
+  "bounds_m": [0.6, 0.5, 0.25],
+  "clock_bound_s": 0.15,
+  "clock_step_s": 0.025,
+  "max_sample_points": 500,
+  "minimum_points": 20,
+  "minimum_fit_views": 2,
+  "minimum_camera_views": 3,
+  "minimum_camera_tracks": 2,
+  "geometry_scale_m": 0.2,
+  "pixel_scale": 15,
+  "box_prior_weight": 0.03,
+  "source_clock_prior_weight": 0.015,
+  "camera_clock_prior_weight": 0.005,
+  "hull_weight": 0.3,
+  "gates": {"mask_inside_drop":0.02,"outside3_increase":0.02,"p95_increase_px":3,"containment_drop":0.01,"hull_drop":0.03},
+  "note": "Same constants for both scenes/arms. Cache-conditioned development probe; no point removal, resizing, rotation change or physical timestamp certification."
+}

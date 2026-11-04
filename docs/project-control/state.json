@@ -23,18 +23,20 @@
       "label": "项目主线",
       "purpose": "可在新机器独立完成数据预处理、模型预训练、全局Gaussian推理、PLY导出与128D渲染的交付主线",
       "parent_scope_id": null,
-      "current_version_id": "PFG-v4",
-      "next_version_number": 5,
+      "current_version_id": "PFG-v5",
+      "next_version_number": 6,
       "version_ids": [
         "PFG-v1",
         "PFG-v2",
         "PFG-v3",
-        "PFG-v4"
+        "PFG-v4",
+        "PFG-v5"
       ],
       "candidate_ids": [
         "PFG-v1-a",
         "PFG-v2-a",
-        "PFG-v3-a"
+        "PFG-v3-a",
+        "PFG-v4-a"
       ],
       "created_at": "2026-09-25T15:51:53+00:00"
     },
@@ -473,7 +475,7 @@
       "scope_id": "project",
       "number": 4,
       "slug": "compact32-union-smpl-delivery",
-      "status": "current",
+      "status": "superseded",
       "parent_version_id": "PFG-v3",
       "promoted_from_candidate_id": "PFG-v3-a",
       "change_types": [
@@ -907,6 +909,187 @@
             "sha256_when_recorded": "0906526af9eb0bf3b1b26ef68851eea70c7b658c927d8a2700101250528e8008",
             "size_when_recorded": 3747,
             "mtime_ns_when_recorded": 1792651953977743490
+          }
+        ]
+      },
+      "superseded_at": "2026-10-28T05:22:36+00:00"
+    },
+    "PFG-v5": {
+      "version_id": "PFG-v5",
+      "scope_id": "project",
+      "number": 5,
+      "slug": "lim-r-default-preprocessing",
+      "status": "current",
+      "parent_version_id": "PFG-v4",
+      "promoted_from_candidate_id": "PFG-v4-a",
+      "change_types": [
+        "data_contract"
+      ],
+      "summary": "VR-v1-s骨干加用户接受的LIM-v1-r固有前处理；fresh默认lim-r，保留legacy与冻结replay；独立原始输入及消费链验证完成，未新增整场PSNR/完整计时结论",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md",
+          "claim": "实质前处理数据合同与工程验证",
+          "recorded_at": "2026-10-28T05:22:36+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "71b9e063b3bd5817c1aff695498933ba4fb8a76cec147cb2a8c29b9a9c846594",
+          "size_when_recorded": 2186,
+          "mtime_ns_when_recorded": 1793164870007482910
+        }
+      ],
+      "legacy_id": null,
+      "created_at": "2026-10-28T05:22:36+00:00",
+      "acceptance_report": {
+        "source": {
+          "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/acceptance-report.json",
+          "claim": "structured acceptance checked against raw evidence",
+          "recorded_at": "2026-10-28T05:22:36+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "5db22d3c616d734ce9c9ad9dbc4a31f68e751dabbf2291ef13688b4be3bbb920",
+          "size_when_recorded": 2762,
+          "mtime_ns_when_recorded": 1793164955920147776
+        },
+        "content": {
+          "schema_version": 1,
+          "subject_id": "PFG-v4-a",
+          "checks": [
+            {
+              "id": "fidelity",
+              "criterion": "LIM-v1-r核心函数与配置保持一致，明确记录工程适配与旧结果局限",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json::73个原版函数方法与配置验证",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::独立源码配置及消费桥冻结快照",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/source_research_report.md::原研究失败结论原样保留"
+              ]
+            },
+            {
+              "id": "default",
+              "criterion": "fresh默认执行独立LIM-v1-r前处理，保留legacy adaptive及历史replay",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/contract-tests.log::fresh默认lim-r且legacy和replay分支保留",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::可执行默认入口与运行阶段包装"
+              ]
+            },
+            {
+              "id": "application",
+              "criterion": "输出逐帧逐相机稀疏深度与修正框被现有dataset实际读取；源数据和静态点不改写",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/consumer_verification.json::两场景6相机视图修正框和深度姿态逐值读取通过",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/final-application-validation.log::最终应用实现使用本run校准结果重新投影，非完整冷启动计时"
+              ]
+            },
+            {
+              "id": "portable",
+              "criterion": "运行不依赖PointForward研究仓库、P/Q历史场景缓存；保存配置、来源、诊断和参数",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::本地模块与模型权重路径，生产运行无研究场景缓存引用",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh/input_manifest.json::原始输入和通用模型，无历史场景状态复用",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh/input_manifest.json::ncore原始输入和独立mask生成",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/reproduce.sh::最小复现入口"
+              ]
+            }
+          ]
+        },
+        "evidence_snapshots": [
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json",
+            "claim": "73个原版函数方法与配置验证",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "8274a8e949deaa642c8fece4828f643aec3b5bda5bf768506455d1fe743a1675",
+            "size_when_recorded": 1154,
+            "mtime_ns_when_recorded": 1793164870007482910
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip",
+            "claim": "独立源码配置及消费桥冻结快照",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "dac34d3d16546d9945ae2e2827488360d1eb9e2ba2a268a3ff21b8dc7aded03f",
+            "size_when_recorded": 79608,
+            "mtime_ns_when_recorded": 1793164870007482910
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/source_research_report.md",
+            "claim": "原研究失败结论原样保留",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3a2357fa1248358f9e7795e36b764c0091d0bf741ecc5aeaa120859f2bdcb945",
+            "size_when_recorded": 8765,
+            "mtime_ns_when_recorded": 1793161894052484922
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/contract-tests.log",
+            "claim": "fresh默认lim-r且legacy和replay分支保留",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "61e50d00c26f649a04bc3dfb04dec1402a3b1c7894ccfa16db0e7adc9314f310",
+            "size_when_recorded": 620,
+            "mtime_ns_when_recorded": 1793164731338410167
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/consumer_verification.json",
+            "claim": "两场景6相机视图修正框和深度姿态逐值读取通过",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "f0e270d4f69f9cd25ade7e5c034a9f1ed719134c97dce57b53580bbc346513d0",
+            "size_when_recorded": 985,
+            "mtime_ns_when_recorded": 1793164727274378728
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/final-application-validation.log",
+            "claim": "最终应用实现使用本run校准结果重新投影，非完整冷启动计时",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "29bcea4da6e69ec973b25fc5fea8c14b987a5e37579a745009635553f1d216a2",
+            "size_when_recorded": 619,
+            "mtime_ns_when_recorded": 1793164693238115429
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh/input_manifest.json",
+            "claim": "原始输入和通用模型，无历史场景状态复用",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ed536ee6e6877a9253d97def4e9e1370b028df7788909736b2510f4021664cad",
+            "size_when_recorded": 8221,
+            "mtime_ns_when_recorded": 1793164062821237431
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh/input_manifest.json",
+            "claim": "ncore原始输入和独立mask生成",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "8dd48c658188b5fac8af6cb6cb2f310c5709162e127c50095d73d03ef4477740",
+            "size_when_recorded": 8256,
+            "mtime_ns_when_recorded": 1793164062837237555
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/reproduce.sh",
+            "claim": "最小复现入口",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "b53bd9c73d0c006fb2ff34e8464a15ba088670f99f4c82aab0432e4cf267b9b1",
+            "size_when_recorded": 844,
+            "mtime_ns_when_recorded": 1793164869983482725
           }
         ]
       }
@@ -1803,6 +1986,223 @@
           }
         ]
       }
+    },
+    "PFG-v4-a": {
+      "candidate_id": "PFG-v4-a",
+      "scope_id": "project",
+      "base_version_id": "PFG-v4",
+      "slug": "lim-r-preprocessing",
+      "status": "promoted",
+      "hypothesis": "用户接受的LIM-v1-r可以独立固化并接入新场景默认前处理，保留旧版本",
+      "change_types": [
+        "data_contract"
+      ],
+      "directory_id": "dir-0036",
+      "run_ids": [
+        "run-20261028T045821Z-lim-r-integration"
+      ],
+      "conclusion": "用户接受LIM-v1-r的独立工程固化验收通过，设为fresh默认；原研究质量失败不改写，整场新重建质量/计时未验证",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md",
+          "claim": "实质前处理数据合同与工程验证",
+          "recorded_at": "2026-10-28T05:22:36+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "71b9e063b3bd5817c1aff695498933ba4fb8a76cec147cb2a8c29b9a9c846594",
+          "size_when_recorded": 2186,
+          "mtime_ns_when_recorded": 1793164870007482910
+        }
+      ],
+      "promoted_to_version_id": "PFG-v5",
+      "created_at": "2026-10-28T04:58:21+00:00",
+      "updated_at": "2026-10-28T05:22:36+00:00",
+      "acceptance_contract": {
+        "source": {
+          "reference": "docs/releases/PFG-v4-a/acceptance-contract.json",
+          "claim": "pre-registered user acceptance criteria",
+          "recorded_at": "2026-10-28T04:58:21+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "cd7e9ffb433af1b128f654486853246a1ea6c30d719275c0fcad2ffdb2c6d0a2",
+          "size_when_recorded": 659,
+          "mtime_ns_when_recorded": 1793163501576895174
+        },
+        "content": {
+          "schema_version": 1,
+          "criteria": [
+            {
+              "id": "fidelity",
+              "criterion": "LIM-v1-r核心函数与配置保持一致，明确记录工程适配与旧结果局限"
+            },
+            {
+              "id": "default",
+              "criterion": "fresh默认执行独立LIM-v1-r前处理，保留legacy adaptive及历史replay"
+            },
+            {
+              "id": "application",
+              "criterion": "输出逐帧逐相机稀疏深度与修正框被现有dataset实际读取；源数据和静态点不改写"
+            },
+            {
+              "id": "portable",
+              "criterion": "运行不依赖PointForward研究仓库、P/Q历史场景缓存；保存配置、来源、诊断和参数"
+            }
+          ]
+        }
+      },
+      "acceptance_report": {
+        "source": {
+          "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/acceptance-report.json",
+          "claim": "structured acceptance checked against raw evidence",
+          "recorded_at": "2026-10-28T05:22:36+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "5db22d3c616d734ce9c9ad9dbc4a31f68e751dabbf2291ef13688b4be3bbb920",
+          "size_when_recorded": 2762,
+          "mtime_ns_when_recorded": 1793164955920147776
+        },
+        "content": {
+          "schema_version": 1,
+          "subject_id": "PFG-v4-a",
+          "checks": [
+            {
+              "id": "fidelity",
+              "criterion": "LIM-v1-r核心函数与配置保持一致，明确记录工程适配与旧结果局限",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json::73个原版函数方法与配置验证",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::独立源码配置及消费桥冻结快照",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/source_research_report.md::原研究失败结论原样保留"
+              ]
+            },
+            {
+              "id": "default",
+              "criterion": "fresh默认执行独立LIM-v1-r前处理，保留legacy adaptive及历史replay",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/contract-tests.log::fresh默认lim-r且legacy和replay分支保留",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::可执行默认入口与运行阶段包装"
+              ]
+            },
+            {
+              "id": "application",
+              "criterion": "输出逐帧逐相机稀疏深度与修正框被现有dataset实际读取；源数据和静态点不改写",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/consumer_verification.json::两场景6相机视图修正框和深度姿态逐值读取通过",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/final-application-validation.log::最终应用实现使用本run校准结果重新投影，非完整冷启动计时"
+              ]
+            },
+            {
+              "id": "portable",
+              "criterion": "运行不依赖PointForward研究仓库、P/Q历史场景缓存；保存配置、来源、诊断和参数",
+              "passed": true,
+              "run_id": "run-20261028T045821Z-lim-r-integration",
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::本地模块与模型权重路径，生产运行无研究场景缓存引用",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh/input_manifest.json::原始输入和通用模型，无历史场景状态复用",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh/input_manifest.json::ncore原始输入和独立mask生成",
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/reproduce.sh::最小复现入口"
+              ]
+            }
+          ]
+        },
+        "evidence_snapshots": [
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json",
+            "claim": "73个原版函数方法与配置验证",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "8274a8e949deaa642c8fece4828f643aec3b5bda5bf768506455d1fe743a1675",
+            "size_when_recorded": 1154,
+            "mtime_ns_when_recorded": 1793164870007482910
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip",
+            "claim": "独立源码配置及消费桥冻结快照",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "dac34d3d16546d9945ae2e2827488360d1eb9e2ba2a268a3ff21b8dc7aded03f",
+            "size_when_recorded": 79608,
+            "mtime_ns_when_recorded": 1793164870007482910
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/source_research_report.md",
+            "claim": "原研究失败结论原样保留",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "3a2357fa1248358f9e7795e36b764c0091d0bf741ecc5aeaa120859f2bdcb945",
+            "size_when_recorded": 8765,
+            "mtime_ns_when_recorded": 1793161894052484922
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/contract-tests.log",
+            "claim": "fresh默认lim-r且legacy和replay分支保留",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "61e50d00c26f649a04bc3dfb04dec1402a3b1c7894ccfa16db0e7adc9314f310",
+            "size_when_recorded": 620,
+            "mtime_ns_when_recorded": 1793164731338410167
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/consumer_verification.json",
+            "claim": "两场景6相机视图修正框和深度姿态逐值读取通过",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "f0e270d4f69f9cd25ade7e5c034a9f1ed719134c97dce57b53580bbc346513d0",
+            "size_when_recorded": 985,
+            "mtime_ns_when_recorded": 1793164727274378728
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/final-application-validation.log",
+            "claim": "最终应用实现使用本run校准结果重新投影，非完整冷启动计时",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "29bcea4da6e69ec973b25fc5fea8c14b987a5e37579a745009635553f1d216a2",
+            "size_when_recorded": 619,
+            "mtime_ns_when_recorded": 1793164693238115429
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh/input_manifest.json",
+            "claim": "原始输入和通用模型，无历史场景状态复用",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ed536ee6e6877a9253d97def4e9e1370b028df7788909736b2510f4021664cad",
+            "size_when_recorded": 8221,
+            "mtime_ns_when_recorded": 1793164062821237431
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh/input_manifest.json",
+            "claim": "ncore原始输入和独立mask生成",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "8dd48c658188b5fac8af6cb6cb2f310c5709162e127c50095d73d03ef4477740",
+            "size_when_recorded": 8256,
+            "mtime_ns_when_recorded": 1793164062837237555
+          },
+          {
+            "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/reproduce.sh",
+            "claim": "最小复现入口",
+            "recorded_at": "2026-10-28T05:22:36+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "b53bd9c73d0c006fb2ff34e8464a15ba088670f99f4c82aab0432e4cf267b9b1",
+            "size_when_recorded": 844,
+            "mtime_ns_when_recorded": 1793164869983482725
+          }
+        ]
+      }
     }
   },
   "runs": {
@@ -1925,6 +2325,103 @@
       ],
       "created_at": "2026-10-22T06:47:10+00:00",
       "updated_at": "2026-10-22T07:07:04+00:00"
+    },
+    "run-20261028T045821Z-lim-r-integration": {
+      "run_id": "run-20261028T045821Z-lim-r-integration",
+      "candidate_id": "PFG-v4-a",
+      "variant": "lim-r-integration",
+      "status": "completed",
+      "directory_id": "dir-0037",
+      "config_identity": "LIM-v1-r accepted 6c28a199ff5afa90",
+      "code_identity": "portable frozen numerics + fresh adapter",
+      "data_identity": "raw Argo017/ncore250d + accepted nine-batch audit; no training",
+      "artifact_review_required": true,
+      "summary": "独立LIM-v1-r固化完成：两场景原始输入小样本、6视图消费读回、73定义一致性及5项合同测试；未运行完整Gaussian训练",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json",
+          "claim": "真实前处理与消费链工程验证，未宣称新质量或完整性能通过",
+          "recorded_at": "2026-10-28T05:22:35+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "8274a8e949deaa642c8fece4828f643aec3b5bda5bf768506455d1fe743a1675",
+          "size_when_recorded": 1154,
+          "mtime_ns_when_recorded": 1793164870007482910
+        },
+        {
+          "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md",
+          "claim": "用户接受、原研究局限与历史警告",
+          "recorded_at": "2026-10-28T05:22:35+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "71b9e063b3bd5817c1aff695498933ba4fb8a76cec147cb2a8c29b9a9c846594",
+          "size_when_recorded": 2186,
+          "mtime_ns_when_recorded": 1793164870007482910
+        }
+      ],
+      "created_at": "2026-10-28T04:58:22+00:00",
+      "updated_at": "2026-10-28T05:22:35+00:00",
+      "artifact_review": {
+        "reference": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/artifact-review.json",
+        "sha256": "f07a324ef606af84bc5266e3f5ac82ab38a50ba0d71d7d4ea89d06d3569d54ef",
+        "review": {
+          "schema_version": 1,
+          "run_id": "run-20261028T045821Z-lim-r-integration",
+          "assessed_at": "2026-10-28T05:22:35.704211+00:00",
+          "review_after": "2026-11-04T05:22:35.704211+00:00",
+          "decision": "keep",
+          "reason": "本run将固化交付，含原始输入验证、源码快照与首次错误证据；无可删大文件候选；仅标记不删除",
+          "checks": {
+            "failed": {
+              "value": false,
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+              ]
+            },
+            "no_future_use": {
+              "value": false,
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+              ]
+            },
+            "not_historical_mainline": {
+              "value": false,
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+              ]
+            },
+            "never_delivered": {
+              "value": false,
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+              ]
+            },
+            "no_protected_dependents": {
+              "value": false,
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+              ]
+            },
+            "reproducible": {
+              "value": true,
+              "evidence": [
+                "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+              ]
+            }
+          },
+          "preserve": [
+            "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md",
+            "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json",
+            "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/reproduce.sh",
+            "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip",
+            "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/consumer_verification.json",
+            "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/personal_review.json",
+            "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/attempts.json"
+          ],
+          "files": []
+        },
+        "recorded_at": "2026-10-28T05:22:35+00:00"
+      }
     }
   },
   "directories": {
@@ -2403,6 +2900,104 @@
       "decision_id": "layout-0034",
       "created_at": "2026-10-22T07:18:06+00:00",
       "updated_at": "2026-10-22T07:18:06+00:00"
+    },
+    "dir-0035": {
+      "directory_id": "dir-0035",
+      "path": "src/pointforward_calibration",
+      "level": "area",
+      "parent_directory_id": "dir-0002",
+      "scope_id": "project",
+      "purpose": "LIM-v1-r独立前处理模块及冻结数值实现",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0035",
+      "created_at": "2026-10-28T04:58:05+00:00",
+      "updated_at": "2026-10-28T04:58:05+00:00"
+    },
+    "dir-0036": {
+      "directory_id": "dir-0036",
+      "path": "docs/releases/PFG-v4-a",
+      "level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "scope_id": "project",
+      "purpose": "用户接受LIM-v1-r固化为默认前处理",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0036",
+      "created_at": "2026-10-28T04:58:05+00:00",
+      "updated_at": "2026-10-28T04:58:05+00:00"
+    },
+    "dir-0037": {
+      "directory_id": "dir-0037",
+      "path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration",
+      "level": "run",
+      "parent_directory_id": "dir-0036",
+      "scope_id": "project",
+      "purpose": "独立代码与前处理消费链验证",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0037",
+      "created_at": "2026-10-28T04:58:22+00:00",
+      "updated_at": "2026-10-28T04:58:22+00:00"
+    },
+    "dir-0038": {
+      "directory_id": "dir-0038",
+      "path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-probe",
+      "level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "scope_id": "project",
+      "purpose": "Fresh raw preprocessing integration sample",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0038",
+      "created_at": "2026-10-28T05:05:39+00:00",
+      "updated_at": "2026-10-28T05:05:39+00:00"
+    },
+    "dir-0039": {
+      "directory_id": "dir-0039",
+      "path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-probe",
+      "level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "scope_id": "project",
+      "purpose": "Fresh ncore raw preprocessing sample",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0039",
+      "created_at": "2026-10-28T05:05:39+00:00",
+      "updated_at": "2026-10-28T05:05:39+00:00"
+    },
+    "dir-0040": {
+      "directory_id": "dir-0040",
+      "path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh",
+      "level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "scope_id": "project",
+      "purpose": "Correct isolated-source fresh integration sample",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0040",
+      "created_at": "2026-10-28T05:07:32+00:00",
+      "updated_at": "2026-10-28T05:07:32+00:00"
+    },
+    "dir-0041": {
+      "directory_id": "dir-0041",
+      "path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh",
+      "level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "scope_id": "project",
+      "purpose": "Correct isolated-source fresh integration sample",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0041",
+      "created_at": "2026-10-28T05:07:32+00:00",
+      "updated_at": "2026-10-28T05:07:32+00:00"
     }
   },
   "layout_decisions": {
@@ -3047,11 +3642,144 @@
       "status": "applied",
       "applied_directory_id": "dir-0034",
       "created_at": "2026-10-22T07:16:37+00:00"
+    },
+    "layout-0035": {
+      "decision_id": "layout-0035",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "src/pointforward_calibration",
+      "target_level": "area",
+      "parent_directory_id": "dir-0002",
+      "purpose": "LIM-v1-r独立前处理模块及冻结数值实现",
+      "reason": "与模型快照和历史实验隔离",
+      "alternatives_considered": [
+        "直接引用研究仓库不满足独立固化"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0035",
+      "created_at": "2026-10-28T04:57:48+00:00"
+    },
+    "layout-0036": {
+      "decision_id": "layout-0036",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v4-a",
+      "target_level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "purpose": "用户接受LIM-v1-r固化为默认前处理",
+      "reason": "明确固化过程与原研究质量验收区别",
+      "alternatives_considered": [
+        "覆盖历史版本"
+      ],
+      "active_sibling_count_at_decision": 3,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0036",
+      "created_at": "2026-10-28T04:58:05+00:00"
+    },
+    "layout-0037": {
+      "decision_id": "layout-0037",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration",
+      "target_level": "run",
+      "parent_directory_id": "dir-0036",
+      "purpose": "独立代码与前处理消费链验证",
+      "reason": "保存工程验收证据，不重写研究验收",
+      "alternatives_considered": [
+        "混入旧研究run"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0037",
+      "created_at": "2026-10-28T04:58:21+00:00"
+    },
+    "layout-0038": {
+      "decision_id": "layout-0038",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-probe",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "purpose": "Fresh raw preprocessing integration sample",
+      "reason": "实际检查独立运行和消费链",
+      "alternatives_considered": [
+        "仅静态代码检查"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0038",
+      "created_at": "2026-10-28T05:05:23+00:00"
+    },
+    "layout-0039": {
+      "decision_id": "layout-0039",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-probe",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "purpose": "Fresh ncore raw preprocessing sample",
+      "reason": "实际检查独立运行和消费链",
+      "alternatives_considered": [
+        "仅静态代码检查"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0039",
+      "created_at": "2026-10-28T05:05:39+00:00"
+    },
+    "layout-0040": {
+      "decision_id": "layout-0040",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "purpose": "Correct isolated-source fresh integration sample",
+      "reason": "修正可导入模块优先级后重试；初次日志保留",
+      "alternatives_considered": [
+        "覆盖初次证据"
+      ],
+      "active_sibling_count_at_decision": 2,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0040",
+      "created_at": "2026-10-28T05:07:32+00:00"
+    },
+    "layout-0041": {
+      "decision_id": "layout-0041",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0037",
+      "purpose": "Correct isolated-source fresh integration sample",
+      "reason": "修正可导入模块优先级后重试；初次日志保留",
+      "alternatives_considered": [
+        "覆盖初次证据"
+      ],
+      "active_sibling_count_at_decision": 3,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0041",
+      "created_at": "2026-10-28T05:07:32+00:00"
     }
   },
-  "updated_at": "2026-10-22T07:18:06+00:00",
+  "updated_at": "2026-10-28T05:22:36+00:00",
   "ledger": {
-    "event_count": 91,
-    "head_hash": "56ca5e4ca91cfd68d820f8f6cf1b002b98cfbe50888cb5c7d622fffc4fd68aea"
+    "event_count": 111,
+    "head_hash": "43891c4ad60cdbe712034613f92dfd6b3f9a6637ddcbf972b6beb9775567c780"
   }
 }

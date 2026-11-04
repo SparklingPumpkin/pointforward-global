@@ -1,0 +1,10 @@
+test_continuous_independent_clocks_and_bounded_support (test_lidar_bbox_preprocessing.CalibrationContract) ... ok
+test_default_fresh_and_legacy_replay (test_lidar_bbox_preprocessing.CalibrationContract) ... ok
+test_frozen_numerical_definitions (test_lidar_bbox_preprocessing.CalibrationContract) ... ok
+test_uniform_real_sources_exclude_both_ends (test_lidar_bbox_preprocessing.CalibrationContract) ... ok
+test_zbuffer_keeps_nearest_depth_and_does_not_move_input (test_lidar_bbox_preprocessing.CalibrationContract) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.295s
+
+OK

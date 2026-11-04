@@ -1,0 +1,9 @@
+{
+  "residual_implementation": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-k/refine.py",
+  "source_offsets": [-1, 0, 1],
+  "meaning": "Fixed RGB f; actual raw LiDAR and bbox g=f+offset transformed with ego(g), projected with camera(f). +1 advances the next scan into the current image. No old E/J time correction or K residual applied in raw arms.",
+  "minimum_points": 20,
+  "minimum_fit_views": 2,
+  "fit_maxiter": 30,
+  "note": "Estimate additional per-car point translation on common original fit observations, frozen RGB objective/extent support; test only evaluates. Sweep identities differ, so raw comparisons are per-observation diagnostics, not same-point calibration gains."
+}

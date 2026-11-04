@@ -1,0 +1,4 @@
+LIM-r full-scene prompts:   0%|          | 0/1 [00:00<?, ?it/s]LIM-r full-scene prompts: 100%|██████████| 1/1 [00:03<00:00,  3.44s/it]LIM-r full-scene prompts: 100%|██████████| 1/1 [00:03<00:00,  3.44s/it]
+argo {'frames': 1, 'camera_views': 3, 'excluded_frames': 0}
+LIM-r full-scene prompts:   0%|          | 0/1 [00:00<?, ?it/s]LIM-r full-scene prompts: 100%|██████████| 1/1 [00:09<00:00,  9.56s/it]LIM-r full-scene prompts: 100%|██████████| 1/1 [00:09<00:00,  9.56s/it]
+ncore {'frames': 1, 'camera_views': 3, 'excluded_frames': 0}

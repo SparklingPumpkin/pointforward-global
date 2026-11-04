@@ -1,0 +1,98 @@
+[
+  {
+    "index": 0,
+    "class_id": 7,
+    "confidence": 0.9296875,
+    "box": [
+      400.0,
+      34.0,
+      768.0,
+      346.0
+    ],
+    "flip_confidence": 0.92578125,
+    "flip_iou": 0.9702572347266881,
+    "sam_iou": 0.9820740192626717,
+    "sam_model_confidence": 0.984375,
+    "all_sam_detector_ious": [
+      0.9820740192626717,
+      0.7125842213408515,
+      0.9631775075842629
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "a0dba83ed16eaf26cc848d5d053015cc76ef2b71f7ede04c23be3838ef811174"
+  },
+  {
+    "index": 1,
+    "class_id": 2,
+    "confidence": 0.8984375,
+    "box": [
+      0.0,
+      232.0,
+      132.0,
+      488.0
+    ],
+    "flip_confidence": 0.8984375,
+    "flip_iou": 0.9864721701572814,
+    "sam_iou": 0.9713701431492843,
+    "sam_model_confidence": 0.9765625,
+    "all_sam_detector_ious": [
+      0.9713701431492843,
+      0.7902578796561605,
+      0.9573065902578797
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "5ccfc91b2c3de5cd7521ca34acfd4e9285bb0788408df1313de3031c9f491096"
+  },
+  {
+    "index": 2,
+    "class_id": 2,
+    "confidence": 0.6796875,
+    "box": [
+      215.0,
+      248.0,
+      352.0,
+      324.0
+    ],
+    "flip_confidence": 0.828125,
+    "flip_iou": 0.9515778714705506,
+    "sam_iou": 0.9546835443037974,
+    "sam_model_confidence": 0.96875,
+    "all_sam_detector_ious": [
+      0.9546835443037974,
+      0.8517378478902142,
+      0.90608228980322
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "2cf3f666c078171300faa8c59eb8b306ce7f2356af8e8cf5114d6b9aebdcb65f"
+  },
+  {
+    "index": 3,
+    "class_id": 2,
+    "confidence": 0.62109375,
+    "box": [
+      108.0,
+      270.0,
+      188.0,
+      290.0
+    ],
+    "flip_confidence": 0.546875,
+    "flip_iou": 0.9531821506949525,
+    "sam_iou": 0.8972701149425287,
+    "sam_model_confidence": 0.890625,
+    "all_sam_detector_ious": [
+      0.8972701149425287,
+      0.8052631578947368,
+      0.8827067669172932
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "9050244ce2d310738f6fcdcd53d572686f807d2fccfa0b02a27637c33b735841"
+  }
+]

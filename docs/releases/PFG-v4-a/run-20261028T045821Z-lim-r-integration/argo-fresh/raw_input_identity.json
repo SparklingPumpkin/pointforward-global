@@ -1,0 +1,79 @@
+{
+  "files": {
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/085.bin": {
+      "size": 1534816,
+      "sha256": "7792bc964cddb0ef73da6d4dcbaa544199920cf3dfa8e4276d7498aba6db59d4"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/125.bin": {
+      "size": 1481472,
+      "sha256": "8680f17320a0f209d662e0e57bd1b8c2ad9a80cca19a532d54bfa7c284a05a5c"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/140.bin": {
+      "size": 1513632,
+      "sha256": "6b9d0afcfa3ab1024c4923bba4d40ff8dabcfc530c39536ed358a45ce00dcf0c"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/104.bin": {
+      "size": 1523312,
+      "sha256": "645192320f99a7764fbc3e1a122bdcd4d5cf5c8397b1b73f3d8acff82dca68e6"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/111.bin": {
+      "size": 1513552,
+      "sha256": "545820bdce8ccd562d7b6297bf21ebf75e65be03dc208249c869b8ca910ba999"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/118.bin": {
+      "size": 1502016,
+      "sha256": "2ff52d0b57b26a3c89d87f0e585aaa1b030b8cac7b6c976f4b98569d41ef6a08"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/084.bin": {
+      "size": 1534208,
+      "sha256": "849bf075f6697d36fd1c1fa99f084e5fcf565a37e4c883fcc267e76fdba65b63"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/086.bin": {
+      "size": 1532480,
+      "sha256": "b2d66c65b4853ce08f9f4c4ea5f08514a70f5edce40510793078a3bc367c0c8a"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/124.bin": {
+      "size": 1482368,
+      "sha256": "65d91a8021fead1e5466ebf500bce4e6d1c94cb4924c6be646ec4db03008c285"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/126.bin": {
+      "size": 1485792,
+      "sha256": "68ad5c46a9f1ceac9ebf8baabf6a27732663576021946701083ca32f8eddc610"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/139.bin": {
+      "size": 1509840,
+      "sha256": "1500c584c363a8e8c76a1108526c44c82c7b4d628340e8d55fcf13be3f4b1d6d"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/141.bin": {
+      "size": 1518592,
+      "sha256": "2daed40cf09149f233c2e17ba4df60d23f317f43c22f5a3404d325fb6a7f6305"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/103.bin": {
+      "size": 1525824,
+      "sha256": "9b7b782672bed88c84875756aafca2f229c799388759bdee75fedb8ce422f531"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/105.bin": {
+      "size": 1523104,
+      "sha256": "0dc8e492af0efc8e01b0a5baa27e1a90c2fe1a495aabffc147fa07c1573c2dec"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/110.bin": {
+      "size": 1514192,
+      "sha256": "ec81559d2318e1cfa47ce3c60cb556e859855e540b53d914a7fcd1c7bac6126a"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/112.bin": {
+      "size": 1512880,
+      "sha256": "7a87c87e967342ac6dbadd4dfca3ea28710e73e099c4b3af906af8424bf51ae3"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/117.bin": {
+      "size": 1499632,
+      "sha256": "0520aa2d01cf0fc26c88a01beb243547232f6508dce66c1d13fd5878904e6a29"
+    },
+    "/mnt/data/dataset/argoverse/processed/training/017/lidar/119.bin": {
+      "size": 1497360,
+      "sha256": "4527592f5ef4e90b300a108460cf22dbcf8a3ccd055570e19e1dcf05554f5da8"
+    }
+  },
+  "timestamp_source": "nominal 10Hz; per-camera exposure unavailable",
+  "static_world_coordinates_unchanged": true,
+  "rolling_shutter": "not corrected"
+}

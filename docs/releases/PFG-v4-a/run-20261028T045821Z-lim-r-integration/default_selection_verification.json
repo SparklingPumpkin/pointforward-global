@@ -1,0 +1,32 @@
+[
+  {
+    "dataset": "argo",
+    "vehicles": [
+      41,
+      47,
+      24,
+      18,
+      22,
+      33,
+      26,
+      19
+    ],
+    "observations": 20,
+    "selection_uses_agreement": false
+  },
+  {
+    "dataset": "ncore",
+    "vehicles": [
+      118,
+      142,
+      83,
+      49,
+      113,
+      227,
+      15,
+      185
+    ],
+    "observations": 23,
+    "selection_uses_agreement": false
+  }
+]

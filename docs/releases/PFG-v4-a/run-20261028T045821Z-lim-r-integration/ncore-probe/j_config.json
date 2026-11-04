@@ -1,0 +1,14 @@
+{
+  "baseline_candidate": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-e",
+  "baseline_run": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-e/run-20261027T034908Z-dual-clock-actor-paired",
+  "completion": {
+    "enabled": true,
+    "search_extension_m": [2.0, 2.0, 0.5],
+    "minimum_component_points": 4,
+    "spacing_multiplier": 2.5,
+    "cluster_radius_bounds_m": [0.3, 0.65],
+    "bridge_radius_bounds_m": [0.6, 0.9],
+    "bridge_radius_multiplier": 1.5,
+    "note": "3D-only seed-connected components plus immediately adjacent compact components. Preserve every original candidate. No RGB or calibration outcome used for selection. Same scene-independent settings; retain original ground plane."
+  }
+}

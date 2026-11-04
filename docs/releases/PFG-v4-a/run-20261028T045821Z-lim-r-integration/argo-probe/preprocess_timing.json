@@ -1,0 +1,10 @@
+{
+  "status": "running",
+  "start": 5364727.211938095,
+  "end": 5364727.508526385,
+  "stages_seconds": {},
+  "scope": "stage",
+  "input_boundary": "before_fresh_dataset_and_models",
+  "output_boundary": "diagnostics_corrected_instances_and_sparse_depth_written",
+  "scene_cache_reused": false
+}

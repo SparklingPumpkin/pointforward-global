@@ -1,0 +1,21 @@
+{
+  "settings_version": "0.0.6",
+  "datasets_dir": "/mnt/data/fjn/projects/fjn/pointforward-global/datasets",
+  "weights_dir": "weights",
+  "runs_dir": "runs",
+  "uuid": "d98eca3af528010d009fb41eb932a301244276ff98c56e7cc71d51f8d30cffbb",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "hub": true,
+  "mlflow": true,
+  "neptune": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}

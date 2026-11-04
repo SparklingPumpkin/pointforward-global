@@ -1,0 +1,56 @@
+[
+  {
+    "dataset": "argo",
+    "scene": "017",
+    "frames": [
+      125
+    ],
+    "views": [
+      {
+        "frame": 125,
+        "camera": 0,
+        "nonzero": 10315
+      },
+      {
+        "frame": 125,
+        "camera": 1,
+        "nonzero": 15983
+      },
+      {
+        "frame": 125,
+        "camera": 2,
+        "nonzero": 17872
+      }
+    ],
+    "corrected_poses_loaded": true,
+    "per_camera_depth_exact": true,
+    "per_camera_exposure_pose_exact": true
+  },
+  {
+    "dataset": "ncore",
+    "scene": "250d2261-e28c-47a7-b317-cb340a6722c0",
+    "frames": [
+      77
+    ],
+    "views": [
+      {
+        "frame": 77,
+        "camera": 0,
+        "nonzero": 55292
+      },
+      {
+        "frame": 77,
+        "camera": 1,
+        "nonzero": 51990
+      },
+      {
+        "frame": 77,
+        "camera": 2,
+        "nonzero": 58651
+      }
+    ],
+    "corrected_poses_loaded": true,
+    "per_camera_depth_exact": true,
+    "per_camera_exposure_pose_exact": true
+  }
+]

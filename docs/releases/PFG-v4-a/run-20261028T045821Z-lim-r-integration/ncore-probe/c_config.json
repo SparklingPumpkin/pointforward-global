@@ -1,0 +1,37 @@
+{
+  "seed": 20261023,
+  "source_run": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-a/run-20261022T173801Z-dense-rawpoint-image-motion",
+  "ground_helper": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-b/run-20261023T073615Z-ncore-ground-lag-track-offset/calibrate.py",
+  "mask_helper": "experiments/lidar-bbox-calibration/benchmark/LC-v1-e/independent_masks.py",
+  "scenes": [
+    {"key":"ncore250d","source":"ncore","scene":"250d2261-e28c-47a7-b317-cb340a6722c0","root":"/mnt/data/dataset/ncore","extrinsics_are_opencv":true,"lidar_columns":4},
+    {"key":"argoverse017","source":"argoverse","scene":"017","root":"/mnt/data/dataset/argoverse/processed/training","exclude_tracks":[0]}
+  ],
+  "selection": {
+    "vehicles_per_scene": 10000, "deliver_vehicles": 8, "observations_per_vehicle": 9,
+    "frame_step": 1, "minimum_in_frame_fraction": 0.85,
+    "maximum_box_occlusion_fraction": 0.4, "minimum_source_area_fraction": 0.006,
+    "minimum_relative_view_area": 0.3, "minimum_frame_gap": 3,
+    "moving_threshold_m": 3.0, "side_camera_multiplier": 1.2,
+    "minimum_observations": 5, "heldout_track_count": 2,
+    "selection_thresholds": {"semantics":"raw geometry and visibility only; no correction-gain selection"}
+  },
+  "expanded_box_factor": 1.5,
+  "minimum_expansion_margin_m": 0.3,
+  "ground": {
+    "neighborhood_m":12, "height_search_m":0.9, "ransac_trials":100,
+    "max_tilt_deg":15, "inlier_distance_m":0.1, "minimum_inliers":100,
+    "remove_height_m":0.18
+  },
+  "fit": {
+    "lag_bound_s":0.15, "lag_grid_step_s":0.025,
+    "offset_bounds_m":[1.5,1.0,0.4], "max_points":500,
+    "minimum_points":20, "minimum_fit_views":3, "minimum_validation_views":1,
+    "containment_scale_m":0.2, "pixel_scale":15,
+    "containment_weight":0.6, "mask_points_weight":0.8, "hull_iou_weight":0.3,
+    "offset_prior_weight":0.03, "lag_prior_weight":0.015,
+    "validation_max_mask_drop":0.02, "validation_max_containment_drop":0.01,
+    "validation_max_hull_iou_drop":0.03,
+    "minimum_global_heldout_views":3, "minimum_global_validation_tracks":2
+  }
+}

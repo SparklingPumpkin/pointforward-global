@@ -1,0 +1,12 @@
+{
+  "start": 5365454.343419251,
+  "end": 5365457.812046751,
+  "scope": "cached_incremental",
+  "source_calibration": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh/calibration.json",
+  "scene_cache_reused": true,
+  "application": {
+    "frames": 1,
+    "camera_views": 3,
+    "excluded_frames": 0
+  }
+}

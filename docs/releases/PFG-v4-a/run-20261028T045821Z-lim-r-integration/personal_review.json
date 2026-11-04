@@ -1,0 +1,15 @@
+{
+  "reviewed_at": "2026-10-28T05:21:09.986914+00:00",
+  "inspected": [
+    "argo-fresh/overview.jpg",
+    "ncore-fresh/overview.jpg"
+  ],
+  "findings": [
+    "Both two-car diagnostic sheets personally opened; axes, five columns, masks, point ownership and time stages display correctly",
+    "Argo ID41 still has tail spill and bbox extent mismatch; ncore ID118/113 retain contour and box discrepancies. This is packaging verification, not new quality acceptance",
+    "Fits intentionally use only two cars / three views each. Their clocks differ from the pooled nine-batch research run; no assertion of identical subset metrics",
+    "Final application exports read back via existing dataset on both adapters, per-camera depth and exposure matrices exact"
+  ],
+  "selected_research_version_accepted_by_user": true,
+  "research_failure_reclassified": false
+}

@@ -1,0 +1,1121 @@
+{
+  "schema_version": 1,
+  "algorithm": "LIM-v1-r",
+  "scene": "250d2261-e28c-47a7-b317-cb340a6722c0",
+  "frames": [
+    77
+  ],
+  "cameras": [
+    0,
+    1,
+    2
+  ],
+  "resolution": [
+    576,
+    768
+  ],
+  "frame_offsets": {
+    "lidar": 0,
+    "bbox": 0
+  },
+  "excluded_frames": [],
+  "excluded_track_frames": [],
+  "records": [
+    {
+      "frame": 77,
+      "camera": 0,
+      "lidar_frame": 77,
+      "bbox_frame": 77,
+      "raw_static_points": 259024,
+      "static_coordinates_unchanged": true,
+      "tracks": [
+        {
+          "track": 22,
+          "source_frame": 77,
+          "source_points": 11,
+          "removed_current_dynamic_points": 11,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 34,
+          "source_frame": 77,
+          "source_points": 1246,
+          "removed_current_dynamic_points": 1246,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 113,
+          "source_frame": 77,
+          "source_points": 1149,
+          "removed_current_dynamic_points": 1149,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": true
+        },
+        {
+          "track": 78,
+          "source_frame": 77,
+          "source_points": 3886,
+          "removed_current_dynamic_points": 3886,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 15,
+          "source_frame": 77,
+          "source_points": 539,
+          "removed_current_dynamic_points": 539,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 1,
+          "source_frame": 77,
+          "source_points": 67,
+          "removed_current_dynamic_points": 67,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 20,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 293,
+          "source_frame": 77,
+          "source_points": 461,
+          "removed_current_dynamic_points": 461,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 71,
+          "source_frame": 77,
+          "source_points": 1528,
+          "removed_current_dynamic_points": 1528,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 118,
+          "source_frame": 77,
+          "source_points": 22137,
+          "removed_current_dynamic_points": 22137,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": true
+        },
+        {
+          "track": 227,
+          "source_frame": 77,
+          "source_points": 3197,
+          "removed_current_dynamic_points": 3197,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 222,
+          "source_frame": 77,
+          "source_points": 586,
+          "removed_current_dynamic_points": 586,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 294,
+          "source_frame": 77,
+          "source_points": 249,
+          "removed_current_dynamic_points": 249,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 23,
+          "source_frame": 77,
+          "source_points": 15,
+          "removed_current_dynamic_points": 15,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 49,
+          "source_frame": 77,
+          "source_points": 1569,
+          "removed_current_dynamic_points": 1569,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 62,
+          "source_frame": 77,
+          "source_points": 2237,
+          "removed_current_dynamic_points": 2237,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 83,
+          "source_frame": 77,
+          "source_points": 138,
+          "removed_current_dynamic_points": 138,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 88,
+          "source_frame": 77,
+          "source_points": 1,
+          "removed_current_dynamic_points": 1,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 94,
+          "source_frame": 77,
+          "source_points": 11,
+          "removed_current_dynamic_points": 11,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 99,
+          "source_frame": 77,
+          "source_points": 324,
+          "removed_current_dynamic_points": 324,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 96,
+          "source_frame": 77,
+          "source_points": 7,
+          "removed_current_dynamic_points": 7,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 98,
+          "source_frame": 77,
+          "source_points": 406,
+          "removed_current_dynamic_points": 406,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 100,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 108,
+          "source_frame": 77,
+          "source_points": 51,
+          "removed_current_dynamic_points": 51,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 110,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 111,
+          "source_frame": 77,
+          "source_points": 103,
+          "removed_current_dynamic_points": 103,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 117,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 119,
+          "source_frame": 77,
+          "source_points": 37,
+          "removed_current_dynamic_points": 37,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 121,
+          "source_frame": 77,
+          "source_points": 812,
+          "removed_current_dynamic_points": 812,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 122,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 132,
+          "source_frame": 77,
+          "source_points": 6,
+          "removed_current_dynamic_points": 6,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 133,
+          "source_frame": 77,
+          "source_points": 65,
+          "removed_current_dynamic_points": 65,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 134,
+          "source_frame": 77,
+          "source_points": 46,
+          "removed_current_dynamic_points": 46,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 135,
+          "source_frame": 77,
+          "source_points": 524,
+          "removed_current_dynamic_points": 524,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 123,
+          "source_frame": 77,
+          "source_points": 26,
+          "removed_current_dynamic_points": 26,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 129,
+          "source_frame": 77,
+          "source_points": 3,
+          "removed_current_dynamic_points": 3,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 131,
+          "source_frame": 77,
+          "source_points": 4,
+          "removed_current_dynamic_points": 4,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 128,
+          "source_frame": 77,
+          "source_points": 1,
+          "removed_current_dynamic_points": 1,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 124,
+          "source_frame": 77,
+          "source_points": 134,
+          "removed_current_dynamic_points": 134,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 130,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 126,
+          "source_frame": 77,
+          "source_points": 54,
+          "removed_current_dynamic_points": 54,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 127,
+          "source_frame": 77,
+          "source_points": 42,
+          "removed_current_dynamic_points": 42,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 125,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 136,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        }
+      ],
+      "nonzero_depth_pixels": 55292
+    },
+    {
+      "frame": 77,
+      "camera": 1,
+      "lidar_frame": 77,
+      "bbox_frame": 77,
+      "raw_static_points": 259024,
+      "static_coordinates_unchanged": true,
+      "tracks": [
+        {
+          "track": 22,
+          "source_frame": 77,
+          "source_points": 11,
+          "removed_current_dynamic_points": 11,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 34,
+          "source_frame": 77,
+          "source_points": 1246,
+          "removed_current_dynamic_points": 1246,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 113,
+          "source_frame": 77,
+          "source_points": 1149,
+          "removed_current_dynamic_points": 1149,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": true
+        },
+        {
+          "track": 78,
+          "source_frame": 77,
+          "source_points": 3886,
+          "removed_current_dynamic_points": 3886,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 15,
+          "source_frame": 77,
+          "source_points": 539,
+          "removed_current_dynamic_points": 539,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 1,
+          "source_frame": 77,
+          "source_points": 67,
+          "removed_current_dynamic_points": 67,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 20,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 293,
+          "source_frame": 77,
+          "source_points": 461,
+          "removed_current_dynamic_points": 461,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 71,
+          "source_frame": 77,
+          "source_points": 1528,
+          "removed_current_dynamic_points": 1528,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 118,
+          "source_frame": 77,
+          "source_points": 22137,
+          "removed_current_dynamic_points": 22137,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": true
+        },
+        {
+          "track": 227,
+          "source_frame": 77,
+          "source_points": 3197,
+          "removed_current_dynamic_points": 3197,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 222,
+          "source_frame": 77,
+          "source_points": 586,
+          "removed_current_dynamic_points": 586,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 294,
+          "source_frame": 77,
+          "source_points": 249,
+          "removed_current_dynamic_points": 249,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 23,
+          "source_frame": 77,
+          "source_points": 15,
+          "removed_current_dynamic_points": 15,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 49,
+          "source_frame": 77,
+          "source_points": 1569,
+          "removed_current_dynamic_points": 1569,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 62,
+          "source_frame": 77,
+          "source_points": 2237,
+          "removed_current_dynamic_points": 2237,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 83,
+          "source_frame": 77,
+          "source_points": 138,
+          "removed_current_dynamic_points": 138,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 88,
+          "source_frame": 77,
+          "source_points": 1,
+          "removed_current_dynamic_points": 1,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 94,
+          "source_frame": 77,
+          "source_points": 11,
+          "removed_current_dynamic_points": 11,
+          "target_extrapolation_s": 0.002785999999999511,
+          "track_fitted": false
+        },
+        {
+          "track": 99,
+          "source_frame": 77,
+          "source_points": 324,
+          "removed_current_dynamic_points": 324,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 96,
+          "source_frame": 77,
+          "source_points": 7,
+          "removed_current_dynamic_points": 7,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 98,
+          "source_frame": 77,
+          "source_points": 406,
+          "removed_current_dynamic_points": 406,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 100,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 108,
+          "source_frame": 77,
+          "source_points": 51,
+          "removed_current_dynamic_points": 51,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 110,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 111,
+          "source_frame": 77,
+          "source_points": 103,
+          "removed_current_dynamic_points": 103,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 117,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 119,
+          "source_frame": 77,
+          "source_points": 37,
+          "removed_current_dynamic_points": 37,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 121,
+          "source_frame": 77,
+          "source_points": 812,
+          "removed_current_dynamic_points": 812,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 122,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 132,
+          "source_frame": 77,
+          "source_points": 6,
+          "removed_current_dynamic_points": 6,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 133,
+          "source_frame": 77,
+          "source_points": 65,
+          "removed_current_dynamic_points": 65,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 134,
+          "source_frame": 77,
+          "source_points": 46,
+          "removed_current_dynamic_points": 46,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 135,
+          "source_frame": 77,
+          "source_points": 524,
+          "removed_current_dynamic_points": 524,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 123,
+          "source_frame": 77,
+          "source_points": 26,
+          "removed_current_dynamic_points": 26,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 129,
+          "source_frame": 77,
+          "source_points": 3,
+          "removed_current_dynamic_points": 3,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 131,
+          "source_frame": 77,
+          "source_points": 4,
+          "removed_current_dynamic_points": 4,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 128,
+          "source_frame": 77,
+          "source_points": 1,
+          "removed_current_dynamic_points": 1,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 124,
+          "source_frame": 77,
+          "source_points": 134,
+          "removed_current_dynamic_points": 134,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 130,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 126,
+          "source_frame": 77,
+          "source_points": 54,
+          "removed_current_dynamic_points": 54,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 127,
+          "source_frame": 77,
+          "source_points": 42,
+          "removed_current_dynamic_points": 42,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 125,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 136,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        }
+      ],
+      "nonzero_depth_pixels": 51990
+    },
+    {
+      "frame": 77,
+      "camera": 2,
+      "lidar_frame": 77,
+      "bbox_frame": 77,
+      "raw_static_points": 259024,
+      "static_coordinates_unchanged": true,
+      "tracks": [
+        {
+          "track": 22,
+          "source_frame": 77,
+          "source_points": 11,
+          "removed_current_dynamic_points": 11,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 34,
+          "source_frame": 77,
+          "source_points": 1246,
+          "removed_current_dynamic_points": 1246,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 113,
+          "source_frame": 77,
+          "source_points": 1149,
+          "removed_current_dynamic_points": 1149,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": true
+        },
+        {
+          "track": 78,
+          "source_frame": 77,
+          "source_points": 3886,
+          "removed_current_dynamic_points": 3886,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 15,
+          "source_frame": 77,
+          "source_points": 539,
+          "removed_current_dynamic_points": 539,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 1,
+          "source_frame": 77,
+          "source_points": 67,
+          "removed_current_dynamic_points": 67,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 20,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 293,
+          "source_frame": 77,
+          "source_points": 461,
+          "removed_current_dynamic_points": 461,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 71,
+          "source_frame": 77,
+          "source_points": 1528,
+          "removed_current_dynamic_points": 1528,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 118,
+          "source_frame": 77,
+          "source_points": 22137,
+          "removed_current_dynamic_points": 22137,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": true
+        },
+        {
+          "track": 227,
+          "source_frame": 77,
+          "source_points": 3197,
+          "removed_current_dynamic_points": 3197,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 222,
+          "source_frame": 77,
+          "source_points": 586,
+          "removed_current_dynamic_points": 586,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 294,
+          "source_frame": 77,
+          "source_points": 249,
+          "removed_current_dynamic_points": 249,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 23,
+          "source_frame": 77,
+          "source_points": 15,
+          "removed_current_dynamic_points": 15,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 49,
+          "source_frame": 77,
+          "source_points": 1569,
+          "removed_current_dynamic_points": 1569,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 62,
+          "source_frame": 77,
+          "source_points": 2237,
+          "removed_current_dynamic_points": 2237,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 83,
+          "source_frame": 77,
+          "source_points": 138,
+          "removed_current_dynamic_points": 138,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 88,
+          "source_frame": 77,
+          "source_points": 1,
+          "removed_current_dynamic_points": 1,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 94,
+          "source_frame": 77,
+          "source_points": 11,
+          "removed_current_dynamic_points": 11,
+          "target_extrapolation_s": 0.002834000000000003,
+          "track_fitted": false
+        },
+        {
+          "track": 99,
+          "source_frame": 77,
+          "source_points": 324,
+          "removed_current_dynamic_points": 324,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 96,
+          "source_frame": 77,
+          "source_points": 7,
+          "removed_current_dynamic_points": 7,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 98,
+          "source_frame": 77,
+          "source_points": 406,
+          "removed_current_dynamic_points": 406,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 100,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 108,
+          "source_frame": 77,
+          "source_points": 51,
+          "removed_current_dynamic_points": 51,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 110,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 111,
+          "source_frame": 77,
+          "source_points": 103,
+          "removed_current_dynamic_points": 103,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 117,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 119,
+          "source_frame": 77,
+          "source_points": 37,
+          "removed_current_dynamic_points": 37,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 121,
+          "source_frame": 77,
+          "source_points": 812,
+          "removed_current_dynamic_points": 812,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 122,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 132,
+          "source_frame": 77,
+          "source_points": 6,
+          "removed_current_dynamic_points": 6,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 133,
+          "source_frame": 77,
+          "source_points": 65,
+          "removed_current_dynamic_points": 65,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 134,
+          "source_frame": 77,
+          "source_points": 46,
+          "removed_current_dynamic_points": 46,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 135,
+          "source_frame": 77,
+          "source_points": 524,
+          "removed_current_dynamic_points": 524,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 123,
+          "source_frame": 77,
+          "source_points": 26,
+          "removed_current_dynamic_points": 26,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 129,
+          "source_frame": 77,
+          "source_points": 3,
+          "removed_current_dynamic_points": 3,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 131,
+          "source_frame": 77,
+          "source_points": 4,
+          "removed_current_dynamic_points": 4,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 128,
+          "source_frame": 77,
+          "source_points": 1,
+          "removed_current_dynamic_points": 1,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 124,
+          "source_frame": 77,
+          "source_points": 134,
+          "removed_current_dynamic_points": 134,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 130,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 126,
+          "source_frame": 77,
+          "source_points": 54,
+          "removed_current_dynamic_points": 54,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 127,
+          "source_frame": 77,
+          "source_points": 42,
+          "removed_current_dynamic_points": 42,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 125,
+          "source_frame": 77,
+          "source_points": 9,
+          "removed_current_dynamic_points": 9,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        },
+        {
+          "track": 136,
+          "source_frame": 77,
+          "source_points": 0,
+          "removed_current_dynamic_points": 0,
+          "target_extrapolation_s": 0.0,
+          "track_fitted": false
+        }
+      ],
+      "nonzero_depth_pixels": 58651
+    }
+  ],
+  "source_data_read_only": true,
+  "static_world_coordinates_unchanged": true,
+  "camera_policy": "original calibration at each recorded exposure; no fitted camera shift",
+  "bbox_pose_convention": "corrected common trajectory at group times; interpolated by existing model",
+  "unselected_tracks": "scene-shared clocks, zero per-track residual and space bias; geometry-only ownership",
+  "diagnostics": "automatic in-sample masks; no independent physical timing guarantee",
+  "rolling_shutter": "not corrected"
+}

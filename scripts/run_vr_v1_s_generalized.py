@@ -39,8 +39,8 @@ def main():
     p.add_argument('--vehicle-gpu', help='Second GPU for parallel FF; same GPU means sequential FF')
     p.add_argument('--sam-python', default=sys.executable,
                    help='Python with SAM2 dependencies; defaults to current interpreter')
-    p.add_argument('--vehicle-calibration', choices=['bbox-expand', 'adaptive', 'both'],
-                   default='adaptive', help='Vehicle reconstruction bbox expansion, adaptive bbox/LiDAR correction, or both')
+    p.add_argument('--vehicle-calibration', choices=['lim-r', 'lim-r-both', 'bbox-expand', 'adaptive', 'both'],
+                   default=None, help='Fresh default: accepted LIM-v1-r. adaptive/both retain the legacy algorithm; replay uses frozen adaptive assets')
     p.add_argument('--bbox-front-back-margin', type=float, default=.5,
                    help='Meters added at EACH longitudinal end in bbox-expand/both (default .5)')
     p.add_argument('--bbox-left-right-margin', type=float, default=.3,
@@ -49,6 +49,8 @@ def main():
                    help='Only with the documented matching torch/CUDA ABI; otherwise use normal gsplat')
     p.add_argument('--dry-run', action='store_true')
     args = p.parse_args()
+    if args.vehicle_calibration is None:
+        args.vehicle_calibration = 'adaptive' if args.mode == 'replay' else 'lim-r'
     if any(not math.isfinite(v) or v < 0 for v in
            (args.bbox_front_back_margin, args.bbox_left_right_margin)):
         p.error('bbox margins must be finite and nonnegative')
@@ -72,8 +74,9 @@ def main():
 
     recipe = json.loads((RELEASE/'pipeline_recipe.json').read_text())
     commands = {k: [resolve(v) for v in row] for k, row in recipe.items()}
-    adaptive = args.vehicle_calibration in ('adaptive', 'both')
-    expand = args.vehicle_calibration in ('bbox-expand', 'both')
+    lim_r = args.vehicle_calibration in ('lim-r', 'lim-r-both')
+    adaptive = args.vehicle_calibration in ('adaptive', 'both') or lim_r
+    expand = args.vehicle_calibration in ('bbox-expand', 'both', 'lim-r-both')
     geometry_stages = ('geometry_prepare', 'rgb_masks', 'geometry_fit_filter')
     for name in ('geometry_prepare', 'geometry_fit_filter'):
         # The original geometry recipe omitted --scene and defaulted to017.
@@ -83,6 +86,18 @@ def main():
             row[row.index('--scene')+1] = args.scene
     commands['rgb_masks'] += ['--sam-root', str(SOURCE/'SAM2'),
                              '--checkpoint', str(PROJECT/'weights/sam2.1_hiera_tiny.pt')]
+    if lim_r:
+        for name in geometry_stages:
+            del commands[name]
+        geometry_stages = ('lim_r_preprocessing',)
+        commands['lim_r_preprocessing'] = [args.sam_python, str(PROJECT/'scripts/preprocess_lidar_bbox.py'),
+            '--config', str(out/'config_build.yaml'), '--out', str(out/'geometry-input'),
+            '--scene', args.scene]
+        # New runtime adapter is explicitly selected for new calibrated inputs.
+        # Historical source snapshots and replay execution remain immutable.
+        for name, command in list(commands.items()):
+            if name != 'lim_r_preprocessing':
+                commands[name] = [command[0], str(PROJECT/'scripts/run_calibrated_stage.py'), *command[1:]]
     vehicle = commands['vehicle_build']
     vehicle[vehicle.index('--decode-box-length-margin')+1] = str(2*args.bbox_front_back_margin if expand else 0.)
     vehicle[vehicle.index('--decode-box-width-margin')+1] = str(2*args.bbox_left_right_margin if expand else 0.)
@@ -90,6 +105,7 @@ def main():
         for name in geometry_stages:
             del commands[name]
     calibration = dict(mode=args.vehicle_calibration, adaptive_bbox_lidar=adaptive,
+        algorithm='LIM-v1-r' if lim_r else 'legacy-adaptive' if adaptive else 'bbox-expand',
         bbox_expanded=expand, front_back_each_m=args.bbox_front_back_margin if expand else 0.,
         left_right_each_m=args.bbox_left_right_margin if expand else 0.,
         length_total_added_m=2*args.bbox_front_back_margin if expand else 0.,
@@ -158,7 +174,7 @@ def main():
             cfg['pedestrians']['tracks_file'] = str(ASSETS/'pedestrian_tracks.pt')
         for name in ('config_build.yaml', 'config_render.yaml'):
             (out/name).write_text(yaml.safe_dump(cfg, sort_keys=False))
-        save(out/'delivery_options.json', dict(release='VR-v1-s', mode=args.mode, scene=args.scene,
+        save(out/'delivery_options.json', dict(release='PFG-v5' if lim_r else 'VR-v1-s', mode=args.mode, scene=args.scene,
             checkpoint=str(args.checkpoint.resolve()), data_root=str(args.data_root.resolve()),
             source=str(SOURCE), scene_state_reused=args.mode == 'replay', commands=commands,
             pinned_extension=args.use_pinned_extension, vehicle_calibration=calibration))

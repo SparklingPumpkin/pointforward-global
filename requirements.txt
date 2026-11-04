@@ -32,5 +32,6 @@ pytorch-lightning
 torchmetrics
 fvcore
 iopath
+-r requirements-calibration.txt
 roma
 e3nn

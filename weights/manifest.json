@@ -79,6 +79,12 @@
       "sha256": "c3181ce6d038cc39271279196e004ea687cdacd2229114bc5dd9b29ab6f5b61c",
       "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/VR-v1-s/run-20261022T054208Z-cold-compact-union1700/joint-all/checkpoint-1670/refiner_state.pt",
       "purpose": "Scene017 step1670 rank32 U-Net; matching payload/projection required"
+    },
+    {
+      "path": "weights/yolo11n-seg.pt",
+      "bytes": 6182636,
+      "sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+      "purpose": "LIM-v1-r generic RGB-only vehicle segmentation proposals; no scene-specific calibration state"
     }
   ]
 }

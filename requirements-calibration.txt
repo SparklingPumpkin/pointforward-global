@@ -1,0 +1,3 @@
+# LIM-v1-r independent RGB measurements, in addition to requirements.txt.
+# SAM2.1 source and SAM2.1 Tiny checkpoint are already bundled.
+ultralytics==8.4.78

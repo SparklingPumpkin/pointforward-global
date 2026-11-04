@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "subject_id": "PFG-v4-a",
+  "checks": [
+    {
+      "id": "fidelity",
+      "criterion": "LIM-v1-r核心函数与配置保持一致，明确记录工程适配与旧结果局限",
+      "passed": true,
+      "run_id": "run-20261028T045821Z-lim-r-integration",
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json::73个原版函数方法与配置验证",
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::独立源码配置及消费桥冻结快照",
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/source_research_report.md::原研究失败结论原样保留"
+      ]
+    },
+    {
+      "id": "default",
+      "criterion": "fresh默认执行独立LIM-v1-r前处理，保留legacy adaptive及历史replay",
+      "passed": true,
+      "run_id": "run-20261028T045821Z-lim-r-integration",
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/contract-tests.log::fresh默认lim-r且legacy和replay分支保留",
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::可执行默认入口与运行阶段包装"
+      ]
+    },
+    {
+      "id": "application",
+      "criterion": "输出逐帧逐相机稀疏深度与修正框被现有dataset实际读取；源数据和静态点不改写",
+      "passed": true,
+      "run_id": "run-20261028T045821Z-lim-r-integration",
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/consumer_verification.json::两场景6相机视图修正框和深度姿态逐值读取通过",
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/final-application-validation.log::最终应用实现使用本run校准结果重新投影，非完整冷启动计时"
+      ]
+    },
+    {
+      "id": "portable",
+      "criterion": "运行不依赖PointForward研究仓库、P/Q历史场景缓存；保存配置、来源、诊断和参数",
+      "passed": true,
+      "run_id": "run-20261028T045821Z-lim-r-integration",
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip::本地模块与模型权重路径，生产运行无研究场景缓存引用",
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh/input_manifest.json::原始输入和通用模型，无历史场景状态复用",
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh/input_manifest.json::ncore原始输入和独立mask生成",
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/reproduce.sh::最小复现入口"
+      ]
+    }
+  ]
+}

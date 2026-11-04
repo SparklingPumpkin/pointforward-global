@@ -3,17 +3,16 @@
 > 由机器状态生成，只展示当前版本与仍活跃的候选；完整历史见 `VERSION_LEDGER.md`。
 
 项目：PointForward Global（`pointforward-global`）  
-更新时间：2026-10-22T07:18:06+00:00
+更新时间：2026-10-28T05:22:36+00:00
 
 ## 项目主线
 
-当前版本：`PFG-v4`（compact32-union-smpl-delivery）
+当前版本：`PFG-v5`（lim-r-default-preprocessing）
 
-当前交付VR-v1-s第1670步：车辆几何校正、32D Gaussian/PCA/U-Net、SMPL插值、全三相机union联合训练；fresh/replay便携入口；独立156帧全局31.131654/车辆28.329244dB，源完整RGB处理后输入至视频PLY1609.087s，研究29dB目标仍未达标
+VR-v1-s骨干加用户接受的LIM-v1-r固有前处理；fresh默认lim-r，保留legacy与冻结replay；独立原始输入及消费链验证完成，未新增整场PSNR/完整计时结论
 
 当前证据：
-- `docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json`：完整独立重放及资产核验通过
-- `docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json`：用户指定当前最佳交付，独立完整验证通过
+- `docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md`：实质前处理数据合同与工程验证
 
 活跃候选：
 - 无。

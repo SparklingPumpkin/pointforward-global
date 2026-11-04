@@ -1,0 +1,4 @@
+{
+  "detector": "/mnt/data/fjn/projects/fjn/pointforward-global/weights/yolo11n-seg.pt",
+  "sam": "/mnt/data/fjn/projects/fjn/pointforward-global/weights/sam2.1_hiera_tiny.pt"
+}

@@ -1,8 +1,10 @@
-# PointForward Global · VR-v1-s
+# PointForward Global · LIM-v1-r 前处理
 
-当前交付主线 **PFG-v4 / VR-v1-s**，固化 Argoverse017 第 **1670 步**完整状态：32D Gaussian、PCA 投影基、配套 U-Net、车辆轨迹、SMPL 行人、通用权重、隔离源码、PLY 预览和视频。
+当前默认流程 **PFG-v5：VR-v1-s 重建骨干 + LIM-v1-r 固有前处理**。fresh先校准再重建；replay使用历史冻结资产。详细流程与独立入口见 [LiDAR/bbox前处理](docs/LIDAR_BBOX_PREPROCESSING.md)。
 
-完整156帧、三前向相机源帧重建：全局 **31.131654 dB**，车辆 bbox **28.329244 dB**，非天空 **30.685005 dB**。指标属于特征 Gaussian + 配套 U-Net 运行时；单独预览 PLY 不等价。车辆29dB研究目标仍未达到。
+历史VR-v1-s交付固化 Argoverse017 第 **1670 步**完整状态：32D Gaussian、PCA 投影基、配套 U-Net、车辆轨迹、SMPL 行人、通用权重、隔离源码、PLY 预览和视频。
+
+以下为历史冻结资产的完整156帧、三前向相机源帧重建：全局 **31.131654 dB**，车辆 bbox **28.329244 dB**，非天空 **30.685005 dB**。指标属于特征 Gaussian + 配套 U-Net 运行时；单独预览 PLY 不等价。车辆29dB研究目标仍未达到。
 
 - [GT / 预测对照视频](artifacts/scene017_vr_v1_s/final_global_runtime_gt_vs_predicted_front3.mp4)
 - [预测视频](artifacts/scene017_vr_v1_s/final_global_runtime_predicted_front3.mp4)
@@ -18,6 +20,7 @@
 
 ```bash
 cd /path/to/pointforward-global
+python -m pip install -r requirements-calibration.txt
 
 # 固定场景资产重放：完整视频、指标、PLY。
 python scripts/run_pipeline.py --mode replay \
@@ -38,9 +41,11 @@ python scripts/run_pipeline.py --mode fresh \
 
 |选项|处理|
 |---|---|
-|`adaptive`（默认）|现有自适应bbox/轨迹对齐与冲突背景LiDAR提示过滤，不额外扩大框|
+|`lim-r`（fresh默认）|已接受LIM-v1-r：点归属、独立粗帧选择、共享+逐车时间残差和受约束小空间项|
+|`lim-r-both`|新校准后增加车辆重建框边距|
+|`adaptive`|现有自适应bbox/轨迹对齐与冲突背景LiDAR提示过滤，不额外扩大框|
 |`bbox-expand`|跳过自适应校准，保留原LiDAR；仅将车辆前馈局部候选/解码框前后各加0.5m、左右各加0.3m|
-|`both`|先做现有自适应bbox/LiDAR校准，再扩大车辆前馈局部候选/解码框|
+|`both`|先做旧版自适应bbox/LiDAR校准，再扩大车辆前馈局部候选/解码框|
 
 扩大量沿车辆自身长宽轴计算，默认总长增加1.0m、总宽增加0.6m、高度不变。可用 `--bbox-front-back-margin 0.5 --bbox-left-right-margin 0.3` 调整单侧值。扩框不改变原始评估框或静态前馈框，也不改变选视图评分的原框；两者同时使用时，自适应拟合/过滤仍用原框支持，扩框用于之后的车辆重建范围，不重复扩张LiDAR归属范围。配置和实际总扩大量写入每次运行的 `delivery_options.json`。replay使用已固化资产，不重新应用这些选项。
 
@@ -56,6 +61,6 @@ python scripts/run_pipeline.py --mode fresh \
 
 ## 时间与交付边界
 
-源一次真实冷启动：预处理、前馈、PCA、优化初始化、1670步与保存共 **1485.371s（24.76min）**；继续到完整视频、指标、PLY的总耗时 **1609.087s（26.82min）**。静态/车辆前馈并行，不能累加GPU阶段时间。这是已固化历史状态的原计时；当前fresh使用上面的双质量阈值/60min停止策略，尚未重测。
+源一次真实冷启动：预处理、前馈、PCA、优化初始化、1670步与保存共 **1485.371s（24.76min）**；继续到完整视频、指标、PLY的总耗时 **1609.087s（26.82min）**。静态/车辆前馈并行，不能累加GPU阶段时间。这是已固化历史状态的原计时，不能用作LIM-v1-r新前处理的端到端耗时；当前fresh使用上面的双质量阈值/60min停止策略，尚未重测。
 
-完整复制须包含 `artifacts/scene017_vr_v1_s/`、`weights/` 及 `docs/releases/VR-v1-s/source/`，保留许可证。大资产沿用Git ignore策略，单独clone不包含完整交付包。资产SHA256、源码差异及独立验证见release。旧版本冻结证据保留，当前默认交付已由新主线替代。
+完整复制须包含 `src/pointforward_calibration/`、`artifacts/scene017_vr_v1_s/`、`weights/` 及 `docs/releases/VR-v1-s/source/`，保留许可证。大资产沿用Git ignore策略，单独clone不包含完整交付包。资产SHA256、源码差异及独立验证见release。旧版本冻结证据保留，当前默认交付已由新主线替代。

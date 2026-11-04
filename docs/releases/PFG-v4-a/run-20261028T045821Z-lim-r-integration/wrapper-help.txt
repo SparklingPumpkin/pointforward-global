@@ -1,0 +1,10 @@
+usage: train.py [-h] --config CONFIG [--depth DEPTH] [--steps STEPS]
+                [--out OUT] [--resume RESUME]
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --config CONFIG
+  --depth DEPTH    override depth.kind
+  --steps STEPS    override train.steps
+  --out OUT        override output dir
+  --resume RESUME

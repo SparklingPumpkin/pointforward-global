@@ -1,0 +1,5 @@
+{
+  "base_implementation": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-m/pipeline.py",
+  "minimum_fit_views": 1,
+  "note": "User explicitly requires a fit with one valid observation. Changes only per-track minimum fit views; scene frame-selection support and original gate/heldout behavior remain unchanged. No physical depth identifiability claimed for a single image."
+}

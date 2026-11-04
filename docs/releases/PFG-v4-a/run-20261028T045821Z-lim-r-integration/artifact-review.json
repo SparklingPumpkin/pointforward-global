@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "run_id": "run-20261028T045821Z-lim-r-integration",
+  "assessed_at": "2026-10-28T05:22:35.704211+00:00",
+  "review_after": "2026-11-04T05:22:35.704211+00:00",
+  "decision": "keep",
+  "reason": "本run将固化交付，含原始输入验证、源码快照与首次错误证据；无可删大文件候选；仅标记不删除",
+  "checks": {
+    "failed": {
+      "value": false,
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+      ]
+    },
+    "no_future_use": {
+      "value": false,
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+      ]
+    },
+    "not_historical_mainline": {
+      "value": false,
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+      ]
+    },
+    "never_delivered": {
+      "value": false,
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+      ]
+    },
+    "no_protected_dependents": {
+      "value": false,
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+      ]
+    },
+    "reproducible": {
+      "value": true,
+      "evidence": [
+        "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md::本run为用户指定固化版本工程证据，受保护且有复现材料"
+      ]
+    }
+  },
+  "preserve": [
+    "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md",
+    "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/validation.json",
+    "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/reproduce.sh",
+    "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/integration_code_snapshot.zip",
+    "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/consumer_verification.json",
+    "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/personal_review.json",
+    "docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/attempts.json"
+  ],
+  "files": []
+}

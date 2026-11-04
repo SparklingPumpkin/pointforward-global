@@ -1,0 +1,6 @@
+{
+  "base_implementation": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-n/all_fit.py",
+  "source_run": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-n/run-20261028T013328Z-all-vehicles-fit-no-holdout",
+  "uniformity": "For every retained RGB frame f, actual LiDAR frame must equal f+dL and actual bbox frame must equal f+dB. Exclude any mismatch at any position; never replace a missing previous/next source with the current frame.",
+  "note": "Reuse exact previously selected point populations and independent frame offsets; refit all remaining observations with minimum one view and no heldout vehicles. Excluded observations appear only in an explicit audit sheet, not calibration output or aggregate scores."
+}

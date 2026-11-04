@@ -1,0 +1,85 @@
+{
+  "records": {
+    "t118_f026_c2": {
+      "candidate_points": 15181,
+      "retained_points": 15181,
+      "removed_points": 0,
+      "fraction": 1.0,
+      "image_supported": true,
+      "mask_identity_note": "independent RGB measurement; original_mask",
+      "previous_good_reference": false,
+      "trusted_reference_points": 0,
+      "trusted_reference_retained": 0,
+      "unresolved_geometry_fallback": false,
+      "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+    },
+    "t118_f077_c2": {
+      "candidate_points": 22140,
+      "retained_points": 22137,
+      "removed_points": 3,
+      "fraction": 0.9998644986449865,
+      "image_supported": true,
+      "mask_identity_note": "independent RGB measurement; original_mask",
+      "previous_good_reference": false,
+      "trusted_reference_points": 0,
+      "trusted_reference_retained": 0,
+      "unresolved_geometry_fallback": false,
+      "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+    },
+    "t118_f090_c2": {
+      "candidate_points": 15900,
+      "retained_points": 15899,
+      "removed_points": 1,
+      "fraction": 0.999937106918239,
+      "image_supported": true,
+      "mask_identity_note": "independent RGB measurement; original_mask",
+      "previous_good_reference": false,
+      "trusted_reference_points": 0,
+      "trusted_reference_retained": 0,
+      "unresolved_geometry_fallback": false,
+      "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+    },
+    "t113_f134_c1": {
+      "candidate_points": 41749,
+      "retained_points": 41749,
+      "removed_points": 0,
+      "fraction": 1.0,
+      "image_supported": true,
+      "mask_identity_note": "independent RGB measurement; original_mask",
+      "previous_good_reference": true,
+      "trusted_reference_points": 39954,
+      "trusted_reference_retained": 39954,
+      "unresolved_geometry_fallback": false,
+      "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+    },
+    "t113_f138_c1": {
+      "candidate_points": 28536,
+      "retained_points": 28536,
+      "removed_points": 0,
+      "fraction": 1.0,
+      "image_supported": true,
+      "mask_identity_note": "independent RGB measurement; original_mask",
+      "previous_good_reference": true,
+      "trusted_reference_points": 27501,
+      "trusted_reference_retained": 27501,
+      "unresolved_geometry_fallback": false,
+      "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+    },
+    "t113_f143_c0": {
+      "candidate_points": 16485,
+      "retained_points": 16485,
+      "removed_points": 0,
+      "fraction": 1.0,
+      "image_supported": true,
+      "mask_identity_note": "independent RGB measurement; original_mask",
+      "previous_good_reference": true,
+      "trusted_reference_points": 15480,
+      "trusted_reference_retained": 15480,
+      "unresolved_geometry_fallback": false,
+      "point_truth": "RGB/3D/trajectory feasibility proxy, not certified LiDAR instance labels"
+    }
+  },
+  "previous_good_proxy_preserved": true,
+  "raw_candidate_data_preserved": true,
+  "no_human_instance_truth": true
+}

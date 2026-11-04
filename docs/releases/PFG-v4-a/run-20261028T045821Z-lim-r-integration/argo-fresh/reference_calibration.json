@@ -1,0 +1,126 @@
+{
+  "tracks": {
+    "41": {
+      "residual_m": [
+        -1.4667374364229682,
+        -0.24516844317535363,
+        -0.025285901434822584
+      ],
+      "bbox_center_m": [
+        -1.2455376746189222,
+        -0.17486413727720942,
+        6.839147304038562e-16
+      ],
+      "fit_views": 3,
+      "extent_fit_views": 0,
+      "fit_zero_objective": 0.6023903504907745,
+      "fit_final_objective": 0.11721900121473114,
+      "boundary_hit": false,
+      "apply": true,
+      "reasons": [],
+      "gate": [],
+      "all_fit_mode": true,
+      "independent_validation": false
+    },
+    "47": {
+      "residual_m": [
+        -0.522678765420357,
+        0.10306517340978462,
+        0.006289334849242366
+      ],
+      "bbox_center_m": [
+        -0.04025791228554158,
+        0.057873562486664476,
+        0.0
+      ],
+      "fit_views": 3,
+      "extent_fit_views": 1,
+      "fit_zero_objective": 1.0584108096637708,
+      "fit_final_objective": 0.013244746833781077,
+      "boundary_hit": false,
+      "apply": true,
+      "reasons": [],
+      "gate": [],
+      "all_fit_mode": true,
+      "independent_validation": false
+    }
+  },
+  "frame_selection": {
+    "lidar": {
+      "offset": 0,
+      "fit_best": -1,
+      "retain_zero_reasons": [
+        "insufficient_gate_observations"
+      ],
+      "metric": "track_balanced_mean_point_mask_distance_px",
+      "profiles": {
+        "fit": {
+          "observations": 4,
+          "tracks": 2,
+          "keys": [
+            "t041_f125_c0",
+            "t047_f104_c0",
+            "t047_f111_c0",
+            "t047_f118_c1"
+          ],
+          "scores": {
+            "-1": 0.11228541160623233,
+            "0": 1.4143961559360225,
+            "1": 4.254538054267566
+          }
+        },
+        "gate": {
+          "observations": 1,
+          "tracks": 1,
+          "keys": [
+            "t041_f140_c1"
+          ],
+          "scores": {
+            "-1": 16.556739807128906,
+            "0": 32.65235900878906,
+            "1": 53.7766227722168
+          }
+        }
+      },
+      "confidence": "multiple_fit_tracks"
+    },
+    "bbox": {
+      "offset": 0,
+      "fit_best": -1,
+      "retain_zero_reasons": [
+        "insufficient_gate_observations"
+      ],
+      "metric": "track_balanced_one_minus_bbox_hull_mask_iou",
+      "profiles": {
+        "fit": {
+          "observations": 4,
+          "tracks": 2,
+          "keys": [
+            "t041_f125_c0",
+            "t047_f104_c0",
+            "t047_f111_c0",
+            "t047_f118_c1"
+          ],
+          "scores": {
+            "-1": 0.4398652331115249,
+            "0": 0.4818055557950831,
+            "1": 0.5159973505267347
+          }
+        },
+        "gate": {
+          "observations": 1,
+          "tracks": 1,
+          "keys": [
+            "t041_f140_c1"
+          ],
+          "scores": {
+            "-1": 0.304020161388034,
+            "0": 0.24408795214421697,
+            "1": 0.3876617855455834
+          }
+        }
+      },
+      "confidence": "multiple_fit_tracks"
+    }
+  }
+}

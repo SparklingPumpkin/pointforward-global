@@ -1,0 +1,26 @@
+[
+  {
+    "index": 0,
+    "class_id": 7,
+    "confidence": 0.8671875,
+    "box": [
+      220.0,
+      168.0,
+      624.0,
+      420.0
+    ],
+    "flip_confidence": 0.8671875,
+    "flip_iou": 0.9556567556225617,
+    "sam_iou": 0.9257033681550646,
+    "sam_model_confidence": 0.95703125,
+    "all_sam_detector_ious": [
+      0.9257033681550646,
+      0.5869992512167728,
+      0.7898571072007987
+    ],
+    "component_fraction": 0.9994086533723184,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "50cadfeae45fa7d5f146c5f2a74462f44931db9b91f8088701593bf8ca30ed3e"
+  }
+]

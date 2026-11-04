@@ -1,0 +1,50 @@
+[
+  {
+    "index": 0,
+    "class_id": 7,
+    "confidence": 0.9140625,
+    "box": [
+      213.0,
+      0.0,
+      708.0,
+      358.0
+    ],
+    "flip_confidence": 0.88671875,
+    "flip_iou": 0.9802969938428105,
+    "sam_iou": 0.9708236467626072,
+    "sam_model_confidence": 0.9765625,
+    "all_sam_detector_ious": [
+      0.9708236467626072,
+      0.6744559270516717,
+      0.9529803147056919
+    ],
+    "component_fraction": 0.9999506737148447,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "de97a5f9396cbbcee59ecdc6b21be7d12c76224500a69f3d030c2ceba7b6d7fd"
+  },
+  {
+    "index": 1,
+    "class_id": 2,
+    "confidence": 0.828125,
+    "box": [
+      0.0,
+      241.0,
+      122.0,
+      328.0
+    ],
+    "flip_confidence": 0.80859375,
+    "flip_iou": 0.9712744436952124,
+    "sam_iou": 0.9617765814266487,
+    "sam_model_confidence": 0.94140625,
+    "all_sam_detector_ious": [
+      0.9617765814266487,
+      0.7139758709502508,
+      0.9095960965031173
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "61a848ec0fac5118eb2b55f0da7436026abc1b63a563f702bf9055bc29759eaf"
+  }
+]

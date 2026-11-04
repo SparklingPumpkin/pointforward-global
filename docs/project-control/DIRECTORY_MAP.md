@@ -21,10 +21,12 @@
 | dir-0034 | configs/runtime-stop | area | dir-0004 | project | active | 否 | 当前fresh运行停止条件，保留已冻结VR-v1-s历史配方 |
 | dir-0013 | docs/releases | experiment_family | dir-0007 | project | active | 否 | 主线交付升级候选与验证记录 |
 | dir-0008 | docs/validation | workstream | dir-0007 | project | active | 否 | PFG-v1独立交付的轻量与27dB复现证据 |
+| dir-0035 | src/pointforward_calibration | area | dir-0002 | project | active | 否 | LIM-v1-r独立前处理模块及冻结数值实现 |
 | dir-0010 | validation-delivery/scene017-27db | experiment_family | dir-0009 | delivery-validation | active | 否 | scene017 27dB交付复现验证实验族 |
 | dir-0014 | docs/releases/PFG-v1-a | candidate | dir-0013 | project | active | 否 | DG-v1-f到GR-v1-s快速27dB主线升级 |
 | dir-0018 | docs/releases/PFG-v2-a | candidate | dir-0013 | project | active | 否 | VR-v1-b独立交付包升级验证 |
 | dir-0025 | docs/releases/PFG-v3-a | candidate | dir-0013 | project | active | 否 | VR-v1-s独立交付验收 |
+| dir-0036 | docs/releases/PFG-v4-a | candidate | dir-0013 | project | active | 否 | 用户接受LIM-v1-r固化为默认前处理 |
 | dir-0020 | docs/releases/VR-v1-b | archive | dir-0013 | project | active | 否 | VR-v1-b版本说明、源码与固定证据 |
 | dir-0028 | docs/releases/VR-v1-s | archive | dir-0013 | project | active | 否 | VR-v1-s不可变版本源码与证据 |
 | dir-0017 | docs/validation/scene017-fast-g8 | experiment_family | dir-0008 | project | active | 否 | scene017 fast-g8指标计时与关键帧证据 |
@@ -32,6 +34,7 @@
 | dir-0015 | docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation | run | dir-0014 | project | active | 否 | PFG-v1-a源码、配方、指标与文档交付验证 |
 | dir-0019 | docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation | run | dir-0018 | project | active | 否 | 独立交付复制核验与156帧重渲染 |
 | dir-0026 | docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation | run | dir-0025 | project | active | 否 | 完整独立重渲染与交付校验 |
+| dir-0037 | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration | run | dir-0036 | project | active | 否 | 独立代码与前处理消费链验证 |
 | dir-0021 | docs/releases/VR-v1-b/source | archive | dir-0020 | project | active | 否 | VR-v1-b精确数值源码快照 |
 | dir-0032 | docs/releases/VR-v1-s/evidence | archive | dir-0028 | project | active | 否 | 原始计时指标与研究失败验收记录 |
 | dir-0029 | docs/releases/VR-v1-s/source | archive | dir-0028 | project | active | 否 | VR-v1-s数值源码及便携依赖 |
@@ -39,6 +42,10 @@
 | dir-0016 | docs/releases/PFG-v1-a/run-20260928T040505Z-fast-g8-delivery-validation/independent-metrics | artifact | dir-0015 | project | active | 否 | 交付包独立156帧复算manifest |
 | dir-0024 | docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/replay | artifact | dir-0019 | project | active | 否 | 包内完整156帧独立重渲染 |
 | dir-0027 | docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/replay | artifact | dir-0026 | project | active | 否 | 包内重渲染输出 |
+| dir-0040 | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh | artifact | dir-0037 | project | active | 否 | Correct isolated-source fresh integration sample |
+| dir-0038 | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-probe | artifact | dir-0037 | project | active | 否 | Fresh raw preprocessing integration sample |
+| dir-0041 | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh | artifact | dir-0037 | project | active | 否 | Correct isolated-source fresh integration sample |
+| dir-0039 | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-probe | artifact | dir-0037 | project | active | 否 | Fresh ncore raw preprocessing sample |
 | dir-0031 | docs/releases/VR-v1-s/source/InfiniDepth | archive | dir-0029 | project | active | 否 | 本次原始深度模型源码 |
 | dir-0030 | docs/releases/VR-v1-s/source/SAM2 | archive | dir-0029 | project | active | 否 | SAM2.1 Tiny源码及许可 |
 
@@ -80,3 +87,10 @@
 | layout-0032 | applied | new_child | docs/releases/VR-v1-s/evidence | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
 | layout-0033 | applied | new_child | artifacts/scene017_vr_v1_s | 用户指定将当前VR-v1-s固化为当前交付主线 | 保留历史冻结证据，仅覆盖当前入口和根说明 | 用户授权在既有包内固化新主线，历史文件不删除 |
 | layout-0034 | applied | new_child | configs/runtime-stop | 用户要求只修改新场景停止条件，不重测；运行时覆盖与历史证据分离 | 直接修改已验收配方会破坏历史指纹 | — |
+| layout-0035 | applied | new_child | src/pointforward_calibration | 与模型快照和历史实验隔离 | 直接引用研究仓库不满足独立固化 | — |
+| layout-0036 | applied | new_child | docs/releases/PFG-v4-a | 明确固化过程与原研究质量验收区别 | 覆盖历史版本 | — |
+| layout-0037 | applied | new_child | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration | 保存工程验收证据，不重写研究验收 | 混入旧研究run | — |
+| layout-0038 | applied | new_child | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-probe | 实际检查独立运行和消费链 | 仅静态代码检查 | — |
+| layout-0039 | applied | new_child | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-probe | 实际检查独立运行和消费链 | 仅静态代码检查 | — |
+| layout-0040 | applied | new_child | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/argo-fresh | 修正可导入模块优先级后重试；初次日志保留 | 覆盖初次证据 | — |
+| layout-0041 | applied | new_child | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/ncore-fresh | 修正可导入模块优先级后重试；初次日志保留 | 覆盖初次证据 | — |

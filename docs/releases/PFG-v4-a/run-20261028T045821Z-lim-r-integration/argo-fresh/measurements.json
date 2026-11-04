@@ -1,0 +1,149 @@
+[
+  {
+    "key": "t041_f085_c0",
+    "track": 41,
+    "frame": 85,
+    "camera": 0,
+    "role": "fit",
+    "accepted": false,
+    "reasons": [
+      "unassigned_one_to_one"
+    ],
+    "proposal_hashes": [
+      "069baf387cfa99f51ca54f43fddd0c18fd6afcd9897228d52c3d55de5a952b10",
+      "bbb988008c497032ca558dab02a3703969c046ca1d7c85867618f0430d8454b9",
+      "a1954fd029aec33c3c6069eb01099977f0d8882ba2c52ded7c07275e172d364f",
+      "63d938b4ca65b42de3ae84ce1b9d70ef6c16067bf17d6098a2b68bdceb132c65",
+      "21decaf1179dc7aa910c53173cfd46916eafac727c59dd51b7d0ca861a16efcc",
+      "891a64796707cf8e943544314df7d961589a6e79161c9ef39e563bb14b7d483e",
+      "60fb01c511c74a6ec66f3522de2973507e56298a492b38509c30f1a64dca6b2c",
+      "ef3ef00ede747cd46a87ce5e9db433eb72ca141da2a13cc1c1921b2ccdca420a",
+      "0d54efd5c18fecaa040a6eff466a966b0a21966b7976cf095b1513e9b7083ea0",
+      "75e7f51167394eb698593926ebd7f73dbb312629e0cdd9883738b6af6b046edb",
+      "85e99f6af5c7f848590931622006ccbe11215fa627f5432f69970801006ff35c",
+      "6aa1e9f1e1cd2b6d55632378295ec2abb7ea5dbb8208d8305f37d50603cb9cd2",
+      "4b1ada7d2112a91a14ec76278e29381ddff79408e551757d5f5180c3d29b790a"
+    ],
+    "geometry_does_not_generate_masks": true
+  },
+  {
+    "key": "t047_f104_c0",
+    "track": 47,
+    "frame": 104,
+    "camera": 0,
+    "role": "heldout_track",
+    "accepted": true,
+    "reasons": [],
+    "detection_index": 0,
+    "hull_mask_iou": 0.5159318266024453,
+    "row_margin": 0.46207521769996485,
+    "column_margin": 0.4893095304294004,
+    "proposal_hashes": [
+      "f1bb08b263b988e5ae0eddd0fe7c474a441a200cb597978a770420370cf38e06",
+      "eeced202895780addafbb5134d2263ddcca3cc289a2bc2b188e802e606830802",
+      "dbaf59902a4e4de1d9a5db230ac328bf7144f7dcf1caef4dc79e3862ae2ce698",
+      "95e00019a25f50a84624a37ea319866612fdcfec2cf3da10eb9c42ebc1edce16",
+      "31a443833b174a1214e89b28f2d72871ad95e2b4c0665c13b8fa549dda694865",
+      "0a8c5a3d918c61651cffe8169f0cae815822c421bb05f52eb2f8a7eb780b6499",
+      "99dc5c68ae34b6ee7c9a8d14318f73de0e3fc4dbb2baf6df0f8fa3268ca49df8",
+      "37c9a7f728feb8832e7eba7daaa8ab3e6a75fca81c973478ab02b71bf84eaf7a",
+      "de5ddd5290f44b44108d6383e656a5ef491865faab86eb4f4fa604ad2e0ae11d",
+      "9eb1bd6e3c5a897c84d56b5fc849b7cbe5206cbe56880cd6f56530efcac346b1"
+    ],
+    "geometry_does_not_generate_masks": true
+  },
+  {
+    "key": "t047_f111_c0",
+    "track": 47,
+    "frame": 111,
+    "camera": 0,
+    "role": "heldout_track",
+    "accepted": true,
+    "reasons": [],
+    "detection_index": 0,
+    "hull_mask_iou": 0.4711700624458727,
+    "row_margin": 0.4056644395517231,
+    "column_margin": 0.33166433178684684,
+    "proposal_hashes": [
+      "64c9e66a1d18532869b69a59d7f5bd43ad77c9265225f8135d58bc67f363208b",
+      "f0c4e61fd7d6fd39bfcad8ccffc42872e2e9952bb2644e973284ef28d78951b5",
+      "d8b0144fa6e796f1638dcff5759c1774ad8803b0d51c357f1d1fcdcf9dd9f311",
+      "a24a2c807a18ed9c4694bb10b013f5d495c7f540165b3f475728c20487ee3062",
+      "c11cf46997b4f8090c7b2e7647f90c2292abb140cce8ab163c736b1b10303ae3",
+      "a8defa69dda20724e64ee146616bf8941a668edaa070a3eb48727af05a11931e",
+      "ff446567b26802b61cc25110083e13551e0fb0afcba81688a798a35b92819815",
+      "23112ebd122d099847fd40869f606f4c6c5246801c0183b8cbc00e733862d3e3",
+      "e2b4f3820abb285a7838f2a9e411531c8fbaaffb3fdeae57400e3947f0c08d47"
+    ],
+    "geometry_does_not_generate_masks": true
+  },
+  {
+    "key": "t047_f118_c1",
+    "track": 47,
+    "frame": 118,
+    "camera": 1,
+    "role": "heldout_track",
+    "accepted": true,
+    "reasons": [],
+    "detection_index": 0,
+    "hull_mask_iou": 0.5190594441404661,
+    "row_margin": 0.48252790819046404,
+    "column_margin": 0.42261916031719976,
+    "proposal_hashes": [
+      "6c52a65871b84333d0e0b8ac1676f514ff937afe8b5dfb5db0776695ba603e10",
+      "55507763f58056c2bd78496ebc8a8f147d28ebd3d501b2c39b0cc181c62fec2a",
+      "2d009137cce012f6c0f92efe399217eb7b7888411b7ad6f0c739ed5f82c98f83",
+      "364421773457ab552c29a163a2d3ee5da80f2d32448483d0008d6f69d70621ee",
+      "7c6ba881303954c5e1c5608d78038385af2e9977d337afd7ca1818ec9b56aa9b",
+      "5fb6cc7448b651ac602308554710f222c433bb8e2f969b495058c65b4e4f229c",
+      "26abcaae0ac30f29a4963f3284b3648eb6a9ee31f19f4fd7609849c7df4dd645",
+      "3ff67378bbe9381e5107784f202ddcca9a9df708dbd7c9870b103139508d2e53",
+      "13db626b238bd18f76f7a034fe4ee96bee4baf8fb7685da2cc9055e18591a1eb"
+    ],
+    "geometry_does_not_generate_masks": true
+  },
+  {
+    "key": "t041_f125_c0",
+    "track": 41,
+    "frame": 125,
+    "camera": 0,
+    "role": "fit",
+    "accepted": true,
+    "reasons": [],
+    "detection_index": 0,
+    "hull_mask_iou": 0.5343351106802391,
+    "row_margin": 0.4681381343115322,
+    "column_margin": 0.4875248372751024,
+    "proposal_hashes": [
+      "b9da9684bdf8f2f255b21799aee495bc675fd292b29d31808ec66e9071e41d15",
+      "a35f3dcf26a2e809e4c3a3c0ff362ae3953279914a4ba57997bc5e0baf3cbe6b",
+      "b096e55346c641efa0a801f0b0768bd780aa1e9cf8ca995a9f0356ae1a8094c7",
+      "e51e6ce6627904baa28b0aa49c0e34ce9a734797cfc21134709fec670ea59ece",
+      "383095b97d413b75965adbe4fc5f378347a0ae189e1e01c0698b2e10bad178e6",
+      "78a1b61883399588e62867750f17773b21cd8d2d6a54d4350804759c0921541d",
+      "1092de82ca9d0d7c8000552bbffe3fb0da36823c48254b4acb67e0547691a5cc",
+      "2aa66e97ed3d329021341989e3d84be58371ae49ed352417123f2cd28a638f0d"
+    ],
+    "geometry_does_not_generate_masks": true
+  },
+  {
+    "key": "t041_f140_c1",
+    "track": 41,
+    "frame": 140,
+    "camera": 1,
+    "role": "validation_frame",
+    "accepted": true,
+    "reasons": [],
+    "detection_index": 0,
+    "hull_mask_iou": 0.755912047855783,
+    "row_margin": 0.7490329946186892,
+    "column_margin": 0.6505407962845853,
+    "proposal_hashes": [
+      "fb26751118fd3550646e432c9c6a0f50140234c11b637226e5cf9a4fa403d778",
+      "9cba0a547df6fb4a0acd15e663457c188f0d7668c98848efbb160f5f3d8f9ffb",
+      "081c970c8bc05145d82b561dc0968c5a65fedfafa4c75903c03574fc864f26fd",
+      "7a29d5d340aac7876a3558df6e6c0f0cca43b9e5aa86813b3654d15ff9c6806c"
+    ],
+    "geometry_does_not_generate_masks": true
+  }
+]

@@ -1,0 +1,164 @@
+{
+  "clocks": {
+    "lidar": {
+      "shared_s": -0.0442712291889324,
+      "tracks": {
+        "113": {
+          "residual_s": -0.010728415862294087,
+          "total_s": -0.05499964505122649,
+          "speed_mps": 22.21816854208086,
+          "temporal_confidence": "moving",
+          "profile_min_s": -0.05699999999999983
+        },
+        "118": {
+          "residual_s": 0.010728415862294087,
+          "total_s": -0.03354281332663831,
+          "speed_mps": 14.489568776671678,
+          "temporal_confidence": "moving",
+          "profile_min_s": -0.0319999999999998
+        }
+      },
+      "weighted_residual_mean_s": 0.0,
+      "success": true,
+      "objective": 0.7925037912806673,
+      "weights": {
+        "113": 0.5,
+        "118": 0.5
+      }
+    },
+    "bbox": {
+      "shared_s": -0.005532581163891847,
+      "tracks": {
+        "113": {
+          "residual_s": 0.004458214476491503,
+          "total_s": -0.0010743666874003443,
+          "speed_mps": 22.21816854208086,
+          "temporal_confidence": "moving",
+          "profile_min_s": -0.000999999999999772
+        },
+        "118": {
+          "residual_s": -0.004458214476491503,
+          "total_s": -0.00999079564038335,
+          "speed_mps": 14.489568776671678,
+          "temporal_confidence": "moving",
+          "profile_min_s": -0.01049999999999978
+        }
+      },
+      "weighted_residual_mean_s": 0.0,
+      "success": true,
+      "objective": 0.062171173527186874,
+      "weights": {
+        "113": 0.5,
+        "118": 0.5
+      }
+    }
+  },
+  "spatial": {
+    "113": {
+      "point_bias_m": [
+        0.06947500173330566,
+        0.02307386554220106,
+        0.01629989160136968
+      ],
+      "point_applied": true,
+      "point_reasons": [],
+      "bbox_bias_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_applied": false
+    },
+    "118": {
+      "point_bias_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "point_applied": false,
+      "point_reasons": [
+        "insufficient_small_space_gain"
+      ],
+      "bbox_bias_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_applied": false
+    }
+  },
+  "configuration": {
+    "seed": 20261028,
+    "ownership": {
+      "time_tube_bound_s": 0.25,
+      "time_tube_step_s": 0.01,
+      "box_margin_m": [
+        0.25,
+        0.15,
+        0.12
+      ],
+      "mask_margin_px": 4.0,
+      "geometry_excess_m": 0.08,
+      "voxel_m": 0.12,
+      "component_radius_m": 0.27,
+      "minimum_component_points": 3,
+      "protect_previous_good_mean_px": 1.0,
+      "protect_previous_good_containment": 0.9,
+      "trusted_reference_distance_px": 1.0,
+      "trusted_reference_box_margin_m": 0.05,
+      "pointwise_reference_protection": true,
+      "pointwise_reference_box_factor": 1.5,
+      "pointwise_maximum_sparse_pool_points": 128
+    },
+    "time": {
+      "scene_bound_s": 0.2,
+      "track_residual_bound_s": 0.06,
+      "track_residual_sigma_s": 0.03,
+      "track_prior_weight": 0.012,
+      "scene_prior_weight": 0.002,
+      "profile_step_s": 0.005,
+      "sample_points": 1800,
+      "outside_pixel_scale": 5.0,
+      "extent_weight": 0.25,
+      "good_frame_regression_tolerance_px": 0.1,
+      "good_frame_regression_weight": 4.0,
+      "maximum_pose_extrapolation_s": 0.27,
+      "static_speed_threshold_mps": 0.5,
+      "local_profile_radius_s": 0.008,
+      "local_profile_step_s": 0.0005
+    },
+    "space": {
+      "point_bounds_m": [
+        0.12,
+        0.08,
+        0.04
+      ],
+      "bbox_bounds_m": [
+        0.15,
+        0.12,
+        0.08
+      ],
+      "prior_weight": 0.03,
+      "minimum_image_gain_px": 0.05,
+      "minimum_relative_gain": 0.1,
+      "maximum_good_frame_regression_px": 0.25,
+      "minimum_containment_gain": 0.02,
+      "maximum_bbox_iou_drop": 0.005
+    },
+    "contract": {
+      "batches": 9,
+      "same_vehicle_lists": true,
+      "same_source_scan_ids_as_P_Q": true,
+      "source_offset_mismatch_excluded": true,
+      "shared_clocks_pooled_by_actual_scene": true,
+      "independent_lidar_and_bbox_clocks": true,
+      "track_residual_weighted_mean_zero": true,
+      "no_heldout_or_mask_based_vehicle_skip": true,
+      "static_background_unchanged": true,
+      "point_ownership_is_proxy_not_certified_ground_truth": true
+    }
+  },
+  "temporal_action": "A_i(t_camera) @ inv(A_i(t_actual_source + scene_tau + track_delta)); independent LiDAR and bbox clocks",
+  "static_background": "untouched",
+  "rolling_shutter": "not corrected"
+}

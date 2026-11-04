@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "key": "t118_f026_c2",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 15181
+    },
+    {
+      "key": "t118_f077_c2",
+      "original_split": "gate",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 22140
+    },
+    {
+      "key": "t118_f090_c2",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 15900
+    },
+    {
+      "key": "t113_f134_c1",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 41749
+    },
+    {
+      "key": "t113_f138_c1",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 28536
+    },
+    {
+      "key": "t113_f143_c0",
+      "original_split": "fit",
+      "original_mask_accepted": true,
+      "mode": "original_mask",
+      "point_count": 16485
+    }
+  ],
+  "no_heldout_tracks": true,
+  "no_observation_mask_application_gate": true,
+  "note": "All existing selected observations are used in fitting, so all reported errors are in-sample diagnostics."
+}

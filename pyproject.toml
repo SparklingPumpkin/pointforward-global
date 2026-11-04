@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pointforward-global"
-version = "2.0.0"
-description = "PFG-v2 fast global-Gaussian training and inference delivery"
+version = "5.0.0"
+description = "Global Gaussian reconstruction with accepted LIM-v1-r preprocessing"
 requires-python = ">=3.9,<3.11"
 
 [tool.setuptools]
@@ -14,3 +14,6 @@ package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["pointforward*"]
+
+[tool.setuptools.package-data]
+pointforward_calibration = ["*.json"]

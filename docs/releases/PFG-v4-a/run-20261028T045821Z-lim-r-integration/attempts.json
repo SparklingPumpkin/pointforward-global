@@ -1,0 +1,28 @@
+{
+  "attempts": [
+    {
+      "name": "argo-probe",
+      "status": "failed",
+      "reason": "Live src preceded frozen SOURCE and shadowed geometry dataset module"
+    },
+    {
+      "name": "ncore-probe",
+      "status": "cancelled",
+      "reason": "Stopped after diagnosing same source precedence problem; no scientific conclusion"
+    },
+    {
+      "name": "argo-fresh",
+      "status": "completed",
+      "reason": "Corrected isolated source precedence, raw RGB/LiDAR and models rerun"
+    },
+    {
+      "name": "ncore-fresh",
+      "status": "completed",
+      "reason": "Corrected isolated source precedence, raw RGB/LiDAR and models rerun"
+    }
+  ],
+  "source_priority_fixed_in": [
+    "scripts/preprocess_lidar_bbox.py",
+    "scripts/run_calibrated_stage.py"
+  ]
+}

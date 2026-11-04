@@ -1,0 +1,50 @@
+{
+  "core_definitions": 73,
+  "contract_tests": 5,
+  "contract_tests_passed": true,
+  "fresh_raw_scenes": [
+    "argoverse017",
+    "ncore250d"
+  ],
+  "fresh_selected_tracks": 4,
+  "fresh_observations": 12,
+  "application_views_verified": 6,
+  "default_selection_verified": [
+    {
+      "dataset": "argo",
+      "vehicles": [
+        41,
+        47,
+        24,
+        18,
+        22,
+        33,
+        26,
+        19
+      ],
+      "observations": 20,
+      "selection_uses_agreement": false
+    },
+    {
+      "dataset": "ncore",
+      "vehicles": [
+        118,
+        142,
+        83,
+        49,
+        113,
+        227,
+        15,
+        185
+      ],
+      "observations": 23,
+      "selection_uses_agreement": false
+    }
+  ],
+  "full_reconstruction_run": false,
+  "full_new_scene_quality_or_end_to_end_time_verified": false,
+  "archived_failure_not_overwritten": true,
+  "inherited_guard_warnings": 4,
+  "final_export_reapplication": "Fit caches from this run reused only to validate final application cache/bridge; explicitly cached timing",
+  "code_snapshot_sha256": "dac34d3d16546d9945ae2e2827488360d1eb9e2ba2a268a3ff21b8dc7aded03f"
+}

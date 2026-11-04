@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_lidar_bbox.py", line 64, in <module>
+    if __name__=='__main__':main()
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_lidar_bbox.py", line 48, in main
+    a=FreshScene(cfg,args.scene,args.out,args.device,args.selection,args.detector,args.sam_checkpoint,args.sam_root)
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_calibration/pipeline.py", line 53, in __init__
+    self.ds = build_dataset(cfg, 'val')
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/VR-v1-s/source/scripts/train.py", line 115, in build_dataset
+    from pointforward.data.vehicle_geometry import GeometryArgoverseClips, SMPLGeometryArgoverseClips
+ModuleNotFoundError: No module named 'pointforward.data.vehicle_geometry'

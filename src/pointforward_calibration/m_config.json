@@ -1,0 +1,13 @@
+{
+  "pairing_implementation": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-l/audit_frames.py",
+  "old_k_run": "experiments/lidar-bbox-calibration/point-ownership/LIM-v1-k/run-20261027T072105Z-fixed-clock-track-point-residual",
+  "source_offsets": [-1, 0, 1],
+  "minimum_selection_views": 2,
+  "lidar_minimum_improvement_px": 0.05,
+  "lidar_minimum_relative_improvement": 0.05,
+  "bbox_minimum_iou_improvement": 0.01,
+  "gate_lidar_max_regression_px": 0.3,
+  "gate_bbox_max_iou_regression": 0.01,
+  "frame_test": "on",
+  "note": "Fixed RGB f. LiDAR and bbox independently choose scene-shared offsets from original fit observations, with original gate confirmation. Test and heldout tracks never select offsets. +1 uses source f+1 with RGB f. After integer pairing, K point residual and separate bbox-center fitting replace (not stack with) old J clock transport. --frame-test off delegates to exact original K."
+}

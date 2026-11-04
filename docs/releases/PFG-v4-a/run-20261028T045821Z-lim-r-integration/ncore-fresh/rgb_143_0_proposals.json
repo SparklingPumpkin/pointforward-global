@@ -1,0 +1,172 @@
+[
+  {
+    "index": 0,
+    "class_id": 7,
+    "confidence": 0.9375,
+    "box": [
+      35.5,
+      126.0,
+      272.0,
+      334.0
+    ],
+    "flip_confidence": 0.9609375,
+    "flip_iou": 0.9883578757110202,
+    "sam_iou": 0.9800693703308431,
+    "sam_model_confidence": 0.96875,
+    "all_sam_detector_ious": [
+      0.9800693703308431,
+      0.8015894252381462,
+      0.9525580648613936
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "57aed02645399129f1c77d15771a63c5db5e13d96c3ed7f87b3c8b5a9894dd57"
+  },
+  {
+    "index": 1,
+    "class_id": 2,
+    "confidence": 0.796875,
+    "box": [
+      0.0,
+      248.0,
+      146.0,
+      484.0
+    ],
+    "flip_confidence": 0.8671875,
+    "flip_iou": 0.9833471416735708,
+    "sam_iou": 0.9766789119577332,
+    "sam_model_confidence": 0.9765625,
+    "all_sam_detector_ious": [
+      0.9766789119577332,
+      0.8409279893563945,
+      0.9610173717895437
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "a636153285c2dd84235b2554279a9fb21e546a0bccad90f60a5a5727af6f1a49"
+  },
+  {
+    "index": 2,
+    "class_id": 2,
+    "confidence": 0.73046875,
+    "box": [
+      376.0,
+      280.0,
+      396.0,
+      308.0
+    ],
+    "flip_confidence": 0.515625,
+    "flip_iou": 0.8696461824953445,
+    "sam_iou": 0.8252032520325203,
+    "sam_model_confidence": 0.8671875,
+    "all_sam_detector_ious": [
+      0.8007448789571695,
+      0.8252032520325203,
+      0.8085106382978723
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "9ff7580260b394a904643762e34b2994df9a59113f6fc7548d6fbaf6b48f4fbd"
+  },
+  {
+    "index": 3,
+    "class_id": 7,
+    "confidence": 0.6796875,
+    "box": [
+      392.0,
+      250.0,
+      472.0,
+      354.0
+    ],
+    "flip_confidence": 0.71875,
+    "flip_iou": 0.945516458569807,
+    "sam_iou": 0.9016678752719361,
+    "sam_model_confidence": 0.91796875,
+    "all_sam_detector_ious": [
+      0.9016678752719361,
+      0.8088712054229296,
+      0.862773937343727
+    ],
+    "component_fraction": 0.9966975939613146,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "9b0155ff7b278f46a38f75b9d7737389066203190027171ee65de911d2eb74f3"
+  },
+  {
+    "index": 4,
+    "class_id": 2,
+    "confidence": 0.6640625,
+    "box": [
+      342.0,
+      282.0,
+      362.0,
+      298.0
+    ],
+    "flip_confidence": 0.515625,
+    "flip_iou": 0.8467153284671532,
+    "sam_iou": 0.8267148014440433,
+    "sam_model_confidence": 0.8359375,
+    "all_sam_detector_ious": [
+      0.7626112759643917,
+      0.8267148014440433,
+      0.7843137254901961
+    ],
+    "component_fraction": 1.0,
+    "reasons": [
+      "not_mutual_flip_match"
+    ],
+    "qualified": false,
+    "sha256": "83d61f1bc0b85802bfdd4ee862d83f8d48a7aa129193fee66bab40814f0a0f38"
+  },
+  {
+    "index": 5,
+    "class_id": 2,
+    "confidence": 0.578125,
+    "box": [
+      116.0,
+      440.0,
+      744.0,
+      576.0
+    ],
+    "flip_confidence": 0.53125,
+    "flip_iou": 0.8902839970841577,
+    "sam_iou": 0.9633867642593451,
+    "sam_model_confidence": 0.82421875,
+    "all_sam_detector_ious": [
+      0.9633867642593451,
+      0.5660208692260182,
+      0.9542722547108512
+    ],
+    "component_fraction": 0.9989075671357063,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "128820ba4646d342888c6f7443123a047d25dda8959d4321a0220193b7b363f7"
+  },
+  {
+    "index": 6,
+    "class_id": 2,
+    "confidence": 0.53125,
+    "box": [
+      344.0,
+      280.0,
+      360.0,
+      296.0
+    ],
+    "flip_confidence": 0.515625,
+    "flip_iou": 0.8473282442748091,
+    "sam_iou": 0.8651685393258427,
+    "sam_model_confidence": 0.83984375,
+    "all_sam_detector_ious": [
+      0.7658227848101266,
+      0.8651685393258427,
+      0.8082191780821918
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "df22a0060e2abc18820ea7aac42d971cdea9fd512a2a89846f1f94d80bca80d3"
+  }
+]

@@ -25,3 +25,7 @@
 新默认入口 `scripts/run_pipeline.py`，版本专属 `scripts/run_vr_v1_s_pipeline.py`支持fresh/replay。旧 `run_current_pipeline.py`被历史验收冻结，保留为VR-v1-b复现入口。旧资产与证据保留，新主线覆盖根说明和默认交付选择。
 
 详见 [release](releases/VR-v1-s/README.md)、源码差异及资产SHA256。后续算法变动在此追加日期、基线、实际改动、指标、完整计时边界及验收链接。
+
+## 2026-10-28：接受并固化LIM-v1-r
+
+fresh默认新增独立原始输入校准，详见 `LIDAR_BBOX_PREPROCESSING.md`；数值核心与研究版保持一致，工程新增完整场景深度/框导出及显式消费桥。旧adaptive/both、replay与冻结源码保留。此为用户接受的前处理数据合同变化，不追认原研究质量验收，也不复用旧PSNR/计时作为新默认实测。

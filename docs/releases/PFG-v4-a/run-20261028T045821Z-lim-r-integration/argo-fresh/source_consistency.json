@@ -1,0 +1,57 @@
+{
+  "selected_offsets": {
+    "lidar": 0,
+    "bbox": 0
+  },
+  "retained": [
+    {
+      "key": "t041_f085_c0",
+      "track": 41,
+      "rgb_frame": 85,
+      "lidar_frame": 85,
+      "bbox_frame": 85,
+      "reasons": []
+    },
+    {
+      "key": "t041_f125_c0",
+      "track": 41,
+      "rgb_frame": 125,
+      "lidar_frame": 125,
+      "bbox_frame": 125,
+      "reasons": []
+    },
+    {
+      "key": "t041_f140_c1",
+      "track": 41,
+      "rgb_frame": 140,
+      "lidar_frame": 140,
+      "bbox_frame": 140,
+      "reasons": []
+    },
+    {
+      "key": "t047_f104_c0",
+      "track": 47,
+      "rgb_frame": 104,
+      "lidar_frame": 104,
+      "bbox_frame": 104,
+      "reasons": []
+    },
+    {
+      "key": "t047_f111_c0",
+      "track": 47,
+      "rgb_frame": 111,
+      "lidar_frame": 111,
+      "bbox_frame": 111,
+      "reasons": []
+    },
+    {
+      "key": "t047_f118_c1",
+      "track": 47,
+      "rgb_frame": 118,
+      "lidar_frame": 118,
+      "bbox_frame": 118,
+      "reasons": []
+    }
+  ],
+  "excluded": []
+}

@@ -1,0 +1,118 @@
+{
+  "definitions": {
+    "geometry.py": {
+      "write": "8f8a7e6eaf4edbbced857652cfaf89c15a7f5f8a8c6f323d18793eee13d7b13f",
+      "transform": "0ec321f6db7c49cd1ef417057f96d044ccdee956bc9ff0a1b1dff080e6375085",
+      "interp": "026b539e9256a8956d2a95c33702251a27252e2b5ee3e81311d2fc59074784f9",
+      "project": "89cf748a9f381a775a887fa06b0eb18b28dc24da3aaac9bcd0565ea18ef1e95c",
+      "box_uv": "673d904c59a51d0520924814e9587b98cae3f9c9d78f655beb37b2a1e94d272b",
+      "draw_box": "1b896dd3b5b9e812e82b4a50a31d89ee1cf7f2be4ea2c86c48b1d80ec3f70850",
+      "load_image": "14d5e75b60749baced04722e1732c7d62e3181d7238a2c011ad2d352b0c7e8b1",
+      "evaluate": "ac1abf6c457d1e90a84b181ab7113663d04405e0ecd642aee64965a427be05d7",
+      "overlay": "c208b88063a9781e0e39a8ceea5f8d39a7bd6c196795ae7d4941388017cbc1e3"
+    },
+    "drawing.py": {
+      "fonts": "ae324f09fc85ab5d2646b194e9f8cf5bfa59d01f0f022e06e55a80dde69c6043",
+      "text": "559e1a7b982330306bc5fe285bb05eba3c7bc9bf0415a05f8be27fcc3c00af04",
+      "sha": "81218fb2ab12b2dc19f8c061a3c4e5d10db58faa1552f42059baa7fef94298d7",
+      "box_layer": "1bc4efc2dac9994b921f20a179ff5983400016eff25b3156cf9a829814bfb4c2"
+    },
+    "selection.py": {
+      "motion": "833f2e12c7224f3e5d1e27ada4b50d2fda707718f48d38cba0c42539cdba3f32",
+      "select": "5f6253bbaad930c94638f53a3dbacf91ceb575c2e6553010078067eec36bbd8e"
+    },
+    "ground.py": {
+      "Calibration.ground": "66ddb993d13db586284143754be85cdd12b4060c031c183c095c27ba85f4d120"
+    },
+    "masks.py": {
+      "iou": "dbf5775c3756397d9c23c51c0c9e66192feda4e6f30b4e49a143cfc0f2f04537",
+      "hull_for": "8ed625723020a13bc133ca6cf1ed432ba34d7d0d9896d2d52406037085103da1",
+      "mask_stats": "0c4a9e22599c0a3ad8b5d61d1245cdfc6d1b66e61dc193f11286ae237fbb46dc",
+      "infer_yolo": "659aa9d79ec041769ce123910f96711ed1fe5e320d11331bde725d8075cd601a",
+      "proposals": "078f24f524464f0d0c3f2304e685b23f9094bee0403c10fb4aa0ed2da0474f72",
+      "assign": "59c78fe069cfd01abfce7bd84ab062043c9bc70fcdb26242a3073d88301dd6b4"
+    },
+    "c.py": {
+      "write": "481ceb9689ed5da7a1098613ffe753deedcdbf28761e246e7ad9e15a5b501fb8",
+      "Poses.__init__": "f0e6375feb32fc3de143d3d221cdc9ea128a4af600fd253f59d18deb168689a2",
+      "Poses.at": "2d6d4b9a3d8d9d9cf0ba2249f3d3b1cc7ff4e6e42d42d57de2cf229216e5d025",
+      "Pipeline.stage": "55371a8a181f29fe399cdcc8735c7aece201c85b0eef4f1699d4f3567a2f4113",
+      "Pipeline.camera": "99e198464986fc913c443e2ee61d0031dbc46d0c36b0d69e49f8277cbb737992",
+      "Pipeline.image": "1ce36807f915fd991b0ba6bcf68669654f840475d90f5c659a859a9621de6591",
+      "Pipeline.world": "7ceab9948ea3e350a86f847e020ca389bc6fd35a975229522f2841ebe8e8a93d",
+      "Pipeline.prepare": "159e3d6aff6f29755a368e6ebd52d524154893eeafaf4ae7172e7adb0729a7a4",
+      "Pipeline.measure": "7f00faf2f102120755ad08b4f74249f1f2d59ea12a40eff29e12ee00e1407618",
+      "Pipeline.pixels": "62bf533c1632f1b3316792b96bc3383ce13139fce67d0dd364b5d6f3d7b4661a",
+      "Pipeline.hull": "f39a757d8a7cfe3352e3fdf249cf603fa1ce370837abfa60a92abca6ba3ee91f"
+    },
+    "e.py": {
+      "save": "06af9b5a77cd1da1eee384222c5ab58b76545fe5a0d99b8eab28adc0e8cc4760",
+      "digest": "1f11e7f042a0e1f3e97091de90104aff47793adb4667f3b412d0623048b6066d",
+      "aggregate": "70cb84d1474c2a3998289225a0e9017df6ea9c1b1a16387e006c01e3a25e734c",
+      "Comparison.score": "72c210fe9815aea71ddfc52dc26c6b64253ecfba1e0e1dd6b1d95f6d1d43679e"
+    },
+    "j.py": {
+      "complete_clusters": "c9e381a9c550c040dd1d0930675f265a1e5b58afec0ecd9a7a43bf178ed5afa3",
+      "Completed.dot_layer": "7479cc5044bac8d64469ede2a424a105e929ff80d9735de07f5c1e020079dce8"
+    },
+    "k.py": {
+      "robust": "d91924b11408a438ca5637c12ba68d33526d5a65dbda7e8881dcd746959ccf61",
+      "Refiner.extent_target": "a1b110b771a38bf4082d9abec51fc78ab6833bd05d6e3dc0ca103e1dc979feff",
+      "Refiner.move": "3ab461bb70710de075615c5474dd54bc0bfdb8146036097f4a66ea4619871c25",
+      "Refiner.image_cost": "2824133d77f75e4317cd52d1bbbaa38a81897919039cc6dacec271748a06b922",
+      "Refiner.usable": "028cb811571907da49d585a16188807138984807515b9a1eaaa22fd78a50c09a",
+      "Refiner.bbox_fit": "cbd90529e09563521f8288dac34817013033abf2474ec9af202d4efc78a43a39",
+      "Refiner.fit": "23979bf9b3565936583ae2b1e5b5d2b2c34294a92e8c7dfca20fe758cee314f6",
+      "Refiner.box": "7187d95efd2ca1fc19f20f27aaec98cb7d91be285dab4417800228efc40ea229"
+    },
+    "l.py": {},
+    "m.py": {
+      "track_mean": "2972afbfc238fa61c072f30279b9ec71a29552ce9aa5f8f9d47c0f595f5350b4",
+      "Pipeline.box_arm": "4d92b354eef57534ff6dc026dd02934fc6919aa22358947d04e2e0aa81786623",
+      "Pipeline.choose_frames": "2be0654e0ac504d92906b442dec43a12dc4a38cc790bd0fce9ac35a68bbd24fb",
+      "Pipeline.bbox_fit": "ab3f2e719cf7a6cb3172ff0967e194d09476d3eacc12287ca2c23760b2535586",
+      "Pipeline.box": "94878c7e43c606866559befe20e2ae2eb208f83c61cacc3b23d496636a0775d0"
+    },
+    "n.py": {
+      "AllFit.prepare_selected": "262e811b50513a054f08be0aacb2ce9cdf9a4001c5d8c2069ba92da95f012dbe",
+      "AllFit.usable": "f76f1bd1747da344595841230fe98115c5e1718aec8656bf61373b0b5d716875",
+      "AllFit.image_cost": "67e8a2e204b2e3c386629344540c2fa8ac4fbc71ae9aa5c69d80462f2fb680ab",
+      "AllFit.fit": "daec4d75448fb4a3907e9c8421a3382d1ff370e91b5f51340afa8f94c9ac0d8c"
+    },
+    "q.py": {
+      "FreshFields.prepare_selected": "c09eac488b1fc85b44f6e300bf5e9462ab0231481ea5f10f440f7433202add7d",
+      "Fresh.prepare_pairings": "2a9b11ba3ecd659e476f05570cb1bf2631d00cc99cc2b930c94477857e160424"
+    },
+    "r.py": {
+      "save": "4003cd24f60e04e3c4706bd8fbdca302a433709538720018e0481826a2ab2909",
+      "distance": "b11ea8259e3bd064b1993c68cd702b26bd72a87399bdecf2f1dfd0a0cd66c872",
+      "pose": "0c56aabc1be2a18d351f41121f79223d24da6f82f5a0b06975aa13aacdaa308e",
+      "warp": "1ac0a082b02429e8939686a310f9e53f2c6485a02bdce3f396e80bee54e403d3",
+      "sample_indices": "190cd04ade05dcfaba59dfc7cc7091151ba70ab4c94d6aed04393173f38ebeb2",
+      "ownership": "aa224d5c964abb7ebf881476ae4f0af90cbf818bf5ad76ac2b170112ec7e5283",
+      "draw_sheet": "47940e30bc9428861625563ae10428d83971ceb5f4e52815c9ea923a89e83666",
+      "stack": "0246b7818e019b2ab42908bd0a1841c88409c8de3ffa38914fbacc8a4fd18c3f",
+      "export_ownership": "5d1ecbb91b077447d4f488b0b46542bc9999944a662806322a297b2b866a80a8",
+      "owned_rows": "82acba3f2257a91637708daa50259c5db2ab803876f7157dca7c69fd2f2ef812",
+      "speed": "f7aa74b9e50ae67a91adf29f9bc5c82f65961c214a7b3f0e13816ba2f7d47cbf",
+      "image_cost": "81088843356d17df19c67fb30b20b78c2e67f836d39f253d37440d390f5c046c",
+      "fit_hierarchy": "c9ec9bccb28be68a27c01a600870f9a337371cfaf2f8803256dd4e1ecbf77098",
+      "small_spatial": "c0454e90391df3dc6a8718b75e260e67409e6c89b177b7db235629418f640de6",
+      "finish_batch": "547918063bc808394803fe80a29a5116298f8828bbeec13e130929fb3207bfcc"
+    }
+  },
+  "configs": {
+    "c_config.json": "0fb6bba6d247fef4e663da84b71c22251db5b06175a81eb9e5d2b4651d728838",
+    "e_config.json": "6dd1783b8db03713ef3fd4342d2070233c45e10278ba7d14e1955c5eb77ade68",
+    "j_config.json": "69769537676ed7d33bb0bbd3d487e8fa71bc11a6ce578dd3518566b6c2d4e1dc",
+    "k_config.json": "65ffb900a7f12db9cfb03b8807143732b0385297effe7df4eda027a701e3eb0e",
+    "l_config.json": "8b528ba7665d3beabcbb487def88a47f87546998ec88e279cad57e3f7c121fc5",
+    "m_config.json": "7ba9888026acff0558d4bf90185fd96c101904e28d640dadd75531a26a9bcedc",
+    "n_config.json": "fb103cc9a9630938b46834edd6a844fd9194cc86d733bdf94153235c5d3e65c3",
+    "p_config.json": "122d414dde1a9236e9afc37494d2300e2c73b7dc853b12e0561b0e08f5f16b50",
+    "r_config.json": "6c28a199ff5afa90f26a31b5ed7299da3a249d353744ccdbd29ec2b331c6fbf6"
+  },
+  "source_ast_verified": true,
+  "definitions_checked": 73,
+  "allowed_adaptation": "C.measure SAM2 path and drawing font-cache decorator only"
+}

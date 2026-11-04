@@ -1,0 +1,205 @@
+[
+  {
+    "index": 0,
+    "class_id": 2,
+    "confidence": 0.8359375,
+    "box": [
+      170.0,
+      302.0,
+      246.0,
+      362.0
+    ],
+    "flip_confidence": 0.828125,
+    "flip_iou": 0.972133526850508,
+    "sam_iou": 0.9372842347525892,
+    "sam_model_confidence": 0.95703125,
+    "all_sam_detector_ious": [
+      0.9372842347525892,
+      0.8086152067071408,
+      0.9216255442670537
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "b9da9684bdf8f2f255b21799aee495bc675fd292b29d31808ec66e9071e41d15"
+  },
+  {
+    "index": 1,
+    "class_id": 2,
+    "confidence": 0.765625,
+    "box": [
+      238.0,
+      300.0,
+      286.0,
+      328.0
+    ],
+    "flip_confidence": 0.77734375,
+    "flip_iou": 0.902676399026764,
+    "sam_iou": 0.8942881500426257,
+    "sam_model_confidence": 0.91796875,
+    "all_sam_detector_ious": [
+      0.8942881500426257,
+      0.8554112554112554,
+      0.8652849740932642
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "a35f3dcf26a2e809e4c3a3c0ff362ae3953279914a4ba57997bc5e0baf3cbe6b"
+  },
+  {
+    "index": 2,
+    "class_id": 2,
+    "confidence": 0.765625,
+    "box": [
+      8.0,
+      306.0,
+      127.0,
+      342.0
+    ],
+    "flip_confidence": 0.7890625,
+    "flip_iou": 0.900813988543865,
+    "sam_iou": 0.9090022749431265,
+    "sam_model_confidence": 0.91796875,
+    "all_sam_detector_ious": [
+      0.844853159299911,
+      0.7287743640568219,
+      0.9090022749431265
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "b096e55346c641efa0a801f0b0768bd780aa1e9cf8ca995a9f0356ae1a8094c7"
+  },
+  {
+    "index": 3,
+    "class_id": 2,
+    "confidence": 0.75390625,
+    "box": [
+      310.0,
+      300.0,
+      350.0,
+      332.0
+    ],
+    "flip_confidence": 0.765625,
+    "flip_iou": 0.8537444933920705,
+    "sam_iou": 0.8899733806566105,
+    "sam_model_confidence": 0.9453125,
+    "all_sam_detector_ious": [
+      0.8899733806566105,
+      0.8216845878136201,
+      0.8553571428571428
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "e51e6ce6627904baa28b0aa49c0e34ce9a734797cfc21134709fec670ea59ece"
+  },
+  {
+    "index": 4,
+    "class_id": 2,
+    "confidence": 0.53125,
+    "box": [
+      376.0,
+      296.0,
+      428.0,
+      344.0
+    ],
+    "flip_confidence": 0.53125,
+    "flip_iou": 0.9512972234865726,
+    "sam_iou": 0.9320074005550416,
+    "sam_model_confidence": 0.953125,
+    "all_sam_detector_ious": [
+      0.9320074005550416,
+      0.8930099857346647,
+      0.9163120567375886
+    ],
+    "component_fraction": 1.0,
+    "reasons": [],
+    "qualified": true,
+    "sha256": "383095b97d413b75965adbe4fc5f378347a0ae189e1e01c0698b2e10bad178e6"
+  },
+  {
+    "index": 5,
+    "class_id": 2,
+    "confidence": 0.376953125,
+    "box": [
+      2.25,
+      304.0,
+      50.0,
+      340.0
+    ],
+    "flip_confidence": 0.7890625,
+    "flip_iou": 0.18322007318348144,
+    "sam_iou": 0.7588652482269503,
+    "sam_model_confidence": 0.82421875,
+    "all_sam_detector_ious": [
+      0.7543978349120433,
+      0.6637658227848101,
+      0.7588652482269503
+    ],
+    "component_fraction": 1.0,
+    "reasons": [
+      "normal_confidence",
+      "not_mutual_flip_match",
+      "flip_iou"
+    ],
+    "qualified": false,
+    "sha256": "78a1b61883399588e62867750f17773b21cd8d2d6a54d4350804759c0921541d"
+  },
+  {
+    "index": 6,
+    "class_id": 2,
+    "confidence": 0.306640625,
+    "box": [
+      432.0,
+      306.0,
+      456.0,
+      322.0
+    ],
+    "flip_confidence": 0.453125,
+    "flip_iou": 0.9716713881019831,
+    "sam_iou": 0.8164893617021277,
+    "sam_model_confidence": 0.84375,
+    "all_sam_detector_ious": [
+      0.6797520661157025,
+      0.8164893617021277,
+      0.7379310344827587
+    ],
+    "component_fraction": 1.0,
+    "reasons": [
+      "normal_confidence",
+      "flip_confidence"
+    ],
+    "qualified": false,
+    "sha256": "1092de82ca9d0d7c8000552bbffe3fb0da36823c48254b4acb67e0547691a5cc"
+  },
+  {
+    "index": 7,
+    "class_id": 2,
+    "confidence": 0.26953125,
+    "box": [
+      4.5,
+      304.0,
+      49.5,
+      324.0
+    ],
+    "flip_confidence": 0.7890625,
+    "flip_iou": 0.017932489451476793,
+    "sam_iou": 0.761744966442953,
+    "sam_model_confidence": 0.765625,
+    "all_sam_detector_ious": [
+      0.5830346475507766,
+      0.655417406749556,
+      0.761744966442953
+    ],
+    "component_fraction": 1.0,
+    "reasons": [
+      "normal_confidence",
+      "not_mutual_flip_match",
+      "flip_iou"
+    ],
+    "qualified": false,
+    "sha256": "2aa66e97ed3d329021341989e3d84be58371ae49ed352417123f2cd28a638f0d"
+  }
+]
