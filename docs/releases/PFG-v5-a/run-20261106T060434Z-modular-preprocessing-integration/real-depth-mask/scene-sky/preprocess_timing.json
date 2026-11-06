@@ -1,0 +1,13 @@
+{
+  "scope": "stage",
+  "start": 6146271.089687238,
+  "status": "failed",
+  "stages_seconds": {
+    "range_measurement": 0.03696129284799099
+  },
+  "input_boundary": "before_dataset_measurement",
+  "output_boundary": "measured_range_sky_state_written",
+  "error": "KeyError('ego_mask')",
+  "end": 6146271.873858071,
+  "seconds": 0.7841708324849606
+}

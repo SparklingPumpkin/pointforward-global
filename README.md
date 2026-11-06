@@ -2,6 +2,8 @@
 
 当前默认流程 **PFG-v5：VR-v1-s 重建骨干 + LIM-v1-r 固有前处理**。fresh先校准再重建；replay使用历史冻结资产。详细流程与独立入口见 [LiDAR/bbox前处理](docs/LIDAR_BBOX_PREPROCESSING.md)。
 
+预处理现提供三个独立可选模块：`lim-r`、`depth-mask`（新深度预测＋天空mask修复）、`scene-sky`（场景范围测量＋有限天空壳）。统一入口 `scripts/preprocess_scene.py --modules ...`；可单独运行或组合，输出标准数组、来源清单和分阶段计时，供其他项目复用。详见[模块化预处理](docs/PREPROCESSING.md)。新增两项为可选工具，默认交付重建仍沿用PFG-v5。
+
 历史VR-v1-s交付固化 Argoverse017 第 **1670 步**完整状态：32D Gaussian、PCA 投影基、配套 U-Net、车辆轨迹、SMPL 行人、通用权重、隔离源码、PLY 预览和视频。
 
 以下为历史冻结资产的完整156帧、三前向相机源帧重建：全局 **31.131654 dB**，车辆 bbox **28.329244 dB**，非天空 **30.685005 dB**。指标属于特征 Gaussian + 配套 U-Net 运行时；单独预览 PLY 不等价。车辆29dB研究目标仍未达到。

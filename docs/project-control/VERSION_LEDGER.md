@@ -2,7 +2,7 @@
 
 > 本文件由 `fjn-project-workflow` 根据不可追加覆盖的事件账本生成；请勿手改。
 
-更新时间：2026-10-28T05:22:36+00:00
+更新时间：2026-11-06T06:23:28+00:00
 
 ## 项目主线（project）
 
@@ -27,6 +27,7 @@
 | PFG-v2-a | PFG-v2 | promoted | VR-v1-b联合优化可独立固化交付并在交付环境精确复现30.294842dB | VR-v1-b固定950步完整状态独立交付，156帧全局30.294842/动态26.334712dB精确重现；保留旧入口与资产，无新冷启动耗时认证 | 1 | docs/releases/PFG-v2-a/run-20261020T063212Z-unified-delivery-validation/validation.json：独立完整重渲染与校验通过 |
 | PFG-v3-a | PFG-v3 | promoted | 用户选定VR-v1-s可独立固化并精确重渲染；交付验收独立于未通过的研究29dB目标 | VR-v1-s第1670步32D运行时独立交付：全局31.131654、车辆28.329244dB精确复现；研究车辆29dB目标仍失败 | 1 | docs/releases/PFG-v3-a/run-20261022T064659Z-compact-delivery-validation/validation.json：完整独立重放及资产核验通过 |
 | PFG-v4-a | PFG-v4 | promoted | 用户接受的LIM-v1-r可以独立固化并接入新场景默认前处理，保留旧版本 | 用户接受LIM-v1-r的独立工程固化验收通过，设为fresh默认；原研究质量失败不改写，整场新重建质量/计时未验证 | 1 | docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md：实质前处理数据合同与工程验证 |
+| PFG-v5-a | PFG-v5 | passed | Independent portable preprocessing stages can preserve research numerics and delivery default while serving other projects | Optional modular preprocessing completed: independent LIM-r, depth-mask and scene-sky, numerical parity plus real six-view integration, 34 tests passed; PFG-v5 default unchanged, no promotion. | 1 | docs/releases/PFG-v5-a/report.md：Completed reusable preprocessing engineering integration and explicit limited validation scope |
 
 ## 交付验证（delivery-validation）
 

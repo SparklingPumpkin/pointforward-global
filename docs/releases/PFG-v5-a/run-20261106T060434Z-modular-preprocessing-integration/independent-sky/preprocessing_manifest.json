@@ -1,0 +1,31 @@
+{
+  "modules": [
+    "scene-sky"
+  ],
+  "config": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml",
+  "out": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky",
+  "scene": "017",
+  "geometry_directory": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input",
+  "sky_mask_directory": "original dataset masks",
+  "cached_depth_directory": null,
+  "partial_frames": [
+    1,
+    61
+  ],
+  "gaussian_construction": false,
+  "optimization": false,
+  "order": "lim-r, then depth-mask, then scene-sky; only selected modules run",
+  "outputs": {
+    "scene-sky": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky"
+  },
+  "status": "completed",
+  "explicit_reused_inputs": [
+    {
+      "kind": "calibration",
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input"
+    }
+  ],
+  "effective_config": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/config_preprocessed.yaml",
+  "partial_export": true,
+  "sky_consumption": "Explicit separate background alpha compositing required; original PFG-v5 renderer is not silently changed"
+}

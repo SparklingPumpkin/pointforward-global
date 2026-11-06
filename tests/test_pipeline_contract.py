@@ -8,8 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_fast_g8_is_default_and_legacy_is_available():
-    source = (ROOT / "scripts/run_current_pipeline.py").read_text()
+def test_historical_fast_g8_recipe_remains_available():
+    # The PFG-v2 entry point moved here when unified delivery became current.
+    source = (ROOT / "scripts/run_legacy_pipeline.py").read_text()
     assert 'choices=("fast-g8", "legacy-alternating")' in source
     assert 'default="fast-g8"' in source
     assert '"--groups", 8' in source

@@ -1,0 +1,103 @@
+{
+  "center": [
+    31.854815895507713,
+    -7.655129591495168,
+    28.563448751169563
+  ],
+  "measured_radius_m": 246.83393520675781,
+  "measured_diameter_m": 493.66787041351563,
+  "scene_boundary_multiplier": 1.5,
+  "scene_boundary_radius_m": 370.2509028101367,
+  "scene_boundary_diameter_m": 740.5018056202734,
+  "sky_multiplier": 2.0,
+  "sky_radius_m": 493.66787041351563,
+  "sky_diameter_m": 987.3357408270313,
+  "compression_upper_radius_m": 394.9342963308125,
+  "bounds_m": [
+    [
+      -212.87499999999952,
+      -217.18525918299034,
+      -3.6231024976608643
+    ],
+    [
+      276.58463179101494,
+      201.875,
+      60.74999999999999
+    ]
+  ],
+  "lidar_point_count": 191874,
+  "camera_count": 6,
+  "definition": "Union AABB midpoint and exact maximum distance R of raw measured points and camera centers in common metric space",
+  "radial_mapping": "Optional downstream mapping only; preprocessing does not modify any Gaussian payload",
+  "scene": "017",
+  "frames": [
+    1,
+    61
+  ],
+  "inputs": [
+    {
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input/application_manifest.json",
+      "size_bytes": 3947144,
+      "mtime_ns": 1793929468237694309,
+      "sha256": "b6e5f3fed92792163def136946104de0175932f17b3d25bc3f18bfc771d273c4"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input/camera_poses.pt",
+      "size_bytes": 128011,
+      "mtime_ns": 1793929468089693212,
+      "sha256": "752e62b27c40d01b898a5997d4f48af2dba1284ffd5e0fca73a5ad53b3d1b5d5"
+    },
+    {
+      "path": "/mnt/data/dataset/argoverse/processed/training/017/lidar/001.bin",
+      "size_bytes": 1524400,
+      "mtime_ns": 1762736672000000000,
+      "sha256": "ffd33f2c660960598f5c624adf773bdfda8b6e230efa4293e8c506007b5ea6b0"
+    },
+    {
+      "path": "/mnt/data/dataset/argoverse/processed/training/017/ego_pose/001.txt",
+      "size_bytes": 403,
+      "mtime_ns": 1762736672000000000,
+      "sha256": "5b587a8259240582bda228d3d7cba67e5eab96328747bf389d6a488f31adac26"
+    },
+    {
+      "path": "/mnt/data/dataset/argoverse/processed/training/017/lidar/061.bin",
+      "size_bytes": 1545584,
+      "mtime_ns": 1762737276000000000,
+      "sha256": "a9927bd813037a3cb63cc461fb027f8ce9e95ce72cb49dcca6610df44d2c7a9a"
+    },
+    {
+      "path": "/mnt/data/dataset/argoverse/processed/training/017/ego_pose/061.txt",
+      "size_bytes": 403,
+      "mtime_ns": 1762737276000000000,
+      "sha256": "2f956a5486ca3c93514bbe94386f4b227e8aa262175ac4454677c1758825b951"
+    }
+  ],
+  "coordinate_frame": "first-supported-frame ego meters",
+  "origin_frame": 1,
+  "origin_world_to_ego": [
+    [
+      0.03795273618106572,
+      -0.9992008582876455,
+      0.012539322693155422,
+      3222.378053083556
+    ],
+    [
+      0.9985783587416728,
+      0.038393117460039754,
+      0.036976073135026585,
+      -247.12288626798832
+    ],
+    [
+      -0.03742794770165297,
+      0.011118153125957899,
+      0.9992374769802772,
+      -9.672180350574218
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ]
+}

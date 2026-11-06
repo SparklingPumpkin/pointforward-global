@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "subject_id": "PFG-v5-a",
+  "checks": [
+    {
+      "id": "modules",
+      "criterion": "Provide independently selectable LIM-r, new depth prediction plus sky-mask repair, and measured scene range plus finite sky shell preprocessing, with own manifests and timing; no Gaussian fitting or training in preprocessing.",
+      "passed": true,
+      "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Three independently selected preprocessing modules, separate manifests/timers and no Gaussian fitting",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/tests.log::All 34 numerical and selection tests passed"
+      ]
+    },
+    {
+      "id": "portable",
+      "criterion": "New modules are package-local and independently callable from CLI and array APIs without importing the research repository. Preserve existing depth repair, finite ray intersection, sky accumulation/coverage and measured range formulas; document inputs, outputs and optional calibrated/mask dependencies.",
+      "passed": true,
+      "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+      "evidence": [
+        "docs/PREPROCESSING.md::CLI and independent array APIs with input/output and explicit optional dependencies",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/code_identity.json::Retained numerical source identities and default compatibility",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/portable-validator.log::Independent read-only validation script successfully ran without temporary plan files"
+      ]
+    },
+    {
+      "id": "validation",
+      "criterion": "Verify module selections and default compatibility, meaningful numerical invariants/parity, and real input limited-frame fresh depth prediction/mask/sky export and readback. Explicitly disclose any reused calibration or depth as non-cold and do not invent full-scene PSNR or timing results.",
+      "passed": true,
+      "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Actual six-view fresh depth and mask parity, independent sky rendering tensor parity and disclosed metadata caveat",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-input.log::Real commands and stage times; calibration reuse explicitly disclosed",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/root_visual_review.json::Personal inspection of full-frame diagnostics"
+      ]
+    },
+    {
+      "id": "delivery",
+      "criterion": "Keep PFG-v5 current, default VR-v1-y-equivalent LIM-r plus VR-v1-s reconstruction and frozen historical assets unchanged; add documentation and algorithm changelog for optional preprocessing. No delivery promotion.",
+      "passed": true,
+      "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+      "evidence": [
+        "docs/ALGORITHM_CHANGES_CURRENT.md::Optional preprocessing engineering change; PFG-v5 defaults retained",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Default delivery scripts and configs identical to HEAD",
+        "docs/PREPROCESSING.md::Optional sky artifact consumption and no promotion clearly documented"
+      ]
+    }
+  ]
+}

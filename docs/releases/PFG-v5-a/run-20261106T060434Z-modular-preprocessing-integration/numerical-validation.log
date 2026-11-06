@@ -1,0 +1,63 @@
+{
+  "independent_sky_rendering_tensors_match_combined": true,
+  "unobserved_key_boundary_rounding_differences": 3584,
+  "key_rounding_note": "Only extrapolated angular metadata cell IDs differ by at most one latitude row at floating floor boundaries; observed keys and all actual rendering tensors are bit-identical. Original completion formula is retained, not relabeled as full metadata bit-reproducibility.",
+  "numpy_torch_roundtrip": true,
+  "raw_mask_independent_option": true,
+  "consumer_masks_exact": true,
+  "consumer_preserves_rgb_intrinsics": true,
+  "fresh_vs_historical_depth_mask": [
+    {
+      "frame": 1,
+      "camera": 0,
+      "mask_different_pixels": 0,
+      "depth_finite_pixels": 442366,
+      "depth_max_abs": 0.0,
+      "depth_mean_abs": 0.0
+    },
+    {
+      "frame": 1,
+      "camera": 1,
+      "mask_different_pixels": 0,
+      "depth_finite_pixels": 441364,
+      "depth_max_abs": 0.0,
+      "depth_mean_abs": 0.0
+    },
+    {
+      "frame": 1,
+      "camera": 2,
+      "mask_different_pixels": 0,
+      "depth_finite_pixels": 441763,
+      "depth_max_abs": 0.0,
+      "depth_mean_abs": 0.0
+    },
+    {
+      "frame": 61,
+      "camera": 0,
+      "mask_different_pixels": 0,
+      "depth_finite_pixels": 442368,
+      "depth_max_abs": 0.0,
+      "depth_mean_abs": 0.0
+    },
+    {
+      "frame": 61,
+      "camera": 1,
+      "mask_different_pixels": 0,
+      "depth_finite_pixels": 441829,
+      "depth_max_abs": 0.0,
+      "depth_mean_abs": 0.0
+    },
+    {
+      "frame": 61,
+      "camera": 2,
+      "mask_different_pixels": 0,
+      "depth_finite_pixels": 442348,
+      "depth_max_abs": 0.0,
+      "depth_mean_abs": 0.0
+    }
+  ],
+  "measured_range_matches_historical_formula": true,
+  "first_failure": "Initial combined probe completed fresh depth/mask but sky raised KeyError ego_mask. Frozen adapter omits absent or disabled masks. Fixed in local preprocessing adapter; first failed outputs retained, fresh retry independently succeeded.",
+  "scope": "Engineering limited-frame integration; old LIM-r calibration explicitly reused; no full-scene cold timing/PSNR claim. Existing LIM numerical tests retained, full LIM fit not rerun.",
+  "passed": true
+}

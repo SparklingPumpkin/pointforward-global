@@ -1,0 +1,7 @@
+{
+  "min_size_bytes": 67108864,
+  "recent_days": 7,
+  "protected_paths": [
+    "/mnt/data/fjn/projects/fjn/pointforward-global"
+  ]
+}

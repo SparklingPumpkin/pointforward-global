@@ -1,0 +1,29 @@
+RUN ['/root/miniconda3/envs/drivestudio/bin/python', '/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_scene.py', '--config', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml', '--geometry-dir', '/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input', '--frames', '1', '61', '--gpu', '1', '--out', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask', '--modules', 'depth-mask', 'scene-sky']
+[INFO] using base=100 for rope new
+[INFO] using min_period=None for rope new
+[INFO] using max_period=None for rope new
+[INFO] using normalize_coords=separate for rope new
+[INFO] using shift_coords=None for rope new
+[INFO] using rescale_coords=2 for rope new
+[INFO] using jitter_coords=None for rope new
+[INFO] using dtype=fp32 for rope new
+[INFO] using mlp layer as FFN
+depth-mask 1
+depth-mask 61
+Traceback (most recent call last):
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_scene.py", line 10, in <module>
+    main()
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/__main__.py", line 118, in main
+    run_scene_sky(cfg, out/name, args.frames, geometry, mask,
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/stages.py", line 112, in run_scene_sky
+    state, records = build_sky(views.sky_views, sizing, pixel_stride)
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/sky.py", line 45, in build_sky
+    for view in views_factory():
+  File "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/dataset.py", line 77, in sky_views
+    batch['ego_mask'][index, 0].numpy() > .5,
+KeyError: 'ego_mask'
+Traceback (most recent call last):
+  File "<stdin>", line 8, in <module>
+  File "/root/miniconda3/envs/drivestudio/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/root/miniconda3/envs/drivestudio/bin/python', '/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_scene.py', '--config', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml', '--geometry-dir', '/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input', '--frames', '1', '61', '--gpu', '1', '--out', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask', '--modules', 'depth-mask', 'scene-sky']' returned non-zero exit status 1.

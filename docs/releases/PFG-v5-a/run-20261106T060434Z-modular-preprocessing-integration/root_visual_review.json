@@ -1,0 +1,14 @@
+{
+  "personally_inspected": true,
+  "scope": "Full-image RGB/old sky/repaired sky overlays; no full-render quality claim",
+  "images": [
+    {
+      "path": "real-combined-retry/depth-mask/diagnostics/mask_full_f0001.jpg",
+      "finding": "Thin poles, wires and far crane recovered as foreground; road/buildings stay outside sky"
+    },
+    {
+      "path": "real-combined-retry/depth-mask/diagnostics/mask_full_f0061.jpg",
+      "finding": "Crane mast/arm and poles removed from erroneous sky mask"
+    }
+  ]
+}

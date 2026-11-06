@@ -1,0 +1,103 @@
+{
+  "center": [
+    31.854815895507713,
+    -7.655129591495168,
+    28.563448751169563
+  ],
+  "radius_m": 493.66787041351563,
+  "diameter_m": 987.3357408270313,
+  "scene_scale_m": 493.66787041351563,
+  "diameter_to_scene_scale": 2.0,
+  "gaussian_count": 158401,
+  "settings": {
+    "longitude_cells": 2048,
+    "latitude_cells": 1024,
+    "boundary_erosion": 4,
+    "translation_budget_m": 3.0,
+    "diameter_to_scene_scale": 2.0
+  },
+  "representation": "Fixed finite sphere, separately alpha-composited behind scene",
+  "appearance": "Two-pass Huber-weighted source RGB, no target lookup",
+  "geometry_trainable": false,
+  "synthetic_depth_prompts": 0,
+  "pixel_stride": 2,
+  "observed_gaussian_count": 29233,
+  "extrapolated_gaussian_count": 129168,
+  "coverage_grid": [
+    512,
+    256
+  ],
+  "coverage_policy": "Full-sphere coarse grid where original high-resolution observations do not cover; nearest observed direction RGB extrapolation",
+  "extrapolation_note": "Unobserved sky appearance is inferred; not new ground-truth observation or recovered building geometry",
+  "maximum_fill_nearest_angle_degrees": 115.43839448751883,
+  "scene": "017",
+  "frame_count": 2,
+  "frames": [
+    1,
+    61
+  ],
+  "cameras": [
+    0,
+    1,
+    2
+  ],
+  "resolution": [
+    576,
+    768
+  ],
+  "origin_frame": 1,
+  "coordinate_frame": "first-supported-frame ego meters",
+  "mask_directory": null,
+  "partial_export": true,
+  "module": "scene-sky",
+  "status": "completed",
+  "records": [
+    {
+      "frame": 1,
+      "camera": 0,
+      "sky_pixels": 109395,
+      "ego_pixels": 39606,
+      "used_observations": 25128
+    },
+    {
+      "frame": 1,
+      "camera": 1,
+      "sky_pixels": 63056,
+      "ego_pixels": 0,
+      "used_observations": 13984
+    },
+    {
+      "frame": 1,
+      "camera": 2,
+      "sky_pixels": 0,
+      "ego_pixels": 0,
+      "used_observations": 0
+    },
+    {
+      "frame": 61,
+      "camera": 0,
+      "sky_pixels": 129551,
+      "ego_pixels": 39606,
+      "used_observations": 29530
+    },
+    {
+      "frame": 61,
+      "camera": 1,
+      "sky_pixels": 55939,
+      "ego_pixels": 0,
+      "used_observations": 12527
+    },
+    {
+      "frame": 61,
+      "camera": 2,
+      "sky_pixels": 14288,
+      "ego_pixels": 0,
+      "used_observations": 2912
+    }
+  ],
+  "geometry_input": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input",
+  "raw_masks_used": true,
+  "exact_tensor_readback": true,
+  "output_format": "Torch tensor dictionary and identical numpy sky_arrays.npz; metadata in this manifest",
+  "gaussian_payload_modified": false
+}

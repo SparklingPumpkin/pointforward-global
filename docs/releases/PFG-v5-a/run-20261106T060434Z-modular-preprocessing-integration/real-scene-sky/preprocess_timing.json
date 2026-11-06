@@ -1,0 +1,29 @@
+{
+  "scope": "stage",
+  "start": 6146442.987121385,
+  "status": "completed",
+  "stages": [
+    {
+      "module": "scene-sky",
+      "start": 6146444.316952039,
+      "status": "completed",
+      "end": 6146463.003246905,
+      "seconds": 18.686294866725802
+    }
+  ],
+  "input_boundary": "before_config_dataset_and_model_reads",
+  "output_boundary": "selected_preprocessing_outputs_written",
+  "reconstruction_included": false,
+  "explicit_reused_inputs": [
+    {
+      "kind": "calibration",
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input"
+    },
+    {
+      "kind": "mask",
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks"
+    }
+  ],
+  "end": 6146463.006878611,
+  "seconds": 20.019757226109505
+}

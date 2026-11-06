@@ -1,0 +1,87 @@
+{
+  "files": [
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/__init__.py",
+      "bytes": 329,
+      "sha256": "49a73d8f21894433252e8a7dffc40727c6b49b8249d3f4fa3795314d4ec47da8"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/__main__.py",
+      "bytes": 8457,
+      "sha256": "a5405855742e8c0db74a00c186f33b0ee7748d57222046a757d96590f1d5bc06"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/consumer.py",
+      "bytes": 2043,
+      "sha256": "c98d7bbeea1df7e027c6951dd544989ffeb27cdb6a9340451e73a66442268419"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/dataset.py",
+      "bytes": 6846,
+      "sha256": "09059294f11981daff916ed33d145ec756be5bd033e00028743e020a436a0c58"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/depth_mask.py",
+      "bytes": 1049,
+      "sha256": "2ec04ba3f446d9c0f96351da2a174cee8fd0d631adb172f2c44b9c8ad11b1bff"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/io.py",
+      "bytes": 808,
+      "sha256": "3a6a5ed2ee3a3b93ae15be9ccc294993522d277ed85964d51a4bb5b7999ac0c5"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/preprocess_scene.py",
+      "bytes": 292,
+      "sha256": "41515a35ebd00114699f9fb8aac40eb76def4bdf40fb7d1f9bcc799048bc3b8a"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/provenance.json",
+      "bytes": 3457,
+      "sha256": "3d04de3876838b29e5df4564c8f59edd0881482b21ba2825e15cd8d27aad0aa2"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/range.py",
+      "bytes": 3040,
+      "sha256": "1c101b5205ac52aae138d697920158a78c203bd82006aeef1dea396d726bcbd3"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/run_preprocessed_stage.py",
+      "bytes": 582,
+      "sha256": "171d69f24c8fcba0c987df4b793ee6fe3797c4019c2d05f36d0d9acb43ce3438"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/sky.py",
+      "bytes": 11920,
+      "sha256": "01be197459e5caa726d64a058f4e618308549795d5bd930162c349d5c6e2b398"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/stages.py",
+      "bytes": 8059,
+      "sha256": "084bb9a9518b892214d557fa90327950242937cc1195eff0216667afc169a244"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/test_modular_preprocessing.py",
+      "bytes": 8059,
+      "sha256": "03503deabefdc8814af5109832bc8edca573ab8fbc136a1544469e15dfdcf992"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/test_pipeline_contract.py",
+      "bytes": 990,
+      "sha256": "bfc55ebacbc2afd096254b6134230c496eeb6eac8e41e52b38e5223c3b5b721b"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/validate_integration.py",
+      "bytes": 5824,
+      "sha256": "4417194d7935ed254e1a1339f975c8dd8354f704d8cbd76f07c9bac118ea68a7"
+    }
+  ],
+  "default_unchanged": {
+    "scripts/run_pipeline.py": true,
+    "scripts/run_vr_v1_s_generalized.py": true,
+    "scripts/preprocess_lidar_bbox.py": true,
+    "configs/runtime-stop/pipeline_recipe.json": true,
+    "configs/runtime-stop/config.template.yaml": true
+  },
+  "base_git_commit": "de4eef8f7d8fddf35b166c571050a6448549b76a"
+}

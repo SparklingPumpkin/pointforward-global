@@ -1,0 +1,415 @@
+{
+  "schema_version": 2,
+  "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+  "inventory_reference": "docs/project-control/inventory-modular-preprocessing-20261106-02.json",
+  "assessed_at": "2026-11-06T06:23:16.431798+00:00",
+  "review_after": "2026-11-13T06:22:31+00:00",
+  "reason": "File-level review of limited-frame preprocessing engineering evidence. Entire delivery package is user-protected; preserve exact reproduction, diagnostic and independent-selection evidence. No deletion.",
+  "preserve": {
+    "conclusion": [
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md",
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/root_visual_review.json"
+    ],
+    "metrics_timing": [
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json",
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/tests.log",
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/preprocess_timing.json"
+    ],
+    "reproduction": [
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/REPRODUCE.md",
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml",
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/validate_integration.py"
+    ],
+    "code_identity": [
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/code_identity.json"
+    ],
+    "inputs": [
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real_input_identity.json",
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/input_manifest.json"
+    ]
+  },
+  "history": {
+    "related_run_ids": [],
+    "reason": "No delivery historical run replaced or compared. External research calibration is an explicitly recorded input, not a local delivery run; default PFG-v5 and frozen assets remain unchanged.",
+    "evidence": [
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real_input_identity.json::Explicit external calibration reused",
+      "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Default delivery files unchanged; limited engineering scope"
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/shared_sky.pt",
+      "decision": "keep",
+      "reason": "Raw-mask independent scene-sky selection evidence and portable output readback. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Raw-mask independent scene-sky selection evidence and portable output readback.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/sky_arrays.npz",
+      "decision": "keep",
+      "reason": "Raw-mask independent scene-sky selection evidence and portable output readback. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Raw-mask independent scene-sky selection evidence and portable output readback.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_0.npy",
+      "decision": "keep",
+      "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_1.npy",
+      "decision": "keep",
+      "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_2.npy",
+      "decision": "keep",
+      "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_0.npy",
+      "decision": "keep",
+      "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_1.npy",
+      "decision": "keep",
+      "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_2.npy",
+      "decision": "keep",
+      "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0001.jpg",
+      "decision": "keep",
+      "reason": "Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0061.jpg",
+      "decision": "keep",
+      "reason": "Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_0.png",
+      "decision": "keep",
+      "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_1.png",
+      "decision": "keep",
+      "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_2.png",
+      "decision": "keep",
+      "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_0.png",
+      "decision": "keep",
+      "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_1.png",
+      "decision": "keep",
+      "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_2.png",
+      "decision": "keep",
+      "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/shared_sky.pt",
+      "decision": "keep",
+      "reason": "Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/sky_arrays.npz",
+      "decision": "keep",
+      "reason": "Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_0.npy",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_1.npy",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_2.npy",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_0.npy",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_1.npy",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_2.npy",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0001.jpg",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0061.jpg",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_0.png",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_1.png",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_2.png",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_0.png",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_1.png",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_2.png",
+      "decision": "keep",
+      "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/shared_sky.pt",
+      "decision": "keep",
+      "reason": "Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/sky_arrays.npz",
+      "decision": "keep",
+      "reason": "Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences. Entire delivery package is explicitly protected by user.",
+      "evidence": [
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences.",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+        "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+      ],
+      "keep_kind": "protected"
+    }
+  ]
+}

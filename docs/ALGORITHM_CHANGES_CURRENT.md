@@ -29,3 +29,9 @@
 ## 2026-10-28：接受并固化LIM-v1-r
 
 fresh默认新增独立原始输入校准，详见 `LIDAR_BBOX_PREPROCESSING.md`；数值核心与研究版保持一致，工程新增完整场景深度/框导出及显式消费桥。旧adaptive/both、replay与冻结源码保留。此为用户接受的前处理数据合同变化，不追认原研究质量验收，也不复用旧PSNR/计时作为新默认实测。
+
+## 2026-11-06：三个独立可选预处理模块（PFG-v5-a，非主线晋级）
+
+新增 `scripts/preprocess_scene.py` 与 `pointforward_preprocessing`，可独立选择LIM-r、新深度预测＋天空mask修复、场景范围测量＋有限天空壳，支持任意组合、逐模块manifest与计时及数组API。数值定义保留研究版公式；输入复用显式登记，预处理不执行Gaussian拟合或训练。天空导出Torch/无pickle NumPy；下游需显式接入合成。默认PFG-v5重建、原LIM入口、历史冻结源码和交付资产保持不变。
+
+34项测试通过；scene017帧1/61三相机真实新推理验证通过，明确复用既有LIM-r校准，无全场景冷启动或新PSNR结论。[说明](PREPROCESSING.md)、[验收证据](releases/PFG-v5-a/report.md)。

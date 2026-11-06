@@ -1,0 +1,154 @@
+{
+  "module": "depth-mask",
+  "status": "completed",
+  "scene": "017",
+  "frames": [
+    1,
+    61
+  ],
+  "cameras": [
+    0,
+    1,
+    2
+  ],
+  "resolution": [
+    576,
+    768
+  ],
+  "coordinate_frame": "dataset image pixels after source crop/resize",
+  "rule": {
+    "local_window_px": 31,
+    "background_depth_percentile": 75,
+    "maximum_foreground_background_depth_ratio": 0.6,
+    "minimum_inverse_depth_gap_per_m": 0.0005,
+    "minimum_component_pixels": 4,
+    "maximum_valid_depth_m": 10000
+  },
+  "records": [
+    {
+      "frame": 1,
+      "camera": 0,
+      "original_sky": 109395,
+      "removed": 2389,
+      "new_sky": 107006,
+      "mask": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_0.png",
+        "size_bytes": 3506,
+        "mtime_ns": 1793945639761730921,
+        "sha256": "52bb650a6500716c7f53b861f1624d05f36d70ba0af023719fa714bcf657469e"
+      },
+      "depth": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_0.npy",
+        "size_bytes": 1769600,
+        "mtime_ns": 1793945639761730921,
+        "sha256": "5f8272455bf47188f98ff7f9c2762907da1111cb53d397873b4d4313e028bce3"
+      }
+    },
+    {
+      "frame": 1,
+      "camera": 1,
+      "original_sky": 63056,
+      "removed": 15,
+      "new_sky": 63041,
+      "mask": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_1.png",
+        "size_bytes": 1834,
+        "mtime_ns": 1793945649069797861,
+        "sha256": "9d5fcb6e2907cd7eb70197e35756dbba6dc398c1b17ebd3b0b2527e7de979110"
+      },
+      "depth": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_1.npy",
+        "size_bytes": 1769600,
+        "mtime_ns": 1793945649069797861,
+        "sha256": "b16d83e62a96bd9f620ad10d1aa37345bd3f2513894610e9da034d8c8f483fa8"
+      }
+    },
+    {
+      "frame": 1,
+      "camera": 2,
+      "original_sky": 0,
+      "removed": 0,
+      "new_sky": 0,
+      "mask": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_2.png",
+        "size_bytes": 509,
+        "mtime_ns": 1793945635333699076,
+        "sha256": "c768ea9022aaa2d28c739c3dc93eb3b89489013e5ac0f928a3d9abdd01e543d8"
+      },
+      "depth": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_2.npy",
+        "size_bytes": 1769600,
+        "mtime_ns": 1793945635333699076,
+        "sha256": "113c5f2bfa5fee0cfb03a79b5946708651fd85308740d380b85df2ae06685ab1"
+      }
+    },
+    {
+      "frame": 61,
+      "camera": 0,
+      "original_sky": 129551,
+      "removed": 2740,
+      "new_sky": 126811,
+      "mask": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_0.png",
+        "size_bytes": 3822,
+        "mtime_ns": 1793945639757730892,
+        "sha256": "b0f66def6a45d31b37f16a6b44c0da0210779cb834f92d5af2bf09d4cf12e6a0"
+      },
+      "depth": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_0.npy",
+        "size_bytes": 1769600,
+        "mtime_ns": 1793945639757730892,
+        "sha256": "eb3ab624d27dceaaefffa8a0e8798b1faa4044226fe64633ff4e7e930ae3210d"
+      }
+    },
+    {
+      "frame": 61,
+      "camera": 1,
+      "original_sky": 55939,
+      "removed": 305,
+      "new_sky": 55634,
+      "mask": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_1.png",
+        "size_bytes": 2053,
+        "mtime_ns": 1793945646401778674,
+        "sha256": "1257a51f5a42e71a88d01f7208bc553c4367db8c2c94d1bc56dfeb2978613568"
+      },
+      "depth": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_1.npy",
+        "size_bytes": 1769600,
+        "mtime_ns": 1793945646401778674,
+        "sha256": "89631112114424014d479a91df2ae5200b53733d465d2934c44eec8c281a3bf4"
+      }
+    },
+    {
+      "frame": 61,
+      "camera": 2,
+      "original_sky": 14288,
+      "removed": 22,
+      "new_sky": 14266,
+      "mask": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_2.png",
+        "size_bytes": 1140,
+        "mtime_ns": 1793945635721701867,
+        "sha256": "ec4cc90ee32da0ccd82f55658d11a3848328784ece827a8fc4a0697ec194d537"
+      },
+      "depth": {
+        "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_2.npy",
+        "size_bytes": 1769600,
+        "mtime_ns": 1793945635721701867,
+        "sha256": "37ed911e2b82b433a9e5c4d524c3582b2aff0263a87811be538cde6078637471"
+      }
+    }
+  ],
+  "removed_total": 5471,
+  "cached_depth_reused": false,
+  "depth_inputs": [],
+  "geometry_input": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input",
+  "generic_depth_checkpoint": {
+    "path": "/mnt/data/fjn/projects/fjn/pointforward-global/weights/infinidepth_depthsensor.ckpt",
+    "size_bytes": 1433096532,
+    "mtime_ns": 1790352109570173485
+  },
+  "partial_export": true,
+  "depth_conversion": "Positive disparity reciprocal without the old near/far clamp; invalid -> NaN"
+}

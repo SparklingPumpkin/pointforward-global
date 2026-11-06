@@ -1,0 +1,32 @@
+{
+  "scope": "stage",
+  "start": 6146384.874029161,
+  "status": "completed",
+  "stages": [
+    {
+      "module": "depth-mask",
+      "start": 6146386.135732428,
+      "status": "completed",
+      "end": 6146423.878206739,
+      "seconds": 37.7424743110314
+    },
+    {
+      "module": "scene-sky",
+      "start": 6146423.878211495,
+      "status": "completed",
+      "end": 6146442.143256897,
+      "seconds": 18.26504540257156
+    }
+  ],
+  "input_boundary": "before_config_dataset_and_model_reads",
+  "output_boundary": "selected_preprocessing_outputs_written",
+  "reconstruction_included": false,
+  "explicit_reused_inputs": [
+    {
+      "kind": "calibration",
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input"
+    }
+  ],
+  "end": 6146442.147143153,
+  "seconds": 57.27311399113387
+}

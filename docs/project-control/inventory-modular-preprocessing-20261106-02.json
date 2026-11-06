@@ -1,0 +1,355 @@
+{
+  "schema_version": 2,
+  "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+  "scanned_at": "2026-11-06T06:22:53.714904+00:00",
+  "policy": {
+    "min_size_bytes": 67108864,
+    "recent_days": 7,
+    "protected_paths": [
+      "/mnt/data/fjn/projects/fjn/pointforward-global"
+    ]
+  },
+  "last_activity_at": "2026-11-06T06:22:31+00:00",
+  "files": [
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/shared_sky.pt",
+      "size_bytes": 10300536,
+      "mtime_ns": 1793945707202220742,
+      "device": 64529,
+      "inode": 553837019,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 10301440
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/sky_arrays.npz",
+      "size_bytes": 2107508,
+      "mtime_ns": 1793945707502222928,
+      "device": 64529,
+      "inode": 553837020,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 2109440
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_0.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945639761730921,
+      "device": 64529,
+      "inode": 553835760,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_1.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945649069797861,
+      "device": 64529,
+      "inode": 553835766,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_2.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945635333699076,
+      "device": 64529,
+      "inode": 553835754,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_0.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945639757730892,
+      "device": 64529,
+      "inode": 553835759,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_1.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945646401778674,
+      "device": 64529,
+      "inode": 553835764,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_2.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945635721701867,
+      "device": 64529,
+      "inode": 553835756,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0001.jpg",
+      "size_bytes": 421466,
+      "mtime_ns": 1793945639809731266,
+      "device": 64529,
+      "inode": 553835762,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 421888
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0061.jpg",
+      "size_bytes": 403829,
+      "mtime_ns": 1793945639809731266,
+      "device": 64529,
+      "inode": 553835761,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 405504
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_0.png",
+      "size_bytes": 3506,
+      "mtime_ns": 1793945639761730921,
+      "device": 64529,
+      "inode": 553835758,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_1.png",
+      "size_bytes": 1834,
+      "mtime_ns": 1793945649069797861,
+      "device": 64529,
+      "inode": 553835765,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_2.png",
+      "size_bytes": 509,
+      "mtime_ns": 1793945635333699076,
+      "device": 64529,
+      "inode": 553835753,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_0.png",
+      "size_bytes": 3822,
+      "mtime_ns": 1793945639757730892,
+      "device": 64529,
+      "inode": 553835757,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_1.png",
+      "size_bytes": 2053,
+      "mtime_ns": 1793945646401778674,
+      "device": 64529,
+      "inode": 553835763,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_2.png",
+      "size_bytes": 1140,
+      "mtime_ns": 1793945635721701867,
+      "device": 64529,
+      "inode": 553835755,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/shared_sky.pt",
+      "size_bytes": 10243448,
+      "mtime_ns": 1793945667045928127,
+      "device": 64529,
+      "inode": 553835772,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 10244096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/sky_arrays.npz",
+      "size_bytes": 2083193,
+      "mtime_ns": 1793945667333930225,
+      "device": 64529,
+      "inode": 553837009,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 2084864
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_0.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945489096649360,
+      "device": 64529,
+      "inode": 553835728,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_1.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945496276700626,
+      "device": 64529,
+      "inode": 553835736,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_2.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945482700603689,
+      "device": 64529,
+      "inode": 553835724,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_0.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945489584652844,
+      "device": 64529,
+      "inode": 553835731,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_1.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945494264686261,
+      "device": 64529,
+      "inode": 553835734,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_2.npy",
+      "size_bytes": 1769600,
+      "mtime_ns": 1793945483084606431,
+      "device": 64529,
+      "inode": 553835726,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 1773568
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0001.jpg",
+      "size_bytes": 421466,
+      "mtime_ns": 1793945489152649760,
+      "device": 64529,
+      "inode": 553835729,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 421888
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0061.jpg",
+      "size_bytes": 403829,
+      "mtime_ns": 1793945489632653187,
+      "device": 64529,
+      "inode": 553835732,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 405504
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_0.png",
+      "size_bytes": 3506,
+      "mtime_ns": 1793945489096649360,
+      "device": 64529,
+      "inode": 553835727,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_1.png",
+      "size_bytes": 1834,
+      "mtime_ns": 1793945496276700626,
+      "device": 64529,
+      "inode": 553835735,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_2.png",
+      "size_bytes": 509,
+      "mtime_ns": 1793945482700603689,
+      "device": 64529,
+      "inode": 553835660,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_0.png",
+      "size_bytes": 3822,
+      "mtime_ns": 1793945489584652844,
+      "device": 64529,
+      "inode": 553835730,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_1.png",
+      "size_bytes": 2053,
+      "mtime_ns": 1793945494264686261,
+      "device": 64529,
+      "inode": 553835733,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_2.png",
+      "size_bytes": 1140,
+      "mtime_ns": 1793945483084606431,
+      "device": 64529,
+      "inode": 553835725,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/shared_sky.pt",
+      "size_bytes": 10243448,
+      "mtime_ns": 1793945687906080133,
+      "device": 64529,
+      "inode": 553837014,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 10244096
+    },
+    {
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/sky_arrays.npz",
+      "size_bytes": 2083189,
+      "mtime_ns": 1793945688194082231,
+      "device": 64529,
+      "inode": 553837015,
+      "nlink": 1,
+      "mode": 33188,
+      "allocated_bytes": 2084864
+    }
+  ]
+}

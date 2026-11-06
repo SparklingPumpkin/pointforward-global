@@ -1,0 +1,15 @@
+{
+  "dataset_root": "/mnt/data/dataset/argoverse/processed/training",
+  "geometry_directory": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input",
+  "geometry_is_cached": true,
+  "frames": [
+    1,
+    61
+  ],
+  "cameras": [
+    0,
+    1,
+    2
+  ],
+  "note": "Explicit historical calibration only; depth model/masks/sky generated fresh; no end-to-end cold claim."
+}

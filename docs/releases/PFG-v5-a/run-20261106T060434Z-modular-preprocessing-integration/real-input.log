@@ -1,0 +1,101 @@
+RUN ['/root/miniconda3/envs/drivestudio/bin/python', '/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_scene.py', '--config', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml', '--geometry-dir', '/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input', '--frames', '1', '61', '--gpu', '1', '--out', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry', '--modules', 'depth-mask', 'scene-sky']
+[INFO] using base=100 for rope new
+[INFO] using min_period=None for rope new
+[INFO] using max_period=None for rope new
+[INFO] using normalize_coords=separate for rope new
+[INFO] using shift_coords=None for rope new
+[INFO] using rescale_coords=2 for rope new
+[INFO] using jitter_coords=None for rope new
+[INFO] using dtype=fp32 for rope new
+[INFO] using mlp layer as FFN
+depth-mask 1
+depth-mask 61
+{
+  "scope": "stage",
+  "start": 6146384.874029161,
+  "status": "completed",
+  "stages": [
+    {
+      "module": "depth-mask",
+      "start": 6146386.135732428,
+      "status": "completed",
+      "end": 6146423.878206739,
+      "seconds": 37.7424743110314
+    },
+    {
+      "module": "scene-sky",
+      "start": 6146423.878211495,
+      "status": "completed",
+      "end": 6146442.143256897,
+      "seconds": 18.26504540257156
+    }
+  ],
+  "input_boundary": "before_config_dataset_and_model_reads",
+  "output_boundary": "selected_preprocessing_outputs_written",
+  "reconstruction_included": false,
+  "explicit_reused_inputs": [
+    {
+      "kind": "calibration",
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input"
+    }
+  ],
+  "end": 6146442.147143153,
+  "seconds": 57.27311399113387
+}
+RUN ['/root/miniconda3/envs/drivestudio/bin/python', '/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_scene.py', '--config', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml', '--geometry-dir', '/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input', '--frames', '1', '61', '--gpu', '1', '--out', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky', '--modules', 'scene-sky', '--mask-dir', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks']
+{
+  "scope": "stage",
+  "start": 6146442.987121385,
+  "status": "completed",
+  "stages": [
+    {
+      "module": "scene-sky",
+      "start": 6146444.316952039,
+      "status": "completed",
+      "end": 6146463.003246905,
+      "seconds": 18.686294866725802
+    }
+  ],
+  "input_boundary": "before_config_dataset_and_model_reads",
+  "output_boundary": "selected_preprocessing_outputs_written",
+  "reconstruction_included": false,
+  "explicit_reused_inputs": [
+    {
+      "kind": "calibration",
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input"
+    },
+    {
+      "kind": "mask",
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks"
+    }
+  ],
+  "end": 6146463.006878611,
+  "seconds": 20.019757226109505
+}
+RUN ['/root/miniconda3/envs/drivestudio/bin/python', '/mnt/data/fjn/projects/fjn/pointforward-global/scripts/preprocess_scene.py', '--config', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml', '--geometry-dir', '/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input', '--frames', '1', '61', '--gpu', '1', '--out', '/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky', '--modules', 'scene-sky']
+{
+  "scope": "stage",
+  "start": 6146463.44056644,
+  "status": "completed",
+  "stages": [
+    {
+      "module": "scene-sky",
+      "start": 6146464.704804316,
+      "status": "completed",
+      "end": 6146482.310241682,
+      "seconds": 17.60543736629188
+    }
+  ],
+  "input_boundary": "before_config_dataset_and_model_reads",
+  "output_boundary": "selected_preprocessing_outputs_written",
+  "reconstruction_included": false,
+  "explicit_reused_inputs": [
+    {
+      "kind": "calibration",
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input"
+    }
+  ],
+  "end": 6146482.314176897,
+  "seconds": 18.873610456474125
+}
+REAL_VALIDATIONS_COMPLETED

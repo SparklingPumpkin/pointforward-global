@@ -13,7 +13,14 @@
     "max_managed_depth": 8,
     "scope_prefix_required": true,
     "legacy_ids_are_aliases_only": true,
-    "directory_policy": "hard_block_with_audited_override"
+    "directory_policy": "hard_block_with_audited_override",
+    "artifact_policy": {
+      "min_size_bytes": 67108864,
+      "recent_days": 7,
+      "protected_paths": [
+        "/mnt/data/fjn/projects/fjn/pointforward-global"
+      ]
+    }
   },
   "scopes": {
     "project": {
@@ -36,7 +43,8 @@
         "PFG-v1-a",
         "PFG-v2-a",
         "PFG-v3-a",
-        "PFG-v4-a"
+        "PFG-v4-a",
+        "PFG-v5-a"
       ],
       "created_at": "2026-09-25T15:51:53+00:00"
     },
@@ -2203,6 +2211,223 @@
           }
         ]
       }
+    },
+    "PFG-v5-a": {
+      "candidate_id": "PFG-v5-a",
+      "scope_id": "project",
+      "base_version_id": "PFG-v5",
+      "slug": "modular-optional-preprocessing",
+      "status": "passed",
+      "hypothesis": "Independent portable preprocessing stages can preserve research numerics and delivery default while serving other projects",
+      "change_types": [
+        "code_architecture"
+      ],
+      "directory_id": "dir-0043",
+      "run_ids": [
+        "run-20261106T060434Z-modular-preprocessing-integration"
+      ],
+      "conclusion": "Optional modular preprocessing completed: independent LIM-r, depth-mask and scene-sky, numerical parity plus real six-view integration, 34 tests passed; PFG-v5 default unchanged, no promotion.",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v5-a/report.md",
+          "claim": "Completed reusable preprocessing engineering integration and explicit limited validation scope",
+          "recorded_at": "2026-11-06T06:23:28+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "e9f4ee611c1114f53be2521063e7962e315df4ac7b0c69bd73a82e004db375fe",
+          "size_when_recorded": 443,
+          "mtime_ns_when_recorded": 1793946116489212206
+        }
+      ],
+      "promoted_to_version_id": null,
+      "created_at": "2026-11-06T06:04:34+00:00",
+      "updated_at": "2026-11-06T06:23:28+00:00",
+      "acceptance_contract": {
+        "source": {
+          "reference": "docs/releases/PFG-v5-a/acceptance-contract.json",
+          "claim": "pre-registered user acceptance criteria",
+          "recorded_at": "2026-11-06T06:04:34+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "6d9a93974c7518e17a01e1139f5ec20aad44934cbad47904b444474666c9db78",
+          "size_when_recorded": 1315,
+          "mtime_ns_when_recorded": 1793945074129670215
+        },
+        "content": {
+          "schema_version": 1,
+          "criteria": [
+            {
+              "id": "modules",
+              "criterion": "Provide independently selectable LIM-r, new depth prediction plus sky-mask repair, and measured scene range plus finite sky shell preprocessing, with own manifests and timing; no Gaussian fitting or training in preprocessing."
+            },
+            {
+              "id": "portable",
+              "criterion": "New modules are package-local and independently callable from CLI and array APIs without importing the research repository. Preserve existing depth repair, finite ray intersection, sky accumulation/coverage and measured range formulas; document inputs, outputs and optional calibrated/mask dependencies."
+            },
+            {
+              "id": "validation",
+              "criterion": "Verify module selections and default compatibility, meaningful numerical invariants/parity, and real input limited-frame fresh depth prediction/mask/sky export and readback. Explicitly disclose any reused calibration or depth as non-cold and do not invent full-scene PSNR or timing results."
+            },
+            {
+              "id": "delivery",
+              "criterion": "Keep PFG-v5 current, default VR-v1-y-equivalent LIM-r plus VR-v1-s reconstruction and frozen historical assets unchanged; add documentation and algorithm changelog for optional preprocessing. No delivery promotion."
+            }
+          ]
+        }
+      },
+      "acceptance_report": {
+        "source": {
+          "reference": "docs/releases/PFG-v5-a/acceptance-report.json",
+          "claim": "structured acceptance checked against raw evidence",
+          "recorded_at": "2026-11-06T06:23:28+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "7a61b2ab15371439c6e76d1bbf9f9f5889e22a2ec2154854b445fb5c648c39ae",
+          "size_when_recorded": 3607,
+          "mtime_ns_when_recorded": 1793946151705470341
+        },
+        "content": {
+          "schema_version": 1,
+          "subject_id": "PFG-v5-a",
+          "checks": [
+            {
+              "id": "modules",
+              "criterion": "Provide independently selectable LIM-r, new depth prediction plus sky-mask repair, and measured scene range plus finite sky shell preprocessing, with own manifests and timing; no Gaussian fitting or training in preprocessing.",
+              "passed": true,
+              "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Three independently selected preprocessing modules, separate manifests/timers and no Gaussian fitting",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/tests.log::All 34 numerical and selection tests passed"
+              ]
+            },
+            {
+              "id": "portable",
+              "criterion": "New modules are package-local and independently callable from CLI and array APIs without importing the research repository. Preserve existing depth repair, finite ray intersection, sky accumulation/coverage and measured range formulas; document inputs, outputs and optional calibrated/mask dependencies.",
+              "passed": true,
+              "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+              "evidence": [
+                "docs/PREPROCESSING.md::CLI and independent array APIs with input/output and explicit optional dependencies",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/code_identity.json::Retained numerical source identities and default compatibility",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/portable-validator.log::Independent read-only validation script successfully ran without temporary plan files"
+              ]
+            },
+            {
+              "id": "validation",
+              "criterion": "Verify module selections and default compatibility, meaningful numerical invariants/parity, and real input limited-frame fresh depth prediction/mask/sky export and readback. Explicitly disclose any reused calibration or depth as non-cold and do not invent full-scene PSNR or timing results.",
+              "passed": true,
+              "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Actual six-view fresh depth and mask parity, independent sky rendering tensor parity and disclosed metadata caveat",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-input.log::Real commands and stage times; calibration reuse explicitly disclosed",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/root_visual_review.json::Personal inspection of full-frame diagnostics"
+              ]
+            },
+            {
+              "id": "delivery",
+              "criterion": "Keep PFG-v5 current, default VR-v1-y-equivalent LIM-r plus VR-v1-s reconstruction and frozen historical assets unchanged; add documentation and algorithm changelog for optional preprocessing. No delivery promotion.",
+              "passed": true,
+              "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+              "evidence": [
+                "docs/ALGORITHM_CHANGES_CURRENT.md::Optional preprocessing engineering change; PFG-v5 defaults retained",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Default delivery scripts and configs identical to HEAD",
+                "docs/PREPROCESSING.md::Optional sky artifact consumption and no promotion clearly documented"
+              ]
+            }
+          ]
+        },
+        "evidence_snapshots": [
+          {
+            "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md",
+            "claim": "Three independently selected preprocessing modules, separate manifests/timers and no Gaussian fitting",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "4631e0098332f3baa1f40b96d9ef631d80abb8b208ef1262249275c5a8e665ce",
+            "size_when_recorded": 4014,
+            "mtime_ns_when_recorded": 1793946116489212206
+          },
+          {
+            "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/tests.log",
+            "claim": "All 34 numerical and selection tests passed",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "4aa74f3520a0a5b75caea03210c0169db845931af38b875201389346ca1ba285",
+            "size_when_recorded": 99,
+            "mtime_ns_when_recorded": 1793945729950386505
+          },
+          {
+            "reference": "docs/PREPROCESSING.md",
+            "claim": "CLI and independent array APIs with input/output and explicit optional dependencies",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "17cfea7d8b11498512d772381faadb84ab3382cc9df221b0f2a2531778c990b5",
+            "size_when_recorded": 7728,
+            "mtime_ns_when_recorded": 1793945555217122908
+          },
+          {
+            "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/code_identity.json",
+            "claim": "Retained numerical source identities and default compatibility",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "afdfcbc665186580681687bf1938d01cceea5ed1082bd7f4a55d224c363261ac",
+            "size_when_recorded": 4711,
+            "mtime_ns_when_recorded": 1793946116489212206
+          },
+          {
+            "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/portable-validator.log",
+            "claim": "Independent read-only validation script successfully ran without temporary plan files",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ffc562135bd5ade587c5f8ae21c5f07ee1e730494dd5346ac80e4d2c142315d3",
+            "size_when_recorded": 6823,
+            "mtime_ns_when_recorded": 1793946130041311543
+          },
+          {
+            "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json",
+            "claim": "Actual six-view fresh depth and mask parity, independent sky rendering tensor parity and disclosed metadata caveat",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "ffc562135bd5ade587c5f8ae21c5f07ee1e730494dd5346ac80e4d2c142315d3",
+            "size_when_recorded": 6823,
+            "mtime_ns_when_recorded": 1793945862627354390
+          },
+          {
+            "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-input.log",
+            "claim": "Real commands and stage times; calibration reuse explicitly disclosed",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "58484294b20109206915f03c33c477b43c3e05a5c50456b2639d05360e8769c1",
+            "size_when_recorded": 5591,
+            "mtime_ns_when_recorded": 1793945707958226251
+          },
+          {
+            "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/root_visual_review.json",
+            "claim": "Personal inspection of full-frame diagnostics",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "24d37c6654c7851c33289239afe460213cec3a8996b345b692bdc9e4c8d448a7",
+            "size_when_recorded": 512,
+            "mtime_ns_when_recorded": 1793946116489212206
+          },
+          {
+            "reference": "docs/ALGORITHM_CHANGES_CURRENT.md",
+            "claim": "Optional preprocessing engineering change; PFG-v5 defaults retained",
+            "recorded_at": "2026-11-06T06:23:28+00:00",
+            "kind": "local_file",
+            "exists_when_recorded": true,
+            "sha256_when_recorded": "f4dbc0f0aba0c1d25a6a9f779ad43217a8f089198f58bbcf3c2babd0f9c7d740",
+            "size_when_recorded": 5119,
+            "mtime_ns_when_recorded": 1793946116489212206
+          }
+        ]
+      }
     }
   },
   "runs": {
@@ -2421,6 +2646,937 @@
           "files": []
         },
         "recorded_at": "2026-10-28T05:22:35+00:00"
+      }
+    },
+    "run-20261106T060434Z-modular-preprocessing-integration": {
+      "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+      "candidate_id": "PFG-v5-a",
+      "variant": "modular-preprocessing-integration",
+      "status": "completed",
+      "directory_id": "dir-0044",
+      "config_identity": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/plan.json",
+      "code_identity": "Package-local source snapshots and numerical provenance saved before acceptance",
+      "data_identity": "Limited scene017 processed inputs; explicit historical LIM-r calibration used only as adapter integration input, no cold PSNR claim",
+      "artifact_review_required": true,
+      "artifact_review_schema": 2,
+      "artifact_inputs": [],
+      "artifact_related_runs": [],
+      "summary": "Completed three optional preprocessing modules, 34 tests and real six-view integration; explicitly reused calibration, no full-cold quality claim.",
+      "evidence": [
+        {
+          "reference": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md",
+          "claim": "Completed engineering validation with numerical parity, stage timing, failure retention and personally inspected diagnostics",
+          "recorded_at": "2026-11-06T06:22:31+00:00",
+          "kind": "local_file",
+          "exists_when_recorded": true,
+          "sha256_when_recorded": "4631e0098332f3baa1f40b96d9ef631d80abb8b208ef1262249275c5a8e665ce",
+          "size_when_recorded": 4014,
+          "mtime_ns_when_recorded": 1793946116489212206
+        }
+      ],
+      "created_at": "2026-11-06T06:04:35+00:00",
+      "updated_at": "2026-11-06T06:22:31+00:00",
+      "ended_at": "2026-11-06T06:22:31+00:00",
+      "artifact_inventory": {
+        "reference": "docs/project-control/inventory-modular-preprocessing-20261106-02.json",
+        "sha256": "ba79fab1413f06a354e58f6afe4ac3af3285b7aa3521fc8a0aaf3e3d68851849",
+        "inventory": {
+          "schema_version": 2,
+          "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+          "scanned_at": "2026-11-06T06:22:53.714904+00:00",
+          "policy": {
+            "min_size_bytes": 67108864,
+            "recent_days": 7,
+            "protected_paths": [
+              "/mnt/data/fjn/projects/fjn/pointforward-global"
+            ]
+          },
+          "last_activity_at": "2026-11-06T06:22:31+00:00",
+          "files": [
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/shared_sky.pt",
+              "size_bytes": 10300536,
+              "mtime_ns": 1793945707202220742,
+              "device": 64529,
+              "inode": 553837019,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 10301440
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/sky_arrays.npz",
+              "size_bytes": 2107508,
+              "mtime_ns": 1793945707502222928,
+              "device": 64529,
+              "inode": 553837020,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 2109440
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_0.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945639761730921,
+              "device": 64529,
+              "inode": 553835760,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_1.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945649069797861,
+              "device": 64529,
+              "inode": 553835766,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_2.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945635333699076,
+              "device": 64529,
+              "inode": 553835754,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_0.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945639757730892,
+              "device": 64529,
+              "inode": 553835759,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_1.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945646401778674,
+              "device": 64529,
+              "inode": 553835764,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_2.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945635721701867,
+              "device": 64529,
+              "inode": 553835756,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0001.jpg",
+              "size_bytes": 421466,
+              "mtime_ns": 1793945639809731266,
+              "device": 64529,
+              "inode": 553835762,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 421888
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0061.jpg",
+              "size_bytes": 403829,
+              "mtime_ns": 1793945639809731266,
+              "device": 64529,
+              "inode": 553835761,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 405504
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_0.png",
+              "size_bytes": 3506,
+              "mtime_ns": 1793945639761730921,
+              "device": 64529,
+              "inode": 553835758,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_1.png",
+              "size_bytes": 1834,
+              "mtime_ns": 1793945649069797861,
+              "device": 64529,
+              "inode": 553835765,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_2.png",
+              "size_bytes": 509,
+              "mtime_ns": 1793945635333699076,
+              "device": 64529,
+              "inode": 553835753,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_0.png",
+              "size_bytes": 3822,
+              "mtime_ns": 1793945639757730892,
+              "device": 64529,
+              "inode": 553835757,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_1.png",
+              "size_bytes": 2053,
+              "mtime_ns": 1793945646401778674,
+              "device": 64529,
+              "inode": 553835763,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_2.png",
+              "size_bytes": 1140,
+              "mtime_ns": 1793945635721701867,
+              "device": 64529,
+              "inode": 553835755,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/shared_sky.pt",
+              "size_bytes": 10243448,
+              "mtime_ns": 1793945667045928127,
+              "device": 64529,
+              "inode": 553835772,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 10244096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/sky_arrays.npz",
+              "size_bytes": 2083193,
+              "mtime_ns": 1793945667333930225,
+              "device": 64529,
+              "inode": 553837009,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 2084864
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_0.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945489096649360,
+              "device": 64529,
+              "inode": 553835728,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_1.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945496276700626,
+              "device": 64529,
+              "inode": 553835736,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_2.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945482700603689,
+              "device": 64529,
+              "inode": 553835724,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_0.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945489584652844,
+              "device": 64529,
+              "inode": 553835731,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_1.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945494264686261,
+              "device": 64529,
+              "inode": 553835734,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_2.npy",
+              "size_bytes": 1769600,
+              "mtime_ns": 1793945483084606431,
+              "device": 64529,
+              "inode": 553835726,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 1773568
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0001.jpg",
+              "size_bytes": 421466,
+              "mtime_ns": 1793945489152649760,
+              "device": 64529,
+              "inode": 553835729,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 421888
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0061.jpg",
+              "size_bytes": 403829,
+              "mtime_ns": 1793945489632653187,
+              "device": 64529,
+              "inode": 553835732,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 405504
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_0.png",
+              "size_bytes": 3506,
+              "mtime_ns": 1793945489096649360,
+              "device": 64529,
+              "inode": 553835727,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_1.png",
+              "size_bytes": 1834,
+              "mtime_ns": 1793945496276700626,
+              "device": 64529,
+              "inode": 553835735,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_2.png",
+              "size_bytes": 509,
+              "mtime_ns": 1793945482700603689,
+              "device": 64529,
+              "inode": 553835660,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_0.png",
+              "size_bytes": 3822,
+              "mtime_ns": 1793945489584652844,
+              "device": 64529,
+              "inode": 553835730,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_1.png",
+              "size_bytes": 2053,
+              "mtime_ns": 1793945494264686261,
+              "device": 64529,
+              "inode": 553835733,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_2.png",
+              "size_bytes": 1140,
+              "mtime_ns": 1793945483084606431,
+              "device": 64529,
+              "inode": 553835725,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 4096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/shared_sky.pt",
+              "size_bytes": 10243448,
+              "mtime_ns": 1793945687906080133,
+              "device": 64529,
+              "inode": 553837014,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 10244096
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/sky_arrays.npz",
+              "size_bytes": 2083189,
+              "mtime_ns": 1793945688194082231,
+              "device": 64529,
+              "inode": 553837015,
+              "nlink": 1,
+              "mode": 33188,
+              "allocated_bytes": 2084864
+            }
+          ]
+        }
+      },
+      "artifact_review": {
+        "reference": "docs/project-control/review-modular-preprocessing-20261106-01.json",
+        "sha256": "4de77f307f4c04e4867d3e3ccb50929bbdeb65293c326381ad527184af8d8fc3",
+        "review": {
+          "schema_version": 2,
+          "run_id": "run-20261106T060434Z-modular-preprocessing-integration",
+          "inventory_reference": "docs/project-control/inventory-modular-preprocessing-20261106-02.json",
+          "assessed_at": "2026-11-06T06:23:16.431798+00:00",
+          "review_after": "2026-11-13T06:22:31+00:00",
+          "reason": "File-level review of limited-frame preprocessing engineering evidence. Entire delivery package is user-protected; preserve exact reproduction, diagnostic and independent-selection evidence. No deletion.",
+          "preserve": {
+            "conclusion": [
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md",
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/root_visual_review.json"
+            ],
+            "metrics_timing": [
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json",
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/tests.log",
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/preprocess_timing.json"
+            ],
+            "reproduction": [
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/REPRODUCE.md",
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml",
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/validate_integration.py"
+            ],
+            "code_identity": [
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/code_identity.json"
+            ],
+            "inputs": [
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real_input_identity.json",
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/input_manifest.json"
+            ]
+          },
+          "history": {
+            "related_run_ids": [],
+            "reason": "No delivery historical run replaced or compared. External research calibration is an explicitly recorded input, not a local delivery run; default PFG-v5 and frozen assets remain unchanged.",
+            "evidence": [
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real_input_identity.json::Explicit external calibration reused",
+              "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Default delivery files unchanged; limited engineering scope"
+            ]
+          },
+          "files": [
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/shared_sky.pt",
+              "decision": "keep",
+              "reason": "Raw-mask independent scene-sky selection evidence and portable output readback. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Raw-mask independent scene-sky selection evidence and portable output readback.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky/sky_arrays.npz",
+              "decision": "keep",
+              "reason": "Raw-mask independent scene-sky selection evidence and portable output readback. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Raw-mask independent scene-sky selection evidence and portable output readback.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_0.npy",
+              "decision": "keep",
+              "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_1.npy",
+              "decision": "keep",
+              "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/001_2.npy",
+              "decision": "keep",
+              "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_0.npy",
+              "decision": "keep",
+              "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_1.npy",
+              "decision": "keep",
+              "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/depth-cache/061_2.npy",
+              "decision": "keep",
+              "reason": "Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact six-view newly inferred depth for historical numerical parity and mask-repair reproduction.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0001.jpg",
+              "decision": "keep",
+              "reason": "Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/diagnostics/mask_full_f0061.jpg",
+              "decision": "keep",
+              "reason": "Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Full-image visual evidence personally inspected for sky-mask repair of thin foreground structures.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_0.png",
+              "decision": "keep",
+              "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_1.png",
+              "decision": "keep",
+              "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/001_2.png",
+              "decision": "keep",
+              "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_0.png",
+              "decision": "keep",
+              "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_1.png",
+              "decision": "keep",
+              "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/depth-mask/masks/061_2.png",
+              "decision": "keep",
+              "reason": "Exact repaired pixel masks for consumer ordering and independent scene-sky input validation. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Exact repaired pixel masks for consumer ordering and independent scene-sky input validation.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/shared_sky.pt",
+              "decision": "keep",
+              "reason": "Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/scene-sky/sky_arrays.npz",
+              "decision": "keep",
+              "reason": "Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Combined scene-sky integration output for rendering-parameter parity and Torch/NumPy exact roundtrip.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_0.npy",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_1.npy",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/001_2.npy",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_0.npy",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_1.npy",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/depth-cache/061_2.npy",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0001.jpg",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/diagnostics/mask_full_f0061.jpg",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_0.png",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_1.png",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/001_2.png",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_0.png",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_1.png",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask/depth-mask/masks/061_2.png",
+              "decision": "keep",
+              "reason": "Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Retain first-attempt output for the ego-mask adapter failure and recovery audit; do not erase failed-run evidence.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/shared_sky.pt",
+              "decision": "keep",
+              "reason": "Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            },
+            {
+              "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky/scene-sky/sky_arrays.npz",
+              "decision": "keep",
+              "reason": "Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences. Entire delivery package is explicitly protected by user.",
+              "evidence": [
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md::Independent repaired-mask sky output for comparison with combined selection, including documented floating boundary metadata differences.",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json::Numerical checks and explicit verification limits",
+                "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json::Delivery package deletion forbidden by prior user instruction"
+              ],
+              "keep_kind": "protected"
+            }
+          ]
+        },
+        "recorded_at": "2026-11-06T06:23:16+00:00",
+        "material_snapshots": {
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/REPRODUCE.md": {
+            "size_bytes": 2544,
+            "mtime_ns": 1793946116489212206,
+            "device": 64529,
+            "inode": 550653953,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "f04a0905d9cb37ab8743e60456948e39825ca2b593b4e5a57d1e2b7ddec49d26"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/code_identity.json": {
+            "size_bytes": 4711,
+            "mtime_ns": 1793946116489212206,
+            "device": 64529,
+            "inode": 550653947,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 8192,
+            "sha256": "afdfcbc665186580681687bf1938d01cceea5ed1082bd7f4a55d224c363261ac"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml": {
+            "size_bytes": 1412,
+            "mtime_ns": 1793945437760285124,
+            "device": 64529,
+            "inode": 550653917,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "b427d38b79c99118e7ad6a2ae755c9b5dfae86272f5a7f084a670851d9b914c3"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/input_manifest.json": {
+            "size_bytes": 4935,
+            "mtime_ns": 1793945611341526533,
+            "device": 64529,
+            "inode": 553835741,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 8192,
+            "sha256": "b9391856edebb72afbda29e091ef62c43c97a23cae7fd86cd411ad31db3eb301"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry/preprocess_timing.json": {
+            "size_bytes": 963,
+            "mtime_ns": 1793945667353930371,
+            "device": 64529,
+            "inode": 553835742,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "5117996e575df5d39fed5064eb4b0207317e36b3ff71e34b463d720355ed62c4"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real_input_identity.json": {
+            "size_bytes": 528,
+            "mtime_ns": 1793945437760285124,
+            "device": 64529,
+            "inode": 550653918,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "69681e4ca6e6fba715e30314784e473ba1170c456a96e5bf40b9ea0de5cee87f"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/report.md": {
+            "size_bytes": 4014,
+            "mtime_ns": 1793946116489212206,
+            "device": 64529,
+            "inode": 550653954,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "4631e0098332f3baa1f40b96d9ef631d80abb8b208ef1262249275c5a8e665ce"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/root_visual_review.json": {
+            "size_bytes": 512,
+            "mtime_ns": 1793946116489212206,
+            "device": 64529,
+            "inode": 550653955,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "24d37c6654c7851c33289239afe460213cec3a8996b345b692bdc9e4c8d448a7"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot/validate_integration.py": {
+            "size_bytes": 5824,
+            "mtime_ns": 1793946116485212177,
+            "device": 64529,
+            "inode": 550653946,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 8192,
+            "sha256": "4417194d7935ed254e1a1339f975c8dd8354f704d8cbd76f07c9bac118ea68a7"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/tests.log": {
+            "size_bytes": 99,
+            "mtime_ns": 1793945729950386505,
+            "device": 64529,
+            "inode": 550653948,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "4aa74f3520a0a5b75caea03210c0169db845931af38b875201389346ca1ba285"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/user_scope.json": {
+            "size_bytes": 359,
+            "mtime_ns": 1793946173389629285,
+            "device": 64529,
+            "inode": 550653957,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 4096,
+            "sha256": "c18dbb5a251e0ace4d976f3cad8352967ce9357ab2ec454bee89e4c61d15311e"
+          },
+          "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/validation.json": {
+            "size_bytes": 6823,
+            "mtime_ns": 1793945862627354390,
+            "device": 64529,
+            "inode": 550653932,
+            "nlink": 1,
+            "mode": 33188,
+            "allocated_bytes": 8192,
+            "sha256": "ffc562135bd5ade587c5f8ae21c5f07ee1e730494dd5346ac80e4d2c142315d3"
+          }
+        }
       }
     }
   },
@@ -2998,6 +4154,118 @@
       "decision_id": "layout-0041",
       "created_at": "2026-10-28T05:07:32+00:00",
       "updated_at": "2026-10-28T05:07:32+00:00"
+    },
+    "dir-0042": {
+      "directory_id": "dir-0042",
+      "path": "src/pointforward_preprocessing",
+      "level": "area",
+      "parent_directory_id": "dir-0002",
+      "scope_id": "project",
+      "purpose": "Reusable depth mask repair and measured scene sky alongside independent LIM-r",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0042",
+      "created_at": "2026-11-06T06:04:21+00:00",
+      "updated_at": "2026-11-06T06:04:21+00:00"
+    },
+    "dir-0043": {
+      "directory_id": "dir-0043",
+      "path": "docs/releases/PFG-v5-a",
+      "level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "scope_id": "project",
+      "purpose": "Optional modular preprocessing engineering integration; PFG-v5 default preserved",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0043",
+      "created_at": "2026-11-06T06:04:34+00:00",
+      "updated_at": "2026-11-06T06:04:34+00:00"
+    },
+    "dir-0044": {
+      "directory_id": "dir-0044",
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration",
+      "level": "run",
+      "parent_directory_id": "dir-0043",
+      "scope_id": "project",
+      "purpose": "Module contracts and real-input limited-frame integration evidence",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0044",
+      "created_at": "2026-11-06T06:04:34+00:00",
+      "updated_at": "2026-11-06T06:04:34+00:00"
+    },
+    "dir-0045": {
+      "directory_id": "dir-0045",
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask",
+      "level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "scope_id": "project",
+      "purpose": "Scoped portable preprocessing validation real-depth-mask",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0045",
+      "created_at": "2026-11-06T06:04:34+00:00",
+      "updated_at": "2026-11-06T06:04:34+00:00"
+    },
+    "dir-0046": {
+      "directory_id": "dir-0046",
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky",
+      "level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "scope_id": "project",
+      "purpose": "Scoped portable preprocessing validation real-scene-sky",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0046",
+      "created_at": "2026-11-06T06:04:35+00:00",
+      "updated_at": "2026-11-06T06:04:35+00:00"
+    },
+    "dir-0047": {
+      "directory_id": "dir-0047",
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky",
+      "level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "scope_id": "project",
+      "purpose": "Scoped portable preprocessing validation independent-sky",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0047",
+      "created_at": "2026-11-06T06:04:35+00:00",
+      "updated_at": "2026-11-06T06:04:35+00:00"
+    },
+    "dir-0048": {
+      "directory_id": "dir-0048",
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot",
+      "level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "scope_id": "project",
+      "purpose": "Scoped portable preprocessing validation source-snapshot",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0048",
+      "created_at": "2026-11-06T06:04:35+00:00",
+      "updated_at": "2026-11-06T06:04:35+00:00"
+    },
+    "dir-0049": {
+      "directory_id": "dir-0049",
+      "path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry",
+      "level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "scope_id": "project",
+      "purpose": "Retry real integration after explicit missing-ego adapter handling; first failure retained",
+      "status": "active",
+      "status_reason": "registered from approved layout decision",
+      "manage_children": false,
+      "decision_id": "layout-0049",
+      "created_at": "2026-11-06T06:13:29+00:00",
+      "updated_at": "2026-11-06T06:13:29+00:00"
     }
   },
   "layout_decisions": {
@@ -3775,11 +5043,164 @@
       "status": "applied",
       "applied_directory_id": "dir-0041",
       "created_at": "2026-10-28T05:07:32+00:00"
+    },
+    "layout-0042": {
+      "decision_id": "layout-0042",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "src/pointforward_preprocessing",
+      "target_level": "area",
+      "parent_directory_id": "dir-0002",
+      "purpose": "Reusable depth mask repair and measured scene sky alongside independent LIM-r",
+      "reason": "User requested reusable independently selectable preprocessing without changing delivery mainline",
+      "alternatives_considered": [
+        "Keep research-only wrappers coupled to experiments"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0042",
+      "created_at": "2026-11-06T06:04:21+00:00"
+    },
+    "layout-0043": {
+      "decision_id": "layout-0043",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v5-a",
+      "target_level": "candidate",
+      "parent_directory_id": "dir-0013",
+      "purpose": "Optional modular preprocessing engineering integration; PFG-v5 default preserved",
+      "reason": "User requested reusable independently selectable preprocessing without changing delivery mainline",
+      "alternatives_considered": [
+        "Keep research-only wrappers coupled to experiments"
+      ],
+      "active_sibling_count_at_decision": 4,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0043",
+      "created_at": "2026-11-06T06:04:33+00:00"
+    },
+    "layout-0044": {
+      "decision_id": "layout-0044",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration",
+      "target_level": "run",
+      "parent_directory_id": "dir-0043",
+      "purpose": "Module contracts and real-input limited-frame integration evidence",
+      "reason": "User requested reusable independently selectable preprocessing without changing delivery mainline",
+      "alternatives_considered": [
+        "Keep research-only wrappers coupled to experiments"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0044",
+      "created_at": "2026-11-06T06:04:34+00:00"
+    },
+    "layout-0045": {
+      "decision_id": "layout-0045",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-depth-mask",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "purpose": "Scoped portable preprocessing validation real-depth-mask",
+      "reason": "User requested reusable independently selectable preprocessing without changing delivery mainline",
+      "alternatives_considered": [
+        "Keep research-only wrappers coupled to experiments"
+      ],
+      "active_sibling_count_at_decision": 0,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0045",
+      "created_at": "2026-11-06T06:04:34+00:00"
+    },
+    "layout-0046": {
+      "decision_id": "layout-0046",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-scene-sky",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "purpose": "Scoped portable preprocessing validation real-scene-sky",
+      "reason": "User requested reusable independently selectable preprocessing without changing delivery mainline",
+      "alternatives_considered": [
+        "Keep research-only wrappers coupled to experiments"
+      ],
+      "active_sibling_count_at_decision": 1,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0046",
+      "created_at": "2026-11-06T06:04:35+00:00"
+    },
+    "layout-0047": {
+      "decision_id": "layout-0047",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "purpose": "Scoped portable preprocessing validation independent-sky",
+      "reason": "User requested reusable independently selectable preprocessing without changing delivery mainline",
+      "alternatives_considered": [
+        "Keep research-only wrappers coupled to experiments"
+      ],
+      "active_sibling_count_at_decision": 2,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0047",
+      "created_at": "2026-11-06T06:04:35+00:00"
+    },
+    "layout-0048": {
+      "decision_id": "layout-0048",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/source-snapshot",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "purpose": "Scoped portable preprocessing validation source-snapshot",
+      "reason": "User requested reusable independently selectable preprocessing without changing delivery mainline",
+      "alternatives_considered": [
+        "Keep research-only wrappers coupled to experiments"
+      ],
+      "active_sibling_count_at_decision": 3,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0048",
+      "created_at": "2026-11-06T06:04:35+00:00"
+    },
+    "layout-0049": {
+      "decision_id": "layout-0049",
+      "scope_id": "project",
+      "candidate_id": null,
+      "action": "new_child",
+      "target_path": "docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/real-combined-retry",
+      "target_level": "artifact",
+      "parent_directory_id": "dir-0044",
+      "purpose": "Retry real integration after explicit missing-ego adapter handling; first failure retained",
+      "reason": "Keep failed first output immutable and generate fresh depth/mask/sky in a separate empty location",
+      "alternatives_considered": [
+        "Overwrite failed evidence"
+      ],
+      "active_sibling_count_at_decision": 4,
+      "override_reason": null,
+      "status": "applied",
+      "applied_directory_id": "dir-0049",
+      "created_at": "2026-11-06T06:13:29+00:00"
     }
   },
-  "updated_at": "2026-10-28T05:22:36+00:00",
+  "updated_at": "2026-11-06T06:23:28+00:00",
   "ledger": {
-    "event_count": 111,
-    "head_hash": "43891c4ad60cdbe712034613f92dfd6b3f9a6637ddcbf972b6beb9775567c780"
-  }
+    "event_count": 136,
+    "head_hash": "4bb4f6753777e4ab441c49080a80a22c9ee06d354001dd5bc63ba9ba22fef7a6"
+  },
+  "artifact_reassessments": {}
 }

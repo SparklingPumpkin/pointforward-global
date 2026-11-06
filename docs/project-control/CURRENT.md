@@ -3,7 +3,7 @@
 > 由机器状态生成，只展示当前版本与仍活跃的候选；完整历史见 `VERSION_LEDGER.md`。
 
 项目：PointForward Global（`pointforward-global`）  
-更新时间：2026-10-28T05:22:36+00:00
+更新时间：2026-11-06T06:23:28+00:00
 
 ## 项目主线
 
@@ -15,7 +15,7 @@ VR-v1-s骨干加用户接受的LIM-v1-r固有前处理；fresh默认lim-r，保�
 - `docs/releases/PFG-v4-a/run-20261028T045821Z-lim-r-integration/report.md`：实质前处理数据合同与工程验证
 
 活跃候选：
-- 无。
+- `PFG-v5-a` [passed]：Independent portable preprocessing stages can preserve research numerics and delivery default while serving other projects
 
 ## 交付验证
 

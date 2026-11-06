@@ -1,0 +1,6 @@
+{
+  "request": "Three optional preprocessing modules reusable by other projects",
+  "existing_protection": "User explicitly prohibited deleting the main delivery package /mnt/fjn/projects/fjn/pointforward-global; applies to resolved package root as well",
+  "protected_root": "/mnt/data/fjn/projects/fjn/pointforward-global",
+  "deletion_authorized": false
+}

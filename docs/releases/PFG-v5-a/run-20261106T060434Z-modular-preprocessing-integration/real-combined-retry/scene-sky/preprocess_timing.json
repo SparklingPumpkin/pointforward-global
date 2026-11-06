@@ -1,0 +1,13 @@
+{
+  "scope": "stage",
+  "start": 6146423.881816327,
+  "status": "completed",
+  "stages_seconds": {
+    "range_measurement": 0.03681990411132574,
+    "sky_build_and_export": 17.82861335761845
+  },
+  "input_boundary": "before_dataset_measurement",
+  "output_boundary": "measured_range_sky_state_written",
+  "end": 6146442.134073677,
+  "seconds": 18.2522573499009
+}

@@ -1,0 +1,10 @@
+{
+  "scope": "stage",
+  "start": 6146386.152188568,
+  "status": "completed",
+  "input_boundary": "before_dataset_depth_model_loading",
+  "output_boundary": "depth_masks_diagnostics_written",
+  "cached_depth_reused": false,
+  "end": 6146423.869682423,
+  "seconds": 37.7174938544631
+}

@@ -1,0 +1,100 @@
+{
+  "plan": {
+    "modules": [
+      "scene-sky"
+    ],
+    "config": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml",
+    "out": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky",
+    "scene": null,
+    "geometry_directory": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input",
+    "sky_mask_directory": "original dataset masks",
+    "cached_depth_directory": null,
+    "partial_frames": [
+      1,
+      61
+    ],
+    "gaussian_construction": false,
+    "optimization": false,
+    "order": "lim-r, then depth-mask, then scene-sky; only selected modules run",
+    "outputs": {
+      "scene-sky": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/independent-sky/scene-sky"
+    }
+  },
+  "config": {
+    "path": "/mnt/data/fjn/projects/fjn/pointforward-global/docs/releases/PFG-v5-a/run-20261106T060434Z-modular-preprocessing-integration/config_input.yaml",
+    "size_bytes": 1412,
+    "mtime_ns": 1793945437760285124,
+    "sha256": "b427d38b79c99118e7ad6a2ae755c9b5dfae86272f5a7f084a670851d9b914c3"
+  },
+  "code": [
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/__init__.py",
+      "size_bytes": 329,
+      "mtime_ns": 1793945167722355620,
+      "sha256": "49a73d8f21894433252e8a7dffc40727c6b49b8249d3f4fa3795314d4ec47da8"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/__main__.py",
+      "size_bytes": 8457,
+      "mtime_ns": 1793945343735618788,
+      "sha256": "a5405855742e8c0db74a00c186f33b0ee7748d57222046a757d96590f1d5bc06"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/consumer.py",
+      "size_bytes": 2043,
+      "mtime_ns": 1793945343735618788,
+      "sha256": "c98d7bbeea1df7e027c6951dd544989ffeb27cdb6a9340451e73a66442268419"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/dataset.py",
+      "size_bytes": 6846,
+      "mtime_ns": 1793945609705514768,
+      "sha256": "09059294f11981daff916ed33d145ec756be5bd033e00028743e020a436a0c58"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/depth_mask.py",
+      "size_bytes": 1049,
+      "mtime_ns": 1793945109117926444,
+      "sha256": "2ec04ba3f446d9c0f96351da2a174cee8fd0d631adb172f2c44b9c8ad11b1bff"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/io.py",
+      "size_bytes": 808,
+      "mtime_ns": 1793945167722355620,
+      "sha256": "3a6a5ed2ee3a3b93ae15be9ccc294993522d277ed85964d51a4bb5b7999ac0c5"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/range.py",
+      "size_bytes": 3040,
+      "mtime_ns": 1793945167722355620,
+      "sha256": "1c101b5205ac52aae138d697920158a78c203bd82006aeef1dea396d726bcbd3"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/sky.py",
+      "size_bytes": 11920,
+      "mtime_ns": 1793945167726355649,
+      "sha256": "01be197459e5caa726d64a058f4e618308549795d5bd930162c349d5c6e2b398"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/stages.py",
+      "size_bytes": 8059,
+      "mtime_ns": 1793945258223016335,
+      "sha256": "084bb9a9518b892214d557fa90327950242937cc1195eff0216667afc169a244"
+    },
+    {
+      "path": "/mnt/data/fjn/projects/fjn/pointforward-global/src/pointforward_preprocessing/provenance.json",
+      "size_bytes": 3457,
+      "mtime_ns": 1793945109117926444,
+      "sha256": "3d04de3876838b29e5df4564c8f59edd0881482b21ba2825e15cd8d27aad0aa2"
+    }
+  ],
+  "raw_data_root": "/mnt/data/dataset/argoverse/processed/training",
+  "scene": "017",
+  "explicit_reused_inputs": [
+    {
+      "kind": "calibration",
+      "path": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/ASR-v1-w/run-20261106T013721Z-asrk-independent-rgb-cold/geometry-input"
+    }
+  ],
+  "meaning": "Preprocessing only, no end-to-end reconstruction performance claim"
+}

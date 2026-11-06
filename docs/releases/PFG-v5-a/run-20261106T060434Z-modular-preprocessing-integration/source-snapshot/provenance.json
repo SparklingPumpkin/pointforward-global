@@ -1,0 +1,54 @@
+{
+  "algorithm": "ASR-v1-k / ASR-v1-w preprocessing",
+  "definitions": [
+    {
+      "definition": "repair",
+      "source": "/mnt/data/fjn/projects/PointForward/scripts/replay_fpl_depth_mask_20261104.py",
+      "source_sha256": "b2db0a74d69757d62fdcbd057d3e3be333543dd25014979c1a2471e7972a981c",
+      "definition_ast_sha256": "2b7df3cad7cfef8d561b0a07abe1a386586a2ebd9036a994e6a21c893fef0894"
+    },
+    {
+      "definition": "shell_directions",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/finite_scene_sky.py",
+      "source_sha256": "9dd5d377300953470ae78f4423a2bd86029260dc585108595b04b684183b7e72",
+      "definition_ast_sha256": "f952a9a5da8d98883070753efae7078196eb650a2019e3d603cb2c5b16b148ad"
+    },
+    {
+      "definition": "complete_sphere",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/coverage_scene_sky.py",
+      "source_sha256": "a4b4cbee29d5edc959c5a5e58edbff834a0721bbb3b940e1690b3d041679f900",
+      "definition_ast_sha256": "081563c26960a3ad5ecfcb909874c93b4cbbbc1e57dfea43647ed4bae315e70d"
+    },
+    {
+      "definition": "compress",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/feedforward-parameter-search/measured_scene_recompute.py",
+      "source_sha256": "6d00b63807edad569e0b436348e0f5a44e5111b9167bfc9c4413525da3cec1c9",
+      "definition_ast_sha256": "bb8b01ba7ed7686b56fc20fa42be4776d726a22a2f83cd3c69a0a8a3f6ac18d6"
+    },
+    {
+      "definition": "SkySettings",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/sky-ego-generalization/SE-v1-b/sky.py",
+      "source_sha256": "56f613598338ffb73775ffacac504bbf55ac70a0b6aeeb79aa1024ac94df9ee6",
+      "definition_ast_sha256": "7baf74f5e9496f84d58d33184dcc9d4b265dbded8a405757b27e23cb440a4826"
+    },
+    {
+      "definition": "direction_keys",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/sky-ego-generalization/SE-v1-b/sky.py",
+      "source_sha256": "56f613598338ffb73775ffacac504bbf55ac70a0b6aeeb79aa1024ac94df9ee6",
+      "definition_ast_sha256": "000f993431572675cffade9afa725e399f0204460e715490d1a8080cad4cdcfb"
+    },
+    {
+      "definition": "key_directions",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/sky-ego-generalization/SE-v1-b/sky.py",
+      "source_sha256": "56f613598338ffb73775ffacac504bbf55ac70a0b6aeeb79aa1024ac94df9ee6",
+      "definition_ast_sha256": "2e36b2de01546c5ab23b84f716add40b87848c7a3a75f247bf505c5caa0a1e8f"
+    },
+    {
+      "definition": "DirectionAccumulator",
+      "source": "/mnt/data/fjn/projects/PointForward/experiments/argoverse-inference/cold-scene-delivery/vehicle-roi-visibility/sky-ego-generalization/SE-v1-b/sky.py",
+      "source_sha256": "56f613598338ffb73775ffacac504bbf55ac70a0b6aeeb79aa1024ac94df9ee6",
+      "definition_ast_sha256": "5841b7c1df2360f8e3becad620913a363460a13b86c27ca8c1f384ce7bed603d"
+    }
+  ],
+  "note": "Numerical definitions copied without importing historical experiment wrappers. Dataset and file orchestration are new; defaults retained."
+}
